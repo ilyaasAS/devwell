@@ -1,14 +1,38 @@
-<nav class="bg-gray-800 text-white">
+<nav style="background-color: #1A2A40;" class="text-white">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
-            <!-- Logo -->
-            <a href="/" class="text-lg font-bold hover:text-blue-400">MonSite</a>
+            <!-- Logo et Accueil -->
+            <div class="flex items-center space-x-6">
+                <a href="/" class="flex items-center">
+                    <img src="assets/images/logo_dw2.png" alt="Logo" class="h-8 w-auto">
+                </a>
+                <a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
+            </div>
 
             <!-- Menu (desktop) -->
             <ul class="hidden md:flex space-x-6">
-                <li><a href="/" class="hover:text-blue-400">Accueil</a></li>
-                <li><a href="/register" class="hover:text-blue-400">Inscription</a></li>
-                <li><a href="/login" class="hover:text-blue-400">Connexion</a></li>
+                {% if app.user is null %}
+                    <li>
+                        <a href="/login" 
+                           class="px-4 py-2 rounded" 
+                           style="background-color: #9EFCED; color: #000000;"
+                           onmouseover="this.style.backgroundColor='#82E8DA';"
+                           onmouseout="this.style.backgroundColor='#9EFCED';">
+                            Connexion
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/register" 
+                           class="px-4 py-2 rounded" 
+                           style="background-color: #2FBF71; color: #1A2A40;"
+                           onmouseover="this.style.backgroundColor='#249A5B';"
+                           onmouseout="this.style.backgroundColor='#2FBF71';">
+                            Inscription
+                        </a>
+                    </li>
+                {% else %}
+                    <li><a href="/logout" class="hover:text-blue-400">Déconnexion</a></li>
+                {% endif %}
             </ul>
 
             <!-- Menu Button (mobile) -->
@@ -22,8 +46,28 @@
         <!-- Menu (mobile) -->
         <ul id="mobile-menu" class="hidden flex-col space-y-2 md:hidden bg-gray-700 text-center py-4">
             <li><a href="/" class="block py-2 hover:text-blue-400">Accueil</a></li>
-            <li><a href="/register" class="block py-2 hover:text-blue-400">Inscription</a></li>
-            <li><a href="/login" class="block py-2 hover:text-blue-400">Connexion</a></li>
+            {% if app.user is null %}
+                <li>
+                    <a href="/login" 
+                       class="block py-2 rounded" 
+                       style="background-color: #9EFCED; color: #000000;"
+                       onmouseover="this.style.backgroundColor='#82E8DA';"
+                       onmouseout="this.style.backgroundColor='#9EFCED';">
+                        Connexion
+                    </a>
+                </li>
+                <li>
+                    <a href="/register" 
+                       class="block py-2 rounded" 
+                       style="background-color: #2FBF71; color: #ffffff;"
+                       onmouseover="this.style.backgroundColor='#249A5B';"
+                       onmouseout="this.style.backgroundColor='#2FBF71';">
+                        Inscription
+                    </a>
+                </li>
+            {% else %}
+                <li><a href="/logout" class="block py-2 hover:text-blue-400">Déconnexion</a></li>
+            {% endif %}
         </ul>
     </div>
 </nav>
