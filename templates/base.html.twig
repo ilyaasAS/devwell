@@ -27,5 +27,18 @@
         
         <!-- Footer -->
         {% include 'components/footer.html.twig' %}
+
+        <script>
+    // Récupérer le bouton et le menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Ajouter un gestionnaire d'événement pour le bouton
+    menuToggle.addEventListener('click', () => {
+        // Basculer la classe `hidden` pour afficher/masquer le menu
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
+
     </body>
 </html>
