@@ -34,12 +34,13 @@ class RegistrationController extends AbstractController
 
             // Sauvegarde dans la base de données via l'EntityManager
             $entityManager->persist($user); // Prépare l'entité pour l'enregistrement
-            $entityManager->flush(); // Exécute la requête SQL
+            $entityManager->flush(); // Exécute la requête SQL pour sauvegarder l'utilisateur
 
             // Redirige vers la page de connexion ou d'accueil après l'inscription
             return $this->redirectToRoute('app_login');
         }
 
+        // Affichage du formulaire d'inscription
         return $this->render('registration/index.html.twig', [
             'form' => $form->createView(),
         ]);

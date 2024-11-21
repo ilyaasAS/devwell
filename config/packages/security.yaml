@@ -1,53 +1,58 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'  # Utilisation automatique du hachage de mot de passe
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    # Fournisseur d'utilisateurs depuis la base de données
     providers:
-        users_in_memory: { memory: null }  # Définition du fournisseur d'utilisateurs en mémoire (à remplacer par une vraie base de données plus tard)
+        users_database:
+            entity:
+                class: App\Entity\User  # Utilisation de l'entité User de la base de données
+                property: email  # Utilisation de l'email pour identifier les utilisateurs
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/  # Cette configuration désactive la sécurité pour certaines parties du projet pendant le développement
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         main:
-            lazy: true  # Cette option charge le firewall de manière paresseuse (lazy), ce qui peut améliorer les performances
-            provider: users_in_memory  # Définition du fournisseur d'utilisateurs à utiliser, dans ce cas "users_in_memory"
+            lazy: true
+            provider: users_database  # Utilisation du fournisseur d'utilisateurs basé sur la base de données
 
-            # Activation des méthodes d'authentification
-            # https://symfony.com/doc/current/security.html#the-firewall
             form_login:  # Active le formulaire de connexion classique
                 login_path: app_login  # Définition du chemin pour la page de connexion
                 check_path: app_login  # Définition du chemin pour vérifier les informations de connexion
-                username_parameter: _username  # Paramètre pour l'email ou le nom d'utilisateur
-                password_parameter: _password  # Paramètre pour le mot de passe
+                username_parameter: email  # Paramètre pour l'email dans le formulaire de connexion
+                password_parameter: password  # Paramètre pour le mot de passe
                 default_target_path: app_home  # Redirige l'utilisateur après une connexion réussie
 
             logout:  # Paramètres pour gérer la déconnexion
-                path: /logout  # Définir le chemin de déconnexion
+                path: /logout
                 target: app_home  # Redirige vers la page d'accueil après déconnexion
 
-            # Switch User - pour l'imitation d'utilisateurs (utile pour l'administration ou le debug)
+            custom_authenticator: App\Security\LoginAuthenticator  # Authentification personnalisée
+            entry_point: App\Security\LoginAuthenticator  # Définir explicitement quel authentificateur utiliser
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800  # Durée de 7 jours
+                path: /
+                # Toujours activé (ou décoché si vous voulez gérer par une case à cocher dans le formulaire de connexion)
+                # always_remember_me: true
+
+            # Switch User - pour l'imitation d'utilisateurs
             # switch_user: true
 
     # Contrôle d'accès pour les pages
     access_control:
-        # Exemple pour restreindre l'accès à certaines sections du site
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
 
-        - { path: ^/admin, roles: ROLE_ADMIN }  # Accès uniquement aux utilisateurs avec le rôle ROLE_ADMIN
-        - { path: ^/profile, roles: ROLE_USER }  # Accès uniquement aux utilisateurs avec le rôle ROLE_USER
-
-# Configuration spéciale pour l'environnement de test (réduit les coûts liés aux algorithmes de hachage pour les tests)
+# Configuration spéciale pour l'environnement de test
 when@test:
     security:
         password_hashers:
-            # Les hachages de mots de passe dans les tests ne nécessitent pas un coût élevé
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4  # Le plus bas possible pour bcrypt
-                time_cost: 3  # Le plus bas possible pour argon
-                memory_cost: 10  # Le plus bas possible pour argon
+                cost: 4
+                time_cost: 3
+                memory_cost: 10
