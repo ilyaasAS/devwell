@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,11 +22,14 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $roles = [];
 
     public function getId(): ?int
     {
@@ -76,5 +82,41 @@ class User
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+
+        // garantir que chaque utilisateur a au moins le rôle ROLE_USER
+        if (!in_array('ROLE_USER', $roles, true)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return $roles;
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Cette méthode est utilisée pour renvoyer l'identifiant unique de l'utilisateur.
+     */
+    public function getUserIdentifier(): string
+    {
+        return $this->email; // Symfony utilise `email` comme identifiant
+    }
+
+    /**
+     * Cette méthode est appelée pour nettoyer des données sensibles si nécessaire.
+     */
+    public function eraseCredentials(): void
+    {
+        // Si tu stockes des données sensibles, efface-les ici
+        // Exemple : $this->plainPassword = null;
     }
 }
