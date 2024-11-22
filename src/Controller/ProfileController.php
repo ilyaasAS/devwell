@@ -2,45 +2,61 @@
 
 namespace App\Controller;
 
-use App\Form\ProfileType; // Utiliser le formulaire ProfileType pour l'édition du profil
+use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile', methods: ['GET', 'POST'])]
-    public function edit(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function edit(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SecurityBundleSecurity $security,
+        UserPasswordHasherInterface $passwordHasher
+    ): Response {
         // Récupérer l'utilisateur connecté
-        $user = $this->getUser();
-        
-        // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
-        if (!$user) {
+        $user = $security->getUser();
+
+        if (!$user instanceof \App\Entity\User) {
+            // Rediriger si l'utilisateur n'est pas connecté ou n'est pas une instance valide
             return $this->redirectToRoute('app_login');
         }
 
-        // Créer le formulaire pour l'édition du profil en utilisant ProfileType
+        // Sauvegarder l'ancien mot de passe
+        $currentPassword = $user->getPassword();
+
+        // Créer le formulaire
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
-        // Si le formulaire est soumis et valide, mettre à jour les données de l'utilisateur
         if ($form->isSubmitted() && $form->isValid()) {
-            // Sauvegarder les modifications dans la base de données
+            // Récupérer le mot de passe brut du formulaire
+            $plainPassword = $form->get('password')->getData();
+
+            if ($plainPassword) {
+                // Si un nouveau mot de passe est défini, le hacher et l'assigner
+                $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
+                $user->setPassword($hashedPassword);
+            } else {
+                // Si aucun mot de passe n'est fourni, conserver l'ancien
+                $user->setPassword($currentPassword);
+            }
+
+            // Sauvegarder les modifications
             $entityManager->flush();
 
-            // Afficher un message de succès
             $this->addFlash('success', 'Profile updated successfully.');
-
-            // Rediriger l'utilisateur vers la page de profil
             return $this->redirectToRoute('app_profile');
         }
 
-        // Rendre la vue avec le formulaire pour que l'utilisateur puisse le modifier
         return $this->render('profile/edit.html.twig', [
-            'form' => $form->createView(), // Créer la vue pour le formulaire
+            'form' => $form->createView(),
         ]);
     }
 }

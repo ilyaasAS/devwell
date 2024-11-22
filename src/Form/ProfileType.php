@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfileType extends AbstractType
 {
@@ -28,9 +29,13 @@ class ProfileType extends AbstractType
                 'attr' => ['class' => 'form-control']
             ])
             ->add('password', PasswordType::class, [
-                'required' => false,  // Password is optional for the user to change
+                'required' => false,
                 'label' => 'Password',
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'empty_data' => '', // Si le champ est laissé vide, on assigne une chaîne vide
+                'constraints' => [
+                    // Supprimez NotBlank ici car le champ peut être vide
+                ],
             ]);
     }
 
