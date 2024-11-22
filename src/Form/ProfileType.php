@@ -1,7 +1,5 @@
 <?php
 
-// src/Form/ProfileType.php
-
 namespace App\Form;
 
 use App\Entity\User;

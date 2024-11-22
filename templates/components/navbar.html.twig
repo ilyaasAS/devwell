@@ -7,7 +7,12 @@
                     <img src="assets/images/logo_dw2.png" alt="Logo" class="h-8 w-auto">
                 </a>
                 <a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
-                <a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
+                <a href="/profile" class="text-lg font-bold hover:text-blue-400">Profile</a>
+
+                <!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
+                {% endif %}
             </div>
 
             <!-- Menu (desktop) -->
