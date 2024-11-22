@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto py-10">
+        <h1 class="text-3xl font-bold mb-6">Edit Profile</h1>
+
+        <div class="bg-white p-6 rounded shadow-md">
+            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+                {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded'}}) }}
+                {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded'}}) }}
+                {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded'}}) }}
+                {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded'}}) }}
+                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Update Profile</button>
+            {{ form_end(form) }}
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_home') }}" class="text-blue-500 hover:underline">Back to Home</a>
+        </div>
+    </div>
+{% endblock %}
