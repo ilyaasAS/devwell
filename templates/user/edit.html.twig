@@ -8,10 +8,6 @@
 
     <div class="bg-white p-6 rounded shadow-md">
         {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
-            {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
-            {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
-            {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
-            {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
             {{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
             <button type="submit" class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600">Update</button>
         {{ form_end(form) }}
