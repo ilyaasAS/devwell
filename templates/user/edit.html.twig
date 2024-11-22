@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+<div class="container mx-auto py-10">
+    <h1 class="text-3xl font-bold mb-6">Edit User</h1>
+
+    <div class="bg-white p-6 rounded shadow-md">
+        {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+            {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
+            {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
+            {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
+            {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
+            {{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
+            <button type="submit" class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600">Update</button>
+        {{ form_end(form) }}
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('app_user_index') }}" class="text-blue-500 hover:underline">Back to list</a>
+    </div>
+</div>
+{% endblock %}

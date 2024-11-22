@@ -45,6 +45,7 @@ security:
     # Contrôle d'accès pour les pages
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
 
 # Configuration spéciale pour l'environnement de test

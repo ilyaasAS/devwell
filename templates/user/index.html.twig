@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+<div class="container mx-auto py-10">
+    <h1 class="text-3xl font-bold mb-6">User Index</h1>
+
+    <table class="table-auto w-full border-collapse border border-gray-300">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="border border-gray-300 px-4 py-2">Id</th>
+                <th class="border border-gray-300 px-4 py-2">FirstName</th>
+                <th class="border border-gray-300 px-4 py-2">LastName</th>
+                <th class="border border-gray-300 px-4 py-2">Email</th>
+                <th class="border border-gray-300 px-4 py-2">Roles</th>
+                <th class="border border-gray-300 px-4 py-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">{{ user.id }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ user.firstName }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ user.lastName }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ user.roles ? user.roles|join(', ') : '' }}</td>
+                <td class="border border-gray-300 px-4 py-2">
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-500 hover:underline">Show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="border border-gray-300 px-4 py-2 text-center">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="mt-4">
+        <a href="{{ path('app_user_new') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Create new</a>
+    </div>
+</div>
+{% endblock %}
