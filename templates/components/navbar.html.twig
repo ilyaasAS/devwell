@@ -7,11 +7,13 @@
                     <img src="assets/images/logodw.png" alt="Logo" class="h-8 w-auto">
                 </a>
                 <a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
+                <a href="/products" class="text-lg font-bold hover:text-blue-400">Produit</a>
                 <a href="/profile" class="text-lg font-bold hover:text-blue-400">Profile</a>
 
                 <!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
+                    <a href="/product" class="text-lg font-bold hover:text-blue-400">Gestion de Produit</a>
                 {% endif %}
             </div>
 
