@@ -105,4 +105,24 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('app_product_index');
     }
+
+
+    // Afficher tous les produits pour les utilisateurs
+    #[Route('/products', name: 'app_products', methods: ['GET'])]
+    public function productsList(EntityManagerInterface $entityManager): Response
+    {
+        $products = $entityManager->getRepository(Product::class)->findAll();
+
+        return $this->render('product/products.html.twig', [
+            'products' => $products,
+        ]);
+    }
+
+    #[Route('/products/{id}', name: 'app_product_details', methods: ['GET'])]
+public function productDetails(Product $product): Response
+{
+    return $this->render('product/details.html.twig', [
+        'product' => $product,
+    ]);
+}
 }
