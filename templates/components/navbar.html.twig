@@ -1,85 +1,75 @@
 <nav style="background-color: #1A2A40;" class="text-white">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center py-4">
-            <!-- Logo et Accueil -->
-            <div class="flex items-center space-x-6">
-                <a href="/" class="flex items-center">
-                    <img src="assets/images/logodw.png" alt="Logo" class="h-8 w-auto">
-                </a>
-                <a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
-                <a href="/products" class="text-lg font-bold hover:text-blue-400">Produit</a>
-                <a href="/categorie" class="text-lg font-bold hover:text-blue-400">Catégorie</a>
-                <a href="/profile" class="text-lg font-bold hover:text-blue-400">Profile</a>
+	<div class="container mx-auto px-4">
+		<div
+			class="flex justify-between items-center py-4">
+			<!-- Logo et Accueil -->
+			<div class="flex items-center space-x-6">
+				<a href="/" class="flex items-center">
+					<img src="assets/images/logodw.png" alt="Logo" class="h-8 w-auto">
+				</a>
+				<a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
+				<a href="/products" class="text-lg font-bold hover:text-blue-400">Produit</a>
+				<a href="/categorie" class="text-lg font-bold hover:text-blue-400">Catégorie</a>
+				<a href="/profile" class="text-lg font-bold hover:text-blue-400">Profile</a>
 
-                <!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
-                    <a href="/product" class="text-lg font-bold hover:text-blue-400">Gestion de Produit</a>
-                    <a href="/categories" class="text-lg font-bold hover:text-blue-400">Gestion de Catégorie</a>
+				<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
+				{% if is_granted('ROLE_ADMIN') %}
+					<a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
+					<a href="/product" class="text-lg font-bold hover:text-blue-400">Gestion de Produit</a>
+					<a href="/categories" class="text-lg font-bold hover:text-blue-400">Gestion de Catégorie</a>
 
-                    
-                {% endif %}
-            </div>
+				{% endif %}
+			</div>
 
-            <!-- Menu (desktop) -->
-            <ul class="hidden md:flex space-x-6">
-                {% if app.user is null %}
-                    <li>
-                        <a href="/login" 
-                           class="px-4 py-2 rounded" 
-                           style="background-color: #9EFCED; color: #000000;"
-                           onmouseover="this.style.backgroundColor='#82E8DA';"
-                           onmouseout="this.style.backgroundColor='#9EFCED';">
-                            Connexion
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/register" 
-                           class="px-4 py-2 rounded" 
-                           style="background-color: #2FBF71; color: #1A2A40;"
-                           onmouseover="this.style.backgroundColor='#249A5B';"
-                           onmouseout="this.style.backgroundColor='#2FBF71';">
-                            Inscription
-                        </a>
-                    </li>
-                {% else %}
-                    <li><a href="/logout" class="hover:text-blue-400">Déconnexion</a></li>
-                {% endif %}
-            </ul>
+			<!-- Menu (desktop) -->
+			<ul class="hidden md:flex space-x-6">
+				{% if app.user is null %}
+					<li>
+						<a href="/login" class="px-4 py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
+							Connexion
+						</a>
+					</li>
+					<li>
+						<a href="/register" class="px-4 py-2 rounded" style="background-color: #2FBF71; color: #1A2A40;" onmouseover="this.style.backgroundColor='#249A5B';" onmouseout="this.style.backgroundColor='#2FBF71';">
+							Inscription
+						</a>
+					</li>
+				{% else %}
+					<li>
+						<a href="/logout" class="hover:text-blue-400">Déconnexion</a>
+					</li>
+				{% endif %}
+			</ul>
 
-            <!-- Menu Button (mobile) -->
-            <button id="menu-toggle" class="md:hidden focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </button>
-        </div>
+			<!-- Menu Button (mobile) -->
+			<button id="menu-toggle" class="md:hidden focus:outline-none">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+				</svg>
+			</button>
+		</div>
 
-        <!-- Menu (mobile) -->
-        <ul id="mobile-menu" class="hidden flex-col space-y-2 md:hidden bg-gray-700 text-center py-4">
-            <li><a href="/" class="block py-2 hover:text-blue-400">Accueil</a></li>
-            {% if app.user is null %}
-                <li>
-                    <a href="/login" 
-                       class="block py-2 rounded" 
-                       style="background-color: #9EFCED; color: #000000;"
-                       onmouseover="this.style.backgroundColor='#82E8DA';"
-                       onmouseout="this.style.backgroundColor='#9EFCED';">
-                        Connexion
-                    </a>
-                </li>
-                <li>
-                    <a href="/register" 
-                       class="block py-2 rounded" 
-                       style="background-color: #2FBF71; color: #ffffff;"
-                       onmouseover="this.style.backgroundColor='#249A5B';"
-                       onmouseout="this.style.backgroundColor='#2FBF71';">
-                        Inscription
-                    </a>
-                </li>
-            {% else %}
-                <li><a href="/logout" class="block py-2 hover:text-blue-400">Déconnexion</a></li>
-            {% endif %}
-        </ul>
-    </div>
+		<!-- Menu (mobile) -->
+		<ul id="mobile-menu" class="hidden flex-col space-y-2 md:hidden bg-gray-700 text-center py-4">
+			<li>
+				<a href="/" class="block py-2 hover:text-blue-400">Accueil</a>
+			</li>
+			{% if app.user is null %}
+				<li>
+					<a href="/login" class="block py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
+						Connexion
+					</a>
+				</li>
+				<li>
+					<a href="/register" class="block py-2 rounded" style="background-color: #2FBF71; color: #ffffff;" onmouseover="this.style.backgroundColor='#249A5B';" onmouseout="this.style.backgroundColor='#2FBF71';">
+						Inscription
+					</a>
+				</li>
+			{% else %}
+				<li>
+					<a href="/logout" class="block py-2 hover:text-blue-400">Déconnexion</a>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
 </nav>
