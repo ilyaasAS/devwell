@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,27 +13,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ProfileController extends AbstractController
 {
-
-    // Liste des produits avec une possibilité de recherche
-    #[Route('/products', name: 'app_product_index', methods: ['GET'])]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        // Récupérer la valeur de la recherche (si elle existe)
-        $search = $request->query->get('search', '');
-
-        // Construire la requête pour chercher des produits par nom ou description
-        $productsQuery = $entityManager->getRepository(Product::class)->createQueryBuilder('p')
-            ->where('p.name LIKE :search OR p.description LIKE :search')
-            ->setParameter('search', '%'.$search.'%')
-            ->getQuery();
-
-        // Exécuter la requête pour récupérer les produits filtrés
-        $products = $productsQuery->getResult();
-
-        return $this->render('product/index.html.twig', [
-            'products' => $products,
-        ]);
-    }
 
 
 

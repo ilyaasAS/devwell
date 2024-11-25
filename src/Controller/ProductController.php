@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-    // Liste des produits
+    // Liste des produits pour l'administration
     #[Route('/product', name: 'app_product_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -21,6 +21,28 @@ class ProductController extends AbstractController
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
+        ]);
+    }
+
+    // Liste des produits avec une fonctionnalité de recherche pour les utilisateurs
+    #[Route('/products', name: 'app_products', methods: ['GET'])]
+    public function productsList(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer la valeur de la recherche (si elle existe)
+        $search = $request->query->get('search', '');
+
+        // Construire la requête pour chercher des produits par nom ou description
+        $productsQuery = $entityManager->getRepository(Product::class)->createQueryBuilder('p')
+            ->where('p.name LIKE :search OR p.description LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery();
+
+        // Exécuter la requête pour récupérer les produits filtrés
+        $products = $productsQuery->getResult();
+
+        return $this->render('product/products.html.twig', [
+            'products' => $products,
+            'search' => $search // Passer le terme de recherche pour le pré-remplir dans le champ de recherche
         ]);
     }
 
@@ -58,11 +80,11 @@ class ProductController extends AbstractController
         ]);
     }
 
-    // Voir un produit spécifique
-    #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
-    public function show(Product $product): Response
+    // Voir un produit spécifique (affichage pour l'utilisateur)
+    #[Route('/products/{id}', name: 'app_product_show', methods: ['GET'])]
+    public function productDetails(Product $product): Response
     {
-        return $this->render('product/show.html.twig', [
+        return $this->render('product/details.html.twig', [
             'product' => $product,
         ]);
     }
@@ -95,7 +117,6 @@ class ProductController extends AbstractController
     #[Route('/product/{id}/delete', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        // Vérification CSRF pour éviter les suppressions non autorisées
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $entityManager->remove($product);
             $entityManager->flush();
@@ -105,24 +126,5 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('app_product_index');
     }
-
-
-    // Afficher tous les produits pour les utilisateurs
-    #[Route('/products', name: 'app_products', methods: ['GET'])]
-    public function productsList(EntityManagerInterface $entityManager): Response
-    {
-        $products = $entityManager->getRepository(Product::class)->findAll();
-
-        return $this->render('product/products.html.twig', [
-            'products' => $products,
-        ]);
-    }
-
-    #[Route('/products/{id}', name: 'app_product_details', methods: ['GET'])]
-public function productDetails(Product $product): Response
-{
-    return $this->render('product/details.html.twig', [
-        'product' => $product,
-    ]);
 }
-}
+
