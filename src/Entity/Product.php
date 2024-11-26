@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use PHPUnit\TextUI\Configuration\File;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -33,6 +34,20 @@ class Product
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    // Ajout d'une propriété temporaire pour l'image
+    private ?File $uploadedImage = null;
+
+    public function getUploadedImage(): ?File
+    {
+        return $this->uploadedImage;
+    }
+
+    public function setUploadedImage(?File $uploadedImage): static
+    {
+        $this->uploadedImage = $uploadedImage;
+        return $this;
+    }
 
     // Ajout de la propriété temporaire pour la nouvelle catégorie
     private ?string $newCategory = null;

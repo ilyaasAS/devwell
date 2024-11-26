@@ -23,7 +23,14 @@ class ProductType extends AbstractType
             ->add('name', TextType::class, ['label' => 'Name'])
             ->add('price', NumberType::class, ['label' => 'Price'])
             ->add('stock', NumberType::class, ['label' => 'Stock'])
-            ->add('image', FileType::class, ['required' => false])
+            
+            // corriger l'erreur //
+            ->add('uploadedImage', FileType::class, [
+                'label' => 'Upload Image',
+                'required' => false,
+                'mapped' => false, // Ce champ ne sera pas mappé à l'entité directement
+            ])
+            
             ->add('description', TextareaType::class, ['label' => 'Description'])
             ->add('category', ChoiceType::class, [
                 'choices' => $this->getCategoryChoices($options['categories']),

@@ -9,9 +9,9 @@
     <!-- Barre de recherche -->
     <div class="mb-6 flex justify-center">
         <form method="get" action="{{ path('app_products') }}" class="flex space-x-2">
-            <input type="text" name="search" value="{{ search }}" placeholder="Search for products..." class="px-4 py-2 border border-gray-300 rounded-md w-1/3">
+            <input type="text" name="search" value="{{ search }}" placeholder="Trouve ton produits..." class="px-4 py-2 border border-gray-300 rounded-md w-1/3">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                Search
+                Recherche
             </button>
         </form>
     </div>
@@ -21,6 +21,8 @@
             {% for product in products %}
                 <div class="bg-white shadow-md rounded p-4">
                     <h2 class="text-xl font-bold mb-2">{{ product.name }}</h2>
+                    {# Problème d'affichage d'image #}
+<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-cover mb-6 rounded">
                     <p class="text-gray-700 mb-2">{{ product.description|slice(0, 100) ~ '...' }}</p>
                     <p class="text-lg font-semibold text-green-600 mb-2">{{ product.price }} €</p>
                     <a href="{{ path('app_product_show', { id: product.id }) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block text-center">
