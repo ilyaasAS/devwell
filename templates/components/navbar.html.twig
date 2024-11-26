@@ -2,27 +2,29 @@
 	<div class="container mx-auto px-4">
 		<div
 			class="flex justify-between items-center py-4">
-			<!-- Logo et Accueil -->
-			<div class="flex items-center space-x-6">
-				<a href="/" class="flex items-center">
-					<img src="assets/images/logodw.png" alt="Logo" class="h-8 w-auto">
-				</a>
-				<a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
-				<a href="/products" class="text-lg font-bold hover:text-blue-400">Produit</a>
-				<a href="/categorie" class="text-lg font-bold hover:text-blue-400">Catégorie</a>
-				<a href="/profile" class="text-lg font-bold hover:text-blue-400">Profile</a>
-
-				<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
-				{% if is_granted('ROLE_ADMIN') %}
-					<a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
-					<a href="/product" class="text-lg font-bold hover:text-blue-400">Gestion de Produit</a>
-					<a href="/categories" class="text-lg font-bold hover:text-blue-400">Gestion de Catégorie</a>
-
-				{% endif %}
-			</div>
 
 			<!-- Menu (desktop) -->
-			<ul class="hidden md:flex space-x-6">
+			<ul
+				class="hidden md:flex space-x-6">
+
+				<!-- Logo et Accueil -->
+				<div class="flex items-center space-x-6">
+					<a href="/" class="flex items-center">
+						<img src="assets/images/logodw.png" alt="Logo" class="h-8 w-auto">
+					</a>
+					<a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
+					<a href="/products" class="text-lg font-bold hover:text-blue-400">Produit</a>
+					<a href="/categorie" class="text-lg font-bold hover:text-blue-400">Catégorie</a>
+					<a href="/profile" class="text-lg font-bold hover:text-blue-400">Profile</a>
+
+					<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
+						<a href="/product" class="text-lg font-bold hover:text-blue-400">Gestion de Produit</a>
+						<a href="/categories" class="text-lg font-bold hover:text-blue-400">Gestion de Catégorie</a>
+					{% endif %}
+				</div>
+
 				{% if app.user is null %}
 					<li>
 						<a href="/login" class="px-4 py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
@@ -54,6 +56,29 @@
 			<li>
 				<a href="/" class="block py-2 hover:text-blue-400">Accueil</a>
 			</li>
+			<li>
+				<a href="/products" class="block py-2 hover:text-blue-400">Produit</a>
+			</li>
+			<li>
+				<a href="/categorie" class="block py-2 hover:text-blue-400">Catégorie</a>
+			</li>
+			<li>
+				<a href="/profile" class="block py-2 hover:text-blue-400">Profile</a>
+			</li>
+
+			<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
+			{% if is_granted('ROLE_ADMIN') %}
+				<li>
+					<a href="/user" class="block py-2 hover:text-blue-400">Dashboard</a>
+				</li>
+				<li>
+					<a href="/product" class="block py-2 hover:text-blue-400">Gestion de Produit</a>
+				</li>
+				<li>
+					<a href="/categories" class="block py-2 hover:text-blue-400">Gestion de Catégorie</a>
+				</li>
+			{% endif %}
+
 			{% if app.user is null %}
 				<li>
 					<a href="/login" class="block py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
