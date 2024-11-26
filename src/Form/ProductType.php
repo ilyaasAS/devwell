@@ -38,11 +38,11 @@ class ProductType extends AbstractType
                     return $category->getName();
                 },
                 'required' => false,
-            ])
-            ->add('newCategory', TextType::class, [
-                'label' => 'Create a new category',
-                'required' => false
             ]);
+            // ->add('newCategory', TextType::class, [
+            //     'label' => 'Create a new category',
+            //     'required' => false
+            // ]);
     }
 
     private function getCategoryChoices($categories)
