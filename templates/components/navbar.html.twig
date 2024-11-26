@@ -1,122 +1,143 @@
 <nav style="background-color: #1A2A40;" class="text-white">
-	<div class="container mx-auto px-4">
-		<div class="flex justify-between items-center py-4">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
 
-			<!-- Menu (desktop) -->
-			<ul class="hidden md:flex w-full justify-between items-center">
+            <!-- Menu (desktop) -->
+            <ul class="hidden md:flex w-full justify-between items-center">
 
-				<!-- Logo et Navigation principale (gauche) -->
-				<div class="flex items-center space-x-6">
-					<a href="/" class="flex items-center">
-						<img src="assets/images/logo_dw.png" alt="Logo" class="h-8 w-auto">
-					</a>
-					<a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
-					<a href="/products" class="text-lg font-bold hover:text-blue-400">Produit</a>
-					<a href="/categorie" class="text-lg font-bold hover:text-blue-400">Catégorie</a>
-					<a href="/profile" class="text-lg font-bold hover:text-blue-400">Profile</a>
+                <!-- Logo et Navigation principale (gauche) -->
+                <div class="flex items-center space-x-6">
+                    <a href="/" class="flex items-center">
+                        <img src="assets/images/logo_dw.png" alt="Logo" class="h-8 w-auto">
+                    </a>
+                    <a href="/" class="text-lg font-bold hover:text-blue-400">Accueil</a>
+                    <a href="/products" class="text-lg font-bold hover:text-blue-400">Produit</a>
+                    <a href="/categorie" class="text-lg font-bold hover:text-blue-400">Catégorie</a>
+                    <a href="/profile" class="text-lg font-bold hover:text-blue-400">Profile</a>
 
-					<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
-					{% if is_granted('ROLE_ADMIN') %}
-						<a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
-						<a href="/product" class="text-lg font-bold hover:text-blue-400">Gestion de Produit</a>
-						<a href="/categories" class="text-lg font-bold hover:text-blue-400">Gestion de Catégorie</a>
-					{% endif %}
-				</div>
+                    <!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="/user" class="text-lg font-bold hover:text-blue-400">Dashboard</a>
+                        <a href="/product" class="text-lg font-bold hover:text-blue-400">Gestion de Produit</a>
+                        <a href="/categories" class="text-lg font-bold hover:text-blue-400">Gestion de Catégorie</a>
+                    {% endif %}
+                </div>
 
-				<!-- Connexion/Inscription/Déconnexion et Panier à droite -->
-				<div class="flex items-center space-x-6">
-					<!-- Panier -->
-					<li>
-						<a href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-blue-400">
-							<!-- Icône Panier -->
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6" />
-							</svg>
-							Panier
-							<!-- Badge de quantité -->
-							<span class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-2">
-								{{ cart.totalItems|default(0) }}
-							</span>
-						</a>
-					</li>
+                <!-- Connexion/Inscription/Déconnexion et Panier à droite -->
+                <div class="flex items-center space-x-6">
+                    <!-- Panier -->
+                    <li>
+                        <a href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-blue-400">
+                            <!-- Icône Panier -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6" />
+                            </svg>
+                            Panier
+                            <!-- Badge de quantité -->
+                            <span id="cart-badge" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-2">
+                                {{ totalItems|default(0) }}
+                            </span>
+                        </a>
+                    </li>
 
-					{% if app.user is null %}
-						<li>
-							<a href="/login" class="px-4 py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
-								Connexion
-							</a>
-						</li>
-						<li>
-							<a href="/register" class="px-4 py-2 rounded" style="background-color: #2FBF71; color: #1A2A40;" onmouseover="this.style.backgroundColor='#249A5B';" onmouseout="this.style.backgroundColor='#2FBF71';">
-								Inscription
-							</a>
-						</li>
-					{% else %}
-						<li>
-							<a href="/logout" class="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 hover:text-blue-400 transition-colors duration-200">
-								Déconnexion
-							</a>
-						</li>
-					{% endif %}
-				</div>
-			</ul>
+                    {% if app.user is null %}
+                        <li>
+                            <a href="/login" class="px-4 py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
+                                Connexion
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/register" class="px-4 py-2 rounded" style="background-color: #2FBF71; color: #1A2A40;" onmouseover="this.style.backgroundColor='#249A5B';" onmouseout="this.style.backgroundColor='#2FBF71';">
+                                Inscription
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="/logout" class="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 hover:text-blue-400 transition-colors duration-200">
+                                Déconnexion
+                            </a>
+                        </li>
+                    {% endif %}
+                </div>
+            </ul>
 
-			<!-- Menu Button (mobile) -->
-			<button id="menu-toggle" class="md:hidden focus:outline-none">
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-				</svg>
-			</button>
-		</div>
+            <!-- Menu Button (mobile) -->
+            <button id="menu-toggle" class="md:hidden focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                </svg>
+            </button>
+        </div>
 
-		<!-- Menu (mobile) -->
-		<ul id="mobile-menu" class="hidden flex-col space-y-2 md:hidden bg-gray-700 text-center py-4">
-			<li>
-				<a href="/" class="block py-2 hover:text-blue-400">Accueil</a>
-			</li>
-			<li>
-				<a href="/products" class="block py-2 hover:text-blue-400">Produit</a>
-			</li>
-			<li>
-				<a href="/categorie" class="block py-2 hover:text-blue-400">Catégorie</a>
-			</li>
-			<li>
-				<a href="/profile" class="block py-2 hover:text-blue-400">Profile</a>
-			</li>
+        <!-- Menu (mobile) -->
+        <ul id="mobile-menu" class="hidden flex-col space-y-2 md:hidden bg-gray-700 text-center py-4">
+            <li>
+                <a href="/" class="block py-2 hover:text-blue-400">Accueil</a>
+            </li>
+            <li>
+                <a href="/products" class="block py-2 hover:text-blue-400">Produit</a>
+            </li>
+            <li>
+                <a href="/categorie" class="block py-2 hover:text-blue-400">Catégorie</a>
+            </li>
+            <li>
+                <a href="/profile" class="block py-2 hover:text-blue-400">Profile</a>
+            </li>
 
-			<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
-			{% if is_granted('ROLE_ADMIN') %}
-				<li>
-					<a href="/user" class="block py-2 hover:text-blue-400">Dashboard</a>
-				</li>
-				<li>
-					<a href="/product" class="block py-2 hover:text-blue-400">Gestion de Produit</a>
-				</li>
-				<li>
-					<a href="/categories" class="block py-2 hover:text-blue-400">Gestion de Catégorie</a>
-				</li>
-			{% endif %}
+            <!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="/user" class="block py-2 hover:text-blue-400">Dashboard</a>
+                </li>
+                <li>
+                    <a href="/product" class="block py-2 hover:text-blue-400">Gestion de Produit</a>
+                </li>
+                <li>
+                    <a href="/categories" class="block py-2 hover:text-blue-400">Gestion de Catégorie</a>
+                </li>
+            {% endif %}
 
-			<li>
-				<a href="/cart" class="block py-2 hover:text-blue-400">Panier</a>
-			</li>
+            <li>
+                <a href="/cart" class="block py-2 hover:text-blue-400">Panier</a>
+            </li>
 
-			{% if app.user is null %}
-				<li>
-					<a href="/login" class="block py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
-						Connexion
-					</a>
-				</li>
-				<li>
-					<a href="/register" class="block py-2 rounded" style="background-color: #2FBF71; color: #ffffff;" onmouseover="this.style.backgroundColor='#249A5B';" onmouseout="this.style.backgroundColor='#2FBF71';">
-						Inscription
-					</a>
-				</li>
-			{% else %}
-				<li>
-					<a href="/logout" class="block py-2 hover:text-blue-400">Déconnexion</a>
-				</li>
-			{% endif %}
-		</ul>
-	</div>
+            {% if app.user is null %}
+                <li>
+                    <a href="/login" class="block py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
+                        Connexion
+                    </a>
+                </li>
+                <li>
+                    <a href="/register" class="block py-2 rounded" style="background-color: #2FBF71; color: #ffffff;" onmouseover="this.style.backgroundColor='#249A5B';" onmouseout="this.style.backgroundColor='#2FBF71';">
+                        Inscription
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="/logout" class="block py-2 hover:text-blue-400">Déconnexion</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 </nav>
+
+<script>
+    // Fonction pour ajouter un produit au panier via AJAX
+    function addToCart(productId) {
+        // Envoi de la requête AJAX
+        fetch(`/cart/add/${productId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json', // Indique que la réponse doit être au format JSON
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Mise à jour du badge panier avec le nombre total d'articles
+            document.getElementById('cart-badge').textContent = data.totalItems;
+        })
+        .catch(error => {
+            console.error('Error adding item to cart:', error);
+        });
+    }
+</script>

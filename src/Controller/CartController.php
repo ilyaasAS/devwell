@@ -8,12 +8,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;  // Ajouter cette importation
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
     #[Route('/cart/add/{id}', name: 'cart_add')]
-    public function addToCart(Product $product, EntityManagerInterface $em): RedirectResponse
+    public function addToCart(Product $product, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
 
@@ -41,8 +42,15 @@ class CartController extends AbstractController
         // Sauvegarder les modifications dans la base de données
         $em->flush();
 
-        $this->addFlash('success', 'Product added to cart!');
-        return $this->redirectToRoute('app_products');
+        // Calcul du nombre total d'articles dans le panier
+        $cartItems = $em->getRepository(Cart::class)->findBy(['user' => $user]);
+        $totalItems = 0;
+        foreach ($cartItems as $item) {
+            $totalItems += $item->getQuantity();
+        }
+
+        // Renvoi du nombre d'articles dans le panier sous forme de réponse JSON
+        return new JsonResponse(['totalItems' => $totalItems]);
     }
 
     #[Route('/cart', name: 'cart_view')]
@@ -57,8 +65,15 @@ class CartController extends AbstractController
         // Utilisation de l'EntityManager pour récupérer les éléments du panier
         $cartItems = $em->getRepository(Cart::class)->findBy(['user' => $user]);
 
+        // Calcul du nombre total d'articles dans le panier
+        $totalItems = 0;
+        foreach ($cartItems as $item) {
+            $totalItems += $item->getQuantity();
+        }
+
         return $this->render('cart/index.html.twig', [
             'cartItems' => $cartItems,
+            'totalItems' => $totalItems, // Passer totalItems au template
         ]);
     }
 
