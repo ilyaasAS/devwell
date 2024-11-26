@@ -1,20 +1,49 @@
+{# templates/contact/index.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Formulaire de Contact{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="max-w-3xl mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
+        <h1 class="text-2xl font-semibold mb-6 text-center">Nous Contacter</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        {% if app.flashes('success') %}
+            <div class="alert alert-success mb-4 p-4 bg-green-200 text-green-800 rounded-lg">
+                {% for message in app.flashes('success') %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/stagiaire/Desktop/Projet Devwell/devwell/src/Controller/ContactController.php</code></li>
-        <li>Your template at <code>C:/Users/stagiaire/Desktop/Projet Devwell/devwell/templates/contact/index.html.twig</code></li>
-    </ul>
-</div>
+        {{ form_start(form) }}
+            <div class="mb-6">
+                {{ form_label(form.name, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-input mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500'}}) }}
+                {{ form_errors(form.name, {'attr': {'class': 'text-sm text-red-600'}}) }}
+            </div>
+
+            <div class="mb-6">
+                {{ form_label(form.email, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-input mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500'}}) }}
+                {{ form_errors(form.email, {'attr': {'class': 'text-sm text-red-600'}}) }}
+            </div>
+
+            <div class="mb-6">
+                {{ form_label(form.subject, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+                {{ form_widget(form.subject, {'attr': {'class': 'form-input mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500'}}) }}
+                {{ form_errors(form.subject, {'attr': {'class': 'text-sm text-red-600'}}) }}
+            </div>
+
+            <div class="mb-6">
+                {{ form_label(form.message, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+                {{ form_widget(form.message, {'attr': {'class': 'form-textarea mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500', 'rows': '5'}}) }}
+                {{ form_errors(form.message, {'attr': {'class': 'text-sm text-red-600'}}) }}
+            </div>
+
+            <div class="mb-6">
+                {{ form_widget(form.submit, {'attr': {'class': 'w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'}}) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
