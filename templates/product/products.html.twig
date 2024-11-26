@@ -21,13 +21,16 @@
             {% for product in products %}
                 <div class="bg-white shadow-md rounded p-4">
                     <h2 class="text-xl font-bold mb-2">{{ product.name }}</h2>
-                    {# Problème d'affichage d'image #}
 <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-cover mb-6 rounded">
                     <p class="text-gray-700 mb-2">{{ product.description|slice(0, 100) ~ '...' }}</p>
                     <p class="text-lg font-semibold text-green-600 mb-2">{{ product.price }} €</p>
                     <a href="{{ path('app_product_show', { id: product.id }) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block text-center">
                         View Details
                     </a>
+                    <a href="{{ path('cart_add', { id: product.id }) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block text-center">
+    Ajouter au panier
+</a>
+
                 </div>
             {% endfor %}
         </div>

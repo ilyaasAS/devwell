@@ -1,11 +1,9 @@
 <nav style="background-color: #1A2A40;" class="text-white">
 	<div class="container mx-auto px-4">
-		<div
-			class="flex justify-between items-center py-4">
+		<div class="flex justify-between items-center py-4">
 
 			<!-- Menu (desktop) -->
-			<ul
-				class="hidden md:flex w-full justify-between items-center">
+			<ul class="hidden md:flex w-full justify-between items-center">
 
 				<!-- Logo et Navigation principale (gauche) -->
 				<div class="flex items-center space-x-6">
@@ -25,8 +23,23 @@
 					{% endif %}
 				</div>
 
-				<!-- Connexion/Inscription/Déconnexion à droite -->
+				<!-- Connexion/Inscription/Déconnexion et Panier à droite -->
 				<div class="flex items-center space-x-6">
+					<!-- Panier -->
+					<li>
+						<a href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-blue-400">
+							<!-- Icône Panier -->
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6" />
+							</svg>
+							Panier
+							<!-- Badge de quantité -->
+							<span class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-2">
+								{{ cart.totalItems|default(0) }}
+							</span>
+						</a>
+					</li>
+
 					{% if app.user is null %}
 						<li>
 							<a href="/login" class="px-4 py-2 rounded" style="background-color: #9EFCED; color: #000000;" onmouseover="this.style.backgroundColor='#82E8DA';" onmouseout="this.style.backgroundColor='#9EFCED';">
@@ -46,9 +59,7 @@
 						</li>
 					{% endif %}
 				</div>
-
 			</ul>
-
 
 			<!-- Menu Button (mobile) -->
 			<button id="menu-toggle" class="md:hidden focus:outline-none">
@@ -85,6 +96,10 @@
 					<a href="/categories" class="block py-2 hover:text-blue-400">Gestion de Catégorie</a>
 				</li>
 			{% endif %}
+
+			<li>
+				<a href="/cart" class="block py-2 hover:text-blue-400">Panier</a>
+			</li>
 
 			{% if app.user is null %}
 				<li>

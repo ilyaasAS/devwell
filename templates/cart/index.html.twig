@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre Panier{% endblock %}
+
+{% block body %}
+<div class="container mx-auto py-10">
+    <h1 class="text-4xl font-semibold mb-6">Votre Panier</h1>
+    {% if cartItems|length > 0 %}
+        <ul>
+            {% for item in cartItems %}
+                <li class="mb-4 flex justify-between items-center">
+                    <p>{{ item.product.name }} ({{ item.quantity }})</p>
+                    <a href="{{ path('cart_remove', { id: item.id }) }}" class="text-red-500">Supprimer</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Votre panier est vide.</p>
+    {% endif %}
+</div>
+{% endblock %}
