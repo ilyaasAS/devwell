@@ -7,7 +7,7 @@
     <h1 class="text-4xl font-semibold mb-6 text-center text-primary_dw">Category List</h1>
 
     <div class="flex justify-end mb-6">
-        <a href="{{ path('app_category_new') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300 transform hover:scale-105">Add New Category</a>
+        <a href="{{ path('app_category_new') }}" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">Add New Category</a>
     </div>
 
     {% if categories|length > 0 %}

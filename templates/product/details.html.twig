@@ -24,16 +24,19 @@
             <!-- Product Stock -->
             <p class="text-xl text-gray-500 text-center mb-6">Stock: {{ product.stock }}</p>
 
-            <!-- Add to Cart Button -->
-            <div class="text-center mb-6">
-                <button onclick="addToCart({{ product.id }})" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <!-- Action Buttons -->
+            <div class="flex flex-col items-center space-y-4">
+                <!-- Add to Cart Button -->
+                <button onclick="addToCart({{ product.id }})" 
+                    class="w-full max-w-xs bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
                     Ajouter au panier
                 </button>
-            </div>
 
-            <!-- Back to Products Link -->
-            <div class="text-center">
-                <a href="/products" class="text-blue-500 hover:underline">Back to Products</a>
+                <!-- Back to Products Link -->
+                <a href="/products" 
+                    class="w-full max-w-xs text-center bg-blue-100 text-blue-500 px-6 py-3 rounded-lg shadow-md hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    Back to Products
+                </a>
             </div>
         </div>
     </div>

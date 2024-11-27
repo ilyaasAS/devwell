@@ -34,7 +34,7 @@ class ProductController extends AbstractController
         // Construire la requête pour chercher des produits par nom ou description
         $productsQuery = $entityManager->getRepository(Product::class)->createQueryBuilder('p')
             ->where('p.name LIKE :search OR p.description LIKE :search')
-            ->setParameter('search', '%'.$search.'%')
+            ->setParameter('search', '%' . $search . '%')
             ->getQuery();
 
         // Exécuter la requête pour récupérer les produits filtrés
@@ -48,153 +48,113 @@ class ProductController extends AbstractController
 
     // Créer un nouveau produit
     #[Route('/product/new', name: 'app_product_new', methods: ['GET', 'POST'])]
-    // public function neww(Request $request, EntityManagerInterface $entityManager): Response
-    // {
-    //     $product = new Product();
-    //     $categories = $entityManager->getRepository(Category::class)->findAll();
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $product = new Product();
+        $categories = $entityManager->getRepository(Category::class)->findAll();
 
-    //     $form = $this->createForm(ProductType::class, $product, [
-    //         'categories' => $categories,
-    //     ]);
+        $form = $this->createForm(ProductType::class, $product, [
+            'categories' => $categories,
+        ]);
 
-    //     $form->handleRequest($request);
+        $form->handleRequest($request);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $category = $product->getCategory();
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Gestion de l'upload de l'image
+            $uploadedFile = $form->get('uploadedImage')->getData();
 
-    //         if (!$category && $product->getNewCategory()) {
-    //             $newCategory = new Category();
-    //             $newCategory->setName($product->getNewCategory());
-    //             $entityManager->persist($newCategory);
-    //             $product->setCategory($newCategory);
-    //         }
+            if ($uploadedFile) {
+                $newFilename = uniqid() . '.' . $uploadedFile->guessExtension(); // Générer un nom unique
 
-    //         $entityManager->persist($product);
-    //         $entityManager->flush();
+                // Déplacer le fichier vers le répertoire d'upload
+                $uploadedFile->move(
+                    $this->getParameter('product_images_directory'), // Chemin défini dans services.yaml
+                    $newFilename
+                );
 
-    //         return $this->redirectToRoute('app_product_index');
-    //     }
+                // Mettre à jour l'image dans l'entité Product
+                $product->setImage($newFilename);
+            }
 
-    //     return $this->render('product/new.html.twig', [
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
-public function new(Request $request, EntityManagerInterface $entityManager): Response
-{
-    $product = new Product();
-    $categories = $entityManager->getRepository(Category::class)->findAll();
+            // Sauvegarder le produit dans la base de données
+            $entityManager->persist($product);
+            $entityManager->flush();
 
-    $form = $this->createForm(ProductType::class, $product, [
-        'categories' => $categories,
-    ]);
-
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Gestion de l'upload de l'image
-        $uploadedFile = $form->get('uploadedImage')->getData();
-
-        if ($uploadedFile) {
-            $newFilename = uniqid() . '.' . $uploadedFile->guessExtension(); // Générer un nom unique
-
-            // Déplacer le fichier vers le répertoire d'upload
-            $uploadedFile->move(
-                $this->getParameter('product_images_directory'), // Chemin défini dans services.yaml
-                $newFilename
-            );
-
-            // Mettre à jour l'image dans l'entité Product
-            $product->setImage($newFilename);
+            return $this->redirectToRoute('app_product_index');
         }
 
-        // Sauvegarder le produit dans la base de données
-        $entityManager->persist($product);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_product_index');
+        return $this->render('product/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
-
-    return $this->render('product/new.html.twig', [
-        'form' => $form->createView(),
-    ]);
-}
 
 
     // Voir un produit spécifique (affichage pour l'utilisateur)
-    #[Route('/products/{id}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/products/{id}', name: 'app_product_details', methods: ['GET'])]
     public function productDetails(Product $product): Response
+    {
+        return $this->render('product/details.html.twig', [
+            'product' => $product,
+        ]);
+    }
+
+
+    // Voir un produit spécifique (affichage pour l'admin)
+    #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
+    public function productShow(Product $product): Response
     {
         return $this->render('product/show.html.twig', [
             'product' => $product,
         ]);
     }
 
+
+
     // Modifier un produit existant
     #[Route('/product/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
-    // public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
-    // {
-    //     $categories = $entityManager->getRepository(Category::class)->findAll();
-
-    //     $form = $this->createForm(ProductType::class, $product, [
-    //         'categories' => $categories,
-    //     ]);
-
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $entityManager->flush();
-
-    //         return $this->redirectToRoute('app_product_index');
-    //     }
-
-    //     return $this->render('product/edit.html.twig', [
-    //         'product' => $product,
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
-{
-    $categories = $entityManager->getRepository(Category::class)->findAll();
+    {
+        $categories = $entityManager->getRepository(Category::class)->findAll();
 
-    $form = $this->createForm(ProductType::class, $product, [
-        'categories' => $categories,
-    ]);
+        $form = $this->createForm(ProductType::class, $product, [
+            'categories' => $categories,
+        ]);
 
-    $form->handleRequest($request);
+        $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Gestion de l'upload d'image
-        $uploadedFile = $form->get('uploadedImage')->getData();
-        if ($uploadedFile) {
-            $newFilename = uniqid() . '.' . $uploadedFile->guessExtension();
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Gestion de l'upload d'image
+            $uploadedFile = $form->get('uploadedImage')->getData();
+            if ($uploadedFile) {
+                $newFilename = uniqid() . '.' . $uploadedFile->guessExtension();
 
-            // Déplacez le fichier vers le répertoire d'upload
-            $uploadedFile->move(
-                $this->getParameter('product_images_directory'), // Chemin défini dans services.yaml
-                $newFilename
-            );
+                // Déplacez le fichier vers le répertoire d'upload
+                $uploadedFile->move(
+                    $this->getParameter('product_images_directory'), // Chemin défini dans services.yaml
+                    $newFilename
+                );
 
-            // Met à jour le champ `image` avec le nouveau nom de fichier
-            $product->setImage($newFilename);
+                // Met à jour le champ `image` avec le nouveau nom de fichier
+                $product->setImage($newFilename);
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_product_index');
         }
 
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_product_index');
+        return $this->render('product/edit.html.twig', [
+            'product' => $product,
+            'form' => $form->createView(),
+        ]);
     }
-
-    return $this->render('product/edit.html.twig', [
-        'product' => $product,
-        'form' => $form->createView(),
-    ]);
-}
 
 
     // Supprimer un produit
     #[Route('/product/{id}/delete', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
             $entityManager->remove($product);
             $entityManager->flush();
 
@@ -204,4 +164,3 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         return $this->redirectToRoute('app_product_index');
     }
 }
-

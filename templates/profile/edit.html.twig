@@ -16,18 +16,20 @@
                     {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
                 </div>
 
-                <!-- Bouton de mise à jour avec un espacement sous le formulaire -->
+                <!-- Bouton de mise à jour -->
                 <div class="mt-6">
-                    <button type="submit" class="w-full bg-primary_dw text-tertiary_dw py-3 px-4 rounded-md shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
+                    <button type="submit" class="w-full bg-primary_dw text-tertiary_dw py-3 px-6 rounded-md shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
                         Update Profile
                     </button>
                 </div>
-            {{ form_end(form) }}
-        </div>
 
-        <!-- Lien de retour avec espacement -->
-        <div class="mt-6 text-center">
-            <a href="{{ path('app_home') }}" class="text-primary_dw hover:underline">Back to Home</a>
+                <!-- Lien de retour -->
+                <div class="mt-6">
+                    <a href="{{ path('app_home') }}" class="block text-center w-full bg-primary_dw text-tertiary_dw py-3 px-6 rounded-md shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
+                        Back to Home
+                    </a>
+                </div>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
