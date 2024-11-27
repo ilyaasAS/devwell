@@ -126,7 +126,7 @@
     // Fonction pour ajouter un produit au panier via AJAX
     function addToCart(productId) {
         // Envoi de la requête AJAX
-        fetch(`/cart/add/${productId}`, {
+        fetch(/cart/add/${productId}, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json', // Indique que la réponse doit être au format JSON
