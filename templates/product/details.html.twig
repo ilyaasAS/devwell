@@ -16,9 +16,9 @@
 				€</p>
 			<p class="text-gray-500 mt-4">Stock:
 				{{ product.stock }}</p>
-				<a href="{{ path('cart_add', { id: product.id }) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block text-center">
+                    <button onclick="addToCart({{ product.id }})" class="btn btn-primary">
     Ajouter au panier
-</a>
+</button>
 			<a href="/products" class="mt-6 inline-block text-blue-500 hover:underline">Back to Products</a>
 		</div>
 	</div>
