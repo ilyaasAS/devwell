@@ -3,39 +3,48 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <!-- Ajout d'une marge supérieure et inférieure pour espacer le formulaire -->
-    <div class="container mx-auto py-20 px-6 max-w-md bg-white shadow-md rounded-md my-12">
+<div class="min-h-screen flex items-center justify-center bg-tertiary_dw py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full bg-white p-8 shadow-secondary rounded-md transform transition-transform duration-300 hover:scale-105 hover:shadow-hover">
         <h1 class="text-2xl font-bold text-center mb-8 text-primary_dw">Inscription</h1>
-        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }} <!-- Espacement global entre les sections -->
-            <div class="space-y-4"> <!-- Espacement entre les éléments du formulaire -->
+        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+            <div class="space-y-4">
+                <!-- Champ Prénom -->
                 <div>
                     {{ form_label(form.firstName, null, {'label_attr': {'class': 'block text-sm font-medium text-text_dw'}}) }}
-                    {{ form_widget(form.firstName, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                    {{ form_widget(form.firstName, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary_dw focus:border-secondary_dw transition-all duration-300 hover:scale-105'}}) }}
                     {{ form_errors(form.firstName, {'attr': {'class': 'text-red-500 text-sm'}}) }}
                 </div>
+
+                <!-- Champ Nom -->
                 <div>
                     {{ form_label(form.lastName, null, {'label_attr': {'class': 'block text-sm font-medium text-text_dw'}}) }}
-                    {{ form_widget(form.lastName, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                    {{ form_widget(form.lastName, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary_dw focus:border-secondary_dw transition-all duration-300 hover:scale-105'}}) }}
                     {{ form_errors(form.lastName, {'attr': {'class': 'text-red-500 text-sm'}}) }}
                 </div>
+
+                <!-- Champ Email -->
                 <div>
                     {{ form_label(form.email, null, {'label_attr': {'class': 'block text-sm font-medium text-text_dw'}}) }}
-                    {{ form_widget(form.email, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary_dw focus:border-secondary_dw transition-all duration-300 hover:scale-105'}}) }}
                     {{ form_errors(form.email, {'attr': {'class': 'text-red-500 text-sm'}}) }}
                 </div>
+
+                <!-- Champ Mot de passe -->
                 <div>
                     {{ form_label(form.password, null, {'label_attr': {'class': 'block text-sm font-medium text-text_dw'}}) }}
-                    {{ form_widget(form.password, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                    {{ form_widget(form.password, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary_dw focus:border-secondary_dw transition-all duration-300 hover:scale-105'}}) }}
                     {{ form_errors(form.password, {'attr': {'class': 'text-red-500 text-sm'}}) }}
                 </div>
             </div>
 
-            <!-- Espacement entre le bouton et le reste du formulaire -->
+            <!-- Bouton S'inscrire -->
             <div class="mt-6">
-                <button type="submit" class="w-full bg-primary_dw text-tertiary_dw py-3 px-4 rounded-md hover:bg-secondary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw focus:ring-opacity-75">
+                <button type="submit" 
+                    class="w-full py-3 px-4 bg-primary_dw text-tertiary_dw rounded-md hover:bg-secondary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw focus:ring-opacity-75 transition-transform duration-300 hover:scale-105">
                     S'inscrire
                 </button>
             </div>
         {{ form_end(form) }}
     </div>
+</div>
 {% endblock %}

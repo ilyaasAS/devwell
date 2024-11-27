@@ -9,22 +9,21 @@
     {% if categories|length > 0 %}
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {% for category in categories %}
-                <div class="bg-white p-6 rounded shadow-md hover:shadow-lg transition duration-300">
+                <!-- Carte de catégorie avec ombre personnalisée -->
+                <div class="bg-white p-6 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
                     <!-- Centrer le titre -->
                     <h2 class="text-xl font-semibold text-primary_dw text-center">{{ category.name }}</h2>
 
                     <!-- Centrer la description -->
                     <p class="text-text_dw text-center mt-2">{{ category.description ? category.description : 'No Description' }}</p>
 
-                   <!-- Centrer le bouton -->
-<div class="flex justify-center mt-4">
-    <a href="{{ path('app_category_user_show', {id: category.id}) }}" 
-       class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:text-primary_dw focus:bg-secondary_dw focus:shadow-lg transition duration-300 transform hover:scale-105">
-       View Products
-    </a>
-</div>
-
-
+                    <!-- Centrer le bouton -->
+                    <div class="flex justify-center mt-4">
+                        <a href="{{ path('app_category_user_show', {id: category.id}) }}" 
+                           class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:text-primary_dw focus:bg-secondary_dw focus:shadow-lg transition duration-300 transform hover:scale-105">
+                           View Products
+                        </a>
+                    </div>
                 </div>
             {% endfor %}
         </div>

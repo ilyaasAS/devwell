@@ -4,18 +4,24 @@
 
 {% block body %}
 <div class="container mx-auto py-10">
-    <h1 class="text-4xl font-semibold mb-6">Votre Panier</h1>
+    <h1 class="text-4xl font-semibold mb-6 text-primary_dw">Votre Panier</h1>
     {% if cartItems|length > 0 %}
-        <ul>
+        <ul class="space-y-4">
             {% for item in cartItems %}
-                <li class="mb-4 flex justify-between items-center">
-                    <p>{{ item.product.name }} ({{ item.quantity }})</p>
-                    <a href="{{ path('cart_remove', { id: item.id }) }}" class="text-red-500">Supprimer</a>
+                <li class="flex justify-between items-center p-4 bg-white rounded-lg shadow-secondary transition-transform duration-300 hover:scale-105 hover:shadow-hover">
+                    <!-- Nom et quantité du produit -->
+                    <p class="text-text_dw font-medium">{{ item.product.name }} ({{ item.quantity }})</p>
+
+                    <!-- Lien pour supprimer -->
+                    <a href="{{ path('cart_remove', { id: item.id }) }}" 
+                       class="text-red-500 font-medium hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 rounded-md">
+                        Supprimer
+                    </a>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>Votre panier est vide.</p>
+        <p class="text-center text-text_dw mt-6">Votre panier est vide.</p>
     {% endif %}
 </div>
 {% endblock %}

@@ -21,8 +21,8 @@
     {% if products|length > 0 %}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {% for product in products %}
-                <!-- Carte du produit avec ombre secondaire -->
-                <div class="bg-white p-4 rounded-lg shadow-secondary transition duration-300 hover:shadow-lg transform hover:scale-105">
+                <!-- Carte du produit avec ombre personnalisée -->
+                <div class="bg-white p-4 rounded-lg shadow-product transition duration-300 hover:shadow-hover transform hover:scale-105">
                     <h2 class="text-xl font-bold mb-2">{{ product.name }}</h2>
                     <div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
                         <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">

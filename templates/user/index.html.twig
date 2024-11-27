@@ -6,7 +6,7 @@
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">User Index</h1>
 
-    <table class="table-auto w-full border-collapse border border-gray-300">
+    <table class="table-auto w-full border-collapse border border-gray-300 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         <thead class="bg-gray-100">
             <tr>
                 <th class="border border-gray-300 px-4 py-2">Id</th>
@@ -19,15 +19,15 @@
         </thead>
         <tbody>
         {% for user in users %}
-            <tr class="odd:bg-white even:bg-gray-50">
+            <tr class="odd:bg-white even:bg-gray-50 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
                 <td class="border border-gray-300 px-4 py-2">{{ user.id }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ user.firstName }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ user.lastName }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ user.roles ? user.roles|join(', ') : '' }}</td>
                 <td class="border border-gray-300 px-4 py-2">
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-500 hover:underline">Show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:underline">Edit</a>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-500 hover:underline transition duration-300 transform hover:scale-105">Show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:underline transition duration-300 transform hover:scale-105">Edit</a>
                 </td>
             </tr>
         {% else %}
