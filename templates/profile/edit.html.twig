@@ -3,21 +3,31 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block body %}
-    <div class="container mx-auto py-10">
-        <h1 class="text-3xl font-bold mb-6">Edit Profile</h1>
+    <!-- Conteneur principal avec marges pour espacement -->
+    <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+        <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Edit Profile</h1>
 
-        <div class="bg-white p-6 rounded shadow-md">
-            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
-                {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded'}}) }}
-                {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded'}}) }}
-                {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded'}}) }}
-                {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded'}}) }}
-                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Update Profile</button>
+        <div class="bg-white p-8 rounded shadow-md">
+            {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+                <div class="space-y-4">
+                    {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                    {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                    {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                    {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                </div>
+
+                <!-- Bouton de mise à jour avec un espacement sous le formulaire -->
+                <div class="mt-6">
+                    <button type="submit" class="w-full bg-primary_dw text-tertiary_dw py-3 px-4 rounded-md hover:bg-secondary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw focus:ring-opacity-75">
+                        Update Profile
+                    </button>
+                </div>
             {{ form_end(form) }}
         </div>
 
-        <div class="mt-4">
-            <a href="{{ path('app_home') }}" class="text-blue-500 hover:underline">Back to Home</a>
+        <!-- Lien de retour avec espacement -->
+        <div class="mt-6 text-center">
+            <a href="{{ path('app_home') }}" class="text-primary_dw hover:underline">Back to Home</a>
         </div>
     </div>
 {% endblock %}

@@ -3,23 +3,23 @@
 {% block title %}Category Details{% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-10">
+<div class="container mx-auto py-12 px-6 max-w-4xl">
     <h1 class="text-4xl font-semibold mb-6 text-center">Category Details</h1>
 
-    <div class="bg-white p-6 rounded shadow-md">
-        <h2 class="text-2xl font-bold mb-4">{{ category.name }}</h2>
-        <p class="mb-2">
-            <strong>Description:</strong> 
-            {{ category.description ? category.description : 'No Description' }}
+    <div class="bg-white shadow-md rounded-lg p-8">
+        <h2 class="text-3xl font-bold mb-4">{{ category.name }}</h2>
+        <p class="text-lg mb-4">
+            <strong>Description:</strong>
+            <span class="text-gray-700">{{ category.description ? category.description : 'No Description' }}</span>
         </p>
 
         {% if category.products|length > 0 %}
             <div class="mt-6">
-                <h3 class="text-xl font-semibold mb-2">Products in this Category:</h3>
+                <h3 class="text-2xl font-semibold mb-3">Products in this Category:</h3>
                 <ul class="list-disc pl-6">
                 {% for product in category.products %}
-                    <li>
-                        <a href="{{ path('app_product_show', {id: product.id}) }}" class="text-blue-500 hover:underline">
+                    <li class="mb-2">
+                        <a href="{{ path('app_product_show', {id: product.id}) }}" class="text-blue-500 hover:text-blue-600 hover:underline">
                             {{ product.name }}
                         </a>
                     </li>
@@ -31,7 +31,7 @@
         {% endif %}
     </div>
 
-    <div class="mt-6 flex justify-between">
+    <div class="mt-8 flex justify-between items-center">
         <a href="{{ path('app_category_index') }}" class="text-blue-500 hover:underline">Back to list</a>
         <a href="{{ path('app_category_edit', {id: category.id}) }}" class="text-yellow-500 hover:underline">Edit Category</a>
     </div>

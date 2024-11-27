@@ -1,25 +1,35 @@
-{# templates/category/user_index.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Category List{% endblock %}
 
 {% block body %}
 <div class="container mx-auto py-10">
-    <h1 class="text-4xl font-semibold mb-6 text-center">Category List</h1>
+    <h1 class="text-4xl font-semibold mb-6 text-center text-primary_dw">Category List</h1>
 
     {% if categories|length > 0 %}
-        <div class="grid grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {% for category in categories %}
-                <div class="bg-white p-6 rounded shadow-md">
-                    <h2 class="text-xl font-semibold">{{ category.name }}</h2>
-                    <p>{{ category.description ? category.description : 'No Description' }}</p>
-                    <a href="{{ path('app_category_user_show', {id: category.id}) }}" class="text-blue-500 hover:underline mt-4 block">View Products</a>
+                <div class="bg-white p-6 rounded shadow-md hover:shadow-lg transition duration-300">
+                    <!-- Centrer le titre -->
+                    <h2 class="text-xl font-semibold text-primary_dw text-center">{{ category.name }}</h2>
+
+                    <!-- Centrer la description -->
+                    <p class="text-text_dw text-center mt-2">{{ category.description ? category.description : 'No Description' }}</p>
+
+                   <!-- Centrer le bouton -->
+<div class="flex justify-center mt-4">
+    <a href="{{ path('app_category_user_show', {id: category.id}) }}" 
+       class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:text-primary_dw focus:bg-secondary_dw focus:shadow-lg transition duration-300 transform hover:scale-105">
+       View Products
+    </a>
+</div>
+
+
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <p class="text-center text-gray-500">No categories found.</p>
+        <p class="text-center text-text_dw">No categories found.</p>
     {% endif %}
 </div>
 {% endblock %}

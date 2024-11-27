@@ -6,40 +6,40 @@
 <div class="container mx-auto py-10">
     <h1 class="text-4xl font-semibold mb-6 text-center">Nos Produits</h1>
 
-<!-- Barre de recherche -->
-<div class="mb-6 flex justify-center">
-    <form method="get" action="{{ path('app_products') }}" class="flex space-x-2 w-full max-w-4xl">
-        <input type="text" name="search" value="{{ search }}" placeholder="Trouve ton produit..." class="px-4 py-2 border border-gray-300 rounded-md w-full">
-        <button 
-            type="submit" 
-            class="bg-primary_dw text-tertiary_dw px-4 py-2 rounded-md hover:bg-green-500">
-            Recherche
-        </button>
-    </form>
-</div>
-
-
+    <!-- Barre de recherche -->
+    <div class="mb-6 flex justify-center">
+        <form method="get" action="{{ path('app_products') }}" class="flex space-x-2 w-full max-w-4xl">
+            <input type="text" name="search" value="{{ search }}" placeholder="Trouve ton produit..." class="px-4 py-2 border border-gray-300 rounded-md w-full">
+            <button 
+                type="submit" 
+                class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+                Recherche
+            </button>
+        </form>
+    </div>
 
     {% if products|length > 0 %}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {% for product in products %}
-                <div class="bg-white shadow-md rounded p-4">
+                <div class="bg-white p-4 rounded-lg shadow-md transition duration-300 hover:shadow-lg transform hover:scale-105">
                     <h2 class="text-xl font-bold mb-2">{{ product.name }}</h2>
-                    <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-cover mb-6 rounded">
+                    <div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
+                        <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+                    </div>
                     <p class="text-gray-700 mb-2">{{ product.description|slice(0, 100) ~ '...' }}</p>
                     <p class="text-lg font-semibold text-green-600 mb-2">{{ product.price }} €</p>
 
                     <a 
                         href="{{ path('app_product_show', { id: product.id }) }}" 
-                        class="bg-primary_dw text-tertiary_dw px-4 py-2 rounded shadow-md hover:bg-green-500 hover:text-white transition-colors duration-300 block text-center mb-4 w-full">
+                        class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full text-center mb-4">
                         View Details
                     </a>
 
-                    <!-- Conteneur flex pour aligner les deux boutons -->
-                    <div class="flex space-x-4 w-full">
+                    <!-- Conteneur flex pour aligner les deux boutons avec espace entre eux -->
+                    <div class="flex flex-col space-y-4 w-full">
                         <button 
                             onclick="addToCart({{ product.id }})" 
-                            class="bg-secondary_dw text-primary_dw px-4 py-2 rounded shadow-md hover:bg-green-500 hover:text-white transition-colors duration-300 w-full">
+                            class="inline-block bg-secondary_dw text-primary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-tertiary_dw focus:text-ter_dw transition duration-300 transform hover:scale-105 w-full">
                             Ajouter au panier
                         </button>
                     </div>

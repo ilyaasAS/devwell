@@ -124,7 +124,7 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
     #[Route('/products/{id}', name: 'app_product_show', methods: ['GET'])]
     public function productDetails(Product $product): Response
     {
-        return $this->render('product/details.html.twig', [
+        return $this->render('product/show.html.twig', [
             'product' => $product,
         ]);
     }

@@ -34,9 +34,10 @@
                             </svg>
                             Panier
                             <!-- Badge de quantité -->
-                            <span id="cart-badge" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-2">
-                                {{ totalItems|default(0) }}
-                            </span>
+<span id="cart-badge" class="absolute top-0 right-0 bg-secondary_dw text-primary_dw rounded-full text-xs px-2">
+    {{ totalItems|default(0) }}
+</span>
+
                         </a>
                     </li>
 
@@ -47,7 +48,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/register" class="px-4 py-2 rounded" style="background-color: #2FBF71; color: #1A2A40;" onmouseover="this.style.backgroundColor='#249A5B';" onmouseout="this.style.backgroundColor='#2FBF71';">
+                            <a href="/register" class="px-4 py-2 rounded" style="background-color: #2FBF71; color: #F5F5F5;" onmouseover="this.style.backgroundColor='#249A5B';" onmouseout="this.style.backgroundColor='#2FBF71';">
                                 Inscription
                             </a>
                         </li>
