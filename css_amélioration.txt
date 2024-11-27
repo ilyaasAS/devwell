@@ -1,39 +1,18 @@
 
-Effet curseur secondary_dw footer et navBar
+Effet curseur secondary_dw navBar
 
 
 ___________________________________________________________
-page d'inscription
-
-boutons couleur
-
-______________________________
-
-page de connexion
-
-boutons couleur
-
-bakground
-
-___________________________________________________
-Page produit
-
-voir produit
-
-centrer la description
-
-
-____________________________
 
 Page catégorie
 
 voir les produits de la catégories
 
-voir le produit
+voir le produit show
 
-effet card et ombre
+---effet card et ombre
 
-bouton retour: changer
+---------bouton retour: changer
 
 _______________________________________
 

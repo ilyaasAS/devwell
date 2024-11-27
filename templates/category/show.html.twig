@@ -29,11 +29,12 @@
         {% else %}
             <p class="text-gray-500 mt-6">No products in this category.</p>
         {% endif %}
-    </div>
-
-    <div class="mt-8 flex justify-between items-center">
+        <div class="mt-8 flex justify-between items-center">
         <a href="{{ path('app_category_index') }}" class="text-blue-500 hover:underline">Back to list</a>
         <a href="{{ path('app_category_edit', {id: category.id}) }}" class="text-yellow-500 hover:underline">Edit Category</a>
     </div>
+    </div>
+
+    
 </div>
 {% endblock %}
