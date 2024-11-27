@@ -5,39 +5,40 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container mx-auto py-12 px-6 max-w-4xl">
-        <div class="bg-white shadow-lg rounded-lg p-8">
-            <!-- Product Image -->
-            <div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
-                <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
-            </div>
+<div class="container mx-auto py-12 px-6 max-w-4xl">
+    <!-- Card -->
+    <div class="bg-white shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105 rounded-lg p-8">
+        <!-- Product Image -->
+        <div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
+            <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+        </div>
 
-            <!-- Product Name -->
-            <h1 class="text-4xl font-semibold text-center text-gray-900 mb-6">{{ product.name }}</h1>
+        <!-- Product Name -->
+        <h1 class="text-4xl font-bold text-center text-primary_dw mb-6">{{ product.name }}</h1>
 
-            <!-- Product Description -->
-            <p class="text-lg text-gray-700 mb-6">{{ product.description }}</p>
+        <!-- Product Description -->
+        <p class="text-lg text-text_dw mb-6">{{ product.description }}</p>
 
-            <!-- Product Price -->
-            <p class="text-3xl font-bold text-green-600 text-center mb-6">{{ product.price }} €</p>
+        <!-- Product Price -->
+        <p class="text-3xl font-bold text-green-600 text-center mb-6">{{ product.price }} €</p>
 
-            <!-- Product Stock -->
-            <p class="text-xl text-gray-500 text-center mb-6">Stock: {{ product.stock }}</p>
+        <!-- Product Stock -->
+        <p class="text-xl text-gray-500 text-center mb-6">Stock: {{ product.stock }}</p>
 
-            <!-- Action Buttons -->
-            <div class="flex flex-col items-center space-y-4">
-                <!-- Add to Cart Button -->
-                <button onclick="addToCart({{ product.id }})" 
-                    class="w-full max-w-xs bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    Ajouter au panier
-                </button>
+        <!-- Action Buttons -->
+        <div class="flex flex-col items-center space-y-4">
+            <!-- Add to Cart Button -->
+            <button onclick="addToCart({{ product.id }})" 
+                class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
+                Ajouter au panier
+            </button>
 
-                <!-- Back to Products Link -->
-                <a href="/products" 
-                    class="w-full max-w-xs text-center bg-blue-100 text-blue-500 px-6 py-3 rounded-lg shadow-md hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    Back to Products
-                </a>
-            </div>
+            <!-- Back to Products Link -->
+            <a href="/products" 
+                class="w-full max-w-xs bg-primary_dw text-tertiary_dw text-center px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
+                Back to Products
+            </a>
         </div>
     </div>
+</div>
 {% endblock %}

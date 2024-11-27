@@ -5,30 +5,43 @@
 {% block title %}Category Details{% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-10">
-    <h1 class="text-4xl font-semibold mb-6 text-center">{{ category.name }}</h1>
+<div class="container mx-auto py-12 px-6 max-w-4xl">
+    <!-- Title -->
+    <h1 class="text-4xl font-bold text-center text-primary_dw mb-8">{{ category.name }}</h1>
 
-    <div class="bg-white p-6 rounded shadow-md">
-        <p class="mb-4"><strong>Description:</strong> {{ category.description ? category.description : 'No Description' }}</p>
+    <!-- Card -->
+    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        <!-- Category Description -->
+        <p class="text-lg text-text_dw mb-6">
+            <strong class="font-semibold">Description:</strong> 
+            {{ category.description ? category.description : 'No Description' }}
+        </p>
 
         {% if category.products|length > 0 %}
-            <h2 class="text-2xl font-semibold mb-4">Products in this Category:</h2>
-            <ul class="list-disc pl-6">
+            <!-- Products List -->
+            <h2 class="text-2xl font-bold text-primary_dw mb-4">Products in this Category:</h2>
+            <ul class="list-disc pl-6 space-y-2">
                 {% for product in category.products %}
                     <li>
-                        <a href="{{ path('app_product_show', {id: product.id}) }}" class="text-blue-500 hover:underline">
-                            {{ product.name }} - ${{ product.price }}
+                        <a href="{{ path('app_product_show', {id: product.id}) }}" 
+                           class="text-primary_dw hover:text-secondary_dw transition duration-200">
+                            {{ product.name }} - €{{ product.price }}
                         </a>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
+            <!-- No Products Message -->
             <p class="text-gray-500 mt-6">No products in this category.</p>
         {% endif %}
-    </div>
 
-    <div class="mt-6">
-        <a href="{{ path('app_category_user_index') }}" class="text-blue-500 hover:underline">Back to category list</a>
+        <!-- Back to Categories Button -->
+        <div class="text-center mt-8">
+            <a href="{{ path('app_category_user_index') }}" 
+               class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                Back to Category List
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}

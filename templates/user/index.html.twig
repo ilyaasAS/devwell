@@ -4,8 +4,10 @@
 
 {% block body %}
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+    <!-- Page Title -->
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">User Index</h1>
 
+    <!-- Users Table -->
     <table class="table-auto w-full border-collapse border border-gray-300 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         <thead class="bg-gray-100">
             <tr>
@@ -25,9 +27,25 @@
                 <td class="border border-gray-300 px-4 py-2">{{ user.lastName }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ user.roles ? user.roles|join(', ') : '' }}</td>
-                <td class="border border-gray-300 px-4 py-2">
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-500 hover:underline transition duration-300 transform hover:scale-105">Show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:underline transition duration-300 transform hover:scale-105">Edit</a>
+                <td class="border border-gray-300 px-4 py-2 text-center">
+                    <!-- Show Link -->
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}" 
+                       class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
+                        Show
+                    </a>
+                    <!-- Edit Link -->
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" 
+                       class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
+                        Edit
+                    </a>
+                    <!-- Delete Form -->
+                    <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" 
+                          onsubmit="return confirm('Are you sure you want to delete this user?');" class="inline mx-2">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                        <button type="submit" class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
+                            Delete
+                        </button>
+                    </form>
                 </td>
             </tr>
         {% else %}
@@ -39,3 +57,4 @@
     </table>
 </div>
 {% endblock %}
+

@@ -1,0 +1,78 @@
+
+Effet curseur secondary_dw footer et navBar
+
+
+___________________________________________________________
+page d'inscription
+
+boutons couleur
+
+______________________________
+
+page de connexion
+
+boutons couleur
+
+bakground
+
+___________________________________________________
+Page produit
+
+voir produit
+
+centrer la description
+
+
+____________________________
+
+Page catégorie
+
+voir les produits de la catégories
+
+voir le produit
+
+effet card et ombre
+
+bouton retour: changer
+
+_______________________________________
+
+
+Dashbord
+
+show, edit
+
+effet card et ombre
+
+et style pour les boutons
+
+et effet curseur secondary_dw
+
+_________________________________________
+
+Gestion de produit
+
+show, edit
+
+effet card et ombre
+
+et style pour les boutons
+
+et effet curseur secondary_dw
+
+________________________________________
+
+
+Gestion de Catégories
+
+show, edit
+
+effet card et ombre
+
+et style pour les boutons
+
+et effet curseur secondary_dw
+
+________________________________________
+
+
