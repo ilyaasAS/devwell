@@ -1,6 +1,5 @@
 afficher le logo
 
-changer les couleur des boutons de connexion, inscription et déconnexion
 
 ___________________________________________________________
 Produit couleur des boutons

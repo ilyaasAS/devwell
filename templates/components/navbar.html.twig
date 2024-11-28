@@ -42,18 +42,22 @@
 
                     {% if app.user is null %}
                         <li>
-                            <a href="/login" class="px-4 py-2 rounded bg-secondary_dw text-primary_dw hover:bg-blue-300 transition-all duration-300">
-                                Connexion
-                            </a>
+                            <a href="/login" class="inline-block bg-secondary_dw text-primary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw-300 hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw-300 transition duration-300 transform hover:scale-105">
+    Connexion
+</a>
+
                         </li>
                         <li>
-                            <a href="/register" class="px-4 py-2 rounded bg-secondary_dw text-tertiary_dw hover:bg-blue-300 transition-all duration-300">
-                                Inscription
-                            </a>
+                           <a href="/register" class="inline-block bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-300 transform hover:scale-105">
+    Inscription
+</a>
+
+
+
                         </li>
                     {% else %}
                         <li>
-                            <a href="/logout" class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-300 transition duration-300 transform hover:scale-105">
+                            <a href="/logout" class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-300 transition duration-300 transform hover:scale-105">
                                 Déconnexion
                             </a>
                         </li>
@@ -119,18 +123,18 @@
 
             {% if app.user is null %}
                 <li>
-                    <a href="/login" class="block py-2 rounded bg-secondary_dw text-primary_dw hover:bg-blue-300 transition-all duration-300">
+                    <a href="/login" class="inline-block bg-secondary_dw text-primary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw-300 hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw-300 transition duration-300 transform hover:scale-105">
                         Connexion
                     </a>
                 </li>
                 <li>
-                    <a href="/register" class="block py-2 rounded bg-secondary_dw text-tertiary_dw hover:bg-blue-300 transition-all duration-300">
+                    <a href="/register" class="inline-block bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-300 transform hover:scale-105">
                         Inscription
                     </a>
                 </li>
             {% else %}
                 <li>
-                    <a href="/logout" class="block py-2 hover:text-secondary_dw">Déconnexion</a>
+                    <a href="/logout" class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-300 transition duration-300 transform hover:scale-105">Déconnexion</a>
                 </li>
             {% endif %}
         </ul>
