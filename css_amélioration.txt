@@ -4,19 +4,29 @@ Effet curseur secondary_dw navBar
 
 ___________________________________________________________
 
-Page catégorie
 
-voir les produits de la catégories
+page produit
 
-voir le produit show
+centrer
 
----effet card et ombre
+titre
 
----------bouton retour: changer
+prix
+____________________________
+catégorie
 
-_______________________________________
+voirs produits
 
+centrer:
 
+Description: No Description
+
+Products in this Category:
+Ordinateur - €23
+Ordinateur 2 - €23
+Ordinateur 3 - €23
+
+______________________________
 Dashbord
 
 show, edit
@@ -28,18 +38,6 @@ et style pour les boutons
 et effet curseur secondary_dw
 
 _________________________________________
-
-Gestion de produit
-
-show, edit
-
-effet card et ombre
-
-et style pour les boutons
-
-et effet curseur secondary_dw
-
-________________________________________
 
 
 Gestion de Catégories

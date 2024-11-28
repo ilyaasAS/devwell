@@ -6,34 +6,34 @@
 <div class="container mx-auto py-12 px-6 max-w-4xl">
     <h1 class="text-4xl font-semibold mb-6 text-center">Edit Product</h1>
 
-    <div class="bg-white p-8 rounded-lg shadow-md">
+    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
 
         <!-- Product Name -->
         <div class="mb-4">
             {{ form_label(form.name, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {{ form_widget(form.name, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_widget(form.name, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
             {{ form_errors(form.name, {'attr': {'class': 'text-red-500 text-sm'}}) }}
         </div>
 
         <!-- Product Price -->
         <div class="mb-4">
             {{ form_label(form.price, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {{ form_widget(form.price, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_widget(form.price, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
             {{ form_errors(form.price, {'attr': {'class': 'text-red-500 text-sm'}}) }}
         </div>
 
         <!-- Product Stock -->
         <div class="mb-4">
             {{ form_label(form.stock, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {{ form_widget(form.stock, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_widget(form.stock, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
             {{ form_errors(form.stock, {'attr': {'class': 'text-red-500 text-sm'}}) }}
         </div>
 
         <!-- Current Image Display -->
         {% if product.image %}
         <div class="mb-6">
-            <p class="text-sm text-gray-600">Current Image:</p>
+            <p class="text-sm text-gray-600 text-center">Current Image:</p>
             <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-contain rounded-lg mb-4">
         </div>
         {% endif %}
@@ -41,35 +41,43 @@
         <!-- Image Upload -->
         <div class="mb-4">
             {{ form_label(form.uploadedImage, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {{ form_widget(form.uploadedImage, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_widget(form.uploadedImage, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
             {{ form_errors(form.uploadedImage, {'attr': {'class': 'text-red-500 text-sm'}}) }}
         </div>
 
         <!-- Product Description -->
         <div class="mb-4">
             {{ form_label(form.description, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {{ form_widget(form.description, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
             {{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm'}}) }}
         </div>
 
         <!-- Product Category -->
         <div class="mb-6">
             {{ form_label(form.category, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {{ form_widget(form.category, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_widget(form.category, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
             {{ form_errors(form.category, {'attr': {'class': 'text-red-500 text-sm'}}) }}
         </div>
 
-        <!-- Submit Button -->
-        <div class="mb-6 text-center">
-            <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Update Product</button>
-        </div>
+       <!-- Submit Button -->
+<div class="mb-6 text-center">
+    <button type="submit" 
+        class="w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+        Update Product
+    </button>
+</div>
+
+<!-- Back to Product List -->
+<div class="mb-6 text-center">
+    <a href="{{ path('app_product_index') }}" 
+        class="w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 inline-block">
+        Back to Product List
+    </a>
+</div>
+
+
 
         {{ form_end(form) }}
-    </div>
-
-    <!-- Back to Product List -->
-    <div class="mt-4 text-center">
-        <a href="{{ path('app_product_index') }}" class="text-blue-500 hover:underline">Back to product list</a>
     </div>
 </div>
 {% endblock %}

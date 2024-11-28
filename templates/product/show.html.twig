@@ -6,40 +6,39 @@
 <div class="container mx-auto py-12 px-6 max-w-3xl">
     <h1 class="text-4xl font-semibold mb-8 text-center">Product Details</h1>
 
-    <div class="bg-white shadow-md rounded-lg p-8">
-        <h2 class="text-3xl font-bold mb-4">{{ product.name }}</h2>
+    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        <!-- Titre centré -->
+        <h2 class="text-3xl font-bold mb-4 text-center">{{ product.name }}</h2>
         
-        <!-- Product image with a better display -->
+        <!-- Image produit -->
         <div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
             <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
         </div>
 
-        <!-- Price and Stock -->
-        <div class="mb-4">
+        <!-- Price et Stock centrés -->
+        <div class="mb-4 text-center">
             <p class="text-2xl font-semibold text-green-600">Price: {{ product.price }} €</p>
             <p class="mt-2 text-lg">Stock: <span class="font-medium">{{ product.stock }}</span></p>
         </div>
 
-        <!-- Category Display -->
-        <div class="mb-4">
+        <!-- Category centrée -->
+        <div class="mb-4 text-center">
             <p class="text-lg">Category: <span class="font-medium">{{ product.category ? product.category.name : 'No Category' }}</span></p>
         </div>
 
-        <!-- Product Description -->
-        <div class="mb-6">
+        <!-- Description centrée -->
+        <div class="mb-6 text-center">
             <p class="text-lg font-semibold">Description:</p>
             <p class="mt-2">{{ product.description }}</p>
         </div>
 
-        <!-- Action buttons -->
+        <!-- Boutons (inchangés) -->
         <div class="flex flex-col items-center space-y-4 mt-8">
-            <!-- Add to Cart button -->
             <button onclick="addToCart({{ product.id }})" 
                 class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
                 Add to Cart
             </button>
             
-            <!-- Back to Product List button -->
             <a href="{{ path('app_product_index') }}" 
                 class="w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
                 Back to Product List

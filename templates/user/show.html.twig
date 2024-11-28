@@ -31,12 +31,15 @@
                 </tr>
             </tbody>
         </table>
-    </div>
 
-    <div class="mt-6 flex justify-center space-x-6">
+        <div class="mt-6 flex justify-center space-x-6">
         <a href="{{ path('app_user_index') }}" class="text-blue-500 hover:underline text-lg">Back to list</a>
         <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:underline text-lg">Edit</a>
         {{ include('user/_delete_form.html.twig') }}
     </div>
+
+    </div>
+
+    
 </div>
 {% endblock %}

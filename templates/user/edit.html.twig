@@ -10,11 +10,13 @@
         {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
             {{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-yellow-300'}}) }}
             <button type="submit" class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600">Update</button>
-        {{ form_end(form) }}
-    </div>
-
-    <div class="mt-6 flex justify-center">
+        
+        <div class="mt-6 flex justify-center">
         <a href="{{ path('app_user_index') }}" class="text-blue-500 hover:underline text-lg">Back to list</a>
     </div>
 </div>
+        {{ form_end(form) }}
+    </div>
+
+    
 {% endblock %}
