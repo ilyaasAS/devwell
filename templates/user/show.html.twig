@@ -6,7 +6,7 @@
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">User Details</h1>
 
-    <div class="bg-white p-6 rounded shadow-md">
+    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         <table class="table-auto w-full border-collapse border border-gray-300">
             <tbody>
                 <tr>
@@ -32,14 +32,16 @@
             </tbody>
         </table>
 
-        <div class="mt-6 flex justify-center space-x-6">
-        <a href="{{ path('app_user_index') }}" class="text-blue-500 hover:underline text-lg">Back to list</a>
-        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:underline text-lg">Edit</a>
-        {{ include('user/_delete_form.html.twig') }}
-    </div>
+        <div class="mt-6 text-center space-y-4">
+            <a href="{{ path('app_user_index') }}" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                Back to list
+            </a>
+            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="inline-block bg-yellow-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-yellow-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-300 transition duration-300 transform hover:scale-105">
+                Edit
+            </a>
+            {{ include('user/_delete_form.html.twig') }}
+        </div>
 
     </div>
-
-    
 </div>
 {% endblock %}

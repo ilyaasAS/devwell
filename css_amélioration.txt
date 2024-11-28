@@ -1,55 +1,46 @@
 
 Effet curseur secondary_dw navBar
 
+afficher le logo
+
+menu burger à droite
 
 ___________________________________________________________
+Produit couleur des boutons
 
 
-page produit
+-----------------------
 
-centrer
+Profile
 
-titre
+couleur des boutons
 
-prix
-____________________________
-catégorie
-
-voirs produits
-
-centrer:
-
-Description: No Description
-
-Products in this Category:
-Ordinateur - €23
-Ordinateur 2 - €23
-Ordinateur 3 - €23
-
-______________________________
-Dashbord
-
-show, edit
-
-effet card et ombre
-
-et style pour les boutons
-
-et effet curseur secondary_dw
+position
 
 _________________________________________
+Gestion des user (Dashbord)
+
+couleur des boutons
+
+potion des boutons
 
 
+
+_________________________________________
 Gestion de Catégories
 
 show, edit
 
-effet card et ombre
+centre
+ et les boutons
+________________________________________
 
-et style pour les boutons
 
-et effet curseur secondary_dw
+Gestion de prodduit
 
+show, edit
+
+couleur des boutons
 ________________________________________
 
 

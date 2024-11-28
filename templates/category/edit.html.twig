@@ -3,28 +3,28 @@
 {% block title %}Edit Category{% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-12 px-6 max-w-3xl">
-    <h1 class="text-4xl font-semibold mb-8 text-center">Edit Category</h1>
+<div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Edit Category</h1>
 
-    <div class="bg-white shadow-md rounded-lg p-8">
+    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
             <div class="space-y-4">
-                {{ form_row(form.name, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
-                {{ form_row(form.description, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+                {{ form_row(form.name, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                {{ form_row(form.description, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
             </div>
 
-            <div class="mt-6 flex justify-between items-center">
-                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Update Category</button>
+            <div class="mt-6 text-center">
+                <button type="submit" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                    Update Category
+                </button>
             </div>
 
-            <div class="mt-6 flex justify-between items-center">
-        <a href="{{ path('app_category_index') }}" class="text-blue-500 hover:text-blue-600 hover:underline">Back to category list</a>
-    </div>
-
-
+            <div class="mt-6 text-center">
+                <a href="{{ path('app_category_index') }}" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                    Back to category list
+                </a>
+            </div>
         {{ form_end(form) }}
     </div>
-
-    
 </div>
 {% endblock %}
