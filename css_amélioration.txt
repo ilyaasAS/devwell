@@ -1,9 +1,6 @@
-
-Effet curseur secondary_dw navBar
-
 afficher le logo
 
-menu burger à droite
+changer les couleur des boutons de connexion, inscription et déconnexion
 
 ___________________________________________________________
 Produit couleur des boutons
