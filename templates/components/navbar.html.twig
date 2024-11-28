@@ -2,14 +2,15 @@
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
 
+            <!-- Logo visible en permanence, à gauche -->
+            <a href="/" class="flex items-center">
+                <img src="assets/images/logo_dw.png" alt="Logo" class="h-8 w-auto">
+            </a>
+
             <!-- Menu (desktop) -->
             <ul class="hidden md:flex w-full justify-between items-center">
 
-                <!-- Logo et Navigation principale (gauche) -->
                 <div class="flex items-center space-x-6">
-                    <a href="/" class="flex items-center">
-                        <img src="assets/images/logo_dw.png" alt="Logo" class="h-8 w-auto">
-                    </a>
                     <a href="/" class="text-lg font-bold hover:text-secondary_dw">Accueil</a>
                     <a href="/products" class="text-lg font-bold hover:text-secondary_dw">Produit</a>
                     <a href="/categorie" class="text-lg font-bold hover:text-secondary_dw">Catégorie</a>
@@ -23,9 +24,8 @@
                     {% endif %}
                 </div>
 
-                <!-- Connexion/Inscription/Déconnexion et Panier à droite -->
                 <div class="flex items-center space-x-6">
-                    <!-- Panier -->
+                    <!-- Panier visible sur Desktop à droite -->
                     <li>
                         <a href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-secondary_dw">
                             <!-- Icône Panier -->
@@ -34,7 +34,7 @@
                             </svg>
                             Panier
                             <!-- Badge de quantité -->
-                            <span id="cart-badge" class="absolute top-0 right-0 bg-secondary_dw text-primary_dw rounded-full text-xs px-2">
+                            <span id="cart-badge-desktop" class="absolute top-0 right-0 bg-secondary_dw text-primary_dw rounded-full text-xs px-2">
                                 {{ totalItems|default(0) }}
                             </span>
                         </a>
@@ -62,11 +62,27 @@
             </ul>
 
             <!-- Menu Button (mobile) -->
-            <button id="menu-toggle" class="md:hidden focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-                </svg>
-            </button>
+            <div class="flex items-center space-x-6">
+                <!-- Panier visible à gauche du menu burger -->
+                <a href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-secondary_dw md:hidden">
+                    <!-- Icône Panier -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6" />
+                    </svg>
+                    Panier
+                    <!-- Badge de quantité -->
+                    <span id="cart-badge-mobile" class="absolute top-0 right-0 bg-secondary_dw text-primary_dw rounded-full text-xs px-2">
+                        {{ totalItems|default(0) }}
+                    </span>
+                </a>
+
+                <!-- Menu burger (mobile) -->
+                <button id="menu-toggle" class="md:hidden focus:outline-none ml-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <!-- Menu (mobile) -->
@@ -97,9 +113,9 @@
                 </li>
             {% endif %}
 
-            <li>
+            {# <li>
                 <a href="/cart" class="block py-2 hover:text-secondary_dw">Panier</a>
-            </li>
+            </li> #}
 
             {% if app.user is null %}
                 <li>
@@ -134,7 +150,8 @@
         .then(response => response.json())
         .then(data => {
             // Mise à jour du badge panier avec le nombre total d'articles
-            document.getElementById('cart-badge').textContent = data.totalItems;
+            document.getElementById('cart-badge-desktop').textContent = data.totalItems;
+            document.getElementById('cart-badge-mobile').textContent = data.totalItems;
         })
         .catch(error => {
             console.error('Error adding item to cart:', error);
