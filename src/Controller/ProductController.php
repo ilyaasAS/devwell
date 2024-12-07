@@ -28,21 +28,18 @@ class ProductController extends AbstractController
     #[Route('/products', name: 'app_products', methods: ['GET'])]
     public function productsList(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Récupérer la valeur de la recherche (si elle existe)
         $search = $request->query->get('search', '');
 
-        // Construire la requête pour chercher des produits par nom ou description
         $productsQuery = $entityManager->getRepository(Product::class)->createQueryBuilder('p')
             ->where('p.name LIKE :search OR p.description LIKE :search')
             ->setParameter('search', '%' . $search . '%')
             ->getQuery();
 
-        // Exécuter la requête pour récupérer les produits filtrés
         $products = $productsQuery->getResult();
 
         return $this->render('product/products.html.twig', [
             'products' => $products,
-            'search' => $search // Passer le terme de recherche pour le pré-remplir dans le champ de recherche
+            'search' => $search,
         ]);
     }
 
@@ -60,19 +57,18 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer la valeur du stock et la définir dans l'entité Product
+            $stock = $form->get('stock')->getData();
+            $product->setStock($stock);
+
             // Gestion de l'upload de l'image
             $uploadedFile = $form->get('uploadedImage')->getData();
-
             if ($uploadedFile) {
-                $newFilename = uniqid() . '.' . $uploadedFile->guessExtension(); // Générer un nom unique
-
-                // Déplacer le fichier vers le répertoire d'upload
+                $newFilename = uniqid() . '.' . $uploadedFile->guessExtension();
                 $uploadedFile->move(
-                    $this->getParameter('product_images_directory'), // Chemin défini dans services.yaml
+                    $this->getParameter('product_images_directory'),
                     $newFilename
                 );
-
-                // Mettre à jour l'image dans l'entité Product
                 $product->setImage($newFilename);
             }
 
@@ -88,7 +84,6 @@ class ProductController extends AbstractController
         ]);
     }
 
-
     // Voir un produit spécifique (affichage pour l'utilisateur)
     #[Route('/products/{id}', name: 'app_product_details', methods: ['GET'])]
     public function productDetails(Product $product): Response
@@ -98,7 +93,6 @@ class ProductController extends AbstractController
         ]);
     }
 
-
     // Voir un produit spécifique (affichage pour l'admin)
     #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
     public function productShow(Product $product): Response
@@ -107,8 +101,6 @@ class ProductController extends AbstractController
             'product' => $product,
         ]);
     }
-
-
 
     // Modifier un produit existant
     #[Route('/product/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
@@ -123,18 +115,18 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer la valeur du stock et la définir dans l'entité Product
+            $stock = $form->get('stock')->getData();
+            $product->setStock($stock);
+
             // Gestion de l'upload d'image
             $uploadedFile = $form->get('uploadedImage')->getData();
             if ($uploadedFile) {
                 $newFilename = uniqid() . '.' . $uploadedFile->guessExtension();
-
-                // Déplacez le fichier vers le répertoire d'upload
                 $uploadedFile->move(
-                    $this->getParameter('product_images_directory'), // Chemin défini dans services.yaml
+                    $this->getParameter('product_images_directory'),
                     $newFilename
                 );
-
-                // Met à jour le champ `image` avec le nouveau nom de fichier
                 $product->setImage($newFilename);
             }
 
@@ -148,7 +140,6 @@ class ProductController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 
     // Supprimer un produit
     #[Route('/product/{id}/delete', name: 'app_product_delete', methods: ['POST'])]

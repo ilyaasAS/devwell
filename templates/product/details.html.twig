@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ product.name }} Details
+    {{ product.name }} - Détails 
 {% endblock %}
 
 {% block body %}
@@ -25,20 +25,26 @@
         <!-- Product Stock -->
         <p class="text-xl text-gray-500 text-center mb-6">Stock: {{ product.stock }}</p>
 
-        <!-- Action Buttons -->
-        <div class="flex flex-col items-center space-y-4">
-            <!-- Add to Cart Button -->
-            <button onclick="addToCart({{ product.id }})" 
-                class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
-                Ajouter au panier
-            </button>
+        <!-- Quantity Selector -->
+        <form action="{{ path('cart_add', {id: product.id}) }}" method="POST">
+            <div class="flex justify-center mb-6">
+                <label for="quantity" class="text-lg text-gray-700 mr-4">Quantité :</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="{{ product.stock }}" value="1" class="w-24 text-center p-2 border border-gray-300 rounded-lg">
+            </div>
 
-            <!-- Back to Products Link -->
-            <a href="/products" 
-                class="w-full max-w-xs bg-primary_dw text-tertiary_dw text-center px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
-                Back to Products
-            </a>
-        </div>
+            <!-- Action Buttons -->
+            <div class="flex flex-col items-center space-y-4">
+                <!-- Add to Cart Button -->
+                <button type="submit" class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
+                    Ajouter au panier
+                </button>
+
+                <!-- Back to Products Link -->
+                <a href="/products" class="w-full max-w-xs bg-primary_dw text-tertiary_dw text-center px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
+                    Retour aux produits
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}
