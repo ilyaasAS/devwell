@@ -24,10 +24,10 @@ class ProfileType extends AbstractType
                 'label' => 'Last Name',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('email', EmailType::class, [
-                'label' => 'Email',
-                'attr' => ['class' => 'form-control']
-            ])
+            // ->add('email', EmailType::class, [
+            //     'label' => 'Email',
+            //     'attr' => ['class' => 'form-control']
+            // ])
             ->add('password', PasswordType::class, [
                 'required' => false,
                 'label' => 'Password',
