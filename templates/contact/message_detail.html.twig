@@ -1,0 +1,22 @@
+{# templates/contact/message_detail.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du message{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto py-10">
+        <h1 class="text-4xl font-semibold mb-6 text-center">Détail du Message</h1>
+
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+            <p class="font-semibold">Nom: {{ message.name }}</p>
+            <p class="font-semibold">Email: {{ message.email }}</p>
+            <p><strong>Sujet:</strong> {{ message.subject }}</p>
+            <p><strong>Message:</strong></p>
+            <p>{{ message.message }}</p>
+            <p class="text-sm text-gray-500"><strong>Envoyé le:</strong> {{ message.createdAt|date('d/m/Y H:i') }}</p>
+
+            <a href="{{ path('admin_messages') }}" class="mt-4 inline-block bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600">Retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}

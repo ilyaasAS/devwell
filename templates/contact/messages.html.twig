@@ -1,0 +1,30 @@
+{# templates/contact/messages.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages de Contact{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto py-10">
+        <h1 class="text-4xl font-semibold mb-6 text-center">Messages de Contact</h1>
+
+        {% if messages|length > 0 %}
+            <div class="space-y-4">
+                {% for message in messages %}
+                    <div class="p-4 bg-white rounded-lg shadow-md mb-4">
+                        <p class="font-semibold">{{ message.name }} ({{ message.email }})</p>
+                        <p><strong>Sujet:</strong> {{ message.subject }}</p>
+                        <p><strong>Message:</strong> {{ message.message }}</p>
+                        <p class="text-sm text-gray-500"><strong>Envoyé le:</strong> {{ message.createdAt|date('d/m/Y H:i') }}</p>
+                                                <a href="{{ path('admin_message_view', { id: message.id }) }}" class="text-blue-500 hover:text-blue-700">Voir</a>
+                        <a href="#" class="text-blue-500 hover:text-blue-700">Répondre</a>
+                        <a href="{{ path('admin_message_delete', { id: message.id }) }}" class="text-red-500 hover:text-red-700">Supprimer</a>
+
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-gray-500">Aucun message pour le moment.</p>
+        {% endif %}
+    </div>
+{% endblock %}

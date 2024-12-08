@@ -43,4 +43,56 @@ class ContactController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    #[Route('/admin/messages', name: 'admin_messages')]
+    public function adminMessages(EntityManagerInterface $em): Response
+    {
+        // Récupérer tous les messages de contact
+        $messages = $em->getRepository(Contact::class)->findBy([], ['createdAt' => 'DESC']);
+
+        return $this->render('contact/messages.html.twig', [
+            'messages' => $messages,
+        ]);
+    }
+
+    #[Route('/admin/messages/delete/{id}', name: 'admin_message_delete')]
+public function deleteMessage(int $id, EntityManagerInterface $em): Response
+{
+    // Récupérer le message à supprimer
+    $message = $em->getRepository(Contact::class)->find($id);
+
+    if ($message) {
+        $em->remove($message);
+        $em->flush();
+
+        $this->addFlash('success', 'Le message a été supprimé.');
+    } else {
+        $this->addFlash('error', 'Le message n\'a pas été trouvé.');
+    }
+
+    return $this->redirectToRoute('admin_messages');
+}
+
+
+#[Route('/admin/messages/view/{id}', name: 'admin_message_view')]
+public function viewMessage(int $id, EntityManagerInterface $em): Response
+{
+    // Récupérer le message spécifique par son ID
+    $message = $em->getRepository(Contact::class)->find($id);
+
+    if (!$message) {
+        // Si le message n'existe pas, afficher une erreur
+        $this->addFlash('error', 'Le message n\'existe pas.');
+        return $this->redirectToRoute('admin_messages');
+    }
+
+    // Rendre la vue avec le message
+    return $this->render('contact/message_detail.html.twig', [
+        'message' => $message,
+    ]);
+}
+
+
+
 }
