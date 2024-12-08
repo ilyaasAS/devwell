@@ -13,17 +13,19 @@
                     <p class="text-text_dw font-medium">{{ item.product.name }}</p>
 
                     <!-- Formulaire pour modifier la quantité -->
-<form action="{{ path('cart_update', { id: item.id }) }}" method="POST" class="flex items-center space-x-2">
-    <input type="number" 
-           name="quantity" 
-           value="{{ item.quantity }}" 
-           min="1" 
-           max="{{ item.product.stock }}" 
-           class="w-16 text-center border rounded-md py-2 px-3"
-           title="Quantité disponible : {{ item.product.stock }}">
-    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Mettre à jour</button>
-</form>
-
+                    <form action="{{ path('cart_update', { id: item.id }) }}" method="POST" class="flex items-center space-x-2">
+                        <input type="number" 
+                               name="quantity" 
+                               value="{{ item.quantity }}" 
+                               min="1" 
+                               max="{{ item.product.stock }}" 
+                               class="w-16 text-center border rounded-md py-2 px-3"
+                               title="Quantité disponible : {{ item.product.stock }}"
+                               onchange="this.form.submit()">
+                        <noscript>
+                            <button type="submit" class="hidden">Mettre à jour</button>
+                        </noscript>
+                    </form>
 
                     <!-- Lien pour supprimer -->
                     <a href="{{ path('cart_remove', { id: item.id }) }}" 
