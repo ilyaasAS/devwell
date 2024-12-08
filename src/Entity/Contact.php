@@ -32,6 +32,10 @@ class Contact
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    // Ajouter le champ "response" pour stocker la réponse de l'administrateur
+    #[ORM\Column(type: Types::TEXT, nullable: true)]  // Le champ est nullable car la réponse peut ne pas être présente au début
+    private ?string $response = null;
+
     // Constructeur pour initialiser createdAt
     public function __construct()
     {
@@ -104,4 +108,18 @@ class Contact
 
         return $this;
     }
+
+    // Getter et setter pour la réponse de l'administrateur
+    public function getResponse(): ?string
+    {
+        return $this->response;
+    }
+
+    public function setResponse(?string $response): static
+    {
+        $this->response = $response;
+
+        return $this;
+    }
 }
+

@@ -17,7 +17,6 @@
                         <p><strong>Message:</strong> {{ message.message }}</p>
                         <p class="text-sm text-gray-500"><strong>Envoyé le:</strong> {{ message.createdAt|date('d/m/Y H:i') }}</p>
                                                 <a href="{{ path('admin_message_view', { id: message.id }) }}" class="text-blue-500 hover:text-blue-700">Voir</a>
-                        <a href="#" class="text-blue-500 hover:text-blue-700">Répondre</a>
                         <a href="{{ path('admin_message_delete', { id: message.id }) }}" class="text-red-500 hover:text-red-700">Supprimer</a>
 
                     </div>
