@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class ProductController extends AbstractController
 {
@@ -24,24 +26,41 @@ class ProductController extends AbstractController
         ]);
     }
 
-    // Liste des produits avec une fonctionnalité de recherche pour les utilisateurs
-    #[Route('/products', name: 'app_products', methods: ['GET'])]
-    public function productsList(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $search = $request->query->get('search', '');
+// Liste des produits avec une fonctionnalité de recherche pour les utilisateurs
+#[Route('/products', name: 'app_products', methods: ['GET'])]
+public function productsList(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $search = $request->query->get('search', '');
+    $page = max(1, $request->query->getInt('page', 1)); // Numéro de la page (minimum 1)
+    $limit = 1; // Nombre de produits par page
+    $offset = ($page - 1) * $limit; // Calcul de l'offset
 
-        $productsQuery = $entityManager->getRepository(Product::class)->createQueryBuilder('p')
-            ->where('p.name LIKE :search OR p.description LIKE :search')
-            ->setParameter('search', '%' . $search . '%')
-            ->getQuery();
+    // Création de la requête avec pagination
+    $queryBuilder = $entityManager->getRepository(Product::class)->createQueryBuilder('p')
+        ->where('p.name LIKE :search OR p.description LIKE :search')
+        ->setParameter('search', '%' . $search . '%')
+        ->setFirstResult($offset)
+        ->setMaxResults($limit);
 
-        $products = $productsQuery->getResult();
+    $products = $queryBuilder->getQuery()->getResult();
 
-        return $this->render('product/products.html.twig', [
-            'products' => $products,
-            'search' => $search,
-        ]);
-    }
+    // Correction: Utiliser un autre QueryBuilder pour compter le nombre total de produits
+    $totalProducts = $entityManager->getRepository(Product::class)->createQueryBuilder('p')
+        ->select('COUNT(p.id)')
+        ->where('p.name LIKE :search OR p.description LIKE :search')
+        ->setParameter('search', '%' . $search . '%')
+        ->getQuery()
+        ->getSingleScalarResult();
+
+    return $this->render('product/products.html.twig', [
+        'products' => $products,
+        'search' => $search,
+        'currentPage' => $page,
+        'totalPages' => ceil($totalProducts / $limit),
+    ]);
+}
+
+
 
     // Créer un nouveau produit
     #[Route('/product/new', name: 'app_product_new', methods: ['GET', 'POST'])]
