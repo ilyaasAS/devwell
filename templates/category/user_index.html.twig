@@ -30,5 +30,38 @@
     {% else %}
         <p class="text-center text-text_dw">No categories found.</p>
     {% endif %}
+
+    <!-- Pagination -->
+    {% if totalPages > 1 %}
+        <div class="mt-6 flex justify-center space-x-2">
+            <!-- Lien vers la page précédente -->
+            {% if currentPage > 1 %}
+                <a href="{{ path('app_category_user_index', { page: currentPage - 1 }) }}"
+                   class="px-4 py-2 border bg-gray-100 text-gray-600 rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
+                    &laquo; Précédent
+                </a>
+            {% endif %}
+
+            <!-- Affichage des pages -->
+            {% for i in 1..totalPages %}
+                {% if i == 1 or i == totalPages or (i >= currentPage - 1 and i <= currentPage + 1) %}
+                    <a href="{{ path('app_category_user_index', { page: i }) }}"
+                       class="px-4 py-2 border {% if i == currentPage %}bg-primary_dw text-tertiary_dw font-bold{% else %}bg-gray-100 text-gray-600{% endif %} rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
+                        {{ i }}
+                    </a>
+                {% elseif i == currentPage - 2 or i == currentPage + 2 %}
+                    <span class="px-4 py-2 text-gray-600">...</span>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Lien vers la page suivante -->
+            {% if currentPage < totalPages %}
+                <a href="{{ path('app_category_user_index', { page: currentPage + 1 }) }}"
+                   class="px-4 py-2 border bg-gray-100 text-gray-600 rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
+                    Suivant &raquo;
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
