@@ -32,7 +32,7 @@ public function productsList(Request $request, EntityManagerInterface $entityMan
 {
     $search = $request->query->get('search', '');
     $page = max(1, $request->query->getInt('page', 1)); // Numéro de la page (minimum 1)
-    $limit = 1; // Nombre de produits par page
+    $limit = 3; // Nombre de produits par page
     $offset = ($page - 1) * $limit; // Calcul de l'offset
 
     // Création de la requête avec pagination
