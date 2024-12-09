@@ -1,170 +1,169 @@
 <nav class="bg-primary_dw text-white">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center py-4">
+	<div class="container mx-auto px-4">
+		<div
+			class="flex justify-between items-center py-4">
 
-            <!-- Logo visible en permanence, à gauche -->
-            <a href="/" class="flex items-center">
-<img src="{{ asset('assets/images/logo_dw.png') }}" alt="Logo" class="h-8 w-auto">
-            </a>
+			<!-- Logo visible en permanence, à gauche -->
+			<a href="/" class="flex items-center">
+				<img src="{{ asset('/images/logo_dw.png') }}" alt="Logo" class="h-8 w-auto">
+			</a>
 
-            <!-- Menu (desktop) -->
-            <ul class="hidden md:flex w-full justify-between items-center">
+			<!-- Menu (desktop) -->
+			<ul class="hidden md:flex w-full justify-between items-center">
 
-                <div class="flex items-center space-x-6">
-                    <a href="/" class="text-lg font-bold hover:text-secondary_dw">Accueil</a>
-                    <a href="/products" class="text-lg font-bold hover:text-secondary_dw">Produit</a>
-                    <a href="/categorie" class="text-lg font-bold hover:text-secondary_dw">Catégorie</a>
-                    <a href="/profile" class="text-lg font-bold hover:text-secondary_dw">Profile</a>
+				<div class="flex items-center space-x-6">
+					<a href="/" class="text-lg font-bold hover:text-secondary_dw">Accueil</a>
+					<a href="/products" class="text-lg font-bold hover:text-secondary_dw">Produit</a>
+					<a href="/categorie" class="text-lg font-bold hover:text-secondary_dw">Catégorie</a>
+					<a href="/profile" class="text-lg font-bold hover:text-secondary_dw">Profile</a>
 
-                    <!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="/user" class="text-lg font-bold hover:text-secondary_dw">Dashboard</a>
-                        <a href="/product" class="text-lg font-bold hover:text-secondary_dw">Gestion de Produit</a>
-                        <a href="/categories" class="text-lg font-bold hover:text-secondary_dw">Gestion de Catégorie</a>
-                    <a href="/admin/messages" class="block py-2 hover:text-secondary_dw">Gestion de message</a>
-                
-                    {% endif %}
-                </div>
+					<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="/user" class="text-lg font-bold hover:text-secondary_dw">Dashboard</a>
+						<a href="/product" class="text-lg font-bold hover:text-secondary_dw">Gestion de Produit</a>
+						<a href="/categories" class="text-lg font-bold hover:text-secondary_dw">Gestion de Catégorie</a>
+						<a href="/admin/messages" class="block py-2 hover:text-secondary_dw">Gestion de message</a>
 
-                <div class="flex items-center space-x-6">
-                    <!-- Panier visible sur Desktop à droite -->
-                    <li>
-                        <a href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-secondary_dw">
-                            <!-- Icône Panier -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6" />
-                            </svg>
-                            Panier
-                            <!-- Badge de quantité -->
-                            <span id="cart-badge-desktop" class="absolute top-0 right-0 bg-secondary_dw text-primary_dw rounded-full text-xs px-2">
-                                {{ totalItems|default(0) }}
-                            </span>
-                            
-                        </a>
-                    </li>
+					{% endif %}
+				</div>
 
-                    {% if app.user is null %}
-                        <li>
-                            <a href="/login" class="inline-block bg-secondary_dw text-primary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw-300 hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw-300 transition duration-300 transform hover:scale-105">
-    Connexion
-</a>
+				<div
+					class="flex items-center space-x-6">
+					<!-- Panier visible sur Desktop à droite -->
+					<li>
+						<a
+							href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-secondary_dw">
+							<!-- Icône Panier -->
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6"/>
+							</svg>
+							Panier
+							<!-- Badge de quantité -->
+							<span id="cart-badge-desktop" class="absolute top-0 right-0 bg-secondary_dw text-primary_dw rounded-full text-xs px-2">
+								{{ totalItems|default(0) }}
+							</span>
 
-                        </li>
-                        <li>
-                           <a href="/register" class="inline-block bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-300 transform hover:scale-105">
-    Inscription
-</a>
+						</a>
+					</li>
+
+					{% if app.user is null %}
+						<li>
+							<a href="/login" class="inline-block bg-secondary_dw text-primary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw-300 hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw-300 transition duration-300 transform hover:scale-105">
+								Connexion
+							</a>
+
+						</li>
+						<li>
+							<a href="/register" class="inline-block bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-300 transform hover:scale-105">
+								Inscription
+							</a>
 
 
+						</li>
+					{% else %}
+						<li>
+							<a href="/logout" class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-300 transition duration-300 transform hover:scale-105">
+								Déconnexion
+							</a>
+						</li>
+					{% endif %}
+				</div>
+			</ul>
 
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="/logout" class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-300 transition duration-300 transform hover:scale-105">
-                                Déconnexion
-                            </a>
-                        </li>
-                    {% endif %}
-                </div>
-            </ul>
+			<!-- Menu Button (mobile) -->
+			<div
+				class="flex items-center space-x-6">
+				<!-- Panier visible à gauche du menu burger -->
+				<a
+					href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-secondary_dw md:hidden">
+					<!-- Icône Panier -->
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6"/>
+					</svg>
+					Panier
+					<!-- Badge de quantité -->
+					<span id="cart-badge-mobile" class="absolute top-0 right-0 bg-secondary_dw text-primary_dw rounded-full text-xs px-2">
+						{{ totalItems|default(0) }}
+					</span>
+				</a>
 
-            <!-- Menu Button (mobile) -->
-            <div class="flex items-center space-x-6">
-                <!-- Panier visible à gauche du menu burger -->
-                <a href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-secondary_dw md:hidden">
-                    <!-- Icône Panier -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6" />
-                    </svg>
-                    Panier
-                    <!-- Badge de quantité -->
-                    <span id="cart-badge-mobile" class="absolute top-0 right-0 bg-secondary_dw text-primary_dw rounded-full text-xs px-2">
-                        {{ totalItems|default(0) }}
-                    </span>
-                </a>
+				<!-- Menu burger (mobile) -->
+				<button id="menu-toggle" class="md:hidden focus:outline-none ml-auto">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+					</svg>
+				</button>
+			</div>
+		</div>
 
-                <!-- Menu burger (mobile) -->
-                <button id="menu-toggle" class="md:hidden focus:outline-none ml-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
+		<!-- Menu (mobile) -->
+		<ul id="mobile-menu" class="hidden flex-col space-y-2 md:hidden bg-gray-700 text-center py-4">
+			<li>
+				<a href="/" class="block py-2 hover:text-secondary_dw">Accueil</a>
+			</li>
+			<li>
+				<a href="/products" class="block py-2 hover:text-secondary_dw">Produit</a>
+			</li>
+			<li>
+				<a href="/categorie" class="block py-2 hover:text-secondary_dw">Catégorie</a>
+			</li>
+			<li>
+				<a href="/profile" class="block py-2 hover:text-secondary_dw">Profile</a>
+			</li>
 
-        <!-- Menu (mobile) -->
-        <ul id="mobile-menu" class="hidden flex-col space-y-2 md:hidden bg-gray-700 text-center py-4">
-            <li>
-                <a href="/" class="block py-2 hover:text-secondary_dw">Accueil</a>
-            </li>
-            <li>
-                <a href="/products" class="block py-2 hover:text-secondary_dw">Produit</a>
-            </li>
-            <li>
-                <a href="/categorie" class="block py-2 hover:text-secondary_dw">Catégorie</a>
-            </li>
-            <li>
-                <a href="/profile" class="block py-2 hover:text-secondary_dw">Profile</a>
-            </li>
+			<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
+			{% if is_granted('ROLE_ADMIN') %}
+				<li>
+					<a href="/user" class="block py-2 hover:text-secondary_dw">Dashboard</a>
+				</li>
+				<li>
+					<a href="/product" class="block py-2 hover:text-secondary_dw">Gestion de Produit</a>
+				</li>
+				<li>
+					<a href="/categories" class="block py-2 hover:text-secondary_dw">Gestion de Catégorie</a>
+				</li>
+				<li>
+					<a href="/admin/messages" class="block py-2 hover:text-secondary_dw">Gestion de message</a>
+				</li>
+			{% endif %}
 
-            <!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
-            {% if is_granted('ROLE_ADMIN') %}
-                <li>
-                    <a href="/user" class="block py-2 hover:text-secondary_dw">Dashboard</a>
-                </li>
-                <li>
-                    <a href="/product" class="block py-2 hover:text-secondary_dw">Gestion de Produit</a>
-                </li>
-                <li>
-                    <a href="/categories" class="block py-2 hover:text-secondary_dw">Gestion de Catégorie</a>
-                </li>
-                <li>
-                    <a href="/admin/messages" class="block py-2 hover:text-secondary_dw">Gestion de message</a>
-                </li>
-            {% endif %}
+			{# <li>
+						                <a href="/cart" class="block py-2 hover:text-secondary_dw">Panier</a>
+						            </li> #}
 
-            {# <li>
-                <a href="/cart" class="block py-2 hover:text-secondary_dw">Panier</a>
-            </li> #}
-
-            {% if app.user is null %}
-                <li>
-                    <a href="/login" class="inline-block bg-secondary_dw text-primary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw-300 hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw-300 transition duration-300 transform hover:scale-105">
-                        Connexion
-                    </a>
-                </li>
-                <li>
-                    <a href="/register" class="inline-block bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-300 transform hover:scale-105">
-                        Inscription
-                    </a>
-                </li>
-            {% else %}
-                <li>
-                    <a href="/logout" class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-300 transition duration-300 transform hover:scale-105">Déconnexion</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
+			{% if app.user is null %}
+				<li>
+					<a href="/login" class="inline-block bg-secondary_dw text-primary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw-300 hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw-300 transition duration-300 transform hover:scale-105">
+						Connexion
+					</a>
+				</li>
+				<li>
+					<a href="/register" class="inline-block bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-300 transform hover:scale-105">
+						Inscription
+					</a>
+				</li>
+			{% else %}
+				<li>
+					<a href="/logout" class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-300 transition duration-300 transform hover:scale-105">Déconnexion</a>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
 </nav>
 
 <script>
-    // Fonction pour ajouter un produit au panier via AJAX
-    function addToCart(productId) {
-        // Envoi de la requête AJAX
-        fetch(`/cart/add/${productId}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json', // Indique que la réponse doit être au format JSON
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Mise à jour du badge panier avec le nombre total d'articles
-            document.getElementById('cart-badge-desktop').textContent = data.totalItems;
-            document.getElementById('cart-badge-mobile').textContent = data.totalItems;
-        })
-        .catch(error => {
-            console.error('Error adding item to cart:', error);
-        });
-    }
+	// Fonction pour ajouter un produit au panier via AJAX
+function addToCart(productId) { // Envoi de la requête AJAX
+fetch(`/cart/add/${productId}`, {
+method: 'GET',
+headers: {
+'Accept': 'application/json', // Indique que la réponse doit être au format JSON
+}
+}).then(response => response.json()).then(data => { // Mise à jour du badge panier avec le nombre total d'articles
+document.getElementById('cart-badge-desktop').textContent = data.totalItems;
+document.getElementById('cart-badge-mobile').textContent = data.totalItems;
+}).catch(error => {
+console.error('Error adding item to cart:', error);
+});
+}
 </script>
