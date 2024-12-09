@@ -93,6 +93,9 @@ class ContactController extends AbstractController
         $responseForm->handleRequest($request);
 
         if ($responseForm->isSubmitted() && $responseForm->isValid()) {
+            // Marquer le message comme répondu
+            $message->setIsResponded(true); // Marque le message comme répondu
+
             // Persister la réponse de l'administrateur
             $em->flush(); // Le message est déjà persistant, donc on n'a pas besoin de le persister à nouveau
 

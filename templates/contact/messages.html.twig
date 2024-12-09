@@ -16,9 +16,16 @@
                         <p><strong>Sujet:</strong> {{ message.subject }}</p>
                         <p><strong>Message:</strong> {{ message.message }}</p>
                         <p class="text-sm text-gray-500"><strong>Envoyé le:</strong> {{ message.createdAt|date('d/m/Y H:i') }}</p>
-                                                <a href="{{ path('admin_message_view', { id: message.id }) }}" class="text-blue-500 hover:text-blue-700">Voir</a>
-                        <a href="{{ path('admin_message_delete', { id: message.id }) }}" class="text-red-500 hover:text-red-700">Supprimer</a>
 
+                        {# Afficher le statut "Répondu" si le message a été répondu #}
+                        {% if message.isResponded %}
+                            <p class="text-green-500 font-semibold">Répondu</p>
+                        {% else %}
+                            <p class="text-red-500 font-semibold">Non répondu</p>
+                        {% endif %}
+
+                        <a href="{{ path('admin_message_view', { id: message.id }) }}" class="text-blue-500 hover:text-blue-700">Voir</a>
+                        <a href="{{ path('admin_message_delete', { id: message.id }) }}" class="text-red-500 hover:text-red-700">Supprimer</a>
                     </div>
                 {% endfor %}
             </div>

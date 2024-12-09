@@ -36,6 +36,10 @@ class Contact
     #[ORM\Column(type: Types::TEXT, nullable: true)]  // Le champ est nullable car la réponse peut ne pas être présente au début
     private ?string $response = null;
 
+    // Ajouter le champ isResponded pour marquer si un message a été répondu
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $isResponded = false; // Initialisé à false par défaut
+
     // Constructeur pour initialiser createdAt
     public function __construct()
     {
@@ -121,5 +125,17 @@ class Contact
 
         return $this;
     }
-}
 
+    // Getter et setter pour savoir si le message a été répondu
+    public function getIsResponded(): bool
+    {
+        return $this->isResponded;
+    }
+
+    public function setIsResponded(bool $isResponded): static
+    {
+        $this->isResponded = $isResponded;
+
+        return $this;
+    }
+}
