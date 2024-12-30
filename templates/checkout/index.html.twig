@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Passer la commande{% endblock %}
+
+{% block body %}
+<div class="container mx-auto py-10">
+    <h1 class="text-4xl font-semibold mb-6">Finaliser votre commande</h1>
+
+    <!-- Formulaire principal avec intégration Stripe -->
+    <form action="{{ path('checkout') }}" method="POST" id="payment-form">
+        {{ form_start(form) }}
+            <div class="space-y-6">
+                {{ form_row(form.address) }}
+                {{ form_row(form.comment) }}
+            </div>
+
+            <!-- Stripe Card Element -->
+            <div class="mt-6">
+                <label for="card-element" class="block text-lg font-medium">Informations de paiement</label>
+                <div id="card-element" class="p-4 border rounded-md shadow-sm"></div> <!-- Stripe Card Element -->
+                <div id="card-errors" class="text-red-600 mt-2 text-sm" role="alert"></div>
+            </div>
+
+            <!-- Bouton de soumission unique -->
+            <div class="mt-6">
+                <button type="submit" class="bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg">
+                    {{ form.submit.vars.label }}
+                </button>
+            </div>
+        {{ form_end(form) }}
+    </form>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var stripe = Stripe("{{ stripe_public_key }}"); // Utilisation de la clé publique Stripe
+        var elements = stripe.elements();
+        var card = elements.create('card', { style: { base: { fontSize: '16px' } } });
+        card.mount('#card-element');
+
+        // Gestion des erreurs de carte
+        card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Gestion du formulaire de paiement
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    var hiddenInput = document.createElement('input');
+                    hiddenInput.setAttribute('type', 'hidden');
+                    hiddenInput.setAttribute('name', 'stripeToken');
+                    hiddenInput.setAttribute('value', result.token.id);
+                    form.appendChild(hiddenInput);
+
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

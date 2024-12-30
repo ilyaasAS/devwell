@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Stripe\Stripe;
+use Stripe\Charge;
 
 class CheckoutController extends AbstractController
 {
@@ -41,6 +43,7 @@ class CheckoutController extends AbstractController
         $form = $this->createForm(CommandType::class);
         $form->handleRequest($request);
 
+        // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
@@ -52,6 +55,29 @@ class CheckoutController extends AbstractController
                 $orderItem->setQuantity($cartItem->getQuantity());
                 $orderItem->setPrice($cartItem->getProduct()->getPrice());
                 $em->persist($orderItem);
+            }
+
+            // Paiement via Stripe
+            $stripeToken = $request->request->get('stripeToken');
+
+            if ($stripeToken) {
+                // Initialiser Stripe
+                Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+
+                // Créer une charge Stripe
+                try {
+                    Charge::create([
+                        'amount' => $this->calculateTotal($cartItems), // Montant en centimes
+                        'currency' => 'eur',
+                        'description' => 'Commande ' . $order->getId(),
+                        'source' => $stripeToken,
+                    ]);
+                } catch (\Exception $e) {
+                    $this->addFlash('error', 'Erreur de paiement : ' . $e->getMessage());
+                    return $this->redirectToRoute('checkout');
+                }
+
+                $order->setStatus('Paid');
             }
 
             // Sauvegarder la commande
@@ -71,6 +97,7 @@ class CheckoutController extends AbstractController
         return $this->render('checkout/index.html.twig', [
             'form' => $form->createView(),
             'cartItems' => $cartItems,
+            'stripe_public_key' => $_ENV['STRIPE_PUBLIC_KEY'], // Passer la clé publique à Twig
         ]);
     }
 
@@ -80,5 +107,15 @@ class CheckoutController extends AbstractController
         return $this->render('order/confirmation.html.twig', [
             'order' => $order,
         ]);
+    }
+
+    // Calculer le total de la commande en centimes
+    private function calculateTotal($cartItems): int
+    {
+        $total = 0;
+        foreach ($cartItems as $cartItem) {
+            $total += $cartItem->getQuantity() * $cartItem->getProduct()->getPrice() * 100; // Convertir en centimes
+        }
+        return $total;
     }
 }

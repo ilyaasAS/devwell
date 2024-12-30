@@ -16,16 +16,25 @@ class CommandType extends AbstractType
         $builder
             ->add('address', TextType::class, [
                 'label' => 'Adresse de livraison',
-                'attr' => ['placeholder' => 'Votre adresse'],
+                'attr' => [
+                    'placeholder' => 'Votre adresse',
+                    'class' => 'form-control',
+                ],
             ])
             ->add('comment', TextareaType::class, [
                 'label' => 'Commentaire (facultatif)',
                 'required' => false,
-                'attr' => ['placeholder' => 'Ajoutez une note pour le livreur'],
+                'attr' => [
+                    'placeholder' => 'Ajoutez une note pour le livreur',
+                    'class' => 'form-control',
+                    'rows' => 4,
+                ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Passer commande',
-                'attr' => ['class' => 'btn btn-primary'],
+                'attr' => [
+                    'class' => 'btn btn-primary mt-4',
+                ],
             ]);
     }
 
