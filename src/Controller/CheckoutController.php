@@ -73,4 +73,12 @@ class CheckoutController extends AbstractController
             'cartItems' => $cartItems,
         ]);
     }
+
+    #[Route('/order/confirmation/{id}', name: 'order_confirmation')]
+    public function confirmOrder(Order $order): Response
+    {
+        return $this->render('order/confirmation.html.twig', [
+            'order' => $order,
+        ]);
+    }
 }

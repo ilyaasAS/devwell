@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de commande{% endblock %}
+
+{% block body %}
+    <h1>Confirmation de votre commande</h1>
+    <p>Commande ID : {{ order.id }}</p>
+    <p>Status : {{ order.status }}</p>
+    <p>Date de création : {{ order.createdAt|date('Y-m-d H:i') }}</p>
+    <p>Utilisateur : {{ order.user.email }}</p>
+
+    <h3>Articles de la commande :</h3>
+    <ul>
+        {% for item in order.orderItems %}
+            <li>{{ item.product.name }} - {{ item.quantity }} x {{ item.price }}€</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

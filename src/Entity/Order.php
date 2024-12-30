@@ -7,6 +7,7 @@ use App\Repository\OrderRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
+#[ORM\Table(name: 'orders')]  // Spécification du nom de la table "orders"
 class Order
 {
     #[ORM\Id]
