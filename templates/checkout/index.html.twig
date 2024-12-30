@@ -1,29 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Passer la commande{% endblock %}
+{% block title %}Finaliser la commande{% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-10">
-    <h1 class="text-4xl font-semibold mb-6">Finaliser votre commande</h1>
+<div class="container mx-auto py-10 max-w-3xl">
+    <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">Finaliser votre commande</h1>
 
-    <!-- Formulaire principal avec intégration Stripe -->
-    <form action="{{ path('checkout') }}" method="POST" id="payment-form">
+    <!-- Formulaire principal avec Stripe intégré -->
+    <form action="{{ path('checkout') }}" method="POST" id="payment-form" class="bg-white shadow-lg rounded-lg p-8 space-y-6">
+        <!-- Adresse et Commentaire -->
         {{ form_start(form) }}
-            <div class="space-y-6">
-                {{ form_row(form.address) }}
-                {{ form_row(form.comment) }}
+            <div class="space-y-4">
+                <div class="form-group">
+                    {{ form_label(form.address, null, { 'label_attr': { 'class': 'block text-lg font-medium text-gray-700' } }) }}
+                    {{ form_widget(form.address, { 'attr': { 'class': 'mt-1 block w-full p-3 border rounded-md shadow-sm focus:ring-primary focus:border-primary' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.comment, null, { 'label_attr': { 'class': 'block text-lg font-medium text-gray-700' } }) }}
+                    {{ form_widget(form.comment, { 'attr': { 'class': 'mt-1 block w-full p-3 border rounded-md shadow-sm focus:ring-primary focus:border-primary', 'placeholder': 'Ajoutez une note pour le livreur (facultatif)' } }) }}
+                </div>
             </div>
 
-            <!-- Stripe Card Element -->
+            <!-- Stripe Section -->
             <div class="mt-6">
-                <label for="card-element" class="block text-lg font-medium">Informations de paiement</label>
-                <div id="card-element" class="p-4 border rounded-md shadow-sm"></div> <!-- Stripe Card Element -->
-                <div id="card-errors" class="text-red-600 mt-2 text-sm" role="alert"></div>
+                <label for="card-element" class="block text-lg font-medium text-gray-700">Informations de paiement</label>
+                <div id="card-element" class="mt-2 p-4 border rounded-md shadow-sm bg-gray-50"></div>
+                <p id="card-errors" class="text-sm text-red-600 mt-2" role="alert"></p>
             </div>
 
-            <!-- Bouton de soumission unique -->
-            <div class="mt-6">
-                <button type="submit" class="bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg">
+            <!-- Bouton de soumission -->
+            <div class="mt-8">
+                <button type="submit" class="w-full bg-primary_dw text-tertiary_dw py-3 rounded-lg text-lg font-semibold shadow hover:bg-primary_hover transition">
                     {{ form.submit.vars.label }}
                 </button>
             </div>
@@ -34,9 +41,23 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var stripe = Stripe("{{ stripe_public_key }}"); // Utilisation de la clé publique Stripe
+        var stripe = Stripe("{{ stripe_public_key }}");
         var elements = stripe.elements();
-        var card = elements.create('card', { style: { base: { fontSize: '16px' } } });
+        var card = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#32325d',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    '::placeholder': {
+                        color: '#a0aec0'
+                    }
+                },
+                invalid: {
+                    color: '#fa755a',
+                }
+            }
+        });
         card.mount('#card-element');
 
         // Gestion des erreurs de carte
@@ -49,7 +70,7 @@
             }
         });
 
-        // Gestion du formulaire de paiement
+        // Gestion du formulaire
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function(event) {
             event.preventDefault();

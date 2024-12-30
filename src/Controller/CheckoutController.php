@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Stripe\Stripe;
 use Stripe\Charge;
+use App\Service\MailService;
+
 
 class CheckoutController extends AbstractController
 {
