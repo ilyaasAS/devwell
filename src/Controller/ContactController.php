@@ -81,39 +81,58 @@ public function contact(Request $request, EntityManagerInterface $em, MailerInte
     }
 
     #[Route('/admin/messages/view/{id}', name: 'admin_message_view')]
-    public function viewMessage(int $id, Request $request, EntityManagerInterface $em): Response
-    {
-        // Récupérer le message spécifique par son ID
-        $message = $em->getRepository(Contact::class)->find($id);
+public function viewMessage(int $id, Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
+{
+    // Récupérer le message spécifique par son ID
+    $message = $em->getRepository(Contact::class)->find($id);
 
-        if (!$message) {
-            // Si le message n'existe pas, afficher une erreur
-            $this->addFlash('error', 'Le message n\'existe pas.');
-            return $this->redirectToRoute('admin_messages');
-        }
-
-        // Créer un formulaire de réponse pour l'administrateur
-        $responseForm = $this->createForm(ResponseType::class, $message); // Assure-toi de créer ce formulaire
-
-        // Gérer la soumission du formulaire de réponse
-        $responseForm->handleRequest($request);
-
-        if ($responseForm->isSubmitted() && $responseForm->isValid()) {
-            // Marquer le message comme répondu
-            $message->setIsResponded(true); // Marque le message comme répondu
-
-            // Persister la réponse de l'administrateur
-            $em->flush(); // Le message est déjà persistant, donc on n'a pas besoin de le persister à nouveau
-
-            $this->addFlash('success', 'Votre réponse a été envoyée.');
-
-            return $this->redirectToRoute('admin_message_view', ['id' => $id]);
-        }
-
-        // Rendre la vue avec le message et le formulaire de réponse
-        return $this->render('contact/message_detail.html.twig', [
-            'message' => $message,
-            'form' => $responseForm->createView(),
-        ]);
+    if (!$message) {
+        // Si le message n'existe pas, afficher une erreur
+        $this->addFlash('error', 'Le message n\'existe pas.');
+        return $this->redirectToRoute('admin_messages');
     }
+
+    // Créer un formulaire de réponse pour l'administrateur
+    $responseForm = $this->createForm(ResponseType::class, $message); // Assure-toi de créer ce formulaire
+
+    // Gérer la soumission du formulaire de réponse
+    $responseForm->handleRequest($request);
+
+    if ($responseForm->isSubmitted() && $responseForm->isValid()) {
+        // Récupérer la réponse de l'administrateur
+        $responseContent = $responseForm->get('response')->getData();
+
+        // Marquer le message comme répondu
+        $message->setIsResponded(true); // Marque le message comme répondu
+
+        // Persister la réponse de l'administrateur
+        $em->flush(); // Le message est déjà persistant, donc on n'a pas besoin de le persister à nouveau
+
+        // Envoi de l'email de réponse à l'utilisateur
+        $email = (new Email())
+            ->from('admin@votre-domaine.com') // L'adresse de l'administrateur
+            ->to($message->getEmail()) // L'adresse email de l'utilisateur qui a envoyé le message
+            ->subject('Réponse à votre message')
+            ->html($this->renderView('emails/contact_response.html.twig', [
+                'contact' => $message, // Le message d'origine
+                'response' => $responseContent, // La réponse de l'administrateur
+            ]));
+
+        // Envoi de l'email
+        $mailer->send($email);
+
+        // Message flash pour indiquer que la réponse a été envoyée
+        $this->addFlash('success', 'Votre réponse a été envoyée par email.');
+
+        // Rediriger vers la page de détails du message
+        return $this->redirectToRoute('admin_message_view', ['id' => $id]);
+    }
+
+    // Rendre la vue avec le message et le formulaire de réponse
+    return $this->render('contact/message_detail.html.twig', [
+        'message' => $message,
+        'form' => $responseForm->createView(),
+    ]);
+}
+
 }
