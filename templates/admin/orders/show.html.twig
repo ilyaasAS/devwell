@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order Details{% endblock %}
+
+{% block body %}
+<h1>Order Details</h1>
+
+<p><strong>Status:</strong> {{ order.status }}</p>
+<p><strong>Created At:</strong> {{ order.createdAt|date('d-m-Y H:i') }}</p>
+
+<a href="{{ path('admin_orders_index') }}">Back to list</a>
+<a href="{{ path('admin_orders_edit', {'id': order.id}) }}">Edit</a>
+<form method="post" action="{{ path('admin_orders_delete', {'id': order.id}) }}" style="display: inline-block;">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ order.id) }}">
+    <button type="submit">Delete</button>
+</form>
+{% endblock %}

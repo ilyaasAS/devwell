@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\ProfileType;
-use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
@@ -14,13 +13,15 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ProfileController extends AbstractController
 {
+
+
+
     #[Route('/profile', name: 'app_profile', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         EntityManagerInterface $entityManager,
         SecurityBundleSecurity $security,
-        UserPasswordHasherInterface $passwordHasher,
-        OrderRepository $orderRepository // Inject OrderRepository
+        UserPasswordHasherInterface $passwordHasher
     ): Response {
         // Récupérer l'utilisateur connecté
         $user = $security->getUser();
@@ -29,9 +30,6 @@ class ProfileController extends AbstractController
             // Rediriger si l'utilisateur n'est pas connecté ou n'est pas une instance valide
             return $this->redirectToRoute('app_login');
         }
-
-        // Récupérer les commandes de l'utilisateur
-        $orders = $orderRepository->findBy(['user' => $user], ['createdAt' => 'DESC']);
 
         // Sauvegarder l'ancien mot de passe
         $currentPassword = $user->getPassword();
@@ -62,7 +60,8 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
-            'orders' => $orders, // Passer les commandes à la vue
         ]);
     }
+
+    
 }
