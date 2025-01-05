@@ -3,33 +3,53 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block body %}
-    <!-- Conteneur principal avec marges pour espacement -->
-    <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
-        <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Edit Profile</h1>
+<div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Edit Profile</h1>
 
-        <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-            {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-                <div class="space-y-4">
-                    {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                    {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                    {# {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }} #}
-                    {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                </div>
+    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+            <div class="space-y-4">
+                {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+            </div>
 
-                <!-- Boutons centrés -->
-                <div class="mt-6 text-center"> <!-- Ajouté text-center pour centrer les boutons -->
-                    <button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                        Update Profile
-                    </button>
-                </div>
+            <div class="mt-6 text-center">
+                <button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                    Update Profile
+                </button>
+            </div>
 
-                <!-- Lien de retour -->
-                <div class="mt-6 text-center"> <!-- Ajouté text-center pour centrer le lien -->
-                    <a href="{{ path('app_home') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                        Back to Home
-                    </a>
-                </div>
-            {{ form_end(form) }}
-        </div>
+            <div class="mt-6 text-center">
+                <a href="{{ path('app_home') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                    Back to Home
+                </a>
+            </div>
+        {{ form_end(form) }}
     </div>
+
+    <h2 class="text-2xl font-bold mt-12 text-center">Your Orders</h2>
+
+    <div class="mt-6 bg-gray-100 p-6 rounded-lg shadow">
+        {% if orders|length > 0 %}
+            <ul>
+                {% for order in orders %}
+                    <li class="border-b border-gray-300 py-4">
+                        <strong>Order ID:</strong> {{ order.id }}<br>
+                        <strong>Status:</strong> {{ order.status }}<br>
+                        <strong>Date:</strong> {{ order.createdAt|date('d-m-Y H:i') }}<br>
+                        <strong>Total:</strong> 
+                        {% set total = 0 %}
+                        {% for item in order.orderItems %}
+                            {% set total = total + (item.quantity * item.price) %}
+                        {% endfor %}
+                        {{ total }} €
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No orders found.</p>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
