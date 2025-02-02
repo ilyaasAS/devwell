@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Devwell - Bien-être pour les Développeurs{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container mx-auto py-20 px-6 my-12 max-w-7xl">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!-- Section Hero avec image en tête -->
+    <section class="relative mb-16">
+        <img src="{{ asset('images/Devwell_en_tête.jpg') }}" alt="Devwell - Bien-être pour les Développeurs" class="w-full h-[250px] sm:h-[300px] object-cover rounded-lg shadow-lg">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/stagiaire/Desktop/Projet Devwell/devwell/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/stagiaire/Desktop/Projet Devwell/devwell/templates/home/index.html.twig</code></li>
-    </ul>
+    <!-- Section Description -->
+    <section class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-primary_dw mb-8">Pourquoi choisir Devwell ?</h2>
+        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed mb-8 max-w-3xl mx-auto">
+            Chez Devwell, nous savons à quel point le travail prolongé devant un écran peut nuire à votre bien-être. C'est pourquoi nous avons conçu une gamme de produits spécialement adaptés aux développeurs, aux professionnels de l'informatique et à tous ceux qui passent beaucoup de temps devant des écrans.
+        </p>
+        <p class="text-lg sm:text-xl text-gray-700 leading-relaxed mb-8 max-w-3xl mx-auto">
+            Que ce soit pour soulager la fatigue oculaire avec nos lunettes anti-lumière bleue, ou pour améliorer votre posture avec nos coussins ergonomiques, chaque produit est pensé pour vous aider à vous sentir mieux et à travailler dans les meilleures conditions.
+        </p>
+    </section>
+
+    <!-- Bouton centré -->
+    <div class="text-center">
+        <a href="/products" class="bg-primary_dw text-white px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-secondary_dw transition duration-300 transform hover:scale-105">
+            Découvrez nos produits
+        </a>
+    </div>
+
 </div>
 {% endblock %}

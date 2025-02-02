@@ -1,0 +1,33 @@
+1)Page d'acceuil
+
+Traduire le site
+
+_____________________________________________________________
+
+2)Gestion de commande à quoi sert :
+
+créer une nouvelle commande ?
+
+3)Tableau de Board :
+
+Dashbord
+Gestion de PRoduit
+Gestion de Catégories
+Gestion de message
+Gestion de Commande
+
+
+4)Profil:
+
+Your commande:
+
+Statut:
+Bouton voir la commande
+Modifier ma commande
+Supprimer ma commande
+
+Impossible de modifier sa commande quand elle est cours de livrais
+Impossible de supprimer quand on est livrer
+
+
+5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois)

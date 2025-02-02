@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class OrderManagementController extends AbstractController
+class AdminOrderController extends AbstractController
 {
     #[Route('/admin/orders', name: 'admin_orders_index', methods: ['GET'])]
     public function index(OrderRepository $orderRepository): Response

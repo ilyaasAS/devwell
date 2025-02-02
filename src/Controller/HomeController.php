@@ -1,6 +1,7 @@
 <?php
 
 // src/Controller/HomeController.php
+
 namespace App\Controller;
 
 use App\Service\CartService;
@@ -25,7 +26,6 @@ class HomeController extends AbstractController
         $totalItems = $this->cartService->getTotalItems();
 
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
             'totalItems' => $totalItems,  // Passer le total d'articles à la vue
         ]);
     }
