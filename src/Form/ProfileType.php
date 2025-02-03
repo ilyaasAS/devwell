@@ -17,11 +17,11 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'First Name',
+                'label' => 'Prénom',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'Last Name',
+                'label' => 'Nom de famille',
                 'attr' => ['class' => 'form-control']
             ])
             // ->add('email', EmailType::class, [
@@ -30,7 +30,7 @@ class ProfileType extends AbstractType
             // ])
             ->add('password', PasswordType::class, [
                 'required' => false,
-                'label' => 'Password',
+                'label' => 'Mot de passe',
                 'attr' => ['class' => 'form-control'],
                 'empty_data' => '', // Si le champ est laissé vide, on assigne une chaîne vide
                 'constraints' => [

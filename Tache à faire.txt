@@ -1,8 +1,9 @@
-1)Page d'acceuil
+ré-ajuster le css et les boutons
 
-Traduire le site
+-------------
 
-_____________________________________________________________
+Voir les détail de la commande montrer les article commande
+____________________________________________________________
 
 2)Gestion de commande à quoi sert :
 
@@ -16,7 +17,7 @@ Gestion de Catégories
 Gestion de message
 Gestion de Commande
 
-
+_________________________________________________________________________________________________
 4)Profil:
 
 Your commande:
@@ -26,8 +27,40 @@ Bouton voir la commande
 Modifier ma commande
 Supprimer ma commande
 
-Impossible de modifier sa commande quand elle est cours de livrais
+Impossible de modifier sa commande quand elle est cours de livraison
 Impossible de supprimer quand on est livrer
 
 
 5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois)
+
+_______________
+
+Les cookies
+__________________________
+
+Table avis clien en nosql
+
+______________________________
+
+Css:
+
+https://127.0.0.1:8000/categories/new
+
+___________________________________________
+
+Fonction supprimer le compte pour l'user dans profile
+
+_________________________________
+
+Remboursser status sur gestion des commandes
+__________________________________________________
+
+Token pour l'inscription Invalid CSRF token.
+
+_________________
+
+bouton Créer un utilisateur admin back office
+
+_________________________
+
+facultatif: chat bot

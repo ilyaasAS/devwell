@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product Details{% endblock %}
+{% block title %}Détails du produit{% endblock %}
 
 {% block body %}
 <div class="container mx-auto py-12 px-6 max-w-3xl">
-    <h1 class="text-4xl font-semibold mb-8 text-center">Product Details</h1>
+    <h1 class="text-4xl font-semibold mb-8 text-center">Détails du produit</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         <!-- Titre centré -->
@@ -23,7 +23,7 @@
 
         <!-- Category centrée -->
         <div class="mb-4 text-center">
-            <p class="text-lg">Category: <span class="font-medium">{{ product.category ? product.category.name : 'No Category' }}</span></p>
+            <p class="text-lg">Catégorie: <span class="font-medium">{{ product.category ? product.category.name : 'No Category' }}</span></p>
         </div>
 
         <!-- Description centrée -->
@@ -36,12 +36,12 @@
         <div class="flex flex-col items-center space-y-4 mt-8">
             <button onclick="addToCart({{ product.id }})" 
                 class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-                Add to Cart
+                Ajouter au panier
             </button>
             
             <a href="{{ path('app_product_index') }}" 
                 class="w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-                Back to Product List
+                Retour à la liste des produits
             </a>
         </div>
     </div>

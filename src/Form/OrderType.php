@@ -15,15 +15,17 @@ class OrderType extends AbstractType
     {
         $builder
             ->add('status', ChoiceType::class, [
+                'label' => 'Statut de la commande', // Ajout du label pour 'status'
                 'choices' => [
-                    'Pending' => 'pending',
-                    'Processing' => 'processing',
-                    'Shipped' => 'shipped',
-                    'Delivered' => 'delivered',
-                    'Cancelled' => 'cancelled',
+                    'En attente' => 'en attente',
+                    'Traitement' => 'traitement',
+                    'Expédié' => 'expédié',
+                    'Livrée' => 'livrée',
+                    'Annulé' => 'annulé',
                 ],
             ])
             ->add('createdAt', DateTimeType::class, [
+                'label' => 'Date de création', // Ajout du label pour 'createdAt'
                 'widget' => 'single_text',
             ])
         ;

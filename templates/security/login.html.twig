@@ -11,7 +11,7 @@
             </div>
         {% endif %}
 
-        <h2 class="text-center text-2xl font-extrabold text-primary_dw">Please sign in</h2>
+        <h2 class="text-center text-2xl font-extrabold text-primary_dw">Connectez-vous</h2>
 
         <form class="mt-8 space-y-6" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -38,11 +38,11 @@
                     <input id="remember_me" name="_remember_me" type="checkbox" 
                         class="h-4 w-4 text-primary_dw focus:ring-secondary_dw border-gray-300 rounded">
                     <label for="remember_me" class="ml-2 block text-sm text-text_dw">
-                        Remember me
+                        Se souvenir de moi
                     </label>
                 </div>
                 <div class="text-sm">
-                    <a href="{{ path('app_forgot_password_request') }}" class="font-medium text-primary_dw hover:text-secondary_dw transition-all duration-300 transform hover:scale-105">Forgot your password?</a>
+                    <a href="{{ path('app_forgot_password_request') }}" class="font-medium text-primary_dw hover:text-secondary_dw transition-all duration-300 transform hover:scale-105">Mot de passe oublié</a>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
             <div>
                 <button type="submit" 
                     class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full text-center mb-4">
-                    Sign in
+                    Connexion
                 </button>
             </div>
         </form>

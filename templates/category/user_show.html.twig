@@ -2,7 +2,7 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Category Details{% endblock %}
+{% block title %}Détails de la catégorie{% endblock %}
 
 {% block body %}
 <div class="container mx-auto py-12 px-6 max-w-4xl">
@@ -14,12 +14,12 @@
         <!-- Category Description (centrée) -->
         <p class="text-lg text-text_dw mb-6 text-center">
             <strong class="font-semibold">Description:</strong> 
-            {{ category.description ? category.description : 'No Description' }}
+            {{ category.description ? category.description : 'Pas de description' }}
         </p>
 
         {% if category.products|length > 0 %}
             <!-- Products List -->
-            <h2 class="text-2xl font-bold text-primary_dw mb-4 text-center">Products in this Category:</h2>
+            <h2 class="text-2xl font-bold text-primary_dw mb-4 text-center">Produits dans cette catégorie :</h2>
             <ul class="list-disc pl-0 text-center" style="list-style-position: inside;">
                 {% for product in category.products %}
                     <li>
@@ -39,7 +39,7 @@
         <div class="text-center mt-8">
             <a href="{{ path('app_category_user_index') }}" 
                class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                Back to Category List
+                Retour à la liste des catégories
             </a>
         </div>
     </div>

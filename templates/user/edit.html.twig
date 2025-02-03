@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modifier l'utilisateur{% endblock %}
 
 {% block body %}
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
-    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Edit User</h1>
+    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Modifier l'utilisateur</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
@@ -12,12 +12,12 @@
 
             <div class="mt-6 text-center">
                 <button type="submit" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                    Update
+                    Mettre à jour
                 </button>
             </div>
         <div class="mt-6 text-center">
             <a href="{{ path('app_user_index') }}" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                Back to list
+                Retour
             </a>
         </div>
         {{ form_end(form) }}

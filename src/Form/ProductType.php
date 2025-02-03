@@ -21,16 +21,17 @@ class ProductType extends AbstractType
     {
         // Ajout du champ stock dans le formulaire pour permettre la modification du stock
 $builder
-->add('name', TextType::class, ['label' => 'Name'])
-->add('price', NumberType::class, ['label' => 'Price'])
+->add('name', TextType::class, ['label' => 'Nom'])
+->add('price', NumberType::class, ['label' => 'Prix'])
 ->add('stock', NumberType::class, ['label' => 'Stock'])  // Modification ici
 ->add('uploadedImage', FileType::class, [
-    'label' => 'Upload Image',
+    'label' => 'Mettre une image',
     'required' => false,
     'mapped' => false, 
 ])
 ->add('description', TextareaType::class, ['label' => 'Description'])
 ->add('category', ChoiceType::class, [
+    'label' => 'Catégorie',
     'choices' => $this->getCategoryChoices($options['categories']),
     'choice_label' => function($category) {
         return $category->getName();

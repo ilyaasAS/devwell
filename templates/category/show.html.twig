@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category Details{% endblock %}
+{% block title %}Détails de la catégorie{% endblock %}
 
 {% block body %}
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
-    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Category Details</h1>
+    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Détails de la catégorie</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         <h2 class="text-2xl font-bold mb-4">{{ category.name }}</h2>
         <p class="text-lg mb-4">
             <strong>Description:</strong>
-            <span class="text-gray-700">{{ category.description ? category.description : 'No Description' }}</span>
+            <span class="text-gray-700">{{ category.description ? category.description : 'Pas de description' }}</span>
         </p>
 
         {% if category.products|length > 0 %}
             <div class="mt-6">
-                <h3 class="text-xl font-semibold mb-3">Products in this Category:</h3>
+                <h3 class="text-xl font-semibold mb-3">Produits dans cette catégorie :</h3>
                 <ul class="list-disc pl-6">
                 {% for product in category.products %}
                     <li class="mb-2">
@@ -32,10 +32,10 @@
         
         <div class="mt-8 text-center">
             <a href="{{ path('app_category_index') }}" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                Back to list
+                Retour à la liste
             </a>
             <a href="{{ path('app_category_edit', {id: category.id}) }}" class="inline-block bg-yellow-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-yellow-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-300 transition duration-300 transform hover:scale-105">
-                Edit Category
+                Modifier la catégorie
             </a>
         </div>
     </div>

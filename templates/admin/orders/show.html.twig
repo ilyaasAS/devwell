@@ -1,17 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Order Details{% endblock %}
+{% block title %}Détails de la commande{% endblock %}
 
 {% block body %}
-<h1>Order Details</h1>
+<div class="container mx-auto py-6 sm:py-10 px-4 sm:px-6 my-4 sm:my-8 max-w-4xl">
+    <!-- Page Title -->
+    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Détails de la commande</h1>
 
-<p><strong>Status:</strong> {{ order.status }}</p>
-<p><strong>Created At:</strong> {{ order.createdAt|date('d-m-Y H:i') }}</p>
+    <!-- Order Details -->
+    <p class="text-lg sm:text-xl mb-4"><strong>Statut:</strong> {{ order.status }}</p>
+    <p class="text-lg sm:text-xl mb-4"><strong>Créer le:</strong> {{ order.createdAt|date('d-m-Y H:i') }}</p>
 
-<a href="{{ path('admin_orders_index') }}">Back to list</a>
-<a href="{{ path('admin_orders_edit', {'id': order.id}) }}">Edit</a>
-<form method="post" action="{{ path('admin_orders_delete', {'id': order.id}) }}" style="display: inline-block;">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ order.id) }}">
-    <button type="submit">Delete</button>
-</form>
+    <!-- Action Buttons -->
+    <div class="flex justify-center gap-6 mt-8">
+        <!-- Retour Button -->
+        <a href="{{ path('admin_orders_index') }}" 
+           class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+            Retour
+        </a>
+        
+        <!-- Modifier Button -->
+        <a href="{{ path('admin_orders_edit', {'id': order.id}) }}" 
+           class="inline-block bg-yellow-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 hover:text-primary_dw focus:bg-yellow-400 focus:text-primary_dw transition duration-300 transform hover:scale-105">
+            Modifier
+        </a>
+        
+        <!-- Supprimer Button -->
+        <form method="post" action="{{ path('admin_orders_delete', {'id': order.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');" class="inline">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ order.id) }}">
+            <button type="submit" 
+                    class="inline-block bg-red-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-red-400 hover:text-primary_dw focus:bg-red-400 focus:text-primary_dw transition duration-300 transform hover:scale-105">
+                Supprimer
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -1,22 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create New Product{% endblock %}
+{% block title %}Créer un nouveau produit{% endblock %}
 
 {% block body %}
-    <div class="container mx-auto py-8">
-        <h1 class="text-4xl font-semibold mb-6 text-center">Create New Product</h1>
+<div class="container mx-auto py-12 px-6 max-w-3xl">
+    <h1 class="text-4xl font-semibold mb-8 text-center">Créer un nouveau produit</h1>
 
-        <div class="bg-white p-6 rounded shadow-md">
-            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
-                {{ form_row(form.name) }}
-                {{ form_row(form.price) }}
-                {{ form_row(form.stock) }}
-                {{ form_row(form.uploadedImage) }}
-                {{ form_row(form.description) }}
-                {{ form_row(form.category) }}
-                {# {{ form_row(form.newCategory) }} #}
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Create Product</button>
-            {{ form_end(form) }}
+    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+
+        <!-- Form Fields -->
+        <div class="space-y-4">
+            <!-- Name -->
+            <div class="form-group">
+                {{ form_row(form.name, {
+                    'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
+                }) }}
+            </div>
+
+            <!-- Price -->
+            <div class="form-group">
+                {{ form_row(form.price, {
+                    'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
+                }) }}
+            </div>
+
+            <!-- Stock -->
+            <div class="form-group">
+                {{ form_row(form.stock, {
+                    'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
+                }) }}
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group">
+                {{ form_row(form.uploadedImage, {
+                    'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
+                }) }}
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                {{ form_row(form.description, {
+                    'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
+                }) }}
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+                {{ form_row(form.category, {
+                    'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
+                }) }}
+            </div>
         </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-6">
+            <button type="submit" class="bg-primary_dw text-white px-6 py-3 rounded-lg hover:bg-secondary_dw focus:ring-2 focus:ring-primary_dw transition duration-300 transform hover:scale-105">
+                Créer un produit
+            </button>
+        </div>
+
+        <!-- Back Link -->
+        <div class="mt-6 text-center">
+            <a href="{{ path('app_product_index') }}" class="w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+                Retour à la liste des produits
+            </a>
+        </div>
+
+        {{ form_end(form) }}
     </div>
+</div>
 {% endblock %}
