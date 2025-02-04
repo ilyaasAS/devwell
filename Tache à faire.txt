@@ -1,14 +1,9 @@
-ré-ajuster le css et les boutons
+--)Créer un bouton utilisateur admin back office
 
--------------
+Fonction supprimer le compte pour l'user dans profile
+_______________________________________________________________
 
 Voir les détail de la commande montrer les article commande
-
-css pages:
-
-https://127.0.0.1:8000/reset-password/reset
-
-check les css
 ____________________________________________________________
 
 2)Gestion de commande à quoi sert :
@@ -38,25 +33,12 @@ Impossible de supprimer quand on est livrer
 
 
 5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois)
-
-_______________
-
-Les cookies
 __________________________
 
 Table avis clien en nosql
 
 ______________________________
 
-Css:
-
-https://127.0.0.1:8000/categories/new
-
-___________________________________________
-
-Fonction supprimer le compte pour l'user dans profile
-
-_________________________________
 
 Remboursser status sur gestion des commandes
 __________________________________________________
@@ -70,3 +52,8 @@ bouton Créer un utilisateur admin back office
 _________________________
 
 facultatif: chat bot
+Les cookies
+
+________
+
+css ajuster

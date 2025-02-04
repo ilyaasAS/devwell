@@ -8,22 +8,43 @@
         
         <h1 class="text-center text-2xl font-bold text-primary_dw">Réinitialiser votre mot de passe</h1>
 
-        {{ form_start(resetForm) }}
-            <div class="space-y-4">
-                <!-- Champ mot de passe -->
-                <div class="rounded-md shadow-sm -space-y-px">
-                    {{ form_row(resetForm.plainPassword, {'attr': {'class': 'appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-text_dw text-text_dw rounded-t-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw sm:text-sm transition-all duration-300 hover:scale-105'}}) }}
-                </div>
+        {{ form_start(resetForm, {'attr': {'class': 'space-y-6'}}) }}
+            
+            <!-- Champ Nouveau mot de passe -->
+            <div>
+                <label for="{{ resetForm.plainPassword.first.vars.id }}" class="block text-sm font-medium text-gray-700">Nouveau mot de passe</label>
+                {{ form_widget(resetForm.plainPassword.first, {
+                    'attr': {
+                        'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary_dw focus:border-primary_dw sm:text-sm transition duration-300 hover:scale-105'
+                    }
+                }) }}
             </div>
 
-            <div class="mt-4">
-                <!-- Bouton de soumission -->
-                <button type="submit" class="inline-block bg-primary_dw text-white px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full text-center">
+            <!-- Champ Répéter le mot de passe -->
+            <div>
+                <label for="{{ resetForm.plainPassword.second.vars.id }}" class="block text-sm font-medium text-gray-700">Répéter le mot de passe</label>
+                {{ form_widget(resetForm.plainPassword.second, {
+                    'attr': {
+                        'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary_dw focus:border-primary_dw sm:text-sm transition duration-300 hover:scale-105'
+                    }
+                }) }}
+            </div>
+
+            <!-- Message d'erreur -->
+            {% if resetForm.plainPassword.vars.errors|length > 0 %}
+                <div class="text-red-500 text-sm">
+                    {{ form_errors(resetForm.plainPassword) }}
+                </div>
+            {% endif %}
+
+            <!-- Bouton de soumission -->
+            <div>
+                <button type="submit" class="w-full bg-primary_dw text-white px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw transition duration-300 transform hover:scale-105">
                     Réinitialiser votre mot de passe
                 </button>
             </div>
+
         {{ form_end(resetForm) }}
     </div>
 </div>
 {% endblock %}
-
