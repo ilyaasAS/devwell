@@ -9,7 +9,36 @@
 
     <!-- Order Details -->
     <p class="text-lg sm:text-xl mb-4"><strong>Statut:</strong> {{ order.status }}</p>
-    <p class="text-lg sm:text-xl mb-4"><strong>Créer le:</strong> {{ order.createdAt|date('d-m-Y H:i') }}</p>
+    <p class="text-lg sm:text-xl mb-4"><strong>Créée le:</strong> {{ order.createdAt|date('d-m-Y H:i') }}</p>
+
+    <!-- Order Items Details -->
+    <h2 class="text-2xl font-bold mt-8 mb-6 text-center text-primary_dw">Détails des articles</h2>
+
+    <div class="space-y-4">
+        {% if order.orderItems|length > 0 %}
+            {% for item in order.orderItems %}
+                <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+                    <p><strong>Produit:</strong> {{ item.product.name }}</p>
+                    <p><strong>Quantité:</strong> {{ item.quantity }}</p>
+                    <p><strong>Prix unitaire:</strong> {{ item.price }} €</p>
+                    <p><strong>Total article:</strong> {{ item.quantity * item.price }} €</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-gray-500">Aucun article dans cette commande.</p>
+        {% endif %}
+    </div>
+
+    <!-- Total Order -->
+    <div class="mt-8 text-lg sm:text-xl">
+        <p><strong>Total de la commande:</strong> 
+            {% set totalOrder = 0 %}
+            {% for item in order.orderItems %}
+                {% set totalOrder = totalOrder + (item.quantity * item.price) %}
+            {% endfor %}
+            {{ totalOrder }} €
+        </p>
+    </div>
 
     <!-- Action Buttons -->
     <div class="flex justify-center gap-6 mt-8">
