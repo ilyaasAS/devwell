@@ -8,7 +8,12 @@ Modifier ma commande (la quantite artices ou supprimer un ou plusieur article)
 Supprimer ma commande
 
 Impossible de modifier sa commande quand elle est cours de livraison
-Impossible de supprimer quand on est livrer
+Impossible de supprimer quand on est livrer mais il peut demande le remboursemment
+
+____________________________________________________________________________________________
+Back office
+
+Modifier les commande (la quantite artices ou supprimer un ou plusieur article et ajouter un article)
 _____________________________________________________
 
 Fonction supprimer le compte pour l'user dans profile
