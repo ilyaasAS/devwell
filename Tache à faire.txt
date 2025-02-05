@@ -1,4 +1,3 @@
---)Créer un bouton utilisateur admin back office
 
 Fonction supprimer le compte pour l'user dans profile
 _______________________________________________________________
