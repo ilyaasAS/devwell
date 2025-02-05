@@ -15,7 +15,6 @@ use Stripe\Stripe;
 use Stripe\Charge;
 use App\Service\MailService;
 
-
 class CheckoutController extends AbstractController
 {
     #[Route('/checkout', name: 'checkout')]
@@ -39,7 +38,7 @@ class CheckoutController extends AbstractController
         // Créer un nouvel objet commande
         $order = new Order();
         $order->setUser($user);
-        $order->setStatus('Pending');
+        $order->setStatus('en attente');  // Mettre le statut sur "en attente" par défaut
         $order->setCreatedAt(new \DateTime());
 
         $form = $this->createForm(CommandType::class);
@@ -79,7 +78,8 @@ class CheckoutController extends AbstractController
                     return $this->redirectToRoute('checkout');
                 }
 
-                $order->setStatus('Paid');
+                // Mettre à jour le statut après paiement
+                $order->setStatus('payée');  // Statut changé en "payée" après paiement réussi
             }
 
             // Sauvegarder la commande

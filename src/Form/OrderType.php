@@ -14,16 +14,18 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('status', ChoiceType::class, [
-                'label' => 'Statut de la commande', // Ajout du label pour 'status'
-                'choices' => [
-                    'En attente' => 'en attente',
-                    'Traitement' => 'traitement',
-                    'Expédié' => 'expédié',
-                    'Livrée' => 'livrée',
-                    'Annulé' => 'annulé',
-                ],
-            ])
+        ->add('status', ChoiceType::class, [
+            'label' => 'Statut de la commande',
+            'choices' => [
+                'En attente' => 'en attente',
+                'Payée' => 'payée',
+                'Traitement' => 'traitement',
+                'Livraison en cours' => 'livraison_en_cours',
+                'Livrée' => 'livrée',
+                'Remboursée' => 'remboursée',
+                'Annulée' => 'annulée',
+            ],
+        ])
             ->add('createdAt', DateTimeType::class, [
                 'label' => 'Date de création', // Ajout du label pour 'createdAt'
                 'widget' => 'single_text',

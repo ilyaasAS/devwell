@@ -1,3 +1,16 @@
+4)Profil:
+
+Mes commande:
+
+
+Bouton voir la commande
+Modifier ma commande (la quantite artices ou supprimer un ou plusieur article)
+Supprimer ma commande
+
+Impossible de modifier sa commande quand elle est cours de livraison
+Impossible de supprimer quand on est livrer
+_____________________________________________________
+
 Fonction supprimer le compte pour l'user dans profile
 ____________________________________________________________
 
@@ -14,29 +27,14 @@ Gestion de Catégories
 Gestion de message
 Gestion de Commande
 
-_________________________________________________________________________________________________
-4)Profil:
 
-Your commande:
-
-Statut:
-Bouton voir la commande
-Modifier ma commande
-Supprimer ma commande
-
-Impossible de modifier sa commande quand elle est cours de livraison
-Impossible de supprimer quand on est livrer
-
+___________________________________________________________________
 
 5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois)
 __________________________
 
 Table avis clien en nosql
 
-______________________________
-
-
-Remboursser status sur gestion des commandes
 __________________________________________________
 
 Token pour l'inscription Invalid CSRF token.
