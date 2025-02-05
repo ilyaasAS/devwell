@@ -1,8 +1,4 @@
-
 Fonction supprimer le compte pour l'user dans profile
-_______________________________________________________________
-
-Voir les détail de la commande montrer les article commande
 ____________________________________________________________
 
 2)Gestion de commande à quoi sert :
@@ -43,10 +39,6 @@ Remboursser status sur gestion des commandes
 __________________________________________________
 
 Token pour l'inscription Invalid CSRF token.
-
-_________________
-
-bouton Créer un utilisateur admin back office
 
 _________________________
 

@@ -35,20 +35,26 @@
             <ul>
                 {% for order in orders %}
                     <li class="border-b border-gray-300 py-4">
-                        <strong>Commandes ID:</strong> {{ order.id }}<br>
+                        <strong>Commande ID:</strong> {{ order.id }}<br>
                         <strong>Statut:</strong> {{ order.status }}<br>
                         <strong>Date:</strong> {{ order.createdAt|date('d-m-Y H:i') }}<br>
                         <strong>Total:</strong> 
                         {% set total = 0 %}
                         {% for item in order.orderItems %}
+                            <div class="mt-2">
+                                <strong>Article:</strong> {{ item.product.name }}<br>
+                                <strong>Quantité:</strong> {{ item.quantity }}<br>
+                                <strong>Prix unitaire:</strong> {{ item.price }} €<br>
+                                <strong>Total article:</strong> {{ item.quantity * item.price }} €
+                            </div>
                             {% set total = total + (item.quantity * item.price) %}
                         {% endfor %}
-                        {{ total }} €
+                        <br><strong>Total de la commande:</strong> {{ total }} €
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p class="text-center text-gray-500">No orders found.</p>
+            <p class="text-center text-gray-500">Aucune commande trouvée.</p>
         {% endif %}
     </div>
 
