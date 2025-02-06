@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route; // Utilisation des annotations classiques
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Order;
 
@@ -71,7 +71,7 @@ class ProfileController extends AbstractController
         }
 
         // Vérifier si la commande n'est pas encore livrée
-        if ($order->getStatus() !== 'livré') {
+        if ($order->getStatus() !== 'livrée') {
             $entityManager->remove($order);
             $entityManager->flush();
 
@@ -94,9 +94,9 @@ class ProfileController extends AbstractController
         }
 
         // Vérifier si la commande est livrée
-        if ($order->getStatus() === 'livré') {
-            // Ici, tu peux marquer la commande comme remboursée, par exemple :
-            $order->setStatus('remboursé');
+        if ($order->getStatus() === 'livrée') {
+            // Mettre à jour le statut de la commande en "remboursé"
+            $order->setStatus('remboursée');
             $entityManager->flush();
 
             $this->addFlash('success', 'Remboursement demandé avec succès.');
