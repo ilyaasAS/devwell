@@ -33,13 +33,6 @@ class OrderType extends AbstractType
         ->add('createdAt', DateTimeType::class, [
             'label' => 'Date de création',
             'widget' => 'single_text',
-        ])
-        ->add('orderItems', CollectionType::class, [
-            'entry_type' => OrderItemType::class,
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'label' => 'Articles de la commande',
         ]);
     }
 
