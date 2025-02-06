@@ -3,11 +3,10 @@
 Mes commande:
 
 
-Bouton voir la commande
-Modifier ma commande (la quantite artices ou supprimer un ou plusieur article)
-Supprimer ma commande
+Bouton:
+voir la commande (voici la route: #[Route('/order/confirmation/{id}', name: 'order_confirmation')]) 
+Supprimer ma commande (si la commande est livré demandé un remborssement)
 
-Impossible de modifier sa commande quand elle est cours de livraison
 Impossible de supprimer quand on est livrer mais il peut demande le remboursemment
 
 ____________________________________________________________________________________________

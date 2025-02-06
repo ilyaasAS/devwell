@@ -8,14 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route; // Utilisation des annotations classiques
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Entity\Order;
 
 class ProfileController extends AbstractController
 {
-
-
-
     #[Route('/profile', name: 'app_profile', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
@@ -31,7 +29,7 @@ class ProfileController extends AbstractController
         }
     
         // Récupérer les commandes de l'utilisateur
-        $orders = $entityManager->getRepository(\App\Entity\Order::class)->findBy(['user' => $user]);
+        $orders = $entityManager->getRepository(Order::class)->findBy(['user' => $user]);
     
         // Sauvegarder l'ancien mot de passe
         $currentPassword = $user->getPassword();
@@ -60,7 +58,52 @@ class ProfileController extends AbstractController
             'form' => $form->createView(),
             'orders' => $orders, // Passer les commandes à la vue
         ]);
-    }    
+    }
 
-    
+    #[Route('/order/delete/{id}', name: 'order_delete', methods: ['POST'])]
+    public function deleteOrder(
+        Order $order, 
+        EntityManagerInterface $entityManager
+    ): Response {
+        // Vérifier si l'utilisateur est le propriétaire de la commande
+        if ($this->getUser() !== $order->getUser()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas supprimer cette commande.');
+        }
+
+        // Vérifier si la commande n'est pas encore livrée
+        if ($order->getStatus() !== 'livré') {
+            $entityManager->remove($order);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Commande supprimée avec succès.');
+        } else {
+            $this->addFlash('error', 'Impossible de supprimer une commande déjà livrée.');
+        }
+
+        return $this->redirectToRoute('app_profile');
+    }
+
+    #[Route('/order/refund/{id}', name: 'order_refund', methods: ['POST'])]
+    public function refundOrder(
+        Order $order, 
+        EntityManagerInterface $entityManager
+    ): Response {
+        // Vérifier si l'utilisateur est le propriétaire de la commande
+        if ($this->getUser() !== $order->getUser()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas demander un remboursement pour cette commande.');
+        }
+
+        // Vérifier si la commande est livrée
+        if ($order->getStatus() === 'livré') {
+            // Ici, tu peux marquer la commande comme remboursée, par exemple :
+            $order->setStatus('remboursé');
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Remboursement demandé avec succès.');
+        } else {
+            $this->addFlash('error', 'Seules les commandes livrées peuvent être remboursées.');
+        }
+
+        return $this->redirectToRoute('app_profile');
+    }
 }

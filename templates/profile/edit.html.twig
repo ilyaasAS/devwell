@@ -50,6 +50,26 @@
                             {% set total = total + (item.quantity * item.price) %}
                         {% endfor %}
                         <br><strong>Total de la commande:</strong> {{ total }} €
+
+                        <div class="mt-4 flex justify-between">
+                            <a href="{{ path('order_confirmation', {'id': order.id}) }}" class="inline-block bg-primary_dw text-tertiary_dw py-2 px-4 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300">
+                                Voir la commande
+                            </a>
+                            
+                            {% if order.status != 'livré' %}
+                                <form action="{{ path('order_delete', {'id': order.id}) }}" method="post" class="inline-block">
+                                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 focus:outline-none transition duration-300">
+                                        Supprimer ma commande
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form action="{{ path('order_refund', {'id': order.id}) }}" method="post" class="inline-block">
+                                    <button type="submit" class="bg-yellow-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none transition duration-300">
+                                        Demander un remboursement
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
