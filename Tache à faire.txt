@@ -1,27 +1,20 @@
-Back office
+Dashboard:
 
-nettoyer le controller adminOrderController.php
-______________________________________________
+Gestion user
+Gestion de produits
+Gestion de Catégorie
+Gestion de commande
 
-3)Tableau de Board :
+____________________________________
 
-Dashbord
-Gestion de PRoduit
-Gestion de Catégories
-Gestion de message
-Gestion de Commande
+5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois car la page ne charge pas vite)
 
-____________________________________________
+____________________________________
 
-Fonction supprimer le compte pour l'user dans profile
+
+Fonction supprimer son compte pour l'user dans profile
 ___________________________________________________________________
 
-5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois)
-__________________________
-
-Table avis clien en nosql
-
-__________________________________________________
 
 Token pour l'inscription Invalid CSRF token.
 
@@ -29,6 +22,12 @@ _________________________
 
 facultatif: chat bot
 Les cookies
+Les page personalisé pour gérer les erreurs
+
+__________________________________________________
+
+Table avis clien en nosql
+
 
 ________
 

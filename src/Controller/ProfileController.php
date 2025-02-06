@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Order;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ProfileController extends AbstractController
 {
@@ -59,6 +61,9 @@ class ProfileController extends AbstractController
             'orders' => $orders, // Passer les commandes à la vue
         ]);
     }
+
+
+
 
     #[Route('/order/delete/{id}', name: 'order_delete', methods: ['POST'])]
     public function deleteOrder(
