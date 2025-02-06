@@ -1,11 +1,6 @@
 Back office
 
 nettoyer le controller adminOrderController.php
-_____________________________________________________
-
-2)Gestion de commande à quoi sert :
-
-créer une nouvelle commande ?
 ______________________________________________
 
 3)Tableau de Board :

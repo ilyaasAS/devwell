@@ -61,24 +61,4 @@ class AdminOrderController extends AbstractController
 
         return $this->redirectToRoute('admin_orders_index');
     }
-
-    // Suppression d'un article d'une commande
-    #[Route('/admin/orders/{orderId}/remove-item/{itemId}', name: 'admin_orders_remove_item', methods: ['POST'])]
-    public function removeItem(int $orderId, int $itemId, EntityManagerInterface $entityManager, OrderRepository $orderRepository): Response
-    {
-        $order = $orderRepository->find($orderId);
-        if (!$order) {
-            throw $this->createNotFoundException("Commande non trouvée.");
-        }
-
-        $orderItem = $entityManager->getRepository(OrderItem::class)->find($itemId);
-        if (!$orderItem || $orderItem->getOrder() !== $order) {
-            throw $this->createNotFoundException("Article non trouvé dans cette commande.");
-        }
-
-        $entityManager->remove($orderItem);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin_orders_edit', ['id' => $orderId]);
-    }
 }
