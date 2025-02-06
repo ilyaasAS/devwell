@@ -2,12 +2,7 @@
 
 Mes commande:
 
-
-Bouton:
-voir la commande (voici la route: #[Route('/order/confirmation/{id}', name: 'order_confirmation')]) 
-Supprimer ma commande (si la commande est livré demandé un remborssement)
-
-Impossible de supprimer quand on est livrer mais il peut demande le remboursemment
+style css 
 
 ____________________________________________________________________________________________
 Back office
