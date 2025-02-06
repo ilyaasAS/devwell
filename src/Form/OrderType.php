@@ -40,11 +40,6 @@ class OrderType extends AbstractType
             'allow_delete' => true,
             'by_reference' => false,
             'label' => 'Articles de la commande',
-        ])
-        ->add('newItem', OrderItemType::class, [
-            'mapped' => false, // Indique que ce champ n'est pas directement lié à l'entité Order
-            'label' => 'Nouvel article',
-            'required' => false, // Permet de ne pas avoir d'erreur si aucun article n'est ajouté
         ]);
     }
 

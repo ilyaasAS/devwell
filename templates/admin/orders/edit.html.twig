@@ -34,13 +34,6 @@
             {% endfor %}
         </div>
 
-        <!-- Ajouter un nouvel article -->
-        <h2 class="text-xl font-semibold mt-6">Ajouter un article</h2>
-        <div class="flex space-x-4">
-            {{ form_widget(form.newItem.product, {'attr': {'class': 'border border-gray-300 px-4 py-2 rounded-md w-full'}}) }}
-            {{ form_widget(form.newItem.quantity, {'attr': {'class': 'border border-gray-300 px-2 py-1 rounded-md w-16 text-center'}}) }}
-        </div>
-
         <!-- Bouton de mise à jour -->
         <div class="mt-6 text-center">
             <button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">

@@ -51,6 +51,24 @@ class AdminOrderController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/orders/{id}/edit', name: 'admin_orders_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Order $order, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(OrderType::class, $order);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_orders_index');
+        }
+
+        return $this->render('admin/orders/edit.html.twig', [
+            'order' => $order,
+            'form' => $form->createView(),
+        ]);
+    }
+
     
 
     #[Route('/admin/orders/{id}', name: 'admin_orders_delete', methods: ['POST'])]
