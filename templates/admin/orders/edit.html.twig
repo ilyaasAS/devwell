@@ -1,31 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer la commande{% endblock %}
+{% block title %}Éditer la commande{% endblock %}
 
 {% block body %}
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
-    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Editer la commande</h1>
+    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Éditer la commande</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-            <div class="space-y-4">
-                {{ form_row(form.status, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                {{ form_row(form.createdAt, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            </div>
+        
+        <!-- Statut et Date de création -->
+        <div class="space-y-4">
+            {{ form_row(form.status, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+            {{ form_row(form.createdAt, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+        </div>
 
-            <div class="mt-6 text-center">
-                <button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                    Mise à jour 
-                </button>
-            </div>
-            <div class="mt-6 text-center">
-        <a href="{{ path('admin_orders_index') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-            Retour
-        </a>
-    </div>
+        <!-- Liste des articles de la commande -->
+        <h2 class="text-xl font-semibold mt-6">Articles de la commande</h2>
+        <div class="space-y-4">
+            {% for item in form.orderItems %}
+                <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-lg">
+                    <!-- Nom du produit -->
+                    <span class="font-semibold">{{ item.product.vars.data.name }}</span>
+
+                    <!-- Modifier la quantité -->
+                    {{ form_widget(item.quantity, {'attr': {'class': 'border border-gray-300 px-2 py-1 rounded-md w-16 text-center'}}) }}
+
+                    <!-- Supprimer un article -->
+                    <a href="{{ path('admin_orders_remove_item', {'orderId': order.id, 'itemId': item.vars.data.id}) }}" class="text-red-500 hover:text-red-700">
+                        ❌ Supprimer
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Ajouter un nouvel article -->
+        <h2 class="text-xl font-semibold mt-6">Ajouter un article</h2>
+        <div class="flex space-x-4">
+            {{ form_widget(form.newItem.product, {'attr': {'class': 'border border-gray-300 px-4 py-2 rounded-md w-full'}}) }}
+            {{ form_widget(form.newItem.quantity, {'attr': {'class': 'border border-gray-300 px-2 py-1 rounded-md w-16 text-center'}}) }}
+        </div>
+
+        <!-- Bouton de mise à jour -->
+        <div class="mt-6 text-center">
+            <button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                Mettre à jour 
+            </button>
+        </div>
+
+        <!-- Bouton retour -->
+        <div class="mt-6 text-center">
+            <a href="{{ path('admin_orders_index') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                Retour
+            </a>
+        </div>
+
         {{ form_end(form) }}
     </div>
-
-    
 </div>
 {% endblock %}

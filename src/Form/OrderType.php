@@ -3,11 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Order;
+use App\Entity\OrderItem;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class OrderType extends AbstractType
 {
@@ -26,11 +30,22 @@ class OrderType extends AbstractType
                 'Annulée' => 'annulée',
             ],
         ])
-            ->add('createdAt', DateTimeType::class, [
-                'label' => 'Date de création', // Ajout du label pour 'createdAt'
-                'widget' => 'single_text',
-            ])
-        ;
+        ->add('createdAt', DateTimeType::class, [
+            'label' => 'Date de création',
+            'widget' => 'single_text',
+        ])
+        ->add('orderItems', CollectionType::class, [
+            'entry_type' => OrderItemType::class,
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            'label' => 'Articles de la commande',
+        ])
+        ->add('newItem', OrderItemType::class, [
+            'mapped' => false, // Indique que ce champ n'est pas directement lié à l'entité Order
+            'label' => 'Nouvel article',
+            'required' => false, // Permet de ne pas avoir d'erreur si aucun article n'est ajouté
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

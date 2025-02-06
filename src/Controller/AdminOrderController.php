@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\OrderItem;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,22 +52,35 @@ class AdminOrderController extends AbstractController
     }
 
     #[Route('/admin/orders/{id}/edit', name: 'admin_orders_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Order $order, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(OrderType::class, $order);
-        $form->handleRequest($request);
+public function edit(Request $request, Order $order, EntityManagerInterface $entityManager): Response
+{
+    $form = $this->createForm(OrderType::class, $order);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_orders_index');
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Récupérer l'article ajouté
+        $newItem = $form->get('newItem')->getData();
+        
+        if ($newItem) {
+            // Associer l'article à la commande
+            $newItem->setOrder($order); // Associe l'article à la commande
+            $entityManager->persist($newItem); // Persiste l'article dans la base de données
         }
 
-        return $this->render('admin/orders/edit.html.twig', [
-            'order' => $order,
-            'form' => $form->createView(),
-        ]);
+        // Sauvegarder les modifications de la commande
+        $entityManager->flush();
+
+        // Rediriger vers l'édition de la commande (pour rafraîchir la page)
+        return $this->redirectToRoute('admin_orders_edit', ['id' => $order->getId()]);
     }
+
+    // Rendre le formulaire à la vue
+    return $this->render('admin/orders/edit.html.twig', [
+        'order' => $order,
+        'form' => $form->createView(),
+    ]);
+}
+
 
     #[Route('/admin/orders/{id}', name: 'admin_orders_delete', methods: ['POST'])]
     public function delete(Request $request, Order $order, EntityManagerInterface $entityManager): Response
@@ -78,4 +92,24 @@ class AdminOrderController extends AbstractController
 
         return $this->redirectToRoute('admin_orders_index');
     }
+
+    #[Route('/admin/orders/{orderId}/remove-item/{itemId}', name: 'admin_orders_remove_item', methods: ['POST'])]
+public function removeItem(int $orderId, int $itemId, EntityManagerInterface $entityManager, OrderRepository $orderRepository): Response
+{
+    $order = $orderRepository->find($orderId);
+    if (!$order) {
+        throw $this->createNotFoundException("Commande non trouvée.");
+    }
+
+    $orderItem = $entityManager->getRepository(OrderItem::class)->find($itemId);
+    if (!$orderItem || $orderItem->getOrder() !== $order) {
+        throw $this->createNotFoundException("Article non trouvé dans cette commande.");
+    }
+
+    $entityManager->remove($orderItem);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('admin_orders_edit', ['id' => $orderId]);
+}
+
 }

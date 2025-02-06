@@ -1,10 +1,3 @@
-4)Profil:
-
-Mes commande:
-
-style css 
-
-____________________________________________________________________________________________
 Back office
 
 Modifier les commande (la quantite artices ou supprimer un ou plusieur article et ajouter un article)
