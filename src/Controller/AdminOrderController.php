@@ -23,27 +23,6 @@ class AdminOrderController extends AbstractController
         ]);
     }
 
-    // Création d'une nouvelle commande
-    #[Route('/admin/orders/new', name: 'admin_orders_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $order = new Order();
-        $form = $this->createForm(OrderType::class, $order);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($order);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_orders_index');
-        }
-
-        return $this->render('admin/orders/new.html.twig', [
-            'order' => $order,
-            'form' => $form->createView(),
-        ]);
-    }
-
     // Affichage des détails d'une commande
     #[Route('/admin/orders/{id}', name: 'admin_orders_show', methods: ['GET'])]
     public function show(Order $order): Response

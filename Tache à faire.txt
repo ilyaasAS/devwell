@@ -1,10 +1,7 @@
 Back office
 
-Modifier les commande (la quantite artices ou supprimer un ou plusieur article et ajouter un article)
+nettoyer le controller adminOrderController.php
 _____________________________________________________
-
-Fonction supprimer le compte pour l'user dans profile
-____________________________________________________________
 
 2)Gestion de commande à quoi sert :
 
@@ -19,7 +16,9 @@ Gestion de Catégories
 Gestion de message
 Gestion de Commande
 
+____________________________________________
 
+Fonction supprimer le compte pour l'user dans profile
 ___________________________________________________________________
 
 5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois)
