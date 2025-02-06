@@ -30,11 +30,11 @@
 
     <h2 class="text-2xl font-bold mt-12 text-center text-primary_dw">Vos commandes</h2>
 
-    <div class="mt-6 bg-gray-100 p-6 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+    <div class="mt-6 bg-white p-6 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         {% if orders|length > 0 %}
             <ul>
                 {% for order in orders %}
-                    <li class="border-b border-gray-300 py-4">
+                    <li class="border-b border-white py-4 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
                         <strong>Commande ID:</strong> {{ order.id }}<br>
                         <strong>Statut:</strong> {{ order.status }}<br>
                         <strong>Date:</strong> {{ order.createdAt|date('d-m-Y H:i') }}<br>
