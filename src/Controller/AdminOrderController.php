@@ -51,36 +51,7 @@ class AdminOrderController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/orders/{id}/edit', name: 'admin_orders_edit', methods: ['GET', 'POST'])]
-public function edit(Request $request, Order $order, EntityManagerInterface $entityManager): Response
-{
-    $form = $this->createForm(OrderType::class, $order);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Récupérer l'article ajouté
-        $newItem = $form->get('newItem')->getData();
-        
-        if ($newItem) {
-            // Associer l'article à la commande
-            $newItem->setOrder($order); // Associe l'article à la commande
-            $entityManager->persist($newItem); // Persiste l'article dans la base de données
-        }
-
-        // Sauvegarder les modifications de la commande
-        $entityManager->flush();
-
-        // Rediriger vers l'édition de la commande (pour rafraîchir la page)
-        return $this->redirectToRoute('admin_orders_edit', ['id' => $order->getId()]);
-    }
-
-    // Rendre le formulaire à la vue
-    return $this->render('admin/orders/edit.html.twig', [
-        'order' => $order,
-        'form' => $form->createView(),
-    ]);
-}
-
+    
 
     #[Route('/admin/orders/{id}', name: 'admin_orders_delete', methods: ['POST'])]
     public function delete(Request $request, Order $order, EntityManagerInterface $entityManager): Response
