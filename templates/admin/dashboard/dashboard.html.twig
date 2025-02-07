@@ -3,32 +3,33 @@
 {% block title %}Dashboard Admin{% endblock %}
 
 {% block body %}
-<div class="container py-6">
-    <h1 class="text-3xl font-bold mb-4">Bienvenue sur le Dashboard Administrateur</h1>
-    <div class="grid grid-cols-2 gap-6">
+<div class="container mx-auto p-8">
+    <h1 class="text-4xl font-bold text-gray-800 text-center mb-8">Bienvenue sur le Dashboard Administrateur</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="card">
-            <a href="/admin/user" class="block p-4 bg-primary_dw text-white rounded-lg shadow hover:scale-105">
-                Gestion des utilisateurs
+            <a href="/admin/user" class="block p-6 bg-blue-600 text-black text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-blue-700">
+                👤 Gestion des utilisateurs
             </a>
         </div>
         <div class="card">
-            <a href="/admin/product" class="block p-4 bg-primary_dw text-white rounded-lg shadow hover:scale-105">
-                Gestion des produits
+            <a href="/admin/product" class="block p-6 bg-green-600 text-black text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-green-700">
+                📦 Gestion des produits
             </a>
         </div>
         <div class="card">
-            <a href="/admin/categories" class="block p-4 bg-primary_dw text-white rounded-lg shadow hover:scale-105">
-                Gestion des Catégorie
+            <a href="/admin/categories" class="block p-6 bg-yellow-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-yellow-600">
+                🏷️ Gestion des Catégories
             </a>
         </div>
         <div class="card">
-            <a href="/admin/orders" class="block p-4 bg-primary_dw text-white rounded-lg shadow hover:scale-105">
-                Gestion des commandes
+            <a href="/admin/orders" class="block p-6 bg-red-600 text-black text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-red-700">
+                📜 Gestion des commandes
             </a>
         </div>
         <div class="card">
-            <a href="/admin/messages" class="block p-4 bg-primary_dw text-white rounded-lg shadow hover:scale-105">
-                Gestion des messages
+            <a href="/admin/messages" class="block p-6 bg-blue-600 text-black text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-purple-700">
+                ✉️ Gestion des messages
             </a>
         </div>
     </div>

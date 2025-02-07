@@ -6,10 +6,6 @@ Commenter le code
 Optimiser le code (facultatif)
 Test unitaire
 ______________________
-Dashboard:
-
-css
-__________________________________________
 Bloquez les pages pour les user
 ____________________________________
 
