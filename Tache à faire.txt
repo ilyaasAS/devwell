@@ -1,5 +1,3 @@
-Bloquez les pages pour les user
-____________________________________
 Commenter le code
 Optimiser le code (facultatif)
 Test unitaire
