@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Erreur {{ status_code }}</h1>
+    <p>{{ status_text }}</p>
+
+    <p>
+        The requested page couldn't be located. Checkout for any URL
+        misspelling or <a href="/">return to the homepage</a>.
+    </p>
+{% endblock %}
