@@ -2,7 +2,7 @@
 
 // src/Controller/ContactController.php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
@@ -15,41 +15,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-class ContactController extends AbstractController
+class AdminContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
-public function contact(Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
-{
-    $contact = new Contact();
-    $form = $this->createForm(ContactType::class, $contact);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Persiste l'entité Contact
-        $em->persist($contact);
-        $em->flush();
-
-        // Envoi de l'email
-        $email = (new Email())
-            ->from($contact->getEmail()) // Adresse de l'utilisateur
-            ->to('admin@votre-domaine.com') // Adresse où envoyer le message
-            ->subject('Nouveau message de contact')
-            ->html($this->renderView('emails/contact_notification.html.twig', [
-                'contact' => $contact,
-            ]));
-
-        $mailer->send($email);
-
-        // Message flash
-        $this->addFlash('success', 'Votre message a bien été envoyé.');
-
-        return $this->redirectToRoute('app_contact');
-    }
-
-    return $this->render('contact/index.html.twig', [
-        'form' => $form->createView(),
-    ]);
-}
 
     #[Route('/admin/messages', name: 'admin_messages')]
     public function adminMessages(EntityManagerInterface $em): Response

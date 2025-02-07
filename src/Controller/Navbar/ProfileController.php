@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Navbar;
 
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;

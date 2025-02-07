@@ -2,7 +2,7 @@
 
 // src/Controller/DashboardController.php
 
-namespace App\Controller;
+namespace App\Controller\Navbar;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

@@ -2,7 +2,7 @@
 
 // src/Controller/HomeController.php
 
-namespace App\Controller;
+namespace App\Controller\Navbar;
 
 use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -1,10 +1,11 @@
+Token pour l'inscription Invalid CSRF token.
+
+______________________
 Dashboard:
 
-Gestion user
-Gestion de produits
-Gestion de Catégorie
-Gestion de commande
+css
 
+Mettre tous les page admin sur le controller Admin
 Bloquez les pages pour les user
 ____________________________________
 
@@ -15,11 +16,6 @@ ____________________________________
 
 Fonction supprimer son compte pour l'user dans profile
 ___________________________________________________________________
-
-
-Token pour l'inscription Invalid CSRF token.
-
-_________________________
 
 facultatif: chat bot
 Les cookies

@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Footer;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class CGUController extends AbstractController
+class CGVController extends AbstractController
 {
-    #[Route('/cgu', name: 'app_cgu')]
+    #[Route('/cgv', name: 'app_cgv')]
     public function index(): Response
     {
-        return $this->render('cgu/index.html.twig', [
-            'controller_name' => 'CGUController',
+        return $this->render('footer/cgv/index.html.twig', [
+            'controller_name' => 'CGVController',
         ]);
     }
 }
