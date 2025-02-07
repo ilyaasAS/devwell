@@ -19,11 +19,7 @@
 
 					<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
 					{% if is_granted('ROLE_ADMIN') %}
-						<a href="/user" class="text-lg font-bold hover:text-secondary_dw">Dashboard</a>
-						<a href="/product" class="text-lg font-bold hover:text-secondary_dw">Gestion de Produit</a>
-						<a href="/categories" class="text-lg font-bold hover:text-secondary_dw">Gestion de Catégorie</a>
-						<a href="/admin/messages" class="block py-2 hover:text-secondary_dw">Gestion de message</a>
-						<a href="/admin/orders" class="block py-2 hover:text-secondary_dw">Gestion de commande</a>
+						<a href="/admin/dashboard" class="text-lg font-bold hover:text-secondary_dw">Dashboard</a>
 
 
 					{% endif %}
@@ -115,22 +111,11 @@
 
 			<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
 			{% if is_granted('ROLE_ADMIN') %}
-				<li>
-					<a href="/user" class="block py-2 hover:text-secondary_dw">Dashboard</a>
-				</li>
-				<li>
-					<a href="/product" class="block py-2 hover:text-secondary_dw">Gestion de Produit</a>
-				</li>
-				<li>
-					<a href="/categories" class="block py-2 hover:text-secondary_dw">Gestion de Catégorie</a>
-				</li>
-				<li>
-					<a href="/admin/messages" class="block py-2 hover:text-secondary_dw">Gestion de message</a>
-				</li>
 				
 				<li>
-					<a href="/admin/orders" class="block py-2 hover:text-secondary_dw">Gestion de commande</a>
+					<a href="/admin/dashboard" class="text-lg font-bold hover:text-secondary_dw">Dashboard</a>
 				</li>
+				
 			{% endif %}
 
 			{# <li>
