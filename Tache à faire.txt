@@ -1,32 +1,21 @@
-
-page personnalise pour gérer les message d'erreur (errer 400 et 500; mot de passe trompe, accés refuser)
-________________
-
-améliorer les fonction mail:
-reset password
-oder_comfirmation
-_____________________________________
-
+Fonction supprimer son compte pour l'user dans profile
+____________________________________
 Token pour l'inscription Invalid CSRF token.
-
+message d'erreur (page de login, contact, controller, formulaire)
 __________________________________________________
-
-Commenter le code
-Optimiser le code (facultatif)
-Test unitaire
-______________________
 
 5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois car la page ne charge pas vite)
 
-____________________________________
-
-
-Fonction supprimer son compte pour l'user dans profile
 ___________________________________________________________________
 
 
 Table avis clien en nosql
 ________
+
+Commenter le code
+Optimiser le code (facultatif)
+Test unitaire
+______________________
 
 facultatif:
 Les cookies
