@@ -1,6 +1,5 @@
 Optimiser les fichier
 Faire un controller footer
-order/confirmation page mettre dossier checkout
 tester
 améliorer les fonction mail
 Commenter le code
