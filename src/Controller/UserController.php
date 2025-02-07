@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface as HasherUserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/user')]
+// Admin
+#[Route('/admin/user')]
 final class UserController extends AbstractController
 {
     private HasherUserPasswordHasherInterface $passwordHasher;  // Déclaration de la variable pour le service de hachage
@@ -23,6 +24,7 @@ final class UserController extends AbstractController
         $this->passwordHasher = $passwordHasher;  // Initialisation du service de hachage
     }
 
+    // Admin créer un user
     #[Route('/create', name: 'app_user_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -56,6 +58,7 @@ final class UserController extends AbstractController
         ]);
     }
 
+    // Admin voir un user
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -64,6 +67,7 @@ final class UserController extends AbstractController
         ]);
     }
 
+    // Admin edit un user
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
@@ -88,6 +92,7 @@ final class UserController extends AbstractController
         ]);
     }
 
+    // Admin supprimer un user
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {

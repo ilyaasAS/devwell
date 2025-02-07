@@ -5,6 +5,7 @@ Gestion de produits
 Gestion de Catégorie
 Gestion de commande
 
+Bloquez les pages pour les user
 ____________________________________
 
 5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois car la page ne charge pas vite)
@@ -27,7 +28,6 @@ Les page personalisé pour gérer les erreurs
 __________________________________________________
 
 Table avis clien en nosql
-
 
 ________
 

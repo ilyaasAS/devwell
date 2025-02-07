@@ -58,7 +58,7 @@ public function indexu(Request $request, EntityManagerInterface $entityManager):
 
 
     // Liste des catégories
-    #[Route('/categories', name: 'app_category_index', methods: ['GET'])]
+    #[Route('/admin/categories', name: 'app_category_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         // Récupérer toutes les catégories
@@ -69,7 +69,7 @@ public function indexu(Request $request, EntityManagerInterface $entityManager):
         ]);
     }
     // Ajouter une nouvelle catégorie
-    #[Route('/categories/new', name: 'app_category_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/categories/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     public function test(Request $request, EntityManagerInterface $entityManager): Response
     {
         $category = new Category();
@@ -89,7 +89,7 @@ public function indexu(Request $request, EntityManagerInterface $entityManager):
         ]);
     }
     // Afficher les détails d'une catégorie (facultatif)
-    #[Route('/categories/{id}', name: 'app_category_show', methods: ['GET'])]
+    #[Route('/admin/categories/{id}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
         // Vérification ajoutée pour éviter des erreurs si la catégorie n'existe pas
@@ -105,7 +105,7 @@ public function indexu(Request $request, EntityManagerInterface $entityManager):
 
 
 
-    #[Route('/categories/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/categories/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
@@ -125,7 +125,7 @@ public function indexu(Request $request, EntityManagerInterface $entityManager):
     }
 
 
-    #[Route('/categories/{id}/delete', name: 'app_category_delete', methods: ['POST'])]
+    #[Route('/admin/categories/{id}/delete', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
