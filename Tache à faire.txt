@@ -29,3 +29,4 @@ facultatif:
 Les cookies
 Les page personalisé pour gérer les erreurs
 css ajuste
+page personnalise pour gérer les message d'erreur (errer 400 et 5000; mot de passe trompe, accés refuser)

@@ -1,59 +1,58 @@
 security:
-    password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
 
-    # Fournisseur d'utilisateurs depuis la base de données
-    providers:
-        users_database:
-            entity:
-                class: App\Entity\User  # Utilisation de l'entité User de la base de données
-                property: email  # Utilisation de l'email pour identifier les utilisateurs
+  # Fournisseur d'utilisateurs depuis la base de données
+  providers:
+    users_database:
+      entity:
+        class: App\Entity\User # Utilisation de l'entité User de la base de données
+        property: email # Utilisation de l'email pour identifier les utilisateurs
 
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
 
-        main:
-            lazy: true
-            provider: users_database  # Utilisation du fournisseur d'utilisateurs basé sur la base de données
+    main:
+      lazy: true
+      provider: users_database # Utilisation du fournisseur d'utilisateurs basé sur la base de données
 
-            form_login:  # Active le formulaire de connexion classique
-                login_path: app_login  # Définition du chemin pour la page de connexion
-                check_path: app_login  # Définition du chemin pour vérifier les informations de connexion
-                username_parameter: email  # Paramètre pour l'email dans le formulaire de connexion
-                password_parameter: password  # Paramètre pour le mot de passe
-                default_target_path: app_home  # Redirige l'utilisateur après une connexion réussie
+      form_login: # Active le formulaire de connexion classique
+        login_path: app_login # Définition du chemin pour la page de connexion
+        check_path: app_login # Définition du chemin pour vérifier les informations de connexion
+        username_parameter: email # Paramètre pour l'email dans le formulaire de connexion
+        password_parameter: password # Paramètre pour le mot de passe
+        default_target_path: app_home # Redirige l'utilisateur après une connexion réussie
 
-            logout:  # Paramètres pour gérer la déconnexion
-                path: /logout
-                target: app_home  # Redirige vers la page d'accueil après déconnexion
+      logout: # Paramètres pour gérer la déconnexion
+        path: /logout
+        target: app_home # Redirige vers la page d'accueil après déconnexion
 
-            custom_authenticator: App\Security\LoginAuthenticator  # Authentification personnalisée
-            entry_point: App\Security\LoginAuthenticator  # Définir explicitement quel authentificateur utiliser
+      custom_authenticator: App\Security\LoginAuthenticator # Authentification personnalisée
+      entry_point: App\Security\LoginAuthenticator # Définir explicitement quel authentificateur utiliser
 
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800  # Durée de 7 jours
-                path: /
-                # Toujours activé (ou décoché si vous voulez gérer par une case à cocher dans le formulaire de connexion)
-                # always_remember_me: true
+      remember_me:
+        secret: "%kernel.secret%"
+        lifetime: 604800 # Durée de 7 jours
+        path: /
+        # Toujours activé (ou décoché si vous voulez gérer par une case à cocher dans le formulaire de connexion)
+        # always_remember_me: true
 
-            # Switch User - pour l'imitation d'utilisateurs
-            # switch_user: true
+      # Switch User - pour l'imitation d'utilisateurs
+      # switch_user: true
 
-    # Contrôle d'accès pour les pages
-    access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER }
+  # Contrôle d'accès pour les pages
+  access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/profile, roles: ROLE_USER }
 
 # Configuration spéciale pour l'environnement de test
 when@test:
-    security:
-        password_hashers:
-            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-                algorithm: auto
-                cost: 4
-                time_cost: 3
-                memory_cost: 10
+  security:
+    password_hashers:
+      Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+        algorithm: auto
+        cost: 4
+        time_cost: 3
+        memory_cost: 10
