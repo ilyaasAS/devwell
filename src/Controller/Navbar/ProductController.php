@@ -52,7 +52,7 @@ public function productsList(Request $request, EntityManagerInterface $entityMan
         ->getQuery()
         ->getSingleScalarResult();
 
-    return $this->render('product/products.html.twig', [
+    return $this->render('navbar/product/products.html.twig', [
         'products' => $products,
         'search' => $search,
         'currentPage' => $page,
@@ -107,7 +107,7 @@ public function productsList(Request $request, EntityManagerInterface $entityMan
     #[Route('/products/{id}', name: 'app_product_details', methods: ['GET'])]
     public function productDetails(Product $product): Response
     {
-        return $this->render('product/details.html.twig', [
+        return $this->render('navbar/product/details.html.twig', [
             'product' => $product,
         ]);
     }

@@ -34,7 +34,7 @@ public function indexu(Request $request, EntityManagerInterface $entityManager):
         ->getQuery()
         ->getSingleScalarResult();
 
-    return $this->render('category/user_index.html.twig', [
+    return $this->render('navbar/category/user_index.html.twig', [
         'categories' => $categories,
         'currentPage' => $page,
         'totalPages' => ceil($totalCategories / $limit),
@@ -51,7 +51,7 @@ public function indexu(Request $request, EntityManagerInterface $entityManager):
             throw $this->createNotFoundException('The category does not exist.');
         }
 
-        return $this->render('category/user_show.html.twig', [
+        return $this->render('navbar/category/user_show.html.twig', [
             'category' => $category,
         ]);
     }

@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
         }
 
         // Affichage du formulaire d'inscription
-        return $this->render('registration/index.html.twig', [
+        return $this->render('authenticator/registration/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }

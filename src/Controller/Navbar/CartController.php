@@ -95,7 +95,7 @@ public function viewCart(EntityManagerInterface $em): Response
         $totalPrice += $item->getProduct()->getPrice() * $item->getQuantity();
     }
 
-    return $this->render('cart/index.html.twig', [
+    return $this->render('navbar/cart/index.html.twig', [
         'cartItems' => $cartItems,
         'totalItems' => $totalItems, // Passer totalItems au template
         'totalPrice' => $totalPrice, // Passer totalPrice au template
@@ -150,7 +150,7 @@ public function viewCart(EntityManagerInterface $em): Response
         }
     
         // Retourner la page du panier avec les informations mises à jour
-        return $this->render('cart/index.html.twig', [
+        return $this->render('navbar/cart/index.html.twig', [
             'cartItems' => $cartItems,
             'totalItems' => $totalItems,
             'totalPrice' => number_format($totalPrice, 2, ',', ' '),  // Formater le prix total

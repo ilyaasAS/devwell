@@ -20,7 +20,7 @@ class AdminCategoryController extends AbstractController
         // Récupérer toutes les catégories
         $categories = $entityManager->getRepository(Category::class)->findAll();
 
-        return $this->render('category/index.html.twig', [
+        return $this->render('admin/category/index.html.twig', [
             'categories' => $categories,
         ]);
     }
@@ -41,7 +41,7 @@ class AdminCategoryController extends AbstractController
             return $this->redirectToRoute('app_category_index');
         }
 
-        return $this->render('category/new.html.twig', [
+        return $this->render('admin/category/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -55,7 +55,7 @@ class AdminCategoryController extends AbstractController
             throw $this->createNotFoundException('The category does not exist.');
         }
 
-        return $this->render('category/show.html.twig', [
+        return $this->render('admin/category/show.html.twig', [
             'category' => $category,
         ]);
     }
@@ -76,7 +76,7 @@ class AdminCategoryController extends AbstractController
             return $this->redirectToRoute('app_category_index');
         }
 
-        return $this->render('category/edit.html.twig', [
+        return $this->render('admin/category/edit.html.twig', [
             'form' => $form->createView(),
             'category' => $category,
         ]);

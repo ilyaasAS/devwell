@@ -1,5 +1,7 @@
-Token pour l'inscription Invalid CSRF token.
-
+Optimiser les fichier
+Commenter le code
+Optimiser le code (facultatif)
+Test unitaire
 ______________________
 Dashboard:
 
@@ -16,6 +18,10 @@ ____________________________________
 
 Fonction supprimer son compte pour l'user dans profile
 ___________________________________________________________________
+
+Token pour l'inscription Invalid CSRF token.
+
+__________________________________________________
 
 facultatif: chat bot
 Les cookies
