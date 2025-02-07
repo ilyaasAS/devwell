@@ -1,20 +1,23 @@
-Fonction supprimer son compte pour l'user dans profile
-____________________________________
 Token pour l'inscription Invalid CSRF token.
 message d'erreur (page de login, contact, controller, formulaire)
 __________________________________________________
+
+Table avis clien en nosql
+________
+
+Ajoute moi une Fonction supprimer son compte pour l'user dans profile
+____________________________________
 
 5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois car la page ne charge pas vite)
 
 ___________________________________________________________________
 
 
-Table avis clien en nosql
-________
-
 Commenter le code
 Optimiser le code (facultatif)
 Test unitaire
+W3C
+DT: un résumer du projet en anglais
 ______________________
 
 facultatif:

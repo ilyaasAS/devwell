@@ -20,6 +20,15 @@
                 </button>
             </div>
 
+<form action="{{ path('app_user_delete_self') }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
+    <button type="submit" class="w-full max-w-xs inline-block bg-red-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-red-600 focus:outline-none transition duration-300 transform hover:scale-105">
+        Supprimer mon compte
+    </button>
+</form>
+
+
+
 
 
 
