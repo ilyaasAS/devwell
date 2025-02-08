@@ -21,7 +21,7 @@ public function addToCart(Product $product, Request $request, EntityManagerInter
     $user = $this->getUser();
 
     if (!$user) {
-        $this->addFlash('error', 'You need to be logged in to add items to your cart.');
+        $this->addFlash('error', 'Vous devez être connecté pour ajouter des articles à votre panier.');
         return $this->redirectToRoute('app_login');
     }
 
@@ -110,7 +110,7 @@ public function viewCart(EntityManagerInterface $em): Response
         $em->remove($cart);
         $em->flush();
 
-        $this->addFlash('success', 'Item removed from cart!');
+        $this->addFlash('success', 'Article retiré du panier!');
         return $this->redirectToRoute('cart_view');
     }
 

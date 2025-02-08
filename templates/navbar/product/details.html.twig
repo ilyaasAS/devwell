@@ -6,6 +6,17 @@
 
 {% block body %}
 <div class="container mx-auto py-12 px-6 max-w-4xl">
+    <!-- Affichage des messages flash -->
+    {% for label, messages in app.flashes %}
+        <div class="alert alert-{{ label|default('info') }} mt-4">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
     <!-- Card -->
     <div class="bg-white shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105 rounded-lg p-8">
         <!-- Product Image -->

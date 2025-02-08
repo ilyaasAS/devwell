@@ -7,15 +7,13 @@ use App\Form\User1Type;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface as HasherUserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Security;  // Importer le service Security
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use Symfony\Bundle\SecurityBundle\Security;
 
 // Admin
 #[Route('/admin/user')]
@@ -110,6 +108,75 @@ final class UserController extends AbstractController
     }
 
     // Suppression du compte utilisateur
+// Suppression du compte utilisateur
+#[Route('/delete-account/{id}', name: 'app_delete_account', methods: ['POST'])]
+public function deleteAccount(
+    EntityManagerInterface $entityManager, 
+    Request $request, 
+    TokenStorageInterface $tokenStorage, 
+    SessionInterface $session, 
+    Security $security, 
+    UserRepository $userRepository, 
+    int $id
+): Response {
+    // Récupérer l'utilisateur connecté
+    $user = $security->getUser(); 
+
+    // Vérifier si l'utilisateur connecté est bien une instance de User
+    if (!$user instanceof User) {
+        $this->addFlash('error', 'Utilisateur non valide.');
+        return $this->redirectToRoute('app_login');
+    }
+
+    // Vérification si l'utilisateur est connecté
+    if (!$user) {
+        $this->addFlash('error', 'Vous devez être connecté pour supprimer votre compte.');
+        return $this->redirectToRoute('app_login');
+    }
+
+    // Vérifier que l'utilisateur connecté est bien celui qui tente de supprimer son propre compte
+    if ($user->getId() !== $id) {
+        $this->addFlash('error', 'Vous ne pouvez pas supprimer le compte d\'un autre utilisateur.');
+        return $this->redirectToRoute('app_profile');
+    }
+
+    // Récupérer l'utilisateur à supprimer depuis la base de données en utilisant l'ID passé dans l'URL
+    $userToDelete = $userRepository->find($id);
+
+    // Vérification si l'utilisateur à supprimer existe
+    if (!$userToDelete) {
+        $this->addFlash('error', 'L\'utilisateur à supprimer n\'existe pas.');
+        return $this->redirectToRoute('app_profile');
+    }
+
+    // Vérification du token CSRF
+    if (!$this->isCsrfTokenValid('delete_account', $request->request->get('_token'))) {
+        $this->addFlash('error', 'Token CSRF invalide.');
+        return $this->redirectToRoute('app_profile');
+    }
+
+    // Tentative de suppression
+    try {
+        $entityManager->remove($userToDelete);
+        $entityManager->flush();
+
+        // Déconnexion
+        $tokenStorage->setToken(null); // Supprimer le token d'authentification
+        $session->invalidate(); // Invalide la session actuelle
+
+        $this->addFlash('success', 'Votre compte a été supprimé avec succès.');
+
+        return $this->redirectToRoute('app_home');
+    } catch (\Exception $e) {
+        $this->addFlash('error', 'Une erreur est survenue lors de la suppression de votre compte.');
+        return $this->redirectToRoute('app_profile');
+    }
+}
+
+
+
+
+
     
     
 }

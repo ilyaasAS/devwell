@@ -10,7 +10,14 @@
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
             <div class="space-y-4">
                 {{ form_row(form.status, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                {{ form_row(form.createdAt, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                
+                {# Pour le champ createdAt, nous spécifions un format de date 'single_text' avec un format spécifique #}
+                {{ form_row(form.createdAt, {
+                    'attr': {
+                        'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw',
+                        'value': order.createdAt|date('Y-m-d H:i') 
+                    }
+                }) }}
             </div>
 
             <div class="mt-6 text-center">

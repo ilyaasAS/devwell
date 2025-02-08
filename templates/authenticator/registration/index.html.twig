@@ -6,7 +6,38 @@
 <div class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full bg-white p-8 shadow-secondary rounded-md transform transition-transform duration-300 hover:scale-105 hover:shadow-hover">
         <h1 class="text-2xl font-bold text-center mb-8 text-primary_dw">Inscrivez-vous</h1>
+
+        {# Affichage du message d'erreur pour email existant #}
+        {% if app.session.flashbag.has('email_exists') %}
+            <div class="alert alert-danger bg-red-100 text-red-800 p-4 mb-4 rounded-md">
+                {% for message in app.session.flashbag.get('email_exists') %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {# Affichage des messages de succès ou d'autres erreurs #}
+        {% if app.session.flashbag.has('success') %}
+            <div class="alert alert-success bg-green-100 text-green-800 p-4 mb-4 rounded-md">
+                {% for message in app.session.flashbag.get('success') %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if app.session.flashbag.has('error') %}
+            <div class="alert alert-danger bg-red-100 text-red-800 p-4 mb-4 rounded-md">
+                {% for message in app.session.flashbag.get('error') %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+
+            {# CSRF token #}
+            {{ form_row(form._token) }}
+
             <div class="space-y-4">
                 <!-- Champ Prénom -->
                 <div>

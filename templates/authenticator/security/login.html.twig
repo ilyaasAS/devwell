@@ -5,9 +5,10 @@
 {% block body %}
 <div class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8 bg-white p-8 shadow-secondary rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-hover">
+        {# Affichage du message d'erreur personnalisé pour un mot de passe incorrect ou une autre erreur d'authentification #}
         {% if error %}
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
+                <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
             </div>
         {% endif %}
 

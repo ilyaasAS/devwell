@@ -31,6 +31,17 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // 1. Vérifie si l'email existe déjà dans la base de données
+            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+
+            // 2. Si l'email existe déjà, ajoute un message d'erreur
+            if ($existingUser) {
+                $this->addFlash('error', 'Un compte avec cet email existe déjà. Veuillez en choisir un autre.');
+
+                // 3. Redirige vers la page d'inscription pour afficher le message d'erreur
+                return $this->redirectToRoute('app_register'); // Redirige vers le formulaire d'inscription
+            }
+
             // Hashage du mot de passe
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hashedPassword);
@@ -49,6 +60,9 @@ class RegistrationController extends AbstractController
                 ]));
 
             $mailer->send($email); // Envoie l'e-mail
+
+            // Après avoir persisté l'utilisateur et envoyé l'email
+            $this->addFlash('success', 'Inscription réussie ! Vous pouvez maintenant vous connecter.');
 
             // Redirige vers la page de connexion ou d'accueil après l'inscription
             return $this->redirectToRoute('app_login');

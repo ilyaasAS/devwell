@@ -37,7 +37,7 @@ class AdminCategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Category successfully created!');
+            $this->addFlash('success', 'Catégorie créée avec succès !');
             return $this->redirectToRoute('app_category_index');
         }
 
@@ -52,7 +52,7 @@ class AdminCategoryController extends AbstractController
     {
         // Vérification ajoutée pour éviter des erreurs si la catégorie n'existe pas
         if (!$category) {
-            throw $this->createNotFoundException('The category does not exist.');
+            throw $this->createNotFoundException("La catégorie n'existe pas.");
         }
 
         return $this->render('admin/category/show.html.twig', [
@@ -72,7 +72,7 @@ class AdminCategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'Category successfully updated!');
+            $this->addFlash('success', 'Mise à jour réussie de la catégorie !');
             return $this->redirectToRoute('app_category_index');
         }
 
@@ -90,7 +90,7 @@ class AdminCategoryController extends AbstractController
             $entityManager->remove($category);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Category successfully deleted!');
+            $this->addFlash('success', 'Catégorie supprimée avec succès !');
         }
 
         return $this->redirectToRoute('app_category_index');

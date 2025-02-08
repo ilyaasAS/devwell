@@ -21,5 +21,9 @@ services:
       - "../src/Entity/"
       - "../src/Kernel.php"
 
+  # Ajout des services manquants
+  Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface: '@security.token_storage'
+  Symfony\Component\HttpFoundation\Session\SessionInterface: '@session'
+
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
