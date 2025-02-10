@@ -30,6 +30,8 @@ https://127.0.0.1:8000/admin/orders/19/edit: date de statut
 
 https://127.0.0.1:8000/admin/messages/view/2: bouton Envoyer css
 
+fotter mettre à jour les lien des route
+
 ____________________
 
 en prod j'ai pas le css de taildwind ?
