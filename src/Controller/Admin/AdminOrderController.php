@@ -41,6 +41,8 @@ class AdminOrderController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
+            $this->addFlash('success', 'La commande a été mise à jour avec succès.');
             return $this->redirectToRoute('admin_orders_index');
         }
 
@@ -53,12 +55,17 @@ class AdminOrderController extends AbstractController
     // Suppression d'une commande
     #[Route('/admin/orders/{id}', name: 'admin_orders_delete', methods: ['POST'])]
     public function delete(Request $request, Order $order, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($order);
-            $entityManager->flush();
-        }
+{
+    if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->request->get('_token'))) {
+        $entityManager->remove($order);
+        $entityManager->flush();
 
-        return $this->redirectToRoute('admin_orders_index');
+        $this->addFlash('success', 'La commande a été supprimée avec succès.');
+    } else {
+        $this->addFlash('error', 'Échec de la suppression de la commande.');
     }
+
+    return $this->redirectToRoute('admin_orders_index');
+}
+
 }

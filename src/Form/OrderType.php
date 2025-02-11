@@ -31,7 +31,7 @@ class OrderType extends AbstractType
             ],
         ])
         ->add('createdAt', DateTimeType::class, [
-            'label' => 'Date de création',
+            'label' => 'Date du statut',
             'widget' => 'single_text',
         ]);
     }

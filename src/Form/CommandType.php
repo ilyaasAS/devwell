@@ -33,7 +33,7 @@ class CommandType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Passer commande',
                 'attr' => [
-                    'class' => 'btn btn-primary mt-4',
+                    'class' => 'w-full bg-primary_dw text-tertiary_dw py-3 rounded-lg text-lg font-semibold shadow hover:bg-primary_hover transition',
                 ],
             ]);
     }

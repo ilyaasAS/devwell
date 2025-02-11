@@ -44,6 +44,9 @@ final class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            // Ajouter un message flash de succès
+        $this->addFlash('success', 'Utilisateur créé avec succès !');
+
             // Rediriger vers la page de liste des utilisateurs après la création
             return $this->redirectToRoute('app_user_index');
         }
@@ -86,6 +89,9 @@ final class UserController extends AbstractController
 
             $entityManager->flush();
 
+            // Ajouter un message flash de succès
+        $this->addFlash('success', 'Utilisateur modifié avec succès !');
+
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -97,15 +103,22 @@ final class UserController extends AbstractController
 
     // Admin supprimer un user
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
+public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+{
+    // Vérification du token CSRF et suppression
+    if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
+        $entityManager->remove($user);
+        $entityManager->flush();
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        // Ajouter un message flash de succès
+        $this->addFlash('success', 'Utilisateur supprimé avec succès !');
+    } else {
+        // Ajouter un message flash d'erreur en cas de problème
+        $this->addFlash('error', 'Échec de la suppression de l\'utilisateur.');
     }
+
+    return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+}
 
     // Suppression du compte utilisateur
 // Suppression du compte utilisateur

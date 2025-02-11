@@ -4,13 +4,7 @@
 
 {% block body %}
 <div class="container mx-auto p-8">
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="p-4 mb-4 text-white rounded-lg {% if type == 'success' %} bg-green-500 {% else %} bg-red-500 {% endif %}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
+
     
     <h1 class="text-4xl font-bold text-gray-800 text-center mb-8">Bienvenue sur le Dashboard Administrateur</h1>
 

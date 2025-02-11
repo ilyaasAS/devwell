@@ -17,13 +17,13 @@ class LegalController extends AbstractController
     #[Route('/cgu', name: 'app_cgu')]
     public function cgu(): Response
     {
-        return $this->render('footer/cgu/index.html.twig');
+        return $this->render('footer/cgu.html.twig');
     }
 
     #[Route('/cgv', name: 'app_cgv')]
     public function cgv(): Response
     {
-        return $this->render('footer/cgv/index.html.twig');
+        return $this->render('footer/cgv.html.twig');
     }
 
     #[Route('/contact', name: 'app_contact')]
@@ -51,7 +51,7 @@ class LegalController extends AbstractController
             return $this->redirectToRoute('app_contact');
         }
 
-        return $this->render('footer/contact/index.html.twig', [
+        return $this->render('footer/contact.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -59,6 +59,6 @@ class LegalController extends AbstractController
     #[Route('/mentions-legales', name: 'app_mentions_legales')]
     public function mentionsLegales(): Response
     {
-        return $this->render('footer/mention_legale/index.html.twig');
+        return $this->render('footer/mention_legale.html.twig');
     }
 }

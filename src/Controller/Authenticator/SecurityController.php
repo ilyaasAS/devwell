@@ -12,25 +12,25 @@ class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
     public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
-{
-    // Récupère l'erreur de connexion, s'il y en a une
-    $error = $authenticationUtils->getLastAuthenticationError();
-    // Récupère le dernier email utilisé
-    $lastUsername = $authenticationUtils->getLastUsername();
+    {
+        // Récupère l'erreur de connexion, s'il y en a une
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // Récupère le dernier email utilisé
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-    // Si aucune erreur et que la méthode est POST, c'est que la connexion a réussi
-    if ($request->isMethod('POST') && !$error) {
-        $this->addFlash('success', 'Connexion réussie !');
+        // Si aucune erreur et que la méthode est POST, c'est que la connexion a réussi
+        if ($request->isMethod('POST') && !$error) {
+            $this->addFlash('success', 'Connexion réussie !');
+        }
+
+        return $this->render('authenticator/security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ]);
     }
 
-    return $this->render('authenticator/security/login.html.twig', [
-        'last_username' => $lastUsername,
-        'error' => $error,
-    ]);
-}
 
 
-    
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void

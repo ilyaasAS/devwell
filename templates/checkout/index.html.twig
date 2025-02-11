@@ -42,10 +42,7 @@
             </div>
 
             <!-- Bouton de soumission -->
-            <div class="mt-8">
-                <button type="submit" class="w-full bg-primary_dw text-tertiary_dw py-3 rounded-lg text-lg font-semibold shadow hover:bg-primary_hover transition">
-                    {{ form.submit.vars.label }}
-                </button>
+            {{ form_widget(form.submit) }}
             </div>
         {{ form_end(form) }}
     </form>

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AvisClientController extends AbstractController
 {
-    #[Route('/avis-client', name: 'avis_client', methods: ['GET', 'POST'])]
+    #[Route('/avis-client', name: 'avis_client', methods: ['GET', 'POST'])] 
     public function avisClient(Request $request, DocumentManager $dm): Response
     {
         if ($request->isMethod('POST')) {
@@ -21,6 +21,7 @@ class AvisClientController extends AbstractController
             $commentaire = $request->request->get('commentaire');
 
             if (empty($nom) || empty($email) || empty($commentaire) || $note < 1 || $note > 5) {
+                // Message d'erreur si des champs sont vides ou si la note est invalide
                 $this->addFlash('error', 'Tous les champs sont obligatoires et la note doit être entre 1 et 5.');
             } else {
                 $avis = new AvisClient();
@@ -32,6 +33,7 @@ class AvisClientController extends AbstractController
                 $dm->persist($avis);
                 $dm->flush();
 
+                // Message de succès après l'enregistrement de l'avis
                 $this->addFlash('success', 'Votre avis a été enregistré avec succès.');
                 return $this->redirectToRoute('avis_client');
             }

@@ -7,10 +7,28 @@
     <div class="max-w-md w-full space-y-8 bg-white p-8 shadow-secondary rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-hover">
         {# Affichage du message d'erreur personnalisé pour un mot de passe incorrect ou une autre erreur d'authentification #}
         {% if error %}
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-                <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
-            </div>
-        {% endif %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+        <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+    </div>
+{% endif %}
+
+        {% if error %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+        <p>Identifiants incorrects. Veuillez réessayer.</p>
+    </div>
+{% endif %}
+
+{% for message in app.flashes('success') %}
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+        <p>{{ message }}</p>
+    </div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+        <p>{{ message }}</p>
+    </div>
+{% endfor %}
+
 
         <h2 class="text-center text-2xl font-extrabold text-primary_dw">Connectez-vous</h2>
 

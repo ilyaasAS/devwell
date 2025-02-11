@@ -25,6 +25,7 @@ class CheckoutController extends AbstractController
     ): Response {
         $user = $this->getUser();
         if (!$user) {
+            $this->addFlash('error', 'Veuillez vous connecter pour procéder à l\'achat.');
             return $this->redirectToRoute('app_login');
         }
 

@@ -52,7 +52,7 @@ class ProfileController extends AbstractController
     
             $entityManager->flush();
     
-            $this->addFlash('success', 'Profile updated successfully.');
+            $this->addFlash('success', 'Profil mis à jour avec succès.');
             return $this->redirectToRoute('app_profile');
         }
     

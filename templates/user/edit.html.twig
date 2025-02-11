@@ -8,19 +8,28 @@
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-            {{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-<!-- Conteneur centré pour les boutons -->
-<div class="mt-6 text-center space-x-4">
-    <!-- Bouton Retour -->
-    <a href="{{ path('app_user_index') }}" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-        Retour
-    </a>
+        
+        <!-- Affichage des autres champs -->
+        {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+        {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+        {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+        {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
 
-    <!-- Bouton Mettre à jour -->
-    <button type="submit" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-        Mettre à jour
-    </button>
-</div>
+        <!-- Affichage du champ 'roles' à la fin -->
+        {{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+
+        <!-- Conteneur centré pour les boutons -->
+        <div class="mt-6 text-center space-x-4">
+            <!-- Bouton Retour -->
+            <a href="{{ path('app_user_index') }}" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                Retour
+            </a>
+
+            <!-- Bouton Mettre à jour -->
+            <button type="submit" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                Mettre à jour
+            </button>
+        </div>
 
         {{ form_end(form) }}
     </div>

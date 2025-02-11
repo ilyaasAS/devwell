@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         // Utiliser le service pour obtenir le nombre total d'articles dans le panier
         $totalItems = $this->cartService->getTotalItems();
 
-        return $this->render('navbar/home/index.html.twig', [
+        return $this->render('navbar/home.html.twig', [
             'totalItems' => $totalItems,  // Passer le total d'articles à la vue
         ]);
     }

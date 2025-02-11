@@ -46,6 +46,7 @@ security:
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/avis-client, roles: ROLE_USER }
 
 # Configuration spéciale pour l'environnement de test
 when@test:

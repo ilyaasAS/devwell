@@ -1,62 +1,42 @@
 checker:
 
-avec JC sur le token crsf et la gestion de messaged'erreur et autre problème
+XV---MCD (voir le chat avec db.sql + lui donner à la fin la table noqsl)
+XV---MLD
+XVV---Diagramme de cas d'utilisation
+Planning
+Maquette
+______________________________________
 
-barre de recherche message d'erreur pas en français: https://127.0.0.1:8000/products?search=Coussinfgf
+Avoir in adresse ip fixe pour le NOqsl (vidéo de miguel)
+____________________________________________
 
-page pannier le bouton passer la commande css
+VVVX Les cookies
 
-page profile la mise en forme des boutons
+a quoi sert ses route ? set et get
+et pourquoi le popup n'apparrait pas à nouveau si je refuse les cookies ? 
+Est ce RGPD de faire apparaite le constement de cookies jusqu'a qu'il accepte mais il peut refuser à chaque fois ?
 
-Gestion des user aucun message d'erreur s'affiche
 
-Gestion de produits message d'erreur pas en français et aucun pour l'ajout d'un produit
+___________________________
 
-https://127.0.0.1:8000/checkout : il y a 2 bouton ?
+Mettre tous les message d'erreur sur 
 
-https://127.0.0.1:8000/order/confirmation/19 : retirer le bouton retour
-
-Page homme le bouton css
-
-https://127.0.0.1:8000/categorie?page=1 il y a un espace grand entre ma barre de pagination et le footer
-
-https://127.0.0.1:8000/admin/user/1/edit : mettre les bouton et champ dans le bonne endroit
-
-https://127.0.0.1:8000/admin/product/new: bouton Créer un produit
-
-https://127.0.0.1:8000/admin/categories/new:  Créer une catégorie
-
-https://127.0.0.1:8000/admin/orders/19/edit: date de statut
-
-https://127.0.0.1:8000/admin/messages/view/2: bouton Envoyer css
-
-fotter mettre à jour les lien des route
-
-____________________
+Problème page de connexion toujour une redirection sur page d'erreur de symfony
+______________
 
 en prod j'ai pas le css de taildwind ?
 
 nmp run prod
 ___________________
 
-Table avis clien en nosql
-________
-
-Ajoute moi une Fonction supprimer son compte pour l'user dans profile
-____________________________________
-
-5)Page pannier problème sur le bouton supprimer (quand on appuie 2 fois car la page ne charge pas vite)
-
-___________________________________________________________________
-
 
 Commenter le code
 Optimiser le code (facultatif)
 Test unitaire
-W3C
+W3C (outil de Miguel)
 DT: un résumer du projet en anglais
 ______________________
 
 facultatif:
-Les cookies
 css ajuste
+captcha
