@@ -15,6 +15,11 @@ Est ce RGPD de faire apparaite le constement de cookies jusqu'a qu'il accepte ma
 
 ___________________________
 
+Nosql
+
+rendre mon partage de co en ip fixe
+______________
+
 Mettre tous les message d'erreur sur 
 
 Problème page de connexion toujour une redirection sur page d'erreur de symfony
