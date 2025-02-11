@@ -5,17 +5,13 @@ XV---MLD
 XVV---Diagramme de cas d'utilisation
 Planning
 Maquette
-______________________________________
-
-Avoir in adresse ip fixe pour le NOqsl (vidéo de miguel)
-____________________________________________
+_________________
 
 VVVX Les cookies
 
 a quoi sert ses route ? set et get
 et pourquoi le popup n'apparrait pas à nouveau si je refuse les cookies ? 
 Est ce RGPD de faire apparaite le constement de cookies jusqu'a qu'il accepte mais il peut refuser à chaque fois ?
-
 
 ___________________________
 
