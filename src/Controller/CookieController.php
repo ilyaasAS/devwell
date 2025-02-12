@@ -11,35 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CookieController extends AbstractController
 {
-    // Route pour définir le cookie (déjà existant)
-    #[Route('/set-cookie', name: 'set_cookie', methods: ['GET'])]
-    public function setCookie()
-    {
-        $cookie = Cookie::create(
-            'my_cookie',       // Nom du cookie
-            'cookie_value',    // Valeur du cookie
-            time() + 3600      // Expiration dans 1 heure
-        );
-
-        $response = new Response('Cookie has been set!');
-        $response->headers->setCookie($cookie);
-
-        return $response;
-    }
-
-    // Route pour récupérer le cookie (déjà existant)
-    #[Route('/get-cookie', name: 'get_cookie', methods: ['GET'])]
-    public function getCookie(Request $request)
-    {
-        $cookieValue = $request->cookies->get('my_cookie');
-
-        if ($cookieValue) {
-            return new Response("Cookie value: $cookieValue");
-        } else {
-            return new Response('Cookie not found.');
-        }
-    }
-
     // Route pour supprimer le cookie (déjà existant)
     #[Route('/delete-cookie', name: 'delete_cookie', methods: ['GET'])]
     public function deleteCookie()
@@ -62,4 +33,12 @@ class CookieController extends AbstractController
     {
         return $this->render('cookie/delete_cookies.html.twig');
     }
+
+    // Route pour afficher la politique de cookies
+#[Route('/politique-cookies', name: 'politique_cookies', methods: ['GET'])]
+public function politiqueCookies()
+{
+    return $this->render('cookie/politique_cookies.html.twig');
+}
+
 }

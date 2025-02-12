@@ -1,0 +1,57 @@
+{# templates/cookie/politique_cookies.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mx-auto px-4 py-10">
+        <h1 class="text-2xl font-bold text-center mb-6">📜 Politique de Cookies</h1>
+
+        <p class="mb-4 text-gray-700"><strong>Dernière mise à jour :</strong> [DATE]</p>
+
+        <h2 class="text-xl font-semibold mt-6">1. Introduction</h2>
+        <p class="text-gray-700">
+            Notre site utilise des cookies pour améliorer votre expérience de navigation et optimiser nos services.
+            Cette page vous explique comment nous utilisons ces cookies et comment vous pouvez gérer vos préférences.
+        </p>
+
+        <h2 class="text-xl font-semibold mt-6">2. Qu'est-ce qu'un cookie ?</h2>
+        <p class="text-gray-700">
+            Un cookie est un petit fichier texte stocké sur votre appareil (ordinateur, tablette, smartphone)
+            lorsque vous visitez un site web. Il permet au site de reconnaître votre appareil et de mémoriser certaines informations.
+        </p>
+
+        <h2 class="text-xl font-semibold mt-6">3. Types de cookies utilisés</h2>
+        <ul class="list-disc pl-6 text-gray-700">
+            <li><strong>Cookies essentiels :</strong> nécessaires au bon fonctionnement du site (ex. : authentification, panier d'achat).</li>
+            <li><strong>Cookies analytiques :</strong> nous aident à comprendre comment les utilisateurs interagissent avec notre site.</li>
+            <li><strong>Cookies de marketing :</strong> utilisés pour vous proposer des publicités personnalisées.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold mt-6">4. Durée de conservation des cookies</h2>
+        <p class="text-gray-700">
+            Les cookies sont stockés pour une durée maximale de 12 mois, conformément aux recommandations de la CNIL.
+        </p>
+
+        <h2 class="text-xl font-semibold mt-6">5. Gérer vos préférences</h2>
+        <p class="text-gray-700">
+            Vous pouvez accepter ou refuser les cookies via notre pop-up de consentement. Vous pouvez également :
+        </p>
+        <ul class="list-disc pl-6 text-gray-700">
+            <li>Modifier vos préférences à tout moment en <a href="{{ path('delete_my_cookies') }}" class="text-blue-500 underline">cliquant ici</a>.</li>
+            <li>Paramétrer votre navigateur pour bloquer certains cookies <a href="https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser" target="_blank" class="text-blue-500 underline">[voir comment]</a>.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold mt-6">6. Vos droits</h2>
+        <p class="text-gray-700">
+            Conformément au RGPD, vous avez le droit d'accéder à vos données, de les rectifier, de demander leur suppression 
+            et de retirer votre consentement à tout moment. Pour exercer ces droits, contactez-nous à :
+            <a href="mailto:[EMAIL]" class="text-blue-500 underline">[EMAIL]</a>.
+        </p>
+
+        <h2 class="text-xl font-semibold mt-6">7. Contact</h2>
+        <p class="text-gray-700">
+            Pour toute question concernant notre politique de cookies, vous pouvez nous écrire à :
+            <a href="mailto:[EMAIL]" class="text-blue-500 underline">[EMAIL]</a>.
+        </p>
+    </div>
+{% endblock %}

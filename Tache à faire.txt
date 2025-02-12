@@ -27,7 +27,9 @@ ______________
 
 en prod j'ai pas le css de taildwind ?
 
-nmp run prod
+https://symfony.com/bundles/TailwindBundle/current/index.html
+
+nmp run prod ?
 ___________________
 
 

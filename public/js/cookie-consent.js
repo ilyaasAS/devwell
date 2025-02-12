@@ -1,5 +1,3 @@
-// public/js/cookie-consent.js
-
 // Vérifie si le consentement aux cookies a déjà été donné
 if (!document.cookie.split('; ').find(row => row.startsWith('cookie_consent='))) {
     // Créer le popup HTML pour demander le consentement
@@ -9,8 +7,10 @@ if (!document.cookie.split('; ').find(row => row.startsWith('cookie_consent=')))
         <p>Nous utilisons des cookies pour améliorer votre expérience. Acceptez-vous l'utilisation des cookies ?</p>
         <button id="accept-cookies">Accepter</button>
         <button id="decline-cookies">Refuser</button>
+        <br>
+        <a href="/politique-cookies" id="cookie-policy-link" target="_blank">En savoir plus</a>
     `;
-    
+
     // Ajouter le style du popup
     Object.assign(cookiePopup.style, {
         position: 'fixed',
@@ -37,12 +37,23 @@ if (!document.cookie.split('; ').find(row => row.startsWith('cookie_consent=')))
         margin: '5px'
     }));
 
+    // Ajouter le style du lien vers la politique des cookies
+    var policyLink = cookiePopup.querySelector('#cookie-policy-link');
+    Object.assign(policyLink.style, {
+        color: '#FFD700',
+        textDecoration: 'underline',
+        fontSize: '14px',
+        display: 'block',
+        marginTop: '10px'
+    });
+
     // Afficher le popup
     document.body.appendChild(cookiePopup);
 
     // Fonction pour gérer le consentement
     function handleConsent(value) {
-        document.cookie = `cookie_consent=${value}; path=/; max-age=${60 * 60 * 24 * 365}`;
+        let maxAge = value === 'true' ? 60 * 60 * 24 * 365 : 60 * 60 * 24; // 1 an si accepté, 1 jour si refusé
+        document.cookie = `cookie_consent=${value}; path=/; max-age=${maxAge}`;
         cookiePopup.style.display = 'none';
         location.reload(); // Rafraîchir la page après le choix
     }
