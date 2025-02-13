@@ -26,28 +26,28 @@ class ProfileController extends AbstractController
     ): Response {
         // Récupérer l'utilisateur connecté via le service de sécurité
         $user = $security->getUser();
-    
+
         // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
         if (!$user instanceof \App\Entity\User) {
             return $this->redirectToRoute('app_login');
         }
-    
+
         // Récupérer toutes les commandes associées à l'utilisateur
         $orders = $entityManager->getRepository(Order::class)->findBy(['user' => $user]);
-    
+
         // Sauvegarder l'ancien mot de passe de l'utilisateur pour le comparer plus tard
         $currentPassword = $user->getPassword();
-    
+
         // Créer le formulaire de modification de profil à partir de la classe ProfileType
         $form = $this->createForm(ProfileType::class, $user);
         // Gérer la soumission du formulaire
         $form->handleRequest($request);
-    
+
         // Vérifier si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
             // Récupérer le mot de passe entré par l'utilisateur
             $plainPassword = $form->get('password')->getData();
-    
+
             // Si l'utilisateur a entré un nouveau mot de passe, on le hash et le met à jour
             if ($plainPassword) {
                 $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
@@ -56,16 +56,16 @@ class ProfileController extends AbstractController
                 // Sinon, conserver l'ancien mot de passe
                 $user->setPassword($currentPassword);
             }
-    
+
             // Sauvegarder les modifications dans la base de données
             $entityManager->flush();
-    
+
             // Ajouter un message flash pour indiquer que le profil a été mis à jour
             $this->addFlash('success', 'Profil mis à jour avec succès.');
             // Rediriger vers la même page pour afficher les modifications
             return $this->redirectToRoute('app_profile');
         }
-    
+
         // Afficher la vue avec le formulaire et les commandes de l'utilisateur
         return $this->render('navbar/profile/edit.html.twig', [
             'form' => $form->createView(),
@@ -76,7 +76,7 @@ class ProfileController extends AbstractController
     // Route pour supprimer une commande
     #[Route('/order/delete/{id}', name: 'order_delete', methods: ['POST'])]
     public function deleteOrder(
-        Order $order, 
+        Order $order,
         EntityManagerInterface $entityManager
     ): Response {
         // Vérifier si l'utilisateur est bien le propriétaire de la commande
@@ -105,7 +105,7 @@ class ProfileController extends AbstractController
     // Route pour demander un remboursement pour une commande
     #[Route('/order/refund/{id}', name: 'order_refund', methods: ['POST'])]
     public function refundOrder(
-        Order $order, 
+        Order $order,
         EntityManagerInterface $entityManager
     ): Response {
         // Vérifier si l'utilisateur est bien le propriétaire de la commande

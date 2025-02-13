@@ -29,14 +29,14 @@ class CartController extends AbstractController
 
         // Récupérer la quantité à ajouter, ou 1 par défaut
         $quantity = (int) $request->request->get('quantity', 1);
-        
+
         // Valider la quantité (doit être entre 1 et le stock disponible)
         if ($quantity < 1) {
             // Si la quantité est inférieure à 1, afficher un message d'erreur
             $this->addFlash('error', 'La quantité doit être d\'au moins 1.');
             return $this->redirectToRoute('product_details', ['id' => $product->getId()]);
         }
-        
+
         if ($quantity > $product->getStock()) {
             // Si la quantité dépasse le stock disponible, afficher un message d'erreur
             $this->addFlash('error', 'La quantité demandée dépasse le stock disponible.');
@@ -93,7 +93,7 @@ class CartController extends AbstractController
         foreach ($cartItems as $item) {
             // Nombre total d'articles
             $totalItems += $item->getQuantity();
-            
+
             // Calcul du prix total : prix du produit * quantité
             $totalPrice += $item->getProduct()->getPrice() * $item->getQuantity();
         }
@@ -116,7 +116,7 @@ class CartController extends AbstractController
 
         // Afficher un message de succès
         $this->addFlash('success', 'Article retiré du panier!');
-        
+
         // Rediriger vers la page du panier
         return $this->redirectToRoute('cart_view');
     }
@@ -127,14 +127,14 @@ class CartController extends AbstractController
     {
         // Récupérer la nouvelle quantité depuis la requête POST
         $quantity = (int) $request->request->get('quantity');
-        
+
         // Vérifier que la quantité est valide
         if ($quantity < 1) {
             // Si la quantité est inférieure à 1, afficher un message d'erreur
             $this->addFlash('error', 'La quantité doit être au moins 1.');
             return $this->redirectToRoute('cart_view');
         }
-    
+
         // Vérifier que la quantité ne dépasse pas le stock disponible
         $product = $cart->getProduct();
         if ($quantity > $product->getStock()) {
@@ -142,23 +142,23 @@ class CartController extends AbstractController
             $this->addFlash('error', 'La quantité demandée dépasse le stock disponible.');
             return $this->redirectToRoute('cart_view');
         }
-    
+
         // Mise à jour de la quantité
         $cart->setQuantity($quantity);
         $em->flush();
-    
+
         // Calculer le nombre total d'articles et le prix total du panier
         $user = $this->getUser();
         $cartItems = $em->getRepository(Cart::class)->findBy(['user' => $user]);
-    
+
         $totalItems = 0;
         $totalPrice = 0;
-    
+
         foreach ($cartItems as $item) {
             $totalItems += $item->getQuantity();
             $totalPrice += $item->getProduct()->getPrice() * $item->getQuantity();
         }
-    
+
         // Retourner la page du panier avec les informations mises à jour
         return $this->render('navbar/cart/index.html.twig', [
             'cartItems' => $cartItems,

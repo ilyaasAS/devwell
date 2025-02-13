@@ -50,7 +50,7 @@ class UserType extends AbstractType
                     // Vérifie la longueur du mot de passe
                     new Length([
                         'min' => 8, // Longueur minimale du mot de passe
-                        'minMessage' => 'Password should be at least {{ limit }} characters.', // Message d'erreur si trop court
+                        'minMessage' => 'Le mot de passe doit comporter au moins {{ limit }} caractères.', // Message d'erreur si trop court
                         'max' => 255, // Longueur maximale du mot de passe
                     ])
                 ]

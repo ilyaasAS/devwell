@@ -1,66 +1,71 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails du produit{% endblock %}
+{% block title %}Détails du produit
+{% endblock %}
 
 {% block body %}
 
-<div class="container mx-auto py-12 px-6 max-w-3xl">
-    {# Le conteneur est centré avec une largeur maximale de 3xl et des espacements internes (12 en haut et 6 sur les côtés). #}
+	<div
+		class="container mx-auto py-12 px-6 max-w-3xl">
+		{# Le conteneur est centré avec une largeur maximale de 3xl et des espacements internes (12 en haut et 6 sur les côtés). #}
 
-    <h1 class="text-4xl font-semibold mb-8 text-center">Détails du produit</h1>
-    {# Le titre de la page, affiché en grande taille (4xl) avec une graisse semi-grasse, et centré. #}
+		<h1 class="text-4xl font-semibold mb-8 text-center">Détails du produit</h1>
+		{# Le titre de la page, affiché en grande taille (4xl) avec une graisse semi-grasse, et centré. #}
 
-    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        {# Une carte avec un fond blanc, des coins arrondis, un ombrage et une animation de survol. #}
+		<div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+			{# Une carte avec un fond blanc, des coins arrondis, un ombrage et une animation de survol. #}
 
-        <!-- Titre centré -->
-        <h2 class="text-3xl font-bold mb-4 text-center">{{ product.name }}</h2>
-        {# Le nom du produit est affiché en 3xl, avec une graisse de police forte et centré. Ce titre correspond au nom du produit sélectionné. #}
+			<!-- Titre centré --><h2 class="text-3xl font-bold mb-4 text-center"> {{ product.name }}</h2>
+			{# Le nom du produit est affiché en 3xl, avec une graisse de police forte et centré. Ce titre correspond au nom du produit sélectionné. #}
 
-        <!-- Image produit -->
-        <div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
-            <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
-        </div>
-        {# Une image du produit est affichée dans un conteneur avec une hauteur de 96, une largeur pleine, des coins arrondis et un ombrage. L'image s'adapte à l'intérieur du conteneur grâce à l'utilisation de 'object-contain'. #}
+			<!-- Image produit -->
+			<div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
+				<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+			</div>
+			{# Une image du produit est affichée dans un conteneur avec une hauteur de 96, une largeur pleine, des coins arrondis et un ombrage. L'image s'adapte à l'intérieur du conteneur grâce à l'utilisation de 'object-contain'. #}
 
-        <!-- Price et Stock centrés -->
-        <div class="mb-4 text-center">
-            <p class="text-2xl font-semibold text-green-600">Price: {{ product.price }} €</p>
-            <p class="mt-2 text-lg">Stock: <span class="font-medium">{{ product.stock }}</span></p>
-        </div>
-        {# Le prix du produit est affiché en 2xl, avec une couleur verte (indiquant le prix) et une graisse de police semi-grasse. Le stock est affiché en taille lg, avec un style pour mettre en évidence la quantité disponible. #}
+			<!-- Price et Stock centrés -->
+			<div class="mb-4 text-center">
+				<p class="text-2xl font-semibold text-green-600">Price:
+					{{ product.price }}
+					€</p>
+				<p class="mt-2 text-lg">Stock:
+					<span class="font-medium">{{ product.stock }}</span>
+				</p>
+			</div>
+			{# Le prix du produit est affiché en 2xl, avec une couleur verte (indiquant le prix) et une graisse de police semi-grasse. Le stock est affiché en taille lg, avec un style pour mettre en évidence la quantité disponible. #}
 
-        <!-- Category centrée -->
-        <div class="mb-4 text-center">
-            <p class="text-lg">Catégorie: <span class="font-medium">{{ product.category ? product.category.name : 'No Category' }}</span></p>
-        </div>
-        {# La catégorie du produit est affichée en texte 'lg'. Si le produit appartient à une catégorie, son nom sera affiché ; sinon, 'No Category' sera montré. #}
+			<!-- Category centrée -->
+			<div class="mb-4 text-center">
+				<p class="text-lg">Catégorie:
+					<span class="font-medium">{{ product.category ? product.category.name : 'No Category' }}</span>
+				</p>
+			</div>
+			{# La catégorie du produit est affichée en texte 'lg'. Si le produit appartient à une catégorie, son nom sera affiché ; sinon, 'No Category' sera montré. #}
 
-        <!-- Description centrée -->
-        <div class="mb-6 text-center">
-            <p class="text-lg font-semibold">Description:</p>
-            <p class="mt-2">{{ product.description }}</p>
-        </div>
-        {# La description du produit est affichée sous un titre "Description" en texte 'lg' avec une graisse de police semi-grasse. Le texte de la description est ensuite affiché en dessous. #}
+			<!-- Description centrée -->
+			<div class="mb-6 text-center">
+				<p class="text-lg font-semibold">Description:</p>
+				<p class="mt-2">{{ product.description }}</p>
+			</div>
+			{# La description du produit est affichée sous un titre "Description" en texte 'lg' avec une graisse de police semi-grasse. Le texte de la description est ensuite affiché en dessous. #}
 
-        <!-- Boutons (inchangés) -->
-        <div class="flex flex-col items-center space-y-4 mt-8">
-            {# Un conteneur flex avec une disposition en colonne pour les boutons. Les éléments sont centrés, et un espace vertical est ajouté entre les éléments (space-y-4). #}
+			<!-- Boutons (inchangés) -->
+			<div
+				class="flex flex-col items-center space-y-4 mt-8">
+				{# Un conteneur flex avec une disposition en colonne pour les boutons. Les éléments sont centrés, et un espace vertical est ajouté entre les éléments (space-y-4). #}
 
-            <button onclick="addToCart({{ product.id }})" 
-                class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-                Ajouter au panier
-            </button>
-            {# Un bouton pour ajouter le produit au panier. Il déclenche la fonction JavaScript 'addToCart' avec l'ID du produit comme paramètre. Le bouton est stylisé avec un fond de couleur principale, un texte secondaire, et des effets visuels au survol et au focus. #}
+				<button onclick="addToCart({{ product.id }})" class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+					Ajouter au panier
+				</button>
+				{# Un bouton pour ajouter le produit au panier. Il déclenche la fonction JavaScript 'addToCart' avec l'ID du produit comme paramètre. Le bouton est stylisé avec un fond de couleur principale, un texte secondaire, et des effets visuels au survol et au focus. #}
 
-            <a href="{{ path('app_product_index') }}" 
-                class="w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-                Retour à la liste des produits
-            </a>
-            {# Un lien qui permet de revenir à la liste des produits. Il est stylisé de la même manière que le bouton "Ajouter au panier". #}
-        </div>
-    </div>
-</div>
+				<a href="{{ path('app_product_index') }}" class="w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+					Retour à la liste des produits
+				</a>
+				{# Un lien qui permet de revenir à la liste des produits. Il est stylisé de la même manière que le bouton "Ajouter au panier". #}
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
-{# Fin du bloc 'body' qui contient tout le contenu de la page. #}

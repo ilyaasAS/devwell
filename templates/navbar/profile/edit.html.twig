@@ -1,98 +1,113 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Modifier le profil
+	Modifier le profil
 {% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
-    <!-- Titre principal pour la section modification du profil -->
-    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Modifier le profil</h1>
+	<div
+		class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+		<!-- Titre principal pour la section modification du profil -->
+		<h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Modifier le profil</h1>
 
-    <!-- Section pour le formulaire de modification du profil -->
-    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        <!-- Formulaire pour modifier le profil de l'utilisateur -->
-        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-            <div class="space-y-4">
-                <!-- Champs de formulaire pour le prénom, nom et mot de passe avec des classes CSS personnalisées -->
-                {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            </div>
+		<!-- Section pour le formulaire de modification du profil -->
+		<div
+			class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+			<!-- Formulaire pour modifier le profil de l'utilisateur -->
+			{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+			<div
+				class="space-y-4">
+				<!-- Champs de formulaire pour le prénom, nom et mot de passe avec des classes CSS personnalisées -->
+				{{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+			</div>
 
-            <!-- Bouton pour soumettre le formulaire -->
-            <div class="mt-6 text-center">
-                <button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                    Mettre à jour
-                </button>
-            </div>
-        {{ form_end(form) }}
-    </div>
+			<!-- Bouton pour soumettre le formulaire -->
+			<div class="mt-6 text-center">
+				<button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+					Mettre à jour
+				</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
 
-    <!-- Section pour afficher les commandes passées par l'utilisateur -->
-    <h2 class="text-2xl font-bold mt-12 text-center text-primary_dw">Vos commandes</h2>
+		<!-- Section pour afficher les commandes passées par l'utilisateur -->
+		<h2 class="text-2xl font-bold mt-12 text-center text-primary_dw">Vos commandes</h2>
 
-    <!-- Affichage des commandes dans un conteneur stylé -->
-    <div class="mt-6 bg-white p-6 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        {% if orders|length > 0 %}
-            <!-- Si l'utilisateur a des commandes, les afficher dans une liste -->
-            <ul>
-                {% for order in orders %}
-                    <!-- Pour chaque commande, afficher ses détails -->
-                    <li class="border-b border-white py-4 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-                        <strong>Commande:</strong> {{ order.id }}<br>
-                        <strong>Statut:</strong> {{ order.status }}<br>
-                        <strong>Date:</strong> {{ order.createdAt|date('d-m-Y H:i') }}<br>
-                        {% set total = 0 %}
-                        {% for item in order.orderItems %}
-                            <div class="mt-2">
-                                <strong>Article:</strong> {{ item.product.name }}<br>
-                                <strong>Quantité:</strong> {{ item.quantity }}<br>
-                                <strong>Prix unitaire:</strong> {{ item.price }} €<br>
-                                <strong>Total article:</strong> {{ item.quantity * item.price }} €
-                            </div>
-                            {% set total = total + (item.quantity * item.price) %}
-                        {% endfor %}
-                        <br><strong>Total de la commande:</strong> {{ total }} €
+		<!-- Affichage des commandes dans un conteneur stylé -->
+		<div class="mt-6 bg-white p-6 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+			{% if orders|length > 0 %}
+				<!-- Si l'utilisateur a des commandes, les afficher dans une liste -->
+				<ul>
+					{% for order in orders %}
+						<!-- Pour chaque commande, afficher ses détails -->
+						<li class="border-b border-white py-4 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+							<strong>Commande:</strong>
+							{{ order.id }}<br>
+							<strong>Statut:</strong>
+							{{ order.status }}<br>
+							<strong>Date:</strong>
+							{{ order.createdAt|date('d-m-Y H:i') }}<br>
+							{% set total = 0 %}
+							{% for item in order.orderItems %}
+								<div class="mt-2">
+									<strong>Article:</strong>
+									{{ item.product.name }}<br>
+									<strong>Quantité:</strong>
+									{{ item.quantity }}<br>
+									<strong>Prix unitaire:</strong>
+									{{ item.price }}
+									€<br>
+									<strong>Total article:</strong>
+									{{ item.quantity * item.price }}
+									€
+								</div>
+								{% set total = total + (item.quantity * item.price) %}
+							{% endfor %}
+							<br><strong>Total de la commande:</strong>
+							{{ total }}
+							€
 
-                        <!-- Boutons d'action en fonction du statut de la commande -->
-                        <div class="mt-4 flex justify-between">
-                            <!-- Lien pour voir les détails de la commande -->
-                            <a href="{{ path('order_confirmation', {'id': order.id}) }}" class="inline-block bg-primary_dw text-tertiary_dw py-2 px-4 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300">
-                                Voir la commande
-                            </a>
+							<!-- Boutons d'action en fonction du statut de la commande -->
+							<div
+								class="mt-4 flex justify-between">
+								<!-- Lien pour voir les détails de la commande -->
+								<a href="{{ path('order_confirmation', {'id': order.id}) }}" class="inline-block bg-primary_dw text-tertiary_dw py-2 px-4 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300">
+									Voir la commande
+								</a>
 
-                            {% if order.status != 'livrée' and order.status != 'remboursée' %}
-                                <!-- Si la commande n'est pas livrée ni remboursée, afficher le bouton pour supprimer la commande -->
-                                <form action="{{ path('order_delete', {'id': order.id}) }}" method="post" class="inline-block">
-                                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 focus:outline-none transition duration-300">
-                                        Supprimer ma commande
-                                    </button>
-                                </form>
-                            {% elseif order.status == 'livrée' %}
-                                <!-- Si la commande est livrée, afficher le bouton pour demander un remboursement -->
-                                <form action="{{ path('order_refund', {'id': order.id}) }}" method="post" class="inline-block">
-                                    <button type="submit" class="bg-yellow-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none transition duration-300">
-                                        Demander un remboursement
-                                    </button>
-                                </form>
-                            {% endif %}
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <!-- Si l'utilisateur n'a pas de commandes, afficher ce message -->
-            <p class="text-center text-gray-500">Aucune commande trouvée.</p>
-        {% endif %}
-    </div>
+								{% if order.status != 'livrée' and order.status != 'remboursée' %}
+									<!-- Si la commande n'est pas livrée ni remboursée, afficher le bouton pour supprimer la commande -->
+									<form action="{{ path('order_delete', {'id': order.id}) }}" method="post" class="inline-block">
+										<button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 focus:outline-none transition duration-300">
+											Supprimer ma commande
+										</button>
+									</form>
+								{% elseif order.status == 'livrée' %}
+									<!-- Si la commande est livrée, afficher le bouton pour demander un remboursement -->
+									<form action="{{ path('order_refund', {'id': order.id}) }}" method="post" class="inline-block">
+										<button type="submit" class="bg-yellow-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none transition duration-300">
+											Demander un remboursement
+										</button>
+									</form>
+								{% endif %}
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<!-- Si l'utilisateur n'a pas de commandes, afficher ce message -->
+				<p class="text-center text-gray-500">Aucune commande trouvée.</p>
+			{% endif %}
+		</div>
 
-    <!-- Bouton de retour à la page d'accueil -->
-    <div class="mt-6 text-center">
-        <a href="{{ path('app_home') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-            Retour
-        </a>
-    </div>
+		<!-- Bouton de retour à la page d'accueil -->
+		<div class="mt-6 text-center">
+			<a href="{{ path('app_home') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+				Retour
+			</a>
+		</div>
 
-</div>
+	</div>
 {% endblock %}

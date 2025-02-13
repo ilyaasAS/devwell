@@ -1,61 +1,67 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ product.name }} - Détails 
+	{{ product.name }}
+	- Détails
 {% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-12 px-6 max-w-4xl">
-    <!-- Affichage des messages flash -->
-    {% for label, messages in app.flashes %}
-        <div class="alert alert-{{ label|default('info') }} mt-4">
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endfor %}
+	<div
+		class="container mx-auto py-12 px-6 max-w-4xl">
+		<!-- Affichage des messages flash -->
+		{% for label, messages in app.flashes %}
+			<div class="alert alert-{{ label|default('info') }} mt-4">
+				<ul>
+					{% for message in messages %}
+						<li>{{ message }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endfor %}
 
-    <!-- Card -->
-    <div class="bg-white shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105 rounded-lg p-8">
-        <!-- Product Image -->
-        <div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
-            <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
-        </div>
+		<!-- Card -->
+		<div
+			class="bg-white shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105 rounded-lg p-8">
+			<!-- Product Image -->
+			<div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
+				<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+			</div>
 
-        <!-- Product Name -->
-        <h1 class="text-4xl font-bold text-center text-primary_dw mb-6">{{ product.name }}</h1>
+			<!-- Product Name -->
+			<h1 class="text-4xl font-bold text-center text-primary_dw mb-6">{{ product.name }}</h1>
 
-        <!-- Product Description -->
-        <p class="text-lg text-center text-text_dw mb-6">{{ product.description }}</p>
+			<!-- Product Description -->
+			<p class="text-lg text-center text-text_dw mb-6">{{ product.description }}</p>
 
-        <!-- Product Price -->
-        <p class="text-3xl font-bold text-green-600 text-center mb-6">{{ product.price }} €</p>
+			<!-- Product Price -->
+			<p class="text-3xl font-bold text-green-600 text-center mb-6">{{ product.price }}
+				€</p>
 
-        <!-- Product Stock -->
-        <p class="text-xl text-gray-500 text-center mb-6">Stock: {{ product.stock }}</p>
+			<!-- Product Stock -->
+			<p class="text-xl text-gray-500 text-center mb-6">Stock:
+				{{ product.stock }}</p>
 
-        <!-- Quantity Selector -->
-        <form action="{{ path('cart_add', {id: product.id}) }}" method="POST">
-            <div class="flex justify-center mb-6">
-                <label for="quantity" class="text-lg text-gray-700 mr-4">Quantité :</label>
-                <input type="number" id="quantity" name="quantity" min="1" max="{{ product.stock }}" value="1" class="w-24 text-center p-2 border border-gray-300 rounded-lg">
-            </div>
+			<!-- Quantity Selector -->
+			<form action="{{ path('cart_add', {id: product.id}) }}" method="POST">
+				<div class="flex justify-center mb-6">
+					<label for="quantity" class="text-lg text-gray-700 mr-4">Quantité :</label>
+					<input type="number" id="quantity" name="quantity" min="1" max="{{ product.stock }}" value="1" class="w-24 text-center p-2 border border-gray-300 rounded-lg">
+				</div>
 
-            <!-- Action Buttons -->
-            <div class="flex flex-col items-center space-y-4">
-                <!-- Add to Cart Button -->
-                <button type="submit" class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
-                    Ajouter au panier
-                </button>
+				<!-- Action Buttons -->
+				<div
+					class="flex flex-col items-center space-y-4">
+					<!-- Add to Cart Button -->
+					<button type="submit" class="w-full max-w-xs bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
+						Ajouter au panier
+					</button>
 
-                <!-- Back to Products Link -->
-                <a href="/products" class="w-full max-w-xs bg-primary_dw text-tertiary_dw text-center px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
-                    Retour aux produits
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
+					<!-- Back to Products Link -->
+					<a href="/products" class="w-full max-w-xs bg-primary_dw text-tertiary_dw text-center px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw focus:ring-opacity-75 transition duration-300 transform hover:scale-105">
+						Retour aux produits
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
 {% endblock %}

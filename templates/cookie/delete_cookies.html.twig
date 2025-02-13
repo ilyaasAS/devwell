@@ -3,31 +3,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div style="text-align: center; padding: 50px;">
-        <h1>Gérer les cookies</h1>
-        <p>Si vous souhaitez supprimer vos cookies, cliquez sur le bouton ci-dessous.</p>
-        
-        <!-- Bouton pour supprimer les cookies -->
-        <button id="delete-cookie-btn" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
-            Supprimer mes cookies
-        </button>
-    </div>
+	<div style="text-align: center; padding: 50px;">
+		<h1>Gérer les cookies</h1>
+		<p>Si vous souhaitez supprimer vos cookies, cliquez sur le bouton ci-dessous.</p>
 
-    <script>
-        document.getElementById('delete-cookie-btn').addEventListener('click', function() {
-            // Suppression du cookie "cookie_consent" côté client
-            document.cookie = "cookie_consent=; path=/; max-age=0"; // Envoie une date d'expiration passée
+		<!-- Bouton pour supprimer les cookies -->
+		<button id="delete-cookie-btn" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
+			Supprimer mes cookies
+		</button>
+	</div>
 
-            // Envoi de la requête au serveur pour supprimer le cookie
-            fetch('{{ path('delete_cookie') }}')
-                .then(response => response.text())
-                .then(data => {
-                    alert('Vos cookies ont été supprimés.');
-                    window.location.href = "/"; // Rediriger vers la page d'accueil après suppression
-                })
-                .catch(error => {
-                    console.error('Erreur lors de la suppression des cookies:', error);
-                });
-        });
-    </script>
+	<script>
+		document.getElementById('delete-cookie-btn').addEventListener('click', function () { // Suppression du cookie "cookie_consent" côté client
+document.cookie = "cookie_consent=; path=/; max-age=0";
+// Envoie une date d'expiration passée
+
+// Envoi de la requête au serveur pour supprimer le cookie
+fetch('{{ path('delete_cookie') }}').then(response => response.text()).then(data => {
+alert('Vos cookies ont été supprimés.');
+window.location.href = "/"; // Rediriger vers la page d'accueil après suppression
+}).catch(error => {
+console.error('Erreur lors de la suppression des cookies:', error);
+});
+});
+	</script>
 {% endblock %}

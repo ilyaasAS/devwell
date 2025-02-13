@@ -68,7 +68,7 @@ class AdminOrderController extends AbstractController
     public function delete(Request $request, Order $order, EntityManagerInterface $entityManager): Response
     {
         // Vérification de la validité du token CSRF pour sécuriser la suppression
-        if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $order->getId(), $request->request->get('_token'))) {
             // Si le token est valide, supprimer la commande
             $entityManager->remove($order);
             $entityManager->flush();

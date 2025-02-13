@@ -1,71 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réinitialiser votre mot de passe{% endblock %}
+{% block title %}Réinitialiser votre mot de passe
+{% endblock %}
 
 {% block body %}
-{# Le contenu principal de la page est défini dans le bloc 'body'. #}
+	{# Le contenu principal de la page est défini dans le bloc 'body'. #}
 
-<div class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
-    {# Ce div prend toute la hauteur de l'écran, utilise Flexbox pour centrer son contenu horizontalement et verticalement.
-    Le padding varie en fonction des tailles d'écran (sm, lg). #}
+	<div
+		class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
+		{# Ce div prend toute la hauteur de l'écran, utilise Flexbox pour centrer son contenu horizontalement et verticalement.
+		    Le padding varie en fonction des tailles d'écran (sm, lg). #}
 
-    <div class="max-w-md w-full space-y-8 bg-white p-8 shadow-secondary rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-hover">
-        {# Conteneur pour le formulaire avec une largeur maximale de "md", un fond blanc, un padding de 8 et une ombre secondaire. Il a aussi des effets de transition et de survol. #}
+		<div class="max-w-md w-full space-y-8 bg-white p-8 shadow-secondary rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-hover">
+			{# Conteneur pour le formulaire avec une largeur maximale de "md", un fond blanc, un padding de 8 et une ombre secondaire. Il a aussi des effets de transition et de survol. #}
 
-        {# Affichage des messages d'erreur lors de la réinitialisation du mot de passe. Si des erreurs existent (stockées sous 'reset_password_error'), elles seront affichées dans cette section. #}
-        {% for flash_error in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-            {{ flash_error }}
-        </div>
-        {% endfor %}
-        {# Chaque message d'erreur sera affiché dans un bloc rouge, avec un fond et des bordures rouges, pour informer l'utilisateur d'une erreur. #}
+			{# Affichage des messages d'erreur lors de la réinitialisation du mot de passe. Si des erreurs existent (stockées sous 'reset_password_error'), elles seront affichées dans cette section. #}
+				{% for flash_error in app.flashes('reset_password_error') %}
+					<div class="alert alert-danger bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"> {{ flash_error }}
+				</div>
+			{% endfor %}
+			{# Chaque message d'erreur sera affiché dans un bloc rouge, avec un fond et des bordures rouges, pour informer l'utilisateur d'une erreur. #}
 
-        <h2 class="text-center text-2xl font-extrabold text-primary_dw">Réinitialisez votre mot de passe</h2>
-        {# Titre de la page centré, avec une taille de texte de 2xl, un poids de police extrême (font-extrabold) et une couleur personnalisée. #}
+			<h2 class="text-center text-2xl font-extrabold text-primary_dw">Réinitialisez votre mot de passe</h2>
+			{# Titre de la page centré, avec une taille de texte de 2xl, un poids de police extrême (font-extrabold) et une couleur personnalisée. #}
 
-        {{ form_start(requestForm) }}
-        {# Début du formulaire, `requestForm` est l'objet formulaire contenant les champs à afficher. Cette fonction génère automatiquement les balises de formulaire nécessaires. #}
+			{{ form_start(requestForm) }}
+			{# Début du formulaire, `requestForm` est l'objet formulaire contenant les champs à afficher. Cette fonction génère automatiquement les balises de formulaire nécessaires. #}
 
-        <div class="mt-8 space-y-6">
-            {# Conteneur avec un espacement de 6 (espace entre les éléments du formulaire). #}
+			<div class="mt-8 space-y-6">
+				{# Conteneur avec un espacement de 6 (espace entre les éléments du formulaire). #}
 
-            <!-- Champ email -->
-            <div class="rounded-md shadow-sm -space-y-px">
-                {# Conteneur pour le champ email, avec des bordures arrondies et un ombrage. #}
-                <div>
-                    <label for="inputEmail" class="sr-only">Adresse électronique</label>
-                    {# Label masqué mais accessible aux lecteurs d'écran. #}
+				<!-- Champ email -->
+					<div
+					class="rounded-md shadow-sm -space-y-px"> {# Conteneur pour le champ email, avec des bordures arrondies et un ombrage. #}
+					<div>
+						<label for="inputEmail" class="sr-only">Adresse électronique</label>
+						{# Label masqué mais accessible aux lecteurs d'écran. #}
 
-                    {{ form_row(requestForm.email, {
+						{{ form_row(requestForm.email, {
                         'attr': {
                             'id': 'inputEmail',
                             'class': 'appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-700 rounded-t-md focus:outline-none focus:ring-secondary_dw focus:border-secondary_dw sm:text-sm transition-all duration-300 hover:scale-105'
                         }
                     }) }}
-                    {# Affichage du champ email du formulaire en utilisant `form_row` pour rendre automatiquement l'input, l'étiquette et les erreurs. Des attributs comme l'ID, les classes et autres sont personnalisés via `attr`. #}
-                </div>
-            </div>
+						{# Affichage du champ email du formulaire en utilisant `form_row` pour rendre automatiquement l'input, l'étiquette et les erreurs. Des attributs comme l'ID, les classes et autres sont personnalisés via `attr`. #}
+					</div>
+				</div>
 
-            <div>
-                <small class="text-sm text-gray-500">
-                    Saisissez votre adresse électronique et nous vous enverrons un lien pour réinitialiser votre mot de passe.
-                </small>
-                {# Petit texte d'instruction sous le champ email pour informer l'utilisateur de la fonctionnalité du formulaire. #}
-            </div>
+				<div>
+					<small class="text-sm text-gray-500">
+						Saisissez votre adresse électronique et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+					</small>
+					{# Petit texte d'instruction sous le champ email pour informer l'utilisateur de la fonctionnalité du formulaire. #}
+				</div>
 
-            <!-- Bouton d'envoi -->
-            <div>
-                <button type="submit" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:shadow-lg hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full text-center mb-4">
-                    Envoyer un courriel de réinitialisation du mot de passe
-                </button>
-                {# Le bouton de soumission du formulaire. Il utilise des classes Tailwind pour la couleur de fond, la couleur du texte, les effets de survol et de focus. Le texte du bouton informe l'utilisateur sur l'action qu'il effectue. #}
-            </div>
-        </div>
+				<!-- Bouton d'envoi -->
+				<div>
+					<button type="submit" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:shadow-lg hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full text-center mb-4">
+						Envoyer un courriel de réinitialisation du mot de passe
+					</button>
+					{# Le bouton de soumission du formulaire. Il utilise des classes Tailwind pour la couleur de fond, la couleur du texte, les effets de survol et de focus. Le texte du bouton informe l'utilisateur sur l'action qu'il effectue. #}
+				</div>
+			</div>
 
-        {{ form_end(requestForm) }}
-        {# Fin du formulaire, cette fonction termine le formulaire et ajoute les balises nécessaires de fermeture. #}
-    </div>
-</div>
+			{{ form_end(requestForm) }}
+			{# Fin du formulaire, cette fonction termine le formulaire et ajoute les balises nécessaires de fermeture. #}
+		</div>
+	</div>
 
 {% endblock %}
 {# Fin du bloc 'body' qui contient le formulaire de réinitialisation du mot de passe. #}

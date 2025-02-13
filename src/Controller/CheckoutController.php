@@ -20,8 +20,8 @@ class CheckoutController extends AbstractController
     // Route pour afficher la page de paiement
     #[Route('/checkout', name: 'checkout')]
     public function checkout(
-        Request $request, 
-        CartRepository $cartRepository, 
+        Request $request,
+        CartRepository $cartRepository,
         EntityManagerInterface $em
     ): Response {
         // Vérifier si l'utilisateur est connecté

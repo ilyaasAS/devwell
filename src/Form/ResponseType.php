@@ -17,17 +17,17 @@ class ResponseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        // Champ de texte pour la réponse
-        ->add('response', TextareaType::class, [
-            'label' => 'Votre réponse', // Étiquette affichée pour le champ
-            'required' => true, // Ce champ est obligatoire
-            'attr' => ['class' => 'form-control', 'rows' => 5], // Attributs HTML ajoutés, dont la classe CSS et le nombre de lignes du textarea
-        ])
-        // Ajout du bouton de soumission du formulaire
-        ->add('submit', SubmitType::class, [   // Type SubmitType pour un bouton de soumission
-            'label' => 'Envoyer', // Texte affiché sur le bouton
-            'attr' => ['class' => 'btn btn-primary'] // Classe CSS pour styliser le bouton
-        ]);
+            // Champ de texte pour la réponse
+            ->add('response', TextareaType::class, [
+                'label' => 'Votre réponse', // Étiquette affichée pour le champ
+                'required' => true, // Ce champ est obligatoire
+                'attr' => ['class' => 'form-control', 'rows' => 5], // Attributs HTML ajoutés, dont la classe CSS et le nombre de lignes du textarea
+            ])
+            // Ajout du bouton de soumission du formulaire
+            ->add('submit', SubmitType::class, [   // Type SubmitType pour un bouton de soumission
+                'label' => 'Envoyer', // Texte affiché sur le bouton
+                'attr' => ['class' => 'btn btn-primary'] // Classe CSS pour styliser le bouton
+            ]);
     }
 
     // Méthode pour configurer les options du formulaire

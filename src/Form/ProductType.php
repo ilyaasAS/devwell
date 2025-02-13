@@ -23,28 +23,28 @@ class ProductType extends AbstractType
         // Champ pour le nom du produit
         $builder
             ->add('name', TextType::class, ['label' => 'Nom'])
-            
+
             // Champ pour le prix du produit
             ->add('price', NumberType::class, ['label' => 'Prix'])
-            
+
             // Champ pour la quantité en stock du produit
             ->add('stock', NumberType::class, ['label' => 'Stock'])  // Modification ici : ajout du champ stock
-            
+
             // Champ pour télécharger une image du produit (fichier)
             ->add('uploadedImage', FileType::class, [
                 'label' => 'Mettre une image',  // Libellé pour l'upload de l'image
                 'required' => false,  // L'image est optionnelle
                 'mapped' => false,  // Le champ n'est pas mappé directement à une propriété de l'entité
             ])
-            
+
             // Champ pour la description du produit
             ->add('description', TextareaType::class, ['label' => 'Description'])
-            
+
             // Champ pour sélectionner une catégorie parmi les choix possibles
             ->add('category', ChoiceType::class, [
                 'label' => 'Catégorie',  // Libellé pour le champ catégorie
                 'choices' => $this->getCategoryChoices($options['categories']),  // Les catégories disponibles sont passées via les options du formulaire
-                'choice_label' => function($category) {  // Définit l'affichage des choix
+                'choice_label' => function ($category) {  // Définit l'affichage des choix
                     return $category->getName();  // Affiche le nom de la catégorie
                 },
                 'required' => false,  // Le champ catégorie est optionnel

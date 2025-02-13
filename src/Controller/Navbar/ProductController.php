@@ -21,13 +21,13 @@ class ProductController extends AbstractController
     {
         // Récupérer la valeur de la recherche dans la query string, si présente
         $search = $request->query->get('search', '');
-        
+
         // Définir la page courante. Si aucune page n'est spécifiée, on démarre à la page 1.
         $page = max(1, $request->query->getInt('page', 1)); // Numéro de la page (minimum 1)
-        
+
         // Définir le nombre d'éléments à afficher par page
         $limit = 3; // Nombre de produits par page
-        
+
         // Calcul de l'offset pour la pagination
         $offset = ($page - 1) * $limit; // Calcul de l'offset
 
@@ -67,5 +67,4 @@ class ProductController extends AbstractController
             'product' => $product, // Passer l'objet produit à la vue
         ]);
     }
-
 }

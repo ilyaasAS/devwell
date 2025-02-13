@@ -34,7 +34,7 @@ class LegalController extends AbstractController
     {
         // Création d'une nouvelle instance de l'entité Contact
         $contact = new Contact();
-        
+
         // Création et gestion du formulaire de contact
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
@@ -56,7 +56,7 @@ class LegalController extends AbstractController
 
             // Envoi de l'email
             $mailer->send($email);
-            
+
             // Message flash pour informer l'utilisateur de l'envoi réussi
             $this->addFlash('success', 'Votre message a bien été envoyé.');
 

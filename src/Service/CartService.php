@@ -34,7 +34,7 @@ class CartService
                 $totalItems += $item->getQuantity(); // Incrémente totalItems en fonction de la quantité de chaque article.
             }
         }
-        
+
         return $totalItems; // Retourne le nombre total d'articles dans le panier.
     }
 }

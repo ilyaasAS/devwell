@@ -118,7 +118,7 @@ final class UserController extends AbstractController
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         // Vérifie si le token CSRF est valide
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($user);  // Supprime l'utilisateur
             $entityManager->flush();  // Applique les changements en base de données
 
@@ -135,12 +135,12 @@ final class UserController extends AbstractController
     // Route pour supprimer le compte d'un utilisateur
     #[Route('/delete-account/{id}', name: 'app_delete_account', methods: ['POST'])]
     public function deleteAccount(
-        EntityManagerInterface $entityManager, 
-        Request $request, 
-        TokenStorageInterface $tokenStorage, 
-        SessionInterface $session, 
-        Security $security, 
-        UserRepository $userRepository, 
+        EntityManagerInterface $entityManager,
+        Request $request,
+        TokenStorageInterface $tokenStorage,
+        SessionInterface $session,
+        Security $security,
+        UserRepository $userRepository,
         int $id
     ): Response {
         $user = $security->getUser();  // Récupère l'utilisateur actuellement connecté

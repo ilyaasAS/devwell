@@ -52,8 +52,7 @@ class ChangePasswordFormType extends AbstractType
                 'invalid_message' => 'Les champs du mot de passe doivent correspondre.', // Message d'erreur si les mots de passe ne correspondent pas.
                 // Ne pas mapper ce champ sur l'entité, car il sera traité dans le contrôleur.
                 'mapped' => false,
-            ])
-        ;
+            ]);
     }
 
     // Configure les options du formulaire, mais ici aucune option par défaut n'est définie.

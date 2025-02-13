@@ -1,56 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer un nouvel utilisateur{% endblock %}
+{% block title %}Créer un nouvel utilisateur
+{% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
-    <!-- Conteneur centré avec des espacements généreux pour une meilleure lisibilité -->
+	<div
+		class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+		<!-- Conteneur centré avec des espacements généreux pour une meilleure lisibilité -->
 
-    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Créer un nouvel utilisateur</h1>
-    <!-- Titre principal stylisé et centré -->
+		<h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Créer un nouvel utilisateur</h1>
+		<!-- Titre principal stylisé et centré -->
 
-    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        <!-- Boîte contenant le formulaire avec un effet de survol et une transition fluide -->
+		<div
+			class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+			<!-- Boîte contenant le formulaire avec un effet de survol et une transition fluide -->
 
-        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-        <!-- Début du formulaire avec un espacement vertical entre les éléments -->
+			{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+			<!-- Début du formulaire avec un espacement vertical entre les éléments -->
 
-            <div class="space-y-4">
-                <!-- Groupe de champs avec espacement entre eux -->
+			<div
+				class="space-y-4">
+				<!-- Groupe de champs avec espacement entre eux -->
 
-                {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                <!-- Champ du prénom avec des styles pour un affichage propre et réactif -->
+				{{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				<!-- Champ du prénom avec des styles pour un affichage propre et réactif -->
 
-                {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                <!-- Champ du nom avec le même style uniforme -->
+				{{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				<!-- Champ du nom avec le même style uniforme -->
 
-                {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                <!-- Champ de l'email avec une mise en forme claire et responsive -->
+				{{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				<!-- Champ de l'email avec une mise en forme claire et responsive -->
 
-                {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                <!-- Champ du mot de passe sécurisé -->
+				{{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				<!-- Champ du mot de passe sécurisé -->
 
-                {{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                <!-- Sélection des rôles avec le même style que les autres champs -->
+				{{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				<!-- Sélection des rôles avec le même style que les autres champs -->
 
-            </div>
+			</div>
 
-            <div class="mt-6 text-center">
-                <!-- Bouton de validation centré avec un effet de survol et de transformation au survol -->
-                <button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                    Créer l'utilisateur
-                </button>
-            </div>
+			<div
+				class="mt-6 text-center">
+				<!-- Bouton de validation centré avec un effet de survol et de transformation au survol -->
+				<button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+					Créer l'utilisateur
+				</button>
+			</div>
 
-            <div class="mt-6 text-center">
-                <!-- Lien de retour stylisé vers la liste des utilisateurs -->
-                <a href="{{ path('app_user_index') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-                    Retour
-                </a>
-            </div>
+			<div
+				class="mt-6 text-center">
+				<!-- Lien de retour stylisé vers la liste des utilisateurs -->
+				<a href="{{ path('app_user_index') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+					Retour
+				</a>
+			</div>
 
-        {{ form_end(form) }}
-        <!-- Fin du formulaire -->
-    </div>
-</div>
+			{{ form_end(form) }}
+			<!-- Fin du formulaire -->
+		</div>
+	</div>
 {% endblock %}

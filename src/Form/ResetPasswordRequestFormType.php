@@ -23,8 +23,7 @@ class ResetPasswordRequestFormType extends AbstractType
                         'message' => 'Please enter your email', // Message d'erreur si le champ est laissé vide
                     ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     // Méthode pour configurer les options du formulaire

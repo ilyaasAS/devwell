@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Réponse à votre message</title>
-</head>
-<body>
-    <h1>Bonjour {{ contact.name }},</h1>
-    <p>Nous avons reçu votre message :</p>
-    <blockquote style="border-left: 4px solid #ccc; padding-left: 10px;">
-        {{ contact.message }}
-    </blockquote>
+	<head>
+		<meta charset="UTF-8">
+		<title>Réponse à votre message</title>
+	</head>
+	<body>
+		<h1>Bonjour
+			{{ contact.name }},</h1>
+		<p>Nous avons reçu votre message :</p>
+		<blockquote style="border-left: 4px solid #ccc; padding-left: 10px;">
+			{{ contact.message }}
+		</blockquote>
 
-    <p>Voici notre réponse :</p>
-    <blockquote style="border-left: 4px solid #007bff; padding-left: 10px;">
-        {{ response }}
-    </blockquote>
+		<p>Voici notre réponse :</p>
+		<blockquote style="border-left: 4px solid #007bff; padding-left: 10px;">
+			{{ response }}
+		</blockquote>
 
-    <p>Si vous avez d'autres questions, n'hésitez pas à nous contacter à nouveau.</p>
-    <p>Cordialement,</p>
-    <p>L'équipe de support</p>
-</body>
+		<p>Si vous avez d'autres questions, n'hésitez pas à nous contacter à nouveau.</p>
+		<p>Cordialement,</p>
+		<p>L'équipe de support</p>
+	</body>
 </html>

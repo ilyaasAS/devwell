@@ -1,83 +1,84 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Messages de Contact{% endblock %}
+{% block title %}Messages de Contact
+{% endblock %}
 
 {% block body %}
 
-<div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
-    {# Le conteneur est centré avec 'mx-auto' pour être aligné au centre, avec des espacements verticaux (py-20, my-12) et des espacements horizontaux (px-6). La largeur maximale est limitée à 4xl (max-w-4xl). #}
+	<div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+		{# Le conteneur est centré avec 'mx-auto' pour être aligné au centre, avec des espacements verticaux (py-20, my-12) et des espacements horizontaux (px-6). La largeur maximale est limitée à 4xl (max-w-4xl). #}
 
-    <!-- Page Title -->
-    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Messages de Contact</h1>
-    {# Titre principal de la page. Il a une taille de texte de 3xl, une police en gras (font-bold), et un margin bottom de 8 pour espacer du contenu suivant. Le texte est centré avec 'text-center' et coloré avec la variable 'text-primary_dw'. #}
+		<!-- Page Title --><h1 class="text-3xl font-bold mb-8 text-center text-primary_dw"> Messages de Contact</h1>
+		{# Titre principal de la page. Il a une taille de texte de 3xl, une police en gras (font-bold), et un margin bottom de 8 pour espacer du contenu suivant. Le texte est centré avec 'text-center' et coloré avec la variable 'text-primary_dw'. #}
 
-    {% if messages|length > 0 %}
-        {# Vérifie si la variable 'messages' contient des éléments. Si oui, affiche les messages. #}
-        
-        <div class="space-y-6">
-            {# Conteneur pour les messages, avec un espace vertical (space-y-6) entre chaque message. #}
-            
-            {% for message in messages %}
-                {# Parcours chaque message dans la liste 'messages' et affiche ses détails. #}
-                
-                <div class="p-6 bg-white rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-                    {# Chaque message est contenu dans un bloc avec padding (p-6), fond blanc (bg-white), coins arrondis (rounded-lg), et une ombre spécifique (shadow-product). Au survol, l'ombre et la taille du bloc changent. #}
+		{% if messages|length > 0 %}
+			{# Vérifie si la variable 'messages' contient des éléments. Si oui, affiche les messages. #}
 
-                    <!-- Nom et Email -->
-                    <p class="font-semibold text-lg text-gray-800">
-                        {{ message.name }} <span class="text-gray-500 text-sm">({{ message.email }})</span>
-                    </p>
-                    {# Affiche le nom de l'expéditeur avec une taille de texte plus grande (font-semibold, text-lg) et une couleur gris foncé. L'email est affiché en texte plus petit et gris (text-gray-500, text-sm). #}
+			<div
+				class="space-y-6">
+				{# Conteneur pour les messages, avec un espace vertical (space-y-6) entre chaque message. #}
 
-                    <!-- Sujet -->
-                    <p class="text-gray-700"><strong>Sujet :</strong> {{ message.subject }}</p>
-                    {# Affiche le sujet du message avec une couleur gris (text-gray-700). Le texte "Sujet" est en gras. #}
+				{% for message in messages %}
+					{# Parcours chaque message dans la liste 'messages' et affiche ses détails. #}
 
-                    <!-- Message -->
-                    <p class="text-gray-600 mt-2">{{ message.message }}</p>
-                    {# Affiche le contenu du message. La couleur du texte est gris clair (text-gray-600) et un margin-top de 2 est ajouté pour séparer du sujet. #}
+					<div class="p-6 bg-white rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+						{# Chaque message est contenu dans un bloc avec padding (p-6), fond blanc (bg-white), coins arrondis (rounded-lg), et une ombre spécifique (shadow-product). Au survol, l'ombre et la taille du bloc changent. #}
 
-                    <!-- Date d'envoi -->
-                    <p class="text-sm text-gray-500 mt-2"><strong>Envoyé le :</strong> {{ message.createdAt|date('d/m/Y H:i') }}</p>
-                    {# Affiche la date d'envoi du message formatée au format 'jour/mois/année heure:minute'. La couleur est gris clair et la taille du texte est réduite (text-sm). #}
+						<!-- Nom et Email -->
+							<p class="font-semibold text-lg text-gray-800"> {{ message.name }}
+							<span class="text-gray-500 text-sm">({{ message.email }})</span>
+						</p>
+						{# Affiche le nom de l'expéditeur avec une taille de texte plus grande (font-semibold, text-lg) et une couleur gris foncé. L'email est affiché en texte plus petit et gris (text-gray-500, text-sm). #}
 
-                    <!-- Statut du message -->
-                    {% if message.isResponded %}
-                        {# Si le message a été répondu, affiche "Répondu" en vert. #}
-                        <p class="text-green-500 font-semibold mt-2">Répondu</p>
-                    {% else %}
-                        {# Sinon, affiche "Non répondu" en rouge. #}
-                        <p class="text-red-500 font-semibold mt-2">Non répondu</p>
-                    {% endif %}
-                    
-                    {# Conditionnel pour afficher si le message a été répondu ou non, avec des couleurs et une police en gras. #}
+						<!-- Sujet -->
+						<p class="text-gray-700">
+							<strong>Sujet :</strong>
+							{{ message.subject }}</p>
+						{# Affiche le sujet du message avec une couleur gris (text-gray-700). Le texte "Sujet" est en gras. #}
 
-                    <!-- Actions -->
-                    <div class="mt-4 flex space-x-4">
-                        {# Conteneur pour les actions liées au message, avec un margin-top de 4 et un espacement horizontal (space-x-4) entre les éléments. #}
-                        
-                        <!-- Lien Voir -->
-                        <a href="{{ path('admin_message_view', { id: message.id }) }}" 
-                           class="text-blue-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
-                            Voir
-                        </a>
-                        {# Lien pour voir les détails du message. Le texte est bleu (text-blue-500) et l'effet de survol le change en couleur secondaire et le souligne. #}
+						<!-- Message -->
+						<p class="text-gray-600 mt-2">{{ message.message }}</p>
+						{# Affiche le contenu du message. La couleur du texte est gris clair (text-gray-600) et un margin-top de 2 est ajouté pour séparer du sujet. #}
 
-                        <!-- Lien Supprimer -->
-                        <a href="{{ path('admin_message_delete', { id: message.id }) }}" 
-                           class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
-                            Supprimer
-                        </a>
-                        {# Lien pour supprimer le message. Le texte est rouge (text-red-500) et l'effet de survol le change en couleur secondaire et le souligne. #}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        {# Si la variable 'messages' est vide (pas de messages), affiche ce texte. #}
-        <p class="text-center text-gray-500">Aucun message pour le moment.</p>
-    {% endif %}
-</div>
+						<!-- Date d'envoi -->
+						<p class="text-sm text-gray-500 mt-2">
+							<strong>Envoyé le :</strong>
+							{{ message.createdAt|date('d/m/Y H:i') }}</p>
+						{# Affiche la date d'envoi du message formatée au format 'jour/mois/année heure:minute'. La couleur est gris clair et la taille du texte est réduite (text-sm). #}
+
+						<!-- Statut du message -->
+						{% if message.isResponded %}
+							{# Si le message a été répondu, affiche "Répondu" en vert. #}
+							<p class="text-green-500 font-semibold mt-2">Répondu</p>
+						{% else %}
+							{# Sinon, affiche "Non répondu" en rouge. #}
+							<p class="text-red-500 font-semibold mt-2">Non répondu</p>
+						{% endif %}
+
+						{# Conditionnel pour afficher si le message a été répondu ou non, avec des couleurs et une police en gras. #}
+
+						<!-- Actions -->
+						<div class="mt-4 flex space-x-4">
+							{# Conteneur pour les actions liées au message, avec un margin-top de 4 et un espacement horizontal (space-x-4) entre les éléments. #}
+
+							<!-- Lien Voir -->
+								<a href="{{ path('admin_message_view', { id: message.id }) }}" class="text-blue-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105"> Voir
+							</a>
+							{# Lien pour voir les détails du message. Le texte est bleu (text-blue-500) et l'effet de survol le change en couleur secondaire et le souligne. #}
+
+							<!-- Lien Supprimer -->
+							<a href="{{ path('admin_message_delete', { id: message.id }) }}" class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
+								Supprimer
+							</a>
+							{# Lien pour supprimer le message. Le texte est rouge (text-red-500) et l'effet de survol le change en couleur secondaire et le souligne. #}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			{# Si la variable 'messages' est vide (pas de messages), affiche ce texte. #}
+			<p class="text-center text-gray-500">Aucun message pour le moment.</p>
+		{% endif %}
+	</div>
 
 {% endblock %}
-{# Fin du bloc 'body'. Ce code est placé dans la structure de base pour afficher le contenu des messages de contact. #}

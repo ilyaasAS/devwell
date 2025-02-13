@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Bienvenue !{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%20128'%3E%3Ctext%20y='1.2em'%20font-size='96'%3E⚫️%3C/text%3E%3Ctext%20y='1.3em'%20x='0.2em'%20font-size='76'%20fill='%23fff'%3Esf%3C/text%3E%3C/svg%3E">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Bienvenue !
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20128%20128'%3E%3Ctext%20y='1.2em'%20font-size='96'%3E⚫️%3C/text%3E%3Ctext%20y='1.3em'%20x='0.2em'%20font-size='76'%20fill='%23fff'%3Esf%3C/text%3E%3C/svg%3E">
 
-        <!-- JavaScript -->
-        {% block javascripts %}
-            {% block importmap %}
-                {{ importmap('app') }}
-            {% endblock %}
-        {% endblock %}
+		<!-- JavaScript -->
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
 
-    </head>
-    <body class="flex flex-col min-h-screen">
-        {% include 'components/navbar.html.twig' %}
+	</head>
+	<body class="flex flex-col min-h-screen">
+		{% include 'components/navbar.html.twig' %}
 
-        <!-- 🔹 MESSAGES FLASH -->
-        <div class="container mx-auto p-4">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert bg-{{ label == 'success' ? 'green' : 'red' }}-500 text-white text-center py-3 px-4 mb-4 rounded">
-                        {% if label == 'success' %}
-                            ✅ Succès : {{ message }}
-                        {% elseif label == 'error' %}
-                            ❌ Erreur : {{ message }}
-                        {% elseif label == 'warning' %}
-                            ⚠️ Attention : {{ message }}
-                        {% else %}
-                            ℹ️ Info : {{ message }}
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        </div>
+		<!-- 🔹 MESSAGES FLASH -->
+		<div class="container mx-auto p-4">
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="alert bg-{{ label == 'success' ? 'green' : 'red' }}-500 text-white text-center py-3 px-4 mb-4 rounded">
+						{% if label == 'success' %}
+							✅ Succès :
+							{{ message }}
+						{% elseif label == 'error' %}
+							❌ Erreur :
+							{{ message }}
+						{% elseif label == 'warning' %}
+							⚠️ Attention :
+							{{ message }}
+						{% else %}
+							ℹ️ Info :
+							{{ message }}
+						{% endif %}
+					</div>
+				{% endfor %}
+			{% endfor %}
+		</div>
 
-        <!-- Contenu principal -->
-        <main class="flex-grow">
-            {% block body %}{% endblock %}
-        </main>
+		<!-- Contenu principal -->
+		<main class="flex-grow"> {% block body %}{% endblock %}
+			</main>
 
-        <!-- Footer -->
-        {% include 'components/footer.html.twig' %}
+			<!-- Footer -->
+			{% include 'components/footer.html.twig' %}
 
-        <!-- 🔹 Script pour fermer les messages après 3 sec -->
-        <script>
-            setTimeout(() => {
-                document.querySelectorAll('.alert').forEach(el => el.remove());
-            }, 3000);
-        </script>
+			<!-- 🔹 Script pour fermer les messages après 3 sec -->
+			<script>
+				setTimeout(() => {
+document.querySelectorAll('.alert').forEach(el => el.remove());
+}, 3000);
+			</script>
 
-        <script>
-            // Récupérer le bouton et le menu
-            const menuToggle = document.getElementById('menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
+			<script>
+				// Récupérer le bouton et le menu
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
 
-            // Ajouter un gestionnaire d'événement pour le bouton
-            menuToggle.addEventListener('click', () => {
-                // Basculer la classe `hidden` pour afficher/masquer le menu
-                mobileMenu.classList.toggle('hidden');
-            });
-        </script>
+// Ajouter un gestionnaire d'événement pour le bouton
+menuToggle.addEventListener('click', () => { // Basculer la classe `hidden` pour afficher/masquer le menu
+mobileMenu.classList.toggle('hidden');
+});
+			</script>
 
-        <!-- Inclure le fichier JavaScript pour le consentement aux cookies -->
-        <script src="{{ asset('js/cookie-consent.js') }}"></script>
+			<!-- Inclure le fichier JavaScript pour le consentement aux cookies -->
+			<script src="{{ asset('js/cookie-consent.js') }}"></script>
 
-    </body>
-</html>
+		</body>
+	</html>

@@ -1,68 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer une nouvelle catégorie{% endblock %}
+{% block title %}Créer une nouvelle catégorie
+{% endblock %}
 
 {% block body %}
 
-<div class="container mx-auto py-12 px-6 max-w-3xl">
-    {# Conteneur principal centré horizontalement (mx-auto), avec un espacement vertical de 12 (py-12) et un padding horizontal de 6 (px-6). La largeur maximale du conteneur est de 3xl. #}
+	<div
+		class="container mx-auto py-12 px-6 max-w-3xl">
+		{# Conteneur principal centré horizontalement (mx-auto), avec un espacement vertical de 12 (py-12) et un padding horizontal de 6 (px-6). La largeur maximale du conteneur est de 3xl. #}
 
-    <h1 class="text-4xl font-semibold mb-8 text-center">Créer une nouvelle catégorie</h1>
-    {# Titre de la page centré avec une taille de texte 4xl, un poids de police semi-gras, une marge inférieure de 8 (mb-8). #}
+		<h1 class="text-4xl font-semibold mb-8 text-center">Créer une nouvelle catégorie</h1>
+		{# Titre de la page centré avec une taille de texte 4xl, un poids de police semi-gras, une marge inférieure de 8 (mb-8). #}
 
-    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        {# Carte principale du formulaire avec fond blanc, padding interne de 8 (p-8), bords arrondis (rounded-lg), et une ombre (shadow-product). Les effets de transition incluent un changement d'ombre et un agrandissement au survol. #}
+		<div
+			class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+			{# Carte principale du formulaire avec fond blanc, padding interne de 8 (p-8), bords arrondis (rounded-lg), et une ombre (shadow-product). Les effets de transition incluent un changement d'ombre et un agrandissement au survol. #}
 
-        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-        {# Début du formulaire avec un attribut de classe 'space-y-6' qui applique un espacement vertical entre les champs du formulaire. #}
+			{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+			{# Début du formulaire avec un attribut de classe 'space-y-6' qui applique un espacement vertical entre les champs du formulaire. #}
 
-        <!-- Form Fields -->
-        <div class="space-y-4">
-            {# Un conteneur pour les champs du formulaire avec un espacement vertical de 4 (space-y-4). #}
+			<!-- Form Fields -->
+				<div class="space-y-4"> {# Un conteneur pour les champs du formulaire avec un espacement vertical de 4 (space-y-4). #}
 
-            <!-- Name Field -->
-            <div class="form-group">
-                {# Le champ du formulaire pour le nom de la catégorie. #}
-                {{ form_row(form.name, {
+				<!-- Name Field -->
+					<div
+					class="form-group"> {# Le champ du formulaire pour le nom de la catégorie. #}
+					{{ form_row(form.name, {
                     'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
                 }) }}
-                {# Utilise la fonction form_row() pour afficher le champ "name" du formulaire. La classe définie applique des styles de largeur pleine (w-full), bordure grise, padding de 3 (px-4 py-3), coins arrondis, et effets de focus (focus:ring et focus:ring-blue-300). #}
-            </div>
+					{# Utilise la fonction form_row() pour afficher le champ "name" du formulaire. La classe définie applique des styles de largeur pleine (w-full), bordure grise, padding de 3 (px-4 py-3), coins arrondis, et effets de focus (focus:ring et focus:ring-blue-300). #}
+				</div>
 
-            <!-- Description Field -->
-            <div class="form-group">
-                {# Le champ pour la description de la catégorie. #}
-                {{ form_row(form.description, {
+				<!-- Description Field -->
+				<div
+					class="form-group">
+					{# Le champ pour la description de la catégorie. #}
+					{{ form_row(form.description, {
                     'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
                 }) }}
-                {# Le champ "description" utilise le même style que le champ "name". #}
-            </div>
-        </div>
+					{# Le champ "description" utilise le même style que le champ "name". #}
+				</div>
+			</div>
 
-        <!-- Submit Button -->
-        <div class="text-center mt-6">
-            {# Un bouton centré avec une marge supérieure de 6 (mt-6). #}
+			<!-- Submit Button -->
+			<div
+				class="text-center mt-6">
+				{# Un bouton centré avec une marge supérieure de 6 (mt-6). #}
 
-            <button type="submit" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-                Créer une catégorie
-            </button>
-            {# Le bouton de soumission avec un texte indiquant "Créer une catégorie". Il utilise une couleur de fond primaire (bg-primary_dw), une couleur de texte secondaire (text-tertiary_dw), un padding confortable, des coins arrondis, et des effets de survol/ focus (changement de couleur et agrandissement au survol). #}
-        </div>
+				<button type="submit" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+					Créer une catégorie
+				</button>
+				{# Le bouton de soumission avec un texte indiquant "Créer une catégorie". Il utilise une couleur de fond primaire (bg-primary_dw), une couleur de texte secondaire (text-tertiary_dw), un padding confortable, des coins arrondis, et des effets de survol/ focus (changement de couleur et agrandissement au survol). #}
+			</div>
 
-        <!-- Back Link -->
-        <div class="mt-6 text-center">
-            {# Un lien pour retourner à la liste des catégories avec une marge supérieure de 6 (mt-6). #}
+			<!-- Back Link -->
+			<div
+				class="mt-6 text-center">
+				{# Un lien pour retourner à la liste des catégories avec une marge supérieure de 6 (mt-6). #}
 
-            <a href="{{ path('app_category_index') }}" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-                Retour à la liste des catégories
-            </a>
-            {# Le lien "Retour à la liste des catégories" utilise les mêmes styles que le bouton, avec une transition pour l'agrandissement et un changement de couleur au survol/focus. #}
-        </div>
+				<a href="{{ path('app_category_index') }}" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+					Retour à la liste des catégories
+				</a>
+				{# Le lien "Retour à la liste des catégories" utilise les mêmes styles que le bouton, avec une transition pour l'agrandissement et un changement de couleur au survol/focus. #}
+			</div>
 
-        {{ form_end(form) }}
-        {# Fin du formulaire. Cette fonction ferme le formulaire correctement. #}
-    </div>
-</div>
+			{{ form_end(form) }}
+			{# Fin du formulaire. Cette fonction ferme le formulaire correctement. #}
+		</div>
+	</div>
 
 {% endblock %}
-{# Fin du bloc 'body' #}

@@ -1,125 +1,126 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier le produit{% endblock %}
+{% block title %}Modifier le produit
+{% endblock %}
 
 {% block body %}
 
-<div class="container mx-auto py-12 px-6 max-w-4xl">
-    {# Un conteneur central qui ajuste la largeur (max-w-4xl) et gère l'espacement interne (padding py-12 et px-6) de la page. #}
+	<div
+		class="container mx-auto py-12 px-6 max-w-4xl">
+		{# Un conteneur central qui ajuste la largeur (max-w-4xl) et gère l'espacement interne (padding py-12 et px-6) de la page. #}
 
-    <h1 class="text-4xl font-semibold mb-6 text-center">Modifier le produit</h1>
-    {# Titre principal de la page avec une taille de texte 4xl et un style en gras. Il est centré avec une marge inférieure (mb-6) pour espacer des autres éléments. #}
+		<h1 class="text-4xl font-semibold mb-6 text-center">Modifier le produit</h1>
+		{# Titre principal de la page avec une taille de texte 4xl et un style en gras. Il est centré avec une marge inférieure (mb-6) pour espacer des autres éléments. #}
 
-    <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        {# Un bloc contenant le formulaire pour modifier le produit. Le fond est blanc, avec du padding (p-8), des bords arrondis (rounded-lg), une ombre (shadow-product), et un effet de transition sur la mise en survol (hover:scale-105). #}
+		<div
+			class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+			{# Un bloc contenant le formulaire pour modifier le produit. Le fond est blanc, avec du padding (p-8), des bords arrondis (rounded-lg), une ombre (shadow-product), et un effet de transition sur la mise en survol (hover:scale-105). #}
 
-        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-        {# Début du formulaire avec des attributs CSS pour gérer l'espacement entre les champs de formulaire avec 'space-y-6'. #}
+			{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+			{# Début du formulaire avec des attributs CSS pour gérer l'espacement entre les champs de formulaire avec 'space-y-6'. #}
 
-        <!-- Product Name -->
-        <div class="mb-4">
-            {{ form_label(form.name, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {# Label pour le champ 'name' du produit, avec une taille de texte 'text-lg' et un style de texte gris. #}
-            
-            {{ form_widget(form.name, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {# Le champ du produit 'name' est stylisé avec une largeur complète (w-full), des bordures grises (border-gray-300), du padding, des bords arrondis, et des effets de focus pour la couleur primaire. #}
+			<!-- Product Name -->
+				<div class="mb-4"> {{ form_label(form.name, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
+				{# Label pour le champ 'name' du produit, avec une taille de texte 'text-lg' et un style de texte gris. #}
 
-            {{ form_errors(form.name, {'attr': {'class': 'text-red-500 text-sm'}}) }}
-            {# Les erreurs liées au champ 'name' sont affichées en rouge avec une petite taille de texte. #}
-        </div>
+				{{ form_widget(form.name, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{# Le champ du produit 'name' est stylisé avec une largeur complète (w-full), des bordures grises (border-gray-300), du padding, des bords arrondis, et des effets de focus pour la couleur primaire. #}
 
-        <!-- Product Price -->
-        <div class="mb-4">
-            {{ form_label(form.price, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {# Label pour le champ 'price' du produit, avec un style similaire à celui du champ 'name'. #}
+				{{ form_errors(form.name, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+				{# Les erreurs liées au champ 'name' sont affichées en rouge avec une petite taille de texte. #}
+			</div>
 
-            {{ form_widget(form.price, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {# Champ pour le prix du produit, avec un style similaire à celui du champ 'name'. #}
+			<!-- Product Price -->
+			<div class="mb-4">
+				{{ form_label(form.price, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
+				{# Label pour le champ 'price' du produit, avec un style similaire à celui du champ 'name'. #}
 
-            {{ form_errors(form.price, {'attr': {'class': 'text-red-500 text-sm'}}) }}
-            {# Les erreurs liées au champ 'price' sont affichées en rouge. #}
-        </div>
+				{{ form_widget(form.price, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{# Champ pour le prix du produit, avec un style similaire à celui du champ 'name'. #}
 
-        <!-- Product Stock -->
-        <div class="mb-4">
-            {{ form_label(form.stock, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {# Label pour le champ 'stock', avec un style similaire aux champs précédents. #}
+				{{ form_errors(form.price, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+				{# Les erreurs liées au champ 'price' sont affichées en rouge. #}
+			</div>
 
-            {{ form_widget(form.stock, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {# Champ pour la quantité en stock du produit. #}
+			<!-- Product Stock -->
+			<div class="mb-4">
+				{{ form_label(form.stock, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
+				{# Label pour le champ 'stock', avec un style similaire aux champs précédents. #}
 
-            {{ form_errors(form.stock, {'attr': {'class': 'text-red-500 text-sm'}}) }}
-            {# Les erreurs liées au champ 'stock' sont affichées en rouge. #}
-        </div>
+				{{ form_widget(form.stock, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{# Champ pour la quantité en stock du produit. #}
 
-        <!-- Current Image Display -->
-        {% if product.image %}
-        {# Si une image du produit est présente, on l'affiche dans un bloc d'image. #}
-        <div class="mb-6">
-            <p class="text-sm text-gray-600 text-center">Image actuelle :</p>
-            <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-contain rounded-lg mb-4">
-            {# L'image actuelle est affichée avec une largeur complète, une hauteur de 64 (h-64), et un effet 'object-contain' pour que l'image soit contenue dans la boîte sans être déformée. #}
-        </div>
-        {% endif %}
+				{{ form_errors(form.stock, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+				{# Les erreurs liées au champ 'stock' sont affichées en rouge. #}
+			</div>
 
-        <!-- Image Upload -->
-        <div class="mb-4">
-            {{ form_label(form.uploadedImage, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {# Label pour le champ 'uploadedImage', avec un style similaire aux autres labels. #}
+			<!-- Current Image Display -->
+			{% if product.image %}
+				{# Si une image du produit est présente, on l'affiche dans un bloc d'image. #}
+				<div class="mb-6">
+					<p class="text-sm text-gray-600 text-center">Image actuelle :</p>
+					<img
+					src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-contain rounded-lg mb-4">
+				{# L'image actuelle est affichée avec une largeur complète, une hauteur de 64 (h-64), et un effet 'object-contain' pour que l'image soit contenue dans la boîte sans être déformée. #}
+				</div>
+			{% endif %}
 
-            {{ form_widget(form.uploadedImage, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {# Champ pour télécharger une nouvelle image du produit, avec un style similaire aux autres champs. #}
+			<!-- Image Upload -->
+			<div class="mb-4">
+				{{ form_label(form.uploadedImage, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
+				{# Label pour le champ 'uploadedImage', avec un style similaire aux autres labels. #}
 
-            {{ form_errors(form.uploadedImage, {'attr': {'class': 'text-red-500 text-sm'}}) }}
-            {# Les erreurs liées à l'image téléchargée sont affichées en rouge. #}
-        </div>
+				{{ form_widget(form.uploadedImage, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{# Champ pour télécharger une nouvelle image du produit, avec un style similaire aux autres champs. #}
 
-        <!-- Product Description -->
-        <div class="mb-4">
-            {{ form_label(form.description, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {# Label pour le champ 'description', avec un style similaire aux autres labels. #}
+				{{ form_errors(form.uploadedImage, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+				{# Les erreurs liées à l'image téléchargée sont affichées en rouge. #}
+			</div>
 
-            {{ form_widget(form.description, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {# Champ pour la description du produit, avec un style similaire aux autres champs. #}
+			<!-- Product Description -->
+			<div class="mb-4">
+				{{ form_label(form.description, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
+				{# Label pour le champ 'description', avec un style similaire aux autres labels. #}
 
-            {{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm'}}) }}
-            {# Les erreurs liées à la description sont affichées en rouge. #}
-        </div>
+				{{ form_widget(form.description, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{# Champ pour la description du produit, avec un style similaire aux autres champs. #}
 
-        <!-- Product Category -->
-        <div class="mb-6">
-            {{ form_label(form.category, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
-            {# Label pour le champ 'category', avec un style similaire aux autres labels. #}
+				{{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+				{# Les erreurs liées à la description sont affichées en rouge. #}
+			</div>
 
-            {{ form_widget(form.category, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {# Champ pour la catégorie du produit. #}
+			<!-- Product Category -->
+			<div class="mb-6">
+				{{ form_label(form.category, null, {'label_attr': {'class': 'text-lg font-medium text-gray-700'}}) }}
+				{# Label pour le champ 'category', avec un style similaire aux autres labels. #}
 
-            {{ form_errors(form.category, {'attr': {'class': 'text-red-500 text-sm'}}) }}
-            {# Les erreurs liées à la catégorie sont affichées en rouge. #}
-        </div>
+				{{ form_widget(form.category, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{# Champ pour la catégorie du produit. #}
 
-        <!-- Submit Button -->
-        <div class="mb-6 text-center">
-            <button type="submit" 
-                class="w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-                Mise à jour du produit
-            </button>
-        </div>
-        {# Le bouton de soumission est centré, avec une largeur complète mais limitée à une taille maximale (max-w-xs). Il a un fond bleu, et le texte change au survol ou au focus avec une animation de mise à l'échelle. #}
+				{{ form_errors(form.category, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+				{# Les erreurs liées à la catégorie sont affichées en rouge. #}
+			</div>
 
-        <!-- Back to Product List -->
-        <div class="mb-6 text-center">
-            <a href="{{ path('app_product_index') }}" 
-                class="w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 inline-block">
-                Retour à la liste des produits
-            </a>
-        </div>
-        {# Un lien qui permet de revenir à la liste des produits avec un style similaire au bouton de soumission. #}
+			<!-- Submit Button -->
+			<div class="mb-6 text-center">
+				<button type="submit" class="w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+					Mise à jour du produit
+				</button>
+			</div>
+			{# Le bouton de soumission est centré, avec une largeur complète mais limitée à une taille maximale (max-w-xs). Il a un fond bleu, et le texte change au survol ou au focus avec une animation de mise à l'échelle. #}
 
-        {{ form_end(form) }}
-        {# Fin du formulaire. #}
-    </div>
-</div>
+			<!-- Back to Product List -->
+			<div class="mb-6 text-center">
+				<a href="{{ path('app_product_index') }}" class="w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 inline-block">
+					Retour à la liste des produits
+				</a>
+			</div>
+			{# Un lien qui permet de revenir à la liste des produits avec un style similaire au bouton de soumission. #}
+
+			{{ form_end(form) }}
+			{# Fin du formulaire. #}
+		</div>
+	</div>
 
 {% endblock %}
 {# Fin du bloc 'body' qui contient tout le contenu principal de la page. #}

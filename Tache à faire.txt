@@ -12,10 +12,26 @@ DT: un résumer du projet en anglais
 _____________
 
 --Test Fonctionnel ?
-Page d'erreur sur ma page de connexion
+
+indenté le code
+Test le site avant le github
+
+Vérifier les fonction mailer
+
+_____
+
+Montre à Miguel la liste des commande
+regarde le canal héberger son site/
+
+-htacces
+-taildwind prod
 ________________________
 
 Hébergement
+
+Pointer son VPS sur le nom de domaine 
+
+installer les bundle taildwind pour la production 
 
 vidéo de Ouwardia
 

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route; // Importation de l'annotation R
 class AvisClientController extends AbstractController
 {
     // Définition de la route pour accéder à la page des avis clients. La route accepte les méthodes GET et POST.
-    #[Route('/avis-client', name: 'avis_client', methods: ['GET', 'POST'])] 
+    #[Route('/avis-client', name: 'avis_client', methods: ['GET', 'POST'])]
     public function avisClient(Request $request, DocumentManager $dm): Response
     {
         // Vérifie si la requête est de type POST (soumission du formulaire d'avis)
@@ -55,4 +55,4 @@ class AvisClientController extends AbstractController
             'avisClients' => $avisClients, // On passe la liste des avis à la vue Twig.
         ]);
     }
-}  
+}

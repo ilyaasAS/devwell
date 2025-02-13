@@ -31,7 +31,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->getQuery() // Préparation de la requête.
             ->getResult(); // Exécution de la requête et récupération des résultats.
     }
-    
+
     /**
      * Trouve une catégorie par son nom.
      * 

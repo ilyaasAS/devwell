@@ -31,10 +31,10 @@ class AdminCategoryController extends AbstractController
     {
         // Créer une nouvelle instance de la catégorie
         $category = new Category();
-        
+
         // Créer le formulaire de catégorie
         $form = $this->createForm(CategoryType::class, $category);
-        
+
         // Gérer la soumission du formulaire
         $form->handleRequest($request);
 
@@ -46,7 +46,7 @@ class AdminCategoryController extends AbstractController
 
             // Afficher un message flash de succès
             $this->addFlash('success', 'Catégorie créée avec succès !');
-            
+
             // Rediriger vers la page des catégories
             return $this->redirectToRoute('app_category_index');
         }
@@ -78,7 +78,7 @@ class AdminCategoryController extends AbstractController
     {
         // Créer le formulaire de modification de catégorie
         $form = $this->createForm(CategoryType::class, $category);
-        
+
         // Gérer la soumission du formulaire
         $form->handleRequest($request);
 
@@ -89,7 +89,7 @@ class AdminCategoryController extends AbstractController
 
             // Afficher un message flash de succès
             $this->addFlash('success', 'Mise à jour réussie de la catégorie !');
-            
+
             // Rediriger vers la page des catégories
             return $this->redirectToRoute('app_category_index');
         }

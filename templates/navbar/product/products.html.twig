@@ -1,115 +1,112 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Nos Produits
+	Nos Produits
 {% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-10">
-    <!-- Affichage des messages flash (succès, erreurs, etc.) -->
-    {% for label, messages in app.flashes %}
-        <div class="alert alert-{{ label|default('info') }} mt-4">
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li> <!-- Affichage de chaque message flash -->
-                {% endfor %}
-            </ul>
-        </div>
-    {% endfor %}
+	<div
+		class="container mx-auto py-10">
+		<!-- Affichage des messages flash (succès, erreurs, etc.) -->
+		{% for label, messages in app.flashes %}
+			<div class="alert alert-{{ label|default('info') }} mt-4">
+				<ul>
+					{% for message in messages %}
+						<li>{{ message }}</li>
+						<!-- Affichage de chaque message flash -->
+					{% endfor %}
+				</ul>
+			</div>
+		{% endfor %}
 
-    <!-- Titre principal centré -->
-    <h1 class="text-4xl font-semibold mb-6 text-center">Nos Produits</h1>
+		<!-- Titre principal centré -->
+		<h1 class="text-4xl font-semibold mb-6 text-center">Nos Produits</h1>
 
-    <!-- Barre de recherche centrée -->
-    <div class="mb-6 flex justify-center">
-        <form method="get" action="{{ path('app_products') }}" class="flex space-x-2 w-full max-w-4xl">
-            <input type="text" name="search" value="{{ search }}" placeholder="Trouve ton produit..." class="px-4 py-2 border border-gray-300 rounded-md w-full">
-            <button 
-                type="submit" 
-                class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-                Recherche
-            </button>
-        </form>
-    </div>
+		<!-- Barre de recherche centrée -->
+		<div class="mb-6 flex justify-center">
+			<form method="get" action="{{ path('app_products') }}" class="flex space-x-2 w-full max-w-4xl">
+				<input type="text" name="search" value="{{ search }}" placeholder="Trouve ton produit..." class="px-4 py-2 border border-gray-300 rounded-md w-full">
+				<button type="submit" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+					Recherche
+				</button>
+			</form>
+		</div>
 
-    {% if products|length > 0 %}
-        <!-- Grid pour afficher les produits -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {% for product in products %}
-                <!-- Carte du produit avec ombre personnalisée -->
-                <div class="bg-white p-4 rounded-lg shadow-product transition duration-300 hover:shadow-hover transform hover:scale-105">
-                    <!-- Titre du produit centré -->
-                    <h2 class="text-xl font-bold mb-2 text-center">{{ product.name }}</h2>
+		{% if products|length > 0 %}
+			<!-- Grid pour afficher les produits -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				{% for product in products %}
+					<!-- Carte du produit avec ombre personnalisée -->
+					<div
+						class="bg-white p-4 rounded-lg shadow-product transition duration-300 hover:shadow-hover transform hover:scale-105">
+						<!-- Titre du produit centré -->
+						<h2 class="text-xl font-bold mb-2 text-center">{{ product.name }}</h2>
 
-                    <!-- Image du produit -->
-                    <div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
-                        <img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
-                    </div>
+						<!-- Image du produit -->
+						<div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
+							<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+						</div>
 
-                    <!-- Description courte du produit -->
-                    <p class="text-gray-700 mb-2 text-center">{{ product.description|slice(0, 100) ~ '...' }}</p>
+						<!-- Description courte du produit -->
+						<p class="text-gray-700 mb-2 text-center">{{ product.description|slice(0, 100) ~ '...' }}</p>
 
-                    <!-- Prix du produit centré -->
-                    <p class="text-lg font-semibold text-green-600 mb-2 text-center">{{ product.price }} €</p>
+						<!-- Prix du produit centré -->
+						<p class="text-lg font-semibold text-green-600 mb-2 text-center">{{ product.price }}
+							€</p>
 
-                    <!-- Lien vers la page de détails du produit -->
-                    <a 
-                        href="{{ path('app_product_details', { id: product.id }) }}" 
-                        class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full text-center mb-4">
-                        Voir le produit
-                    </a>
+						<!-- Lien vers la page de détails du produit -->
+						<a href="{{ path('app_product_details', { id: product.id }) }}" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full text-center mb-4">
+							Voir le produit
+						</a>
 
-                    <!-- Formulaire pour ajouter au panier -->
-                    <form action="{{ path('cart_add', { id: product.id }) }}" method="POST" class="flex flex-col space-y-4 w-full">
-                        <input type="hidden" name="quantity" value="1"> <!-- Quantité par défaut de 1 -->
-                        
-                        <!-- Bouton pour ajouter le produit au panier -->
-                        <button 
-                            type="submit" 
-                            class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full">
-                            Ajouter au panier
-                        </button>
-                    </form>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <!-- Message lorsque aucun produit n'est disponible -->
-        <p class="text-center text-gray-500">Aucun produit n'est disponible pour le moment. Revenez plus tard !</p>
-    {% endif %}
-</div>
+						<!-- Formulaire pour ajouter au panier -->
+						<form action="{{ path('cart_add', { id: product.id }) }}" method="POST" class="flex flex-col space-y-4 w-full">
+							<input type="hidden" name="quantity" value="1">
+							<!-- Quantité par défaut de 1 -->
 
-<!-- Pagination -->
-{% if totalPages > 1 %}
-    <div class="mt-6 flex justify-center space-x-2">
-        <!-- Lien vers la page précédente -->
-        {% if currentPage > 1 %}
-            <a href="{{ path('app_products', { page: currentPage - 1, search: search }) }}"
-               class="px-4 py-2 border bg-gray-100 text-gray-600 rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
-                &laquo; Précédent
-            </a>
-        {% endif %}
+							<!-- Bouton pour ajouter le produit au panier -->
+								<button type="submit" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105 w-full"> Ajouter au panier
+							</button>
+						</form>
+					</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			<!-- Message lorsque aucun produit n'est disponible -->
+			<p class="text-center text-gray-500">Aucun produit n'est disponible pour le moment. Revenez plus tard !</p>
+		{% endif %}
+	</div>
 
-        <!-- Affichage des pages (affichage dynamique selon la page actuelle) -->
-        {% for i in 1..totalPages %}
-            {% if i == 1 or i == totalPages or (i >= currentPage - 1 and i <= currentPage + 1) %}
-                <a href="{{ path('app_products', { page: i, search: search }) }}"
-                   class="px-4 py-2 border {% if i == currentPage %}bg-primary_dw text-tertiary_dw font-bold{% else %}bg-gray-100 text-gray-600{% endif %} rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
-                    {{ i }}
-                </a>
-            {% elseif i == currentPage - 2 or i == currentPage + 2 %}
-                <span class="px-4 py-2 text-gray-600">...</span> <!-- Affichage des points de suspension entre les pages -->
-            {% endif %}
-        {% endfor %}
+	<!-- Pagination -->
+	{% if totalPages > 1 %}
+		<div
+			class="mt-6 flex justify-center space-x-2">
+			<!-- Lien vers la page précédente -->
+			{% if currentPage > 1 %}
+				<a href="{{ path('app_products', { page: currentPage - 1, search: search }) }}" class="px-4 py-2 border bg-gray-100 text-gray-600 rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
+					&laquo; Précédent
+				</a>
+			{% endif %}
 
-        <!-- Lien vers la page suivante -->
-        {% if currentPage < totalPages %}
-            <a href="{{ path('app_products', { page: currentPage + 1, search: search }) }}"
-               class="px-4 py-2 border bg-gray-100 text-gray-600 rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
-                Suivant &raquo;
-            </a>
-        {% endif %}
-    </div>
-{% endif %}
+			<!-- Affichage des pages (affichage dynamique selon la page actuelle) -->
+			{% for i in 1..totalPages %}
+				{% if i == 1 or i == totalPages or (i >= currentPage - 1 and i <= currentPage + 1) %}
+					<a href="{{ path('app_products', { page: i, search: search }) }}" class="px-4 py-2 border {% if i == currentPage %}bg-primary_dw text-tertiary_dw font-bold{% else %}bg-gray-100 text-gray-600{% endif %} rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
+						{{ i }}
+					</a>
+				{% elseif i == currentPage - 2 or i == currentPage + 2 %}
+					<span class="px-4 py-2 text-gray-600">...</span>
+					<!-- Affichage des points de suspension entre les pages -->
+				{% endif %}
+			{% endfor %}
+
+			<!-- Lien vers la page suivante -->
+			{% if currentPage < totalPages %}
+				<a href="{{ path('app_products', { page: currentPage + 1, search: search }) }}" class="px-4 py-2 border bg-gray-100 text-gray-600 rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
+					Suivant &raquo;
+				</a>
+			{% endif %}
+		</div>
+	{% endif %}
 
 {% endblock %}

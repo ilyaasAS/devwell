@@ -1,45 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formulaire de Contact{% endblock %}
+{% block title %}Formulaire de Contact
+{% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-20 px-6 my-12 max-w-3xl">
-    <!-- Page Title -->
-    <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Nous Contacter</h1>
+	<div
+		class="container mx-auto py-20 px-6 my-12 max-w-3xl">
+		<!-- Page Title -->
+		<h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Nous Contacter</h1>
 
-    <div class="p-8 bg-white rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        {{ form_start(form) }}
+		<div class="p-8 bg-white rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+			{{ form_start(form) }}
 
-        <div class="mb-6">
-            {{ form_label(form.name, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
-            {{ form_widget(form.name, {'attr': {'class': 'form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {{ form_errors(form.name, {'attr': {'class': 'text-sm text-red-600'}}) }}
-        </div>
+			<div class="mb-6">
+				{{ form_label(form.name, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+				{{ form_widget(form.name, {'attr': {'class': 'form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{{ form_errors(form.name, {'attr': {'class': 'text-sm text-red-600'}}) }}
+			</div>
 
-        <div class="mb-6">
-            {{ form_label(form.email, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
-            {{ form_widget(form.email, {'attr': {'class': 'form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {{ form_errors(form.email, {'attr': {'class': 'text-sm text-red-600'}}) }}
-        </div>
+			<div class="mb-6">
+				{{ form_label(form.email, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+				{{ form_widget(form.email, {'attr': {'class': 'form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{{ form_errors(form.email, {'attr': {'class': 'text-sm text-red-600'}}) }}
+			</div>
 
-        <div class="mb-6">
-            {{ form_label(form.subject, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
-            {{ form_widget(form.subject, {'attr': {'class': 'form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            {{ form_errors(form.subject, {'attr': {'class': 'text-sm text-red-600'}}) }}
-        </div>
+			<div class="mb-6">
+				{{ form_label(form.subject, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+				{{ form_widget(form.subject, {'attr': {'class': 'form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw'}}) }}
+				{{ form_errors(form.subject, {'attr': {'class': 'text-sm text-red-600'}}) }}
+			</div>
 
-        <div class="mb-6">
-            {{ form_label(form.message, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
-            {{ form_widget(form.message, {'attr': {'class': 'form-textarea w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw', 'rows': '5'}}) }}
-            {{ form_errors(form.message, {'attr': {'class': 'text-sm text-red-600'}}) }}
-        </div>
+			<div class="mb-6">
+				{{ form_label(form.message, null, {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+				{{ form_widget(form.message, {'attr': {'class': 'form-textarea w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw', 'rows': '5'}}) }}
+				{{ form_errors(form.message, {'attr': {'class': 'text-sm text-red-600'}}) }}
+			</div>
 
-      <div class="mb-6 flex justify-center">
-    {{ form_widget(form.submit, {'attr': {'class': 'w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105'}}) }}
-</div>
+			<div class="mb-6 flex justify-center">
+				{{ form_widget(form.submit, {'attr': {'class': 'w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105'}}) }}
+			</div>
 
 
-        {{ form_end(form) }}
-    </div>
-</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
 {% endblock %}

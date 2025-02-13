@@ -1,15 +1,15 @@
 <!-- Formulaire de suppression d'utilisateur -->
-<form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" 
-      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" 
-      class="inline">
-      
-    <!-- Champ caché contenant le token CSRF pour sécuriser la requête -->
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+<form
+	method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" class="inline">
 
-    <!-- Bouton de suppression avec styles et effets visuels -->
-    <button class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md 
-                   hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 
-                   focus:ring-yellow-300 transition duration-300 transform hover:scale-105">
-        Supprimer
-    </button>
+	<!-- Champ caché contenant le token CSRF pour sécuriser la requête -->
+	<input
+	type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+
+	<!-- Bouton de suppression avec styles et effets visuels -->
+	<button class="inline-block bg-red-500 text-black py-3 px-6 rounded-lg shadow-md
+			                   hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2
+			                   focus:ring-yellow-300 transition duration-300 transform hover:scale-105">
+		Supprimer
+	</button>
 </form>

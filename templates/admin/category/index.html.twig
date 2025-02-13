@@ -1,99 +1,99 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categories{% endblock %}
+{% block title %}Categories
+{% endblock %}
 
 {% block body %}
 
-<div class="container mx-auto py-12 px-6 max-w-4xl">
-    {# Le conteneur global qui englobe tout le contenu. Il est centré horizontalement (mx-auto), avec des espacements verticaux (py-12) et un padding horizontal (px-6). La largeur maximale du conteneur est limitée à 4xl. #}
+	<div
+		class="container mx-auto py-12 px-6 max-w-4xl">
+		{# Le conteneur global qui englobe tout le contenu. Il est centré horizontalement (mx-auto), avec des espacements verticaux (py-12) et un padding horizontal (px-6). La largeur maximale du conteneur est limitée à 4xl. #}
 
-    <h1 class="text-4xl font-semibold mb-6 text-center text-primary_dw">Liste des catégories</h1>
-    {# Le titre principal de la page, avec une taille de texte 4xl, un poids de police semi-gras (font-semibold), une marge inférieure (mb-6), et un texte centré. La couleur du texte est définie par 'text-primary_dw'. #}
+		<h1 class="text-4xl font-semibold mb-6 text-center text-primary_dw">Liste des catégories</h1>
+		{# Le titre principal de la page, avec une taille de texte 4xl, un poids de police semi-gras (font-semibold), une marge inférieure (mb-6), et un texte centré. La couleur du texte est définie par 'text-primary_dw'. #}
 
-    <!-- Add New Category Button -->
-    <div class="flex justify-end mb-6">
-        {# Ce div aligne le bouton à droite (justify-end) et ajoute une marge inférieure (mb-6). #}
+		<!-- Add New Category Button -->
+		<div
+			class="flex justify-end mb-6">
+			{# Ce div aligne le bouton à droite (justify-end) et ajoute une marge inférieure (mb-6). #}
 
-        <a href="{{ path('app_category_new') }}" 
-           class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-            Ajouter une nouvelle catégorie
-        </a>
-        {# Lien vers la page de création d'une nouvelle catégorie. Le bouton a des classes pour le style : fond primaire (bg-primary_dw), texte secondaire (text-tertiary_dw), un padding confortable, des coins arrondis (rounded-lg) et une ombre subtile. Lors du survol, la couleur de fond et du texte change, et l'effet de transition agrandit légèrement le bouton. #}
-    </div>
+			<a href="{{ path('app_category_new') }}" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+				Ajouter une nouvelle catégorie
+			</a>
+			{# Lien vers la page de création d'une nouvelle catégorie. Le bouton a des classes pour le style : fond primaire (bg-primary_dw), texte secondaire (text-tertiary_dw), un padding confortable, des coins arrondis (rounded-lg) et une ombre subtile. Lors du survol, la couleur de fond et du texte change, et l'effet de transition agrandit légèrement le bouton. #}
+		</div>
 
-    {% if categories|length > 0 %}
-        {# Si des catégories existent, nous affichons un tableau avec les informations des catégories. #}
+		{% if categories|length > 0 %}
+			{# Si des catégories existent, nous affichons un tableau avec les informations des catégories. #}
 
-        <!-- Categories Table -->
-        <table class="table-auto w-full border-collapse border border-gray-300 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105 mb-8">
-            {# Tableaux sont stylisés avec des bordures grises (border-gray-300) et ont des effets de transition pour l'agrandissement et l'ombre au survol (hover). #}
+			<!-- Categories Table -->
+				<table
+				class="table-auto w-full border-collapse border border-gray-300 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105 mb-8"> {# Tableaux sont stylisés avec des bordures grises (border-gray-300) et ont des effets de transition pour l'agrandissement et l'ombre au survol (hover). #}
 
-            <thead class="bg-gray-100">
-                {# En-tête du tableau avec une couleur de fond grise claire (bg-gray-100). #}
-                <tr>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Nom de la catégorie</th>
-                    {# Titre de la première colonne : "Nom de la catégorie". #}
-                    <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
-                    {# Titre de la deuxième colonne : "Description". #}
-                    <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
-                    {# Titre de la troisième colonne : "Actions" pour les liens de gestion des catégories (voir, modifier, supprimer). #}
-                </tr>
-            </thead>
-            <tbody>
-                {# Corps du tableau, où chaque ligne représente une catégorie. #}
+				<thead
+					class="bg-gray-100">
+					{# En-tête du tableau avec une couleur de fond grise claire (bg-gray-100). #}
+					<tr>
+						<th class="border border-gray-300 px-4 py-2 text-left">Nom de la catégorie</th>
+						{# Titre de la première colonne : "Nom de la catégorie". #}
+						<th class="border border-gray-300 px-4 py-2 text-left">Description</th>
+						{# Titre de la deuxième colonne : "Description". #}
+						<th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+						{# Titre de la troisième colonne : "Actions" pour les liens de gestion des catégories (voir, modifier, supprimer). #}
+					</tr>
+				</thead>
+				<tbody>
+					{# Corps du tableau, où chaque ligne représente une catégorie. #}
 
-            {% for category in categories %}
-                {# Pour chaque catégorie dans la liste des catégories, nous affichons une ligne avec ses détails. #}
+					{% for category in categories %}
+						{# Pour chaque catégorie dans la liste des catégories, nous affichons une ligne avec ses détails. #}
 
-                <tr class="odd:bg-white even:bg-gray-50 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-                    {# Chaque ligne alterne entre un fond blanc (odd:bg-white) et un fond gris clair (even:bg-gray-50) pour une meilleure lisibilité. #}
+						<tr
+							class="odd:bg-white even:bg-gray-50 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+							{# Chaque ligne alterne entre un fond blanc (odd:bg-white) et un fond gris clair (even:bg-gray-50) pour une meilleure lisibilité. #}
 
-                    <td class="border border-gray-300 px-4 py-2">{{ category.name }}</td>
-                    {# Affiche le nom de la catégorie dans la première colonne. #}
+							<td class="border border-gray-300 px-4 py-2">{{ category.name }}</td>
+							{# Affiche le nom de la catégorie dans la première colonne. #}
 
-                    <td class="border border-gray-300 px-4 py-2">{{ category.description ? category.description : 'Pas de description' }}</td>
-                    {# Affiche la description de la catégorie, ou "Pas de description" si aucune description n'est fournie. #}
+							<td class="border border-gray-300 px-4 py-2">{{ category.description ? category.description : 'Pas de description' }}</td>
+							{# Affiche la description de la catégorie, ou "Pas de description" si aucune description n'est fournie. #}
 
-                    <td class="border border-gray-300 px-4 py-2 text-center"> 
-                        {# Cette cellule contient les liens d'action (voir, modifier, supprimer). Les actions sont centrées (text-center). #}
-                        
-                        <!-- Show Link -->
-                        <a href="{{ path('app_category_show', {id: category.id}) }}" 
-                           class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
-                            Voir
-                        </a>
-                        {# Lien pour afficher les détails de la catégorie. Le lien est stylisé avec une couleur bleue (text-blue-500), et change de couleur et devient souligné lors du survol. #}
+							<td class="border border-gray-300 px-4 py-2 text-center">
+								{# Cette cellule contient les liens d'action (voir, modifier, supprimer). Les actions sont centrées (text-center). #}
 
-                        <!-- Edit Link -->
-                        <a href="{{ path('app_category_edit', {id: category.id}) }}" 
-                           class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
-                            Modifier
-                        </a>
-                        {# Lien pour modifier la catégorie. Il est stylisé avec une couleur jaune (text-yellow-500) et a les mêmes effets de survol que le lien "Voir". #}
+								<!-- Show Link -->
+									<a href="{{ path('app_category_show', {id: category.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105"> Voir
+								</a>
+								{# Lien pour afficher les détails de la catégorie. Le lien est stylisé avec une couleur bleue (text-blue-500), et change de couleur et devient souligné lors du survol. #}
 
-                        <!-- Delete Button -->
-                        <form method="post" action="{{ path('app_category_delete', {id: category.id}) }}" 
-                              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');" class="inline mx-2">
-                            {# Le formulaire de suppression de catégorie. Il envoie une requête POST pour supprimer la catégorie sélectionnée. Le formulaire est inline et a un espace horizontal (mx-2). #}
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
-                            {# Utilisation d'un jeton CSRF pour sécuriser l'action de suppression. #}
+								<!-- Edit Link -->
+								<a href="{{ path('app_category_edit', {id: category.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
+									Modifier
+								</a>
+								{# Lien pour modifier la catégorie. Il est stylisé avec une couleur jaune (text-yellow-500) et a les mêmes effets de survol que le lien "Voir". #}
 
-                            <button type="submit" 
-                                    class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
-                                Supprimer
-                            </button>
-                            {# Le bouton pour soumettre la suppression de la catégorie. Il est stylisé en rouge (text-red-500) et a des effets de survol similaires aux autres liens. #}
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p class="text-center text-gray-500 mt-6">Aucune catégorie n'a été trouvée.</p>
-        {# Si aucune catégorie n'est présente dans la base de données, un message informant l'utilisateur qu'aucune catégorie n'a été trouvée est affiché. #}
-    {% endif %}
-</div>
+								<!-- Delete Button -->
+								<form
+									method="post" action="{{ path('app_category_delete', {id: category.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');" class="inline mx-2">
+									{# Le formulaire de suppression de catégorie. Il envoie une requête POST pour supprimer la catégorie sélectionnée. Le formulaire est inline et a un espace horizontal (mx-2). #}
+									<input
+									type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+									{# Utilisation d'un jeton CSRF pour sécuriser l'action de suppression. #}
+
+									<button type="submit" class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
+										Supprimer
+									</button>
+									{# Le bouton pour soumettre la suppression de la catégorie. Il est stylisé en rouge (text-red-500) et a des effets de survol similaires aux autres liens. #}
+								</form>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p class="text-center text-gray-500 mt-6">Aucune catégorie n'a été trouvée.</p>
+			{# Si aucune catégorie n'est présente dans la base de données, un message informant l'utilisateur qu'aucune catégorie n'a été trouvée est affiché. #}
+		{% endif %}
+	</div>
 
 {% endblock %}
-{# Fin du bloc 'body'. #}

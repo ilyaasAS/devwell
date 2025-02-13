@@ -1,62 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Votre Panier{% endblock %}
+{% block title %}Votre Panier
+{% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-10">
-    <!-- Titre de la page -->
-    <h1 class="text-4xl font-semibold mb-6 text-primary_dw">Votre Panier</h1>
-    
-    {% if cartItems|length > 0 %}
-        <ul class="space-y-6">
-            {% for item in cartItems %}
-                <li class="flex justify-between items-center p-4 bg-white rounded-lg shadow-secondary transition-transform duration-300 hover:scale-105 hover:shadow-hover">
-                    <!-- Nom du produit et description -->
-                    <div class="flex-1">
-                        <p class="text-text_dw font-semibold">{{ item.product.name }}</p>
-                        <p class="text-gray-600 text-sm">{{ item.product.description|slice(0, 60) ~ '...' }}</p>
-                    </div>
+	<div
+		class="container mx-auto py-10">
+		<!-- Titre de la page -->
+		<h1 class="text-4xl font-semibold mb-6 text-primary_dw">Votre Panier</h1>
 
-                    <!-- Formulaire pour modifier la quantité du produit dans le panier -->
-                    <div class="flex items-center space-x-4">
-                        <span class="text-lg font-semibold text-gray-700">Quantité</span>
-                        <form action="{{ path('cart_update', { id: item.id }) }}" method="POST" class="flex items-center space-x-2">
-                            <input type="number" 
-                                   name="quantity" 
-                                   value="{{ item.quantity }}" 
-                                   min="1" 
-                                   max="{{ item.product.stock }}" 
-                                   class="w-16 text-center border rounded-md py-2 px-3 bg-light_gray focus:outline-none focus:ring-2 focus:ring-primary_dw"
-                                   title="Quantité disponible : {{ item.product.stock }}"
-                                   onchange="this.form.submit()"> <!-- Met à jour la quantité dès que l'utilisateur change la valeur -->
-                            <noscript>
-                                <button type="submit" class="hidden">Mettre à jour</button>
-                            </noscript>
-                        </form>
-                    </div>
+		{% if cartItems|length > 0 %}
+			<ul class="space-y-6">
+				{% for item in cartItems %}
+					<li
+						class="flex justify-between items-center p-4 bg-white rounded-lg shadow-secondary transition-transform duration-300 hover:scale-105 hover:shadow-hover">
+						<!-- Nom du produit et description -->
+						<div class="flex-1">
+							<p class="text-text_dw font-semibold">{{ item.product.name }}</p>
+							<p class="text-gray-600 text-sm">{{ item.product.description|slice(0, 60) ~ '...' }}</p>
+						</div>
 
-                    <!-- Lien pour supprimer un produit du panier -->
-                    <div class="ml-4">
-                        <a href="{{ path('cart_remove', { id: item.id }) }}" 
-                           class="text-red-500 font-medium hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 rounded-md">
-                            <i class="fa fa-trash-alt mr-2"></i> Supprimer
-                        </a>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
+						<!-- Formulaire pour modifier la quantité du produit dans le panier -->
+						<div class="flex items-center space-x-4">
+							<span class="text-lg font-semibold text-gray-700">Quantité</span>
+							<form action="{{ path('cart_update', { id: item.id }) }}" method="POST" class="flex items-center space-x-2">
+								<input
+								type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" class="w-16 text-center border rounded-md py-2 px-3 bg-light_gray focus:outline-none focus:ring-2 focus:ring-primary_dw" title="Quantité disponible : {{ item.product.stock }}" onchange="this.form.submit()">
+								<!-- Met à jour la quantité dès que l'utilisateur change la valeur -->
+								<noscript>
+									<button type="submit" class="hidden">Mettre à jour</button>
+								</noscript>
+							</form>
+						</div>
 
-        <!-- Affichage du total du panier (nombre d'articles et prix total) -->
-        <div class="mt-8 flex justify-between items-center">
-            <p class="font-semibold text-lg">Total: <span class="text-gray-600">{{ totalItems }} article(s)</span> | <span class="text-green-600">{{ totalPrice }} €</span></p>
+						<!-- Lien pour supprimer un produit du panier -->
+						<div class="ml-4">
+							<a href="{{ path('cart_remove', { id: item.id }) }}" class="text-red-500 font-medium hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 rounded-md">
+								<i class="fa fa-trash-alt mr-2"></i>
+								Supprimer
+							</a>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
 
-            <!-- Lien pour passer à la caisse -->
-            <a href="/checkout" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:text-primary_dw focus:bg-secondary_dw focus:shadow-lg transition duration-300 transform hover:scale-105">Passer à la caisse</a>
-        </div>
+			<!-- Affichage du total du panier (nombre d'articles et prix total) -->
+			<div class="mt-8 flex justify-between items-center">
+				<p class="font-semibold text-lg">Total:
+					<span class="text-gray-600">{{ totalItems }}
+						article(s)</span>
+					|
+					<span class="text-green-600">{{ totalPrice }}
+						€</span>
+				</p>
 
-    {% else %}
-        <!-- Message si le panier est vide -->
-        <p class="text-center text-text_dw mt-6">Votre panier est vide.</p>
-    {% endif %}
-</div>
+				<!-- Lien pour passer à la caisse -->
+				<a href="/checkout" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:text-primary_dw focus:bg-secondary_dw focus:shadow-lg transition duration-300 transform hover:scale-105">Passer à la caisse</a>
+			</div>
+
+		{% else %}
+			<!-- Message si le panier est vide -->
+			<p class="text-center text-text_dw mt-6">Votre panier est vide.</p>
+		{% endif %}
+	</div>
 {% endblock %}

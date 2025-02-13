@@ -1,87 +1,90 @@
 <?php
 
-namespace App\Security; // Déclaration de l'espace de noms pour le fichier LoginAuthenticator.
+namespace App\Security;  // Déclaration du namespace qui indique que ce fichier appartient à la couche sécurité de l'application.
 
-use Symfony\Component\HttpFoundation\RedirectResponse; // Importation de RedirectResponse pour effectuer des redirections HTTP.
-use Symfony\Component\HttpFoundation\Request; // Importation de Request pour manipuler les requêtes HTTP entrantes.
-use Symfony\Component\HttpFoundation\Response; // Importation de Response pour envoyer une réponse HTTP.
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface; // Importation de l'interface pour générer des URL.
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface; // Importation de TokenInterface pour manipuler les tokens d'authentification.
-use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator; // Importation de la classe de base pour créer un authentificateur personnalisé.
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge; // Importation pour valider les tokens CSRF.
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge; // Importation pour ajouter une gestion du "remember me".
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge; // Importation pour obtenir l'identité de l'utilisateur.
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials; // Importation pour les informations d'identification (mot de passe).
-use Symfony\Component\Security\Http\Authenticator\Passport\Passport; // Importation pour créer un "passport" qui contient toutes les informations nécessaires à l'authentification.
-use Symfony\Component\Security\Http\SecurityRequestAttributes; // Importation pour manipuler les attributs de sécurité de la requête.
-use Symfony\Component\Security\Http\Util\TargetPathTrait; // Importation pour gérer la redirection après une authentification réussie.
-use App\Entity\User; // Importation de l'entité User pour interagir avec les utilisateurs.
-use Doctrine\ORM\EntityManagerInterface; // Importation de l'interface pour interagir avec la base de données via Doctrine.
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface; // Importation pour hasher les mots de passe et les valider.
+use Symfony\Component\HttpFoundation\RedirectResponse;  // Permet de rediriger l'utilisateur vers une autre page après l'authentification.
+use Symfony\Component\HttpFoundation\Request;  // Permet d'obtenir les données de la requête HTTP (comme les informations de connexion).
+use Symfony\Component\HttpFoundation\Response;  // Utilisé pour envoyer une réponse HTTP au client.
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;  // Permet de générer des URLs (comme la page de login ou la page d'accueil).
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;  // Interface pour manipuler les tokens d'authentification (représente l'utilisateur authentifié).
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;  // Classe de base pour un authentificateur basé sur un formulaire de login.
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;  // Badge pour valider les tokens CSRF (protection contre les attaques CSRF).
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;  // Badge pour gérer la fonctionnalité "Se souvenir de moi" (remember me).
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;  // Badge pour associer l'utilisateur à son email.
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;  // Badge pour gérer les informations d'identification de l'utilisateur (ici le mot de passe).
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;  // Représente toutes les informations nécessaires à l'authentification.
+use Symfony\Component\Security\Http\SecurityRequestAttributes;  // Permet de manipuler les attributs de sécurité dans la requête.
+use Symfony\Component\Security\Http\Util\TargetPathTrait;  // Permet de gérer la redirection de l'utilisateur après l'authentification.
+use App\Entity\User;  // Entité qui représente un utilisateur dans la base de données.
+use Doctrine\ORM\EntityManagerInterface;  // Permet d'interagir avec la base de données via Doctrine.
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;  // Permet de vérifier les mots de passe et de les hasher.
+use Symfony\Component\Security\Core\Exception\AuthenticationException;  // Exception levée lorsqu'une authentification échoue.
 
-class LoginAuthenticator extends AbstractLoginFormAuthenticator // Déclaration de la classe LoginAuthenticator, qui étend AbstractLoginFormAuthenticator pour créer un authentificateur personnalisé.
+class LoginAuthenticator extends AbstractLoginFormAuthenticator  // Déclaration de la classe LoginAuthenticator, qui étend AbstractLoginFormAuthenticator pour gérer l'authentification via un formulaire de login.
 {
-    use TargetPathTrait; // Utilisation du trait TargetPathTrait pour gérer les redirections.
+    use TargetPathTrait;  // Utilisation du trait TargetPathTrait pour gérer les redirections après l'authentification.
 
-    public const LOGIN_ROUTE = 'app_login'; // Définition de la route de connexion.
+    public const LOGIN_ROUTE = 'app_login';  // Définition de la route pour accéder au formulaire de login.
 
-    private $urlGenerator; // Déclaration de la variable pour générer des URL.
-    private $entityManager; // Déclaration de la variable pour interagir avec la base de données.
-    private $passwordHasher; // Déclaration de la variable pour hasher et valider les mots de passe.
+    private $urlGenerator;  // Déclaration d'une propriété pour générer des URLs.
+    private $entityManager;  // Déclaration d'une propriété pour interagir avec la base de données (via Doctrine).
+    private $passwordHasher;  // Déclaration d'une propriété pour vérifier et hasher les mots de passe.
 
-    // Constructeur qui initialise les services nécessaires pour l'authentification.
+    // Constructeur de la classe, il initialise les services nécessaires à l'authentification.
     public function __construct(UrlGeneratorInterface $urlGenerator, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
-        $this->urlGenerator = $urlGenerator; // Initialisation de l'URL Generator.
-        $this->entityManager = $entityManager; // Initialisation de l'EntityManager.
-        $this->passwordHasher = $passwordHasher; // Initialisation du hasher de mot de passe.
+        $this->urlGenerator = $urlGenerator;  // Initialisation de l'URL generator.
+        $this->entityManager = $entityManager;  // Initialisation de l'Entity Manager pour accéder à la base de données.
+        $this->passwordHasher = $passwordHasher;  // Initialisation du password hasher pour vérifier et hasher les mots de passe.
     }
 
-    // La méthode authenticate est responsable de l'authentification de l'utilisateur.
+    // Cette méthode est appelée pour authentifier un utilisateur.
     public function authenticate(Request $request): Passport
     {
-        // Récupérer les informations de connexion envoyées via la requête HTTP.
+        // Récupérer les informations de l'utilisateur depuis la requête HTTP (email et mot de passe).
         $email = $request->request->get('email');
         $password = $request->request->get('password');
 
-        // Récupérer l'utilisateur correspondant à l'email.
+        // Recherche de l'utilisateur dans la base de données avec l'email.
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
+        // Si l'utilisateur n'est pas trouvé, lancer une exception d'authentification.
         if (!$user) {
-            throw new \Exception('Utilisateur introuvable'); // Si l'utilisateur n'est pas trouvé, une exception est lancée.
+            throw new AuthenticationException('Utilisateur introuvable');
         }
 
-        // Vérification du mot de passe.
+        // Vérification de la validité du mot de passe de l'utilisateur.
         if (!$this->passwordHasher->isPasswordValid($user, $password)) {
-            throw new \Exception('Mot de passe incorrect'); // Si le mot de passe est invalide, une exception est lancée.
+            throw new AuthenticationException('Mot de passe incorrect');
         }
 
-        // Crée un passport (un objet qui contient les informations nécessaires à l'authentification).
+        // Si l'utilisateur et le mot de passe sont valides, créer un "passport" (un objet contenant les informations nécessaires à l'authentification).
         return new Passport(
-            new UserBadge($email), // Le badge de l'utilisateur identifie l'utilisateur par son email.
-            new PasswordCredentials($password), // Le badge des informations d'identification contient le mot de passe.
+            new UserBadge($email),  // Créer un badge d'utilisateur à partir de l'email.
+            new PasswordCredentials($password),  // Créer un badge de crédentiales avec le mot de passe.
             [
-                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')), // Validation du token CSRF pour protéger contre les attaques CSRF.
-                new RememberMeBadge(), // Activation de la fonctionnalité "remember me" pour maintenir l'utilisateur connecté.
+                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),  // Validation du token CSRF pour la sécurité.
+                new RememberMeBadge(),  // Activer le "remember me" pour garder l'utilisateur connecté.
             ]
         );
     }
 
-    // La méthode onAuthenticationSuccess est appelée après une authentification réussie.
+    // Cette méthode est appelée lorsqu'une authentification réussie a lieu.
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // Si l'utilisateur venait d'une page spécifique avant d'être redirigé vers la page de connexion, il est renvoyé à cette page.
+        // Vérifier si l'utilisateur était en train de visiter une page avant de se rendre sur la page de login.
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath); // Redirection vers la page demandée.
+            // Si oui, rediriger l'utilisateur vers cette page.
+            return new RedirectResponse($targetPath);
         }
 
-        // Sinon, l'utilisateur est redirigé vers la page d'accueil.
-        return new RedirectResponse($this->urlGenerator->generate('app_home')); // Redirection vers la page d'accueil.
+        // Sinon, rediriger l'utilisateur vers la page d'accueil.
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
-    // La méthode getLoginUrl est utilisée pour obtenir l'URL de la page de connexion.
+    // Cette méthode retourne l'URL de la page de login.
     protected function getLoginUrl(Request $request): string
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE); // Génération de l'URL de la page de connexion.
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);  // Génère l'URL de la route de login définie plus haut.
     }
 }
