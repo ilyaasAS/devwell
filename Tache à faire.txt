@@ -2,21 +2,16 @@ checker:
 
 XV---MCD (voir le chat avec db.sql + lui donner à la fin la table noqsl)
 XV---MLD
+_____
+
 XVV---Diagramme de cas d'utilisation
 Planning
 Maquette
 ___________________
 DT: un résumer du projet en anglais
-______________
-
---Test le site 
-
-
---avant de faire un github (commentaire)
-
 _____________
 
---Test unitaire
+--Test Fonctionnel
 ________________________
 
 Hébergement
@@ -26,7 +21,9 @@ Nosql
 rendre mon partage de co en ip fixe
 
 mettre l'ip du VPS
-_
+________
+
+W3C
 
 Cette erreur disparait en prod si tu t'appent les bonne commande
 
