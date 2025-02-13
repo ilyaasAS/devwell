@@ -11,10 +11,13 @@ ___________________
 DT: un résumer du projet en anglais
 _____________
 
---Test Fonctionnel
+--Test Fonctionnel ?
+Page d'erreur sur ma page de connexion
 ________________________
 
 Hébergement
+
+vidéo de Ouwardia
 
 Nosql
 
