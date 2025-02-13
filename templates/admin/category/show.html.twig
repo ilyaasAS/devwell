@@ -3,41 +3,65 @@
 {% block title %}Détails de la catégorie{% endblock %}
 
 {% block body %}
+
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+    {# Un conteneur centré horizontalement avec une largeur maximale de 4xl (max-w-4xl), un padding vertical de 20 (py-20) et un padding horizontal de 6 (px-6). Une marge verticale de 12 (my-12) est appliquée pour espacer le contenu. #}
+
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Détails de la catégorie</h1>
+    {# Titre de la page, centré, avec une taille de texte de 3xl, un poids de police en gras (font-bold) et une marge inférieure de 8 (mb-8). Le texte est coloré avec une classe personnalisée 'text-primary_dw'. #}
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        {# Une carte blanche avec padding de 8 (p-8), des bords arrondis (rounded-lg), une ombre (shadow-product) et un effet de transition. Au survol, l'ombre change et un effet de zoom (agrandissement) est appliqué. #}
+
         <h2 class="text-2xl font-bold mb-4">{{ category.name }}</h2>
+        {# Affiche le nom de la catégorie dans un titre de taille 2xl, avec un poids de police en gras et une marge inférieure de 4 (mb-4). Le nom est récupéré via la variable 'category'. #}
+
         <p class="text-lg mb-4">
             <strong>Description:</strong>
             <span class="text-gray-700">{{ category.description ? category.description : 'Pas de description' }}</span>
         </p>
+        {# Affiche la description de la catégorie avec un texte plus grand (text-lg). Si la catégorie a une description, elle est affichée ; sinon, un message par défaut ("Pas de description") est montré. Le texte est coloré en gris foncé (text-gray-700). #}
 
         {% if category.products|length > 0 %}
+            {# Vérifie si la catégorie contient des produits. Si oui, une section sera affichée avec la liste des produits. #}
+
             <div class="mt-6">
                 <h3 class="text-xl font-semibold mb-3">Produits dans cette catégorie :</h3>
+                {# Titre indiquant la liste des produits dans cette catégorie, avec une taille de texte de 1xl (text-xl), un poids de police semi-gras (font-semibold) et une marge inférieure de 3 (mb-3). #}
                 <ul class="list-disc pl-6">
-                {% for product in category.products %}
-                    <li class="mb-2">
-                        <a href="{{ path('app_product_show', {id: product.id}) }}" class="text-primary_dw hover:text-secondary_dw hover:underline">
-                            {{ product.name }}
-                        </a>
-                    </li>
-                {% endfor %}
+                    {# Une liste non ordonnée avec des puces (list-disc) et un padding à gauche de 6 (pl-6) pour ajouter de l'espacement. #}
+
+                    {% for product in category.products %}
+                        {# Boucle sur tous les produits associés à cette catégorie. Chaque produit est lié à une page de détail avec l'ID du produit. #}
+                        <li class="mb-2">
+                            <a href="{{ path('app_product_show', {id: product.id}) }}" class="text-primary_dw hover:text-secondary_dw hover:underline">
+                                {{ product.name }}
+                            </a>
+                        </li>
+                        {# Affiche chaque produit avec un lien vers sa page de détails. Le nom du produit est récupéré via la variable 'product'. Le lien est stylisé pour changer de couleur et souligner au survol. #}
+                    {% endfor %}
                 </ul>
             </div>
         {% else %}
+            {# Si la catégorie ne contient aucun produit, un message est affiché indiquant "Aucun produit dans cette catégorie". #}
             <p class="text-gray-500 mt-6">Aucun produit dans cette catégorie.</p>
         {% endif %}
         
         <div class="mt-8 text-center">
+            {# Une section en bas du formulaire avec des liens de retour et de modification. Un espacement supérieur de 8 (mt-8) et un centrage du texte. #}
+
             <a href="{{ path('app_category_index') }}" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
                 Retour à la liste
             </a>
+            {# Un bouton "Retour à la liste" avec un style de fond primaire (bg-primary_dw), un texte secondaire (text-tertiary_dw) et des effets de transition au survol/focus. #}
+
             <a href="{{ path('app_category_edit', {id: category.id}) }}" class="inline-block bg-yellow-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-yellow-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-300 transition duration-300 transform hover:scale-105">
                 Modifier la catégorie
             </a>
+            {# Un bouton "Modifier la catégorie" qui redirige vers la page de modification de la catégorie. Il utilise une couleur de fond jaune (bg-yellow-500) et des transitions pour agrandir au survol. #}
         </div>
     </div>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body' #}

@@ -8,50 +8,52 @@ use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ContactRepository::class)]
+#[ORM\Entity(repositoryClass: ContactRepository::class)] // Définition de l'entité Contact associée à la table dans la base de données
 class Contact
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id] // Identifiant unique pour chaque message de contact
+    #[ORM\GeneratedValue] // La valeur de l'ID est générée automatiquement
+    #[ORM\Column] // Définition de la colonne pour l'ID
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)] // Définition d'une colonne pour le nom du contact, longueur maximale de 255 caractères
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)] // Définition d'une colonne pour l'email du contact, longueur maximale de 255 caractères
     private ?string $email = null;
 
-    // Change la propriété Sujet à subject
-    #[ORM\Column(length: 255)]
+    // Changement du nom de la propriété Sujet à subject
+    #[ORM\Column(length: 255)] // Définition d'une colonne pour le sujet du message
     private ?string $subject = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT)] // Définition d'une colonne pour le message (texte long)
     private ?string $message = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)] // Définition de la colonne pour la date de création du message
     private ?\DateTimeInterface $createdAt = null;
 
-    // Ajouter le champ "response" pour stocker la réponse de l'administrateur
-    #[ORM\Column(type: Types::TEXT, nullable: true)]  // Le champ est nullable car la réponse peut ne pas être présente au début
+    // Ajout du champ "response" pour stocker la réponse de l'administrateur
+    #[ORM\Column(type: Types::TEXT, nullable: true)]  // Le champ est nullable pour permettre l'absence de réponse au début
     private ?string $response = null;
 
-    // Ajouter le champ isResponded pour marquer si un message a été répondu
-    #[ORM\Column(type: Types::BOOLEAN)]
-    private bool $isResponded = false; // Initialisé à false par défaut
+    // Ajout du champ isResponded pour marquer si un message a été répondu
+    #[ORM\Column(type: Types::BOOLEAN)] // Champ booléen pour savoir si le message a été répondu
+    private bool $isResponded = false; // Par défaut, le message n'est pas encore répondu
 
-    // Constructeur pour initialiser createdAt
+    // Constructeur pour initialiser la date de création
     public function __construct()
     {
-        // Initialiser la date de création à la date et l'heure actuelles
+        // Initialisation de createdAt à la date et heure actuelles
         $this->createdAt = new \DateTime();
     }
 
+    // Getter pour l'ID
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    // Getter et setter pour le nom du contact
     public function getName(): ?string
     {
         return $this->name;
@@ -60,10 +62,10 @@ class Contact
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
+    // Getter et setter pour l'email du contact
     public function getEmail(): ?string
     {
         return $this->email;
@@ -72,11 +74,10 @@ class Contact
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
-    // Change le getter et setter de Sujet à subject
+    // Getter et setter pour le sujet du message (anciennement "Sujet")
     public function getSubject(): ?string
     {
         return $this->subject;
@@ -85,10 +86,10 @@ class Contact
     public function setSubject(string $subject): static
     {
         $this->subject = $subject;
-
         return $this;
     }
 
+    // Getter et setter pour le message
     public function getMessage(): ?string
     {
         return $this->message;
@@ -97,19 +98,19 @@ class Contact
     public function setMessage(string $message): static
     {
         $this->message = $message;
-
         return $this;
     }
 
+    // Getter pour la date de création du message
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    // Setter pour la date de création du message
     public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -122,7 +123,6 @@ class Contact
     public function setResponse(?string $response): static
     {
         $this->response = $response;
-
         return $this;
     }
 
@@ -135,7 +135,6 @@ class Contact
     public function setIsResponded(bool $isResponded): static
     {
         $this->isResponded = $isResponded;
-
         return $this;
     }
 }

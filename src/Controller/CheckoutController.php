@@ -17,12 +17,14 @@ use App\Service\MailService;
 
 class CheckoutController extends AbstractController
 {
+    // Route pour afficher la page de paiement
     #[Route('/checkout', name: 'checkout')]
     public function checkout(
         Request $request, 
         CartRepository $cartRepository, 
         EntityManagerInterface $em
     ): Response {
+        // Vérifier si l'utilisateur est connecté
         $user = $this->getUser();
         if (!$user) {
             $this->addFlash('error', 'Veuillez vous connecter pour procéder à l\'achat.');
@@ -42,10 +44,11 @@ class CheckoutController extends AbstractController
         $order->setStatus('en attente');  // Mettre le statut sur "en attente" par défaut
         $order->setCreatedAt(new \DateTime());
 
+        // Création du formulaire de commande
         $form = $this->createForm(CommandType::class);
         $form->handleRequest($request);
 
-        // Si le formulaire est soumis et valide
+        // Vérification si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
@@ -59,14 +62,14 @@ class CheckoutController extends AbstractController
                 $em->persist($orderItem);
             }
 
-            // Paiement via Stripe
+            // Gestion du paiement via Stripe
             $stripeToken = $request->request->get('stripeToken');
 
             if ($stripeToken) {
-                // Initialiser Stripe
+                // Initialisation de Stripe
                 Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
-                // Créer une charge Stripe
+                // Création d'une charge Stripe
                 try {
                     Charge::create([
                         'amount' => $this->calculateTotal($cartItems), // Montant en centimes
@@ -79,15 +82,15 @@ class CheckoutController extends AbstractController
                     return $this->redirectToRoute('checkout');
                 }
 
-                // Mettre à jour le statut après paiement
-                $order->setStatus('payée');  // Statut changé en "payée" après paiement réussi
+                // Mettre à jour le statut après paiement réussi
+                $order->setStatus('payée');
             }
 
-            // Sauvegarder la commande
+            // Sauvegarder la commande dans la base de données
             $em->persist($order);
             $em->flush();
 
-            // Supprimer les articles du panier
+            // Suppression des articles du panier après achat
             foreach ($cartItems as $cartItem) {
                 $em->remove($cartItem);
             }
@@ -97,6 +100,7 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('order_confirmation', ['id' => $order->getId()]);
         }
 
+        // Affichage de la page de paiement
         return $this->render('checkout/index.html.twig', [
             'form' => $form->createView(),
             'cartItems' => $cartItems,
@@ -104,6 +108,7 @@ class CheckoutController extends AbstractController
         ]);
     }
 
+    // Route pour confirmer la commande après paiement
     #[Route('/order/confirmation/{id}', name: 'order_confirmation')]
     public function confirmOrder(Order $order): Response
     {
@@ -112,7 +117,7 @@ class CheckoutController extends AbstractController
         ]);
     }
 
-    // Calculer le total de la commande en centimes
+    // Fonction pour calculer le total de la commande en centimes
     private function calculateTotal($cartItems): int
     {
         $total = 0;

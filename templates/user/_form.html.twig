@@ -1,4 +1,11 @@
+<!-- Début du formulaire -->
 {{ form_start(form) }}
+
+    <!-- Génération automatique des champs du formulaire -->
     {{ form_widget(form) }}
+
+    <!-- Bouton de soumission avec un libellé dynamique -->
     <button class="btn">{{ button_label|default('Save') }}</button>
+
+<!-- Fin du formulaire -->
 {{ form_end(form) }}

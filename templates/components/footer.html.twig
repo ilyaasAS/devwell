@@ -1,9 +1,23 @@
 <footer style="background-color: #1a2a40;" class="text-white py-6">
+
     <div class="container mx-auto px-4">
+        <!-- Le conteneur central utilise des marges automatiques pour se centrer, avec des espacements horizontaux (px-4) -->
+
         <div class="flex flex-col sm:flex-row justify-between items-center">
+            <!-- Utilisation de Flexbox pour gérer la disposition : 
+                 - Sur mobile (par défaut), les éléments sont en colonne (flex-col)
+                 - Sur les écrans plus grands (sm et au-dessus), les éléments sont disposés en ligne (flex-row)
+                 - 'justify-between' assure l'espace entre les éléments, 'items-center' les aligne verticalement au centre -->
+
             <!-- Liens du footer -->
             <nav class="mb-4 sm:mb-0">
+                <!-- Navigation des liens dans le footer, avec un espace en bas (mb-4) sur mobile, supprimé sur les écrans plus larges -->
+
                 <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
+                    <!-- Liste des liens dans le footer. Sur mobile, les éléments sont en colonne (space-y-2), 
+                         sur les écrans plus larges, ils sont en ligne avec un espacement horizontal (sm:space-x-6) -->
+
+                    <!-- Chaque lien représente une page différente (CGV, CGU, Mentions Légales, etc.) -->
                     <li>
                         <a href="{{ path('app_cgv') }}" 
                            class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300">
@@ -39,6 +53,7 @@
 
             <!-- Copyright -->
             <div class="text-sm text-gray-400">
+                <!-- Affichage du texte des droits d'auteur avec la date actuelle -->
                 &copy; {{ "now"|date("Y") }} VotreEntreprise. Tous droits réservés.
             </div>
         </div>

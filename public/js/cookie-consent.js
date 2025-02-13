@@ -25,10 +25,10 @@ if (!document.cookie.split('; ').find(row => row.startsWith('cookie_consent=')))
         textAlign: 'center'
     });
 
-    // Ajouter les boutons
+    // Ajouter les styles aux boutons
     var buttons = cookiePopup.querySelectorAll('button');
     buttons.forEach(button => Object.assign(button.style, {
-        backgroundColor: '#4CAF50',
+        backgroundColor: '#4CAF50', // Vert
         color: 'white',
         border: 'none',
         padding: '10px 20px',
@@ -40,7 +40,7 @@ if (!document.cookie.split('; ').find(row => row.startsWith('cookie_consent=')))
     // Ajouter le style du lien vers la politique des cookies
     var policyLink = cookiePopup.querySelector('#cookie-policy-link');
     Object.assign(policyLink.style, {
-        color: '#FFD700',
+        color: '#FFD700', // Or
         textDecoration: 'underline',
         fontSize: '14px',
         display: 'block',
@@ -50,7 +50,7 @@ if (!document.cookie.split('; ').find(row => row.startsWith('cookie_consent=')))
     // Afficher le popup
     document.body.appendChild(cookiePopup);
 
-    // Fonction pour gérer le consentement
+    // Fonction pour gérer le consentement aux cookies
     function handleConsent(value) {
         let maxAge = value === 'true' ? 60 * 60 * 24 * 365 : 60 * 60 * 24; // 1 an si accepté, 1 jour si refusé
         document.cookie = `cookie_consent=${value}; path=/; max-age=${maxAge}`;

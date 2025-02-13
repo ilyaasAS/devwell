@@ -3,15 +3,26 @@
 {% block title %}Editer la commande{% endblock %}
 
 {% block body %}
+
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+    {# Un conteneur qui est centré horizontalement avec une largeur maximale de 4xl (max-w-4xl). Un padding vertical de 20 (py-20) et un padding horizontal de 6 (px-6) sont ajoutés pour aérer le contenu. Une marge verticale de 12 (my-12) est utilisée pour espacer la section. #}
+
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Editer la commande</h1>
+    {# Titre principal centré avec une taille de texte de 3xl, un poids de police en gras (font-bold), et une marge inférieure de 8 (mb-8). Le texte est stylisé avec la couleur personnalisée 'text-primary_dw'. #}
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        {# Une section avec un fond blanc, du padding (p-8), des bords arrondis (rounded-lg), une ombre (shadow-product) et un effet de transition dynamique (agrandissement et changement d'ombre) au survol. #}
+
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+        {# Le formulaire est démarré avec un attribut 'class' contenant 'space-y-6' qui ajoute un espacement vertical entre les éléments du formulaire. #}
+
             <div class="space-y-4">
-                {{ form_row(form.status, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                {# Un conteneur pour les champs de formulaire avec un espacement vertical de 4 (space-y-4). #}
                 
-                {# Pour le champ createdAt, nous spécifions un format de date 'single_text' avec un format spécifique #}
+                {{ form_row(form.status, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+                {# Affiche le champ 'status' du formulaire avec des attributs CSS pour personnaliser son apparence : une bordure (border-gray-300), un padding interne (px-4 py-2), des bords arrondis (rounded-md), et un focus avec un contour de couleur personnalisée (focus:ring-primary_dw, focus:border-primary_dw). #}
+                
+                {# Pour le champ 'createdAt', un format de date spécifique est appliqué (date('Y-m-d H:i')), et la valeur par défaut est définie sur l'heure de création de la commande (order.createdAt). #}
                 {{ form_row(form.createdAt, {
                     'attr': {
                         'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw',
@@ -21,18 +32,27 @@
             </div>
 
             <div class="mt-6 text-center">
+                {# Une marge supérieure de 6 (mt-6) est ajoutée au bouton de soumission, qui est centré horizontalement (text-center). #}
+
                 <button type="submit" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
                     Mise à jour 
                 </button>
+                {# Le bouton "Mise à jour" pour soumettre le formulaire, avec un style de fond primaire (bg-primary_dw), un texte secondaire (text-tertiary_dw), des bordures arrondies, et une transition dynamique au survol. L'effet de zoom (agrandissement) et de changement de couleur au survol sont également ajoutés. #}
             </div>
+            
             <div class="mt-6 text-center">
-        <a href="{{ path('admin_orders_index') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-            Retour
-        </a>
-    </div>
-        {{ form_end(form) }}
-    </div>
+                {# Une autre section pour un bouton de retour avec la même logique de style que le précédent. Une marge supérieure (mt-6) est ajoutée pour espacer les éléments. #}
+                
+                <a href="{{ path('admin_orders_index') }}" class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                    Retour
+                </a>
+                {# Un lien de retour à la liste des commandes avec un style de fond primaire et du texte secondaire. #}
+            </div>
 
-    
+        {{ form_end(form) }}
+        {# Le formulaire est fermé ici avec la méthode 'form_end'. #}
+    </div>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body' #}

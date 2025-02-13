@@ -8,34 +8,34 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 use PHPUnit\TextUI\Configuration\File;
 
-#[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\Entity(repositoryClass: ProductRepository::class)] // Définition de l'entité Product avec le repository associé
 class Product
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id] // Définition de l'ID comme clé primaire
+    #[ORM\GeneratedValue] // L'ID est généré automatiquement
+    #[ORM\Column] // La colonne pour l'ID
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)] // Définition d'une colonne pour le nom du produit
     private ?string $name = null;
 
-    #[ORM\Column]
+    #[ORM\Column] // Définition d'une colonne pour le prix du produit
     private ?float $price = null;
 
-    #[ORM\Column]
+    #[ORM\Column] // Définition d'une colonne pour le stock du produit
     private ?int $stock = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)] // Définition d'une colonne pour l'image du produit (nullable)
     private ?string $image = null;
 
-    #[ORM\Column(type: "text")]
+    #[ORM\Column(type: "text")] // Définition d'une colonne pour la description du produit
     private ?string $description = null;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')] // Relation ManyToOne avec la catégorie du produit
+    #[ORM\JoinColumn(nullable: false)] // La catégorie du produit ne peut pas être nulle
     private ?Category $category = null;
 
-    // Ajout d'une propriété temporaire pour l'image
+    // Propriété temporaire pour l'image téléchargée (utilisée dans le formulaire pour la gestion des fichiers)
     private ?File $uploadedImage = null;
 
     public function getUploadedImage(): ?File
@@ -49,7 +49,7 @@ class Product
         return $this;
     }
 
-    // Ajout de la propriété temporaire pour la nouvelle catégorie
+    // Propriété temporaire pour la nouvelle catégorie (utilisée dans le formulaire pour la gestion de la catégorie)
     private ?string $newCategory = null;
 
     public function getId(): ?int
@@ -57,7 +57,7 @@ class Product
         return $this->id;
     }
 
-    // Getters et Setters
+    // Getters et Setters pour les propriétés de l'entité Product
 
     public function getName(): ?string
     {
@@ -125,7 +125,7 @@ class Product
         return $this;
     }
 
-    // Getters et Setters pour la nouvelle catégorie
+    // Getters et Setters pour la nouvelle catégorie (propriété temporaire)
     public function getNewCategory(): ?string
     {
         return $this->newCategory;

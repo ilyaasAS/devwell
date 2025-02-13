@@ -3,29 +3,51 @@
 {% block title %}Modifier la catégorie{% endblock %}
 
 {% block body %}
+
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+    {# Ce div est utilisé pour contenir tout le contenu de la page. Il est centré horizontalement avec 'mx-auto', et dispose de larges espacements verticaux (py-20, my-12) et d'un padding horizontal (px-6). La largeur maximale est définie à '4xl' (max-w-4xl). #}
+
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Modifier la catégorie</h1>
+    {# Le titre principal de la page avec une taille de texte de 3xl, un poids de police gras (font-bold), une marge inférieure (mb-8), et un texte centré (text-center). La couleur du texte est définie par 'text-primary_dw'. #}
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        {# Un conteneur de formulaire avec fond blanc, padding de 8, coins arrondis (rounded-lg) et une ombre subtile. L'effet de survol agrandit légèrement le conteneur et change l'ombre. #}
+
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-            <div class="space-y-4">
-                {{ form_row(form.name, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-                {{ form_row(form.description, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-            </div>
+        {# Le formulaire commence ici. 'space-y-6' applique un espacement vertical de 6 unités entre les éléments du formulaire. #}
 
-            <div class="mt-6 text-center">
-    <button type="submit" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-        Mettre à jour
-    </button>
-</div>
+        <div class="space-y-4">
+            {# Conteneur pour les champs du formulaire, avec un espacement vertical de 4 entre les éléments. #}
 
-<div class="mt-6 text-center">
-    <a href="{{ path('app_category_index') }}" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-        Retour
-    </a>
-</div>
+            {{ form_row(form.name, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+            {# Affiche le champ 'name' du formulaire avec un style spécifique. Le champ est large ('w-full'), avec une bordure grise, un padding horizontal de 4 et vertical de 2. Les coins sont arrondis (rounded-md), et les classes de focus changent la couleur de la bordure et de l'anneau au focus (focus:ring-primary_dw, focus:border-primary_dw). #}
+
+            {{ form_row(form.description, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+            {# Affiche également le champ 'description' avec le même style que le champ 'name'. #}
+        </div>
+
+        <div class="mt-6 text-center">
+            {# Un conteneur avec une marge supérieure (mt-6) et le texte centré (text-center) pour le bouton de soumission. #}
+            
+            <button type="submit" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                Mettre à jour
+            </button>
+            {# Le bouton pour soumettre le formulaire, avec un fond primaire (bg-primary_dw) et un texte de couleur secondaire (text-tertiary_dw). Au survol (hover), le fond devient secondaire et le texte devient primaire. Les classes de focus ajoutent un anneau autour du bouton lors de la mise au focus. L'effet de survol agrandit légèrement le bouton. #}
+        </div>
+
+        <div class="mt-6 text-center">
+            {# Un autre conteneur centré avec un bouton pour revenir à la liste des catégories. #}
+            
+            <a href="{{ path('app_category_index') }}" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+                Retour
+            </a>
+            {# Le lien pour retourner à la liste des catégories. Il a le même style que le bouton de soumission, avec des effets similaires au survol et au focus. #}
+        </div>
 
         {{ form_end(form) }}
+        {# Affiche la fin du formulaire. #}
     </div>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body'. #}

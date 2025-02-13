@@ -3,29 +3,48 @@
 {% block title %}Détails de la commande{% endblock %}
 
 {% block body %}
+
 <div class="container mx-auto py-6 sm:py-10 px-4 sm:px-6 my-4 sm:my-8 max-w-4xl">
+    {# Un conteneur est utilisé avec des classes pour gérer les espacements (padding et margin), ainsi qu'une largeur maximale de 4xl pour mieux contrôler l'affichage. #}
+
     <!-- Page Title -->
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Détails de la commande</h1>
+    {# Le titre principal de la page est centré, avec une taille de texte 3xl, en gras (font-bold), et une couleur primaire définie par 'text-primary_dw'. Une marge inférieure (mb-8) est ajoutée pour espacer le titre du contenu suivant. #}
 
     <!-- Order Details -->
-    <p class="text-lg sm:text-xl mb-4"><strong>Statut:</strong> {{ order.status }}</p>
-    <p class="text-lg sm:text-xl mb-4"><strong>Créée le:</strong> {{ order.createdAt|date('d-m-Y H:i') }}</p>
+    <p class="text-lg sm:text-xl mb-4"><strong>Statut :</strong> {{ order.status }}</p>
+    {# Affiche le statut de la commande avec une taille de texte large (text-lg). Pour les écrans plus grands (sm), la taille passe à 'text-xl'. #}
+
+    <p class="text-lg sm:text-xl mb-4"><strong>Date :</strong> {{ order.createdAt|date('d-m-Y H:i') }}</p>
+    {# Affiche la date de création de la commande, formatée avec un filtre 'date' pour afficher la date au format jour-mois-année heure:minute. #}
 
     <!-- Order Items Details -->
     <h2 class="text-2xl font-bold mt-8 mb-6 text-center text-primary_dw">Détails des articles</h2>
+    {# Titre pour la section des articles de la commande, centré et avec une taille de texte 2xl. La couleur primaire est appliquée. Une marge supérieure et inférieure (mt-8, mb-6) est ajoutée pour espacer le titre. #}
 
     <div class="space-y-4">
         {% if order.orderItems|length > 0 %}
+            {# Si la commande contient des articles, on parcourt chaque article avec une boucle for. #}
             {% for item in order.orderItems %}
                 <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+                    {# Chaque article est affiché dans un bloc avec un fond gris clair (bg-gray-100), du padding (p-4), et un bord arrondi (rounded-lg) avec une ombre légère (shadow-md). #}
+
                     <p><strong>Produit:</strong> {{ item.product.name }}</p>
+                    {# Affiche le nom du produit. #}
+
                     <p><strong>Quantité:</strong> {{ item.quantity }}</p>
+                    {# Affiche la quantité de l'article commandé. #}
+
                     <p><strong>Prix unitaire:</strong> {{ item.price }} €</p>
+                    {# Affiche le prix unitaire de l'article en euros. #}
+
                     <p><strong>Total article:</strong> {{ item.quantity * item.price }} €</p>
+                    {# Affiche le total pour cet article, calculé en multipliant la quantité par le prix unitaire. #}
                 </div>
             {% endfor %}
         {% else %}
             <p class="text-center text-gray-500">Aucun article dans cette commande.</p>
+            {# Si aucun article n'est présent dans la commande, un message est affiché pour informer l'utilisateur. #}
         {% endif %}
     </div>
 
@@ -33,35 +52,49 @@
     <div class="mt-8 text-lg sm:text-xl">
         <p><strong>Total de la commande:</strong> 
             {% set totalOrder = 0 %}
+            {# Initialise une variable 'totalOrder' pour calculer le montant total de la commande. #}
             {% for item in order.orderItems %}
                 {% set totalOrder = totalOrder + (item.quantity * item.price) %}
+                {# Pour chaque article, le total de la commande est mis à jour en ajoutant le total de l'article (quantité * prix). #}
             {% endfor %}
             {{ totalOrder }} €
         </p>
+        {# Affiche le total de la commande, calculé avec les articles de la commande. Le total est affiché en euros. #}
     </div>
 
     <!-- Action Buttons -->
     <div class="flex justify-center gap-6 mt-8">
+        {# Une zone avec des boutons d'action, centrée et avec un espacement entre les boutons (gap-6). #}
+
         <!-- Retour Button -->
         <a href="{{ path('admin_orders_index') }}" 
            class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
             Retour
         </a>
-        
+        {# Un bouton pour revenir à la liste des commandes, avec un style de fond bleu et un texte tertiaire. Le bouton change de couleur et s'agrandit au survol. #}
+
         <!-- Modifier Button -->
         <a href="{{ path('admin_orders_edit', {'id': order.id}) }}" 
            class="inline-block bg-yellow-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 hover:text-primary_dw focus:bg-yellow-400 focus:text-primary_dw transition duration-300 transform hover:scale-105">
             Modifier
         </a>
-        
+        {# Un bouton pour éditer la commande, avec un fond jaune et du texte blanc. Le fond change au survol. #}
+
         <!-- Supprimer Button -->
         <form method="post" action="{{ path('admin_orders_delete', {'id': order.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');" class="inline">
+            {# Un formulaire pour supprimer la commande. Un message de confirmation est demandé avant la suppression. #}
+            
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ order.id) }}">
+            {# Le token CSRF est inclus pour sécuriser la suppression. #}
+
             <button type="submit" 
                     class="inline-block bg-red-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-red-400 hover:text-primary_dw focus:bg-red-400 focus:text-primary_dw transition duration-300 transform hover:scale-105">
                 Supprimer
             </button>
+            {# Le bouton de suppression est rouge avec un texte blanc. Le bouton change de couleur au survol. #}
         </form>
     </div>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body' qui contient tout le contenu principal de la page. #}

@@ -5,49 +5,86 @@
 {% block title %}Détail du message{% endblock %}
 
 {% block body %}
+
 <div class="container mx-auto py-20 px-6 my-12 max-w-3xl">
+    {# Le conteneur est centré avec 'mx-auto', avec des espacements verticaux (py-20, my-12) et horizontaux (px-6). La largeur maximale est limitée à '3xl' (max-w-3xl). #}
+
     <!-- Page Title -->
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Détail du Message</h1>
+    {# Le titre principal de la page est centré avec une taille de texte de 3xl, en gras (font-bold), et une marge inférieure de 8 (mb-8). La couleur du texte est définie par 'text-primary_dw'. #}
 
     <!-- Main Message Card with shadow effect -->
     <div class="p-8 bg-white rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        {# Le message principal est affiché dans une carte avec un fond blanc, un padding de 8, des coins arrondis (rounded-lg), et une ombre. Il y a un effet de survol qui change l'ombre et la taille du bloc. #}
+
         <div class="mb-6 border-b pb-4">
+            {# Ce conteneur contient le nom et l'email de l'expéditeur, avec une bordure inférieure pour la séparation. #}
             <p class="font-semibold text-lg">Nom : <span class="text-gray-700">{{ message.name }}</span></p>
+            {# Affiche le nom de l'expéditeur en texte gras (font-semibold) et de taille large (text-lg). Le nom est suivi de l'email de l'expéditeur en gris (text-gray-700). #}
             <p class="font-semibold text-lg">Email : <span class="text-gray-700">{{ message.email }}</span></p>
         </div>
+
         <div class="mb-6 border-b pb-4">
+            {# Affiche le sujet du message avec une bordure inférieure pour la séparation. #}
             <p class="text-lg font-medium text-primary_dw">Sujet :</p>
+            {# Le texte "Sujet" est en taille moyenne (text-lg) et en couleur primaire (text-primary_dw). #}
             <p class="text-gray-800">{{ message.subject }}</p>
+            {# Le sujet du message est affiché en texte gris foncé (text-gray-800). #}
         </div>
+
         <div class="mb-6 border-b pb-4">
+            {# Affiche le corps du message avec une bordure inférieure pour la séparation. #}
             <p class="text-lg font-medium text-primary_dw">Message :</p>
+            {# Le texte "Message" est en taille moyenne (text-lg) et en couleur primaire (text-primary_dw). #}
             <p class="p-4 bg-gray-100 rounded-md">{{ message.message }}</p>
+            {# Le message lui-même est affiché avec un padding de 4, un fond gris clair (bg-gray-100), et des coins arrondis. #}
         </div>
+
         <p class="text-sm text-gray-500"><strong>Envoyé le :</strong> {{ message.createdAt|date('d/m/Y H:i') }}</p>
+        {# Affiche la date et l'heure d'envoi du message avec une taille de texte petite (text-sm) et une couleur gris clair (text-gray-500). La date est formatée au format 'jour/mois/année heure:minute'. #}
 
         {% if is_granted('ROLE_ADMIN') %}
+            {# Si l'utilisateur est un administrateur (vérifié avec la fonction 'is_granted'), il peut répondre au message. #}
+
             <!-- Admin Response Card with hover shadow effect -->
             <div class="mt-8 p-6 bg-gray-50 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+                {# Cette section permet à l'administrateur de répondre au message. Elle est également une carte avec des coins arrondis, une ombre et un effet de survol. #}
+
                 <h3 class="text-2xl font-semibold mb-4 text-primary_dw">Répondre au message</h3>
-                
+                {# Titre de la section de réponse avec une taille de texte de 2xl, en gras, et une marge inférieure de 4. Le texte est en couleur primaire. #}
+
                 {{ form_start(form) }}
+                {# Affiche le début du formulaire pour la réponse. #}
 
                 <div class="mb-6">
+                    {# Conteneur pour le champ de la réponse. Il est espacé avec une marge inférieure de 6. #}
                     {{ form_label(form.response, 'Votre réponse', {'label_attr': {'class': 'block text-lg font-medium text-gray-700 mb-2'}}) }}
+                    {# Affiche l'étiquette du champ de réponse. Le texte est de taille grande (text-lg) et de couleur gris (text-gray-700). #}
                     {{ form_widget(form.response, {'attr': {'class': 'form-textarea w-full p-3 border border-gray-300 rounded-lg focus:ring-primary_dw focus:border-primary_dw', 'rows': '5'}}) }}
+                    {# Affiche le champ de texte pour la réponse. Il est large (w-full), avec un padding de 3, une bordure grise et des coins arrondis. Les classes de focus changent la couleur de la bordure lors de la sélection. #}
                     {{ form_errors(form.response, {'attr': {'class': 'text-sm text-red-600'}}) }}
+                    {# Affiche les erreurs de validation du formulaire si présentes, en texte rouge (text-red-600) et de taille petite (text-sm). #}
                 </div>
 
                 <div class="flex justify-end space-x-4">
+                    {# Conteneur pour les boutons d'action, disposés avec un espacement horizontal. #}
+
+                    <!-- Retour à la liste -->
                     <a href="{{ path('admin_messages') }}" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 transform hover:scale-105">
                         Retour à la liste
                     </a>
+                    {# Lien pour retourner à la liste des messages, avec un style de fond gris et un effet de survol. #}
+
                     {{ form_widget(form.submit, {'attr': {'class': 'inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:text-primary_dw focus:bg-secondary_dw focus:shadow-lg transition duration-300 transform hover:scale-105'}}) }}
+                    {# Le bouton de soumission du formulaire pour envoyer la réponse. Il a un fond primaire et une couleur de texte secondaire au survol. #}
                 </div>
 
                 {{ form_end(form) }}
+                {# Affiche la fin du formulaire. #}
             </div>
+
         {% else %}
+            {# Si l'utilisateur n'est pas un administrateur, il voit seulement un bouton pour retourner à la liste des messages. #}
             <div class="mt-6 text-center">
                 <a href="{{ path('admin_messages') }}" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 transform hover:scale-105">
                     Retour à la liste
@@ -56,4 +93,6 @@
         {% endif %}
     </div>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body' contenant l'affichage des détails du message et de la possibilité de répondre pour les administrateurs. #}

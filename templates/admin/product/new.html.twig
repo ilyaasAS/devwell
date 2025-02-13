@@ -3,20 +3,30 @@
 {% block title %}Créer un nouveau produit{% endblock %}
 
 {% block body %}
+
 <div class="container mx-auto py-12 px-6 max-w-3xl">
+    {# Le conteneur est centré avec une largeur maximale de 3xl. Des espacements internes sont ajoutés (py-12 et px-6). #}
+
     <h1 class="text-4xl font-semibold mb-8 text-center">Créer un nouveau produit</h1>
+    {# Le titre de la page "Créer un nouveau produit" est affiché en taille 4xl, avec une graisse de police semi-grasse (font-semibold) et une marge inférieure de 8 pour l'espacer des autres éléments. #}
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        {# Un conteneur blanc avec des coins arrondis, un ombrage et une animation au survol. #}
+
         {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+        {# Le formulaire est ouvert ici avec une classe 'space-y-6' pour espacer verticalement les champs de formulaire. #}
 
         <!-- Form Fields -->
         <div class="space-y-4">
+            {# Les champs de formulaire sont groupés dans un conteneur avec des espacements verticaux (space-y-4). #}
+
             <!-- Name -->
             <div class="form-group">
                 {{ form_row(form.name, {
                     'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
                 }) }}
             </div>
+            {# Le champ "Nom" est affiché avec des bordures et des coins arrondis, un fond gris clair et un effet visuel de focus avec une couleur bleue sur le bord. #}
 
             <!-- Price -->
             <div class="form-group">
@@ -24,6 +34,7 @@
                     'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
                 }) }}
             </div>
+            {# Le champ "Prix" utilise les mêmes styles que le champ précédent. #}
 
             <!-- Stock -->
             <div class="form-group">
@@ -31,6 +42,7 @@
                     'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
                 }) }}
             </div>
+            {# Le champ "Stock" est également stylisé avec la même apparence pour garder la cohérence visuelle. #}
 
             <!-- Image Upload -->
             <div class="form-group">
@@ -38,6 +50,7 @@
                     'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
                 }) }}
             </div>
+            {# Le champ "Image" permet de télécharger une image, avec des bordures et une animation au focus. #}
 
             <!-- Description -->
             <div class="form-group">
@@ -45,6 +58,7 @@
                     'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
                 }) }}
             </div>
+            {# Le champ "Description" est également stylisé de manière cohérente avec les autres champs de formulaire. #}
 
             <!-- Category -->
             <div class="form-group">
@@ -52,24 +66,29 @@
                     'attr': {'class': 'w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300'}
                 }) }}
             </div>
+            {# Le champ "Catégorie" permet de choisir une catégorie pour le produit, avec un style uniforme. #}
         </div>
 
         <!-- Submit Button -->
-<div class="text-center mt-6">
-    <button type="submit" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-        Créer un produit
-    </button>
-</div>
+        <div class="text-center mt-6">
+            <button type="submit" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+                Créer un produit
+            </button>
+        </div>
+        {# Le bouton de soumission est centré avec une largeur maximale de 'max-w-xs', un fond de couleur principale, et un texte secondaire. Il a des effets au survol et au focus, avec une animation d'agrandissement. #}
 
-<!-- Back Link -->
-<div class="mt-6 text-center">
-    <a href="{{ path('app_product_index') }}" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
-        Retour à la liste des produits
-    </a>
-</div>
-
+        <!-- Back Link -->
+        <div class="mt-6 text-center">
+            <a href="{{ path('app_product_index') }}" class="inline-block w-full max-w-xs text-center bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+                Retour à la liste des produits
+            </a>
+        </div>
+        {# Un lien pour revenir à la liste des produits, avec un style similaire au bouton de soumission. #}
 
         {{ form_end(form) }}
+        {# La fin du formulaire est marquée ici. #}
     </div>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body' qui contient le contenu de la page. #}

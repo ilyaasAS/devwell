@@ -3,22 +3,33 @@
 {% block title %}Liste des produits{% endblock %}
 
 {% block body %}
+
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+    {# Un conteneur centré avec une largeur maximale de 4xl et des espacements verticaux (py-20) et horizontaux (px-6). Il y a aussi une marge verticale (my-12). #}
+
     <!-- Page Title -->
     <h1 class="text-4xl font-semibold mb-8 text-center text-primary_dw">Liste des produits</h1>
+    {# Titre de la page, de taille 4xl, avec une graisse de police (font-semibold), une marge inférieure (mb-8) pour espacer des autres éléments, centré et avec une couleur de texte définie par la classe 'text-primary_dw'. #}
 
     <!-- Add New Product Button -->
     <div class="flex justify-end mb-6">
+        {# Un conteneur flexible (flex) pour placer le bouton "Ajouter un nouveau produit" aligné à droite (justify-end), avec une marge inférieure (mb-6). #}
+        
         <a href="{{ path('app_product_new') }}" 
            class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
             Ajouter un nouveau produit
         </a>
+        {# Le bouton est stylisé pour avoir un fond de couleur principale ('bg-primary_dw'), un texte secondaire ('text-tertiary_dw'), et des effets d'animation au survol et au focus. Il a une forme arrondie et une ombre. #}
     </div>
 
     {% if products|length > 0 %}
+        {# Si la liste des produits n'est pas vide, on affiche le tableau des produits. #}
+        
         <!-- Products Table -->
         <table class="table-auto w-full border-collapse border border-gray-300 mb-8 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+            {# Un tableau stylisé avec des bordures, des effets de survol et de mise à l'échelle. La classe 'table-auto' permet de rendre le tableau dynamique avec une largeur automatique. #}
             <thead class="bg-gray-100">
+                {# En-tête du tableau avec un fond gris clair (bg-gray-100). #}
                 <tr>
                     <th class="border border-gray-300 px-4 py-3">Nom</th>
                     <th class="border border-gray-300 px-4 py-3">Prix</th>
@@ -28,32 +39,51 @@
                 </tr>
             </thead>
             <tbody>
+                {# Le corps du tableau contient les lignes pour chaque produit. #}
+                
             {% for product in products %}
+                {# Pour chaque produit dans la liste 'products', une ligne de tableau est générée. #}
+                
                 <tr class="odd:bg-white even:bg-gray-50 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+                    {# Chaque ligne est alternée avec une couleur de fond (blanc pour les impairs, gris pour les pairs) et possède des effets de survol et de mise à l'échelle. #}
+
                     <td class="border border-gray-300 px-4 py-3">{{ product.name }}</td>
                     <td class="border border-gray-300 px-4 py-3">{{ product.price }}</td>
                     <td class="border border-gray-300 px-4 py-3">{{ product.stock }}</td>
                     <td class="border border-gray-300 px-4 py-3">{{ product.category ? product.category.name : 'No Category' }}</td>
-                    <td class="border border-gray-300 px-4 py-3 text-center"> <!-- Ajout du centrage ici -->
+                    {# Affiche les informations du produit (nom, prix, stock, catégorie). Si aucune catégorie n'est définie, "No Category" est affiché. #}
+                    
+                    <td class="border border-gray-300 px-4 py-3 text-center">
+                        {# Colonne des actions centrée (text-center). Contient les liens pour afficher, modifier ou supprimer un produit. #}
+
                         <!-- Show Link -->
                         <a href="{{ path('app_product_show', {id: product.id}) }}" 
                            class="text-blue-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
                             Voir
                         </a>
+                        {# Lien pour afficher les détails du produit. Il est stylisé pour être bleu avec un effet au survol. #}
+
                         <!-- Edit Link -->
                         <a href="{{ path('app_product_edit', {id: product.id}) }}" 
                            class="text-yellow-500 hover:text-secondary_dw hover:underline ml-2 transition duration-300 transform hover:scale-105">
                             Modifier
                         </a>
+                        {# Lien pour modifier le produit. Il est stylisé en jaune, avec un effet au survol. 'ml-2' ajoute une marge gauche pour espacer le lien. #}
+
                         <!-- Delete Button -->
                         <form method="post" action="{{ path('app_product_delete', {id: product.id}) }}" 
-                              onsubmit="return confirm('Are you sure you want to delete this item?');" class="inline ml-2">
+                              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" class="inline ml-2">
+                            {# Formulaire pour supprimer un produit. La méthode est 'post' et la confirmation de suppression est demandée avant la soumission. Le formulaire est en ligne avec une marge à gauche. #}
+
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                            {# Un jeton CSRF est ajouté pour sécuriser la suppression. #}
+
                             <button type="submit" 
                                     class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
                                 Supprimer
                             </button>
                         </form>
+                        {# Bouton pour supprimer le produit. Il est stylisé en rouge, avec un effet au survol. #}
                     </td>
                 </tr>
             {% endfor %}
@@ -62,6 +92,9 @@
     {% else %}
         <!-- No Products Message -->
         <p class="text-center text-gray-500">Aucun produit n'a été trouvé.</p>
+        {# Si aucun produit n'est trouvé, un message est affiché au centre de la page. Le texte est gris clair. #}
     {% endif %}
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body', qui contient tout le contenu de la page. #}

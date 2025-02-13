@@ -6,24 +6,28 @@
 
 {% block body %}
 <div class="container mx-auto py-12 px-6 max-w-4xl">
-    <!-- Title -->
+    <!-- Titre de la catégorie, centré -->
     <h1 class="text-4xl font-bold text-center text-primary_dw mb-8">{{ category.name }}</h1>
 
-    <!-- Card -->
+    <!-- Carte de catégorie avec description -->
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        <!-- Category Description (centrée) -->
+        
+        <!-- Description de la catégorie (centrée) -->
         <p class="text-lg text-text_dw mb-6 text-center">
             <strong class="font-semibold">Description:</strong> 
             {{ category.description ? category.description : 'Pas de description' }}
         </p>
 
         {% if category.products|length > 0 %}
-            <!-- Products List -->
+            <!-- Si des produits existent dans cette catégorie -->
             <h2 class="text-2xl font-bold text-primary_dw mb-4 text-center">Produits dans cette catégorie :</h2>
+            
+            <!-- Liste des produits dans la catégorie -->
             <ul class="list-disc pl-0 text-center" style="list-style-position: inside;">
                 {% for product in category.products %}
                     <li>
-                        <a href="{{ path('app_product_show', {id: product.id}) }}" 
+                        <!-- Lien vers la page de détails du produit -->
+                        <a href="{{ path('app_product_details', {id: product.id}) }}" 
                            class="text-primary_dw hover:text-secondary_dw transition duration-200">
                             {{ product.name }} - €{{ product.price }}
                         </a>
@@ -31,11 +35,11 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <!-- No Products Message -->
+            <!-- Message affiché si aucun produit n'est dans cette catégorie -->
             <p class="text-gray-500 mt-6 text-center">No products in this category.</p>
         {% endif %}
 
-        <!-- Back to Categories Button -->
+        <!-- Bouton pour retourner à la liste des catégories -->
         <div class="text-center mt-8">
             <a href="{{ path('app_category_user_index') }}" 
                class="w-full max-w-xs inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">

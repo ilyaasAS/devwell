@@ -15,181 +15,183 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
-// Admin
+// Définition de la route principale pour ce contrôleur d'administration
 #[Route('/admin/user')]
 final class UserController extends AbstractController
 {
-    private HasherUserPasswordHasherInterface $passwordHasher;  // Déclaration de la variable pour le service de hachage
+    private HasherUserPasswordHasherInterface $passwordHasher;  // Service pour le hachage des mots de passe
 
-    // Injection du service dans le constructeur
+    // Injection de dépendance pour le service de hachage
     public function __construct(HasherUserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;  // Initialisation du service de hachage
     }
 
-    // Admin créer un user
+    // Route pour la création d'un utilisateur
     #[Route('/create', name: 'app_user_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = new User(); // Créer un nouvel utilisateur
-        $form = $this->createForm(User1Type::class, $user); // Utiliser ton formulaire pour définir les rôles
-        $form->handleRequest($request); // Traiter la soumission du formulaire
+        $user = new User(); // Crée un nouvel objet utilisateur
+        $form = $this->createForm(User1Type::class, $user); // Crée un formulaire basé sur User1Type
+        $form->handleRequest($request); // Gère la soumission du formulaire
 
+        // Vérifie si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Hachage du mot de passe avant de persister l'utilisateur
-            $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());  // Utiliser hashPassword
-            $user->setPassword($hashedPassword);  // Affectation du mot de passe haché
+            // Hache le mot de passe avant de persister l'utilisateur
+            $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setPassword($hashedPassword); // Affecte le mot de passe haché à l'utilisateur
 
-            // Sauvegarder l'utilisateur
+            // Sauvegarde l'utilisateur en base de données
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Ajouter un message flash de succès
-        $this->addFlash('success', 'Utilisateur créé avec succès !');
+            // Affiche un message flash de succès
+            $this->addFlash('success', 'Utilisateur créé avec succès !');
 
-            // Rediriger vers la page de liste des utilisateurs après la création
+            // Redirige vers la liste des utilisateurs
             return $this->redirectToRoute('app_user_index');
         }
 
+        // Affiche le formulaire pour la création d'un utilisateur
         return $this->render('user/create.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView(),  // Passe le formulaire à la vue
         ]);
     }
 
+    // Route pour afficher la liste des utilisateurs
     #[Route(name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $userRepository->findAll(), // Récupère tous les utilisateurs de la base de données
         ]);
     }
 
-    // Admin voir un user
+    // Route pour afficher les détails d'un utilisateur
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', [
-            'user' => $user,
+            'user' => $user,  // Passe l'utilisateur à la vue
         ]);
     }
 
-    // Admin edit un user
+    // Route pour éditer un utilisateur
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(User1Type::class, $user);
-        $form->handleRequest($request);
+        // Vérifie si l'utilisateur connecté est un administrateur
+        $isAdminEdit = $this->isGranted('ROLE_ADMIN');
 
+        // Crée un formulaire pour éditer l'utilisateur en passant l'option 'is_admin_edit'
+        $form = $this->createForm(User1Type::class, $user, [
+            'is_admin_edit' => $isAdminEdit,
+        ]);
+
+        $form->handleRequest($request); // Gère la soumission du formulaire
+
+        // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Si le mot de passe est modifié, hacher le nouveau mot de passe
-            if ($user->getPassword()) {
-                $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());  // Utiliser hashPassword
-                $user->setPassword($hashedPassword);  // Affectation du mot de passe haché
+            // Si l'admin modifie le mot de passe, on le hache avant de le sauvegarder
+            if ($user->getPassword() && !$isAdminEdit) {
+                $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
+                $user->setPassword($hashedPassword); // Affecte le mot de passe haché à l'utilisateur
             }
 
+            // Sauvegarde les changements en base de données
             $entityManager->flush();
 
-            // Ajouter un message flash de succès
-        $this->addFlash('success', 'Utilisateur modifié avec succès !');
+            // Affiche un message flash de succès
+            $this->addFlash('success', 'Utilisateur modifié avec succès !');
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_index'); // Redirige vers la liste des utilisateurs
         }
 
         return $this->render('user/edit.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'form' => $form->createView(),  // Passe le formulaire à la vue
         ]);
     }
 
-    // Admin supprimer un user
+    // Route pour supprimer un utilisateur
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
-{
-    // Vérification du token CSRF et suppression
-    if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
-        $entityManager->remove($user);
-        $entityManager->flush();
+    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        // Vérifie si le token CSRF est valide
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($user);  // Supprime l'utilisateur
+            $entityManager->flush();  // Applique les changements en base de données
 
-        // Ajouter un message flash de succès
-        $this->addFlash('success', 'Utilisateur supprimé avec succès !');
-    } else {
-        // Ajouter un message flash d'erreur en cas de problème
-        $this->addFlash('error', 'Échec de la suppression de l\'utilisateur.');
+            // Affiche un message flash de succès
+            $this->addFlash('success', 'Utilisateur supprimé avec succès !');
+        } else {
+            // Affiche un message d'erreur en cas d'échec de la suppression
+            $this->addFlash('error', 'Échec de la suppression de l\'utilisateur.');
+        }
+
+        return $this->redirectToRoute('app_user_index'); // Redirige vers la liste des utilisateurs
     }
 
-    return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-}
+    // Route pour supprimer le compte d'un utilisateur
+    #[Route('/delete-account/{id}', name: 'app_delete_account', methods: ['POST'])]
+    public function deleteAccount(
+        EntityManagerInterface $entityManager, 
+        Request $request, 
+        TokenStorageInterface $tokenStorage, 
+        SessionInterface $session, 
+        Security $security, 
+        UserRepository $userRepository, 
+        int $id
+    ): Response {
+        $user = $security->getUser();  // Récupère l'utilisateur actuellement connecté
 
-    // Suppression du compte utilisateur
-// Suppression du compte utilisateur
-#[Route('/delete-account/{id}', name: 'app_delete_account', methods: ['POST'])]
-public function deleteAccount(
-    EntityManagerInterface $entityManager, 
-    Request $request, 
-    TokenStorageInterface $tokenStorage, 
-    SessionInterface $session, 
-    Security $security, 
-    UserRepository $userRepository, 
-    int $id
-): Response {
-    // Récupérer l'utilisateur connecté
-    $user = $security->getUser(); 
+        // Vérifie si l'utilisateur est valide
+        if (!$user instanceof User) {
+            $this->addFlash('error', 'Utilisateur non valide.');
+            return $this->redirectToRoute('app_login');
+        }
 
-    // Vérifier si l'utilisateur connecté est bien une instance de User
-    if (!$user instanceof User) {
-        $this->addFlash('error', 'Utilisateur non valide.');
-        return $this->redirectToRoute('app_login');
+        // Vérifie si l'utilisateur est bien connecté
+        if (!$user) {
+            $this->addFlash('error', 'Vous devez être connecté pour supprimer votre compte.');
+            return $this->redirectToRoute('app_login');
+        }
+
+        // Vérifie que l'utilisateur connecté est celui qui tente de supprimer son propre compte
+        if ($user->getId() !== $id) {
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer le compte d\'un autre utilisateur.');
+            return $this->redirectToRoute('app_profile');
+        }
+
+        $userToDelete = $userRepository->find($id);  // Récupère l'utilisateur à supprimer
+
+        // Vérifie si l'utilisateur à supprimer existe
+        if (!$userToDelete) {
+            $this->addFlash('error', 'L\'utilisateur à supprimer n\'existe pas.');
+            return $this->redirectToRoute('app_profile');
+        }
+
+        // Vérification du token CSRF
+        if (!$this->isCsrfTokenValid('delete_account', $request->request->get('_token'))) {
+            $this->addFlash('error', 'Token CSRF invalide.');
+            return $this->redirectToRoute('app_profile');
+        }
+
+        // Tente de supprimer l'utilisateur
+        try {
+            $entityManager->remove($userToDelete);
+            $entityManager->flush();
+
+            // Déconnexion après suppression
+            $tokenStorage->setToken(null);  // Supprime le token d'authentification
+            $session->invalidate();  // Invalide la session actuelle
+
+            $this->addFlash('success', 'Votre compte a été supprimé avec succès.');
+
+            return $this->redirectToRoute('app_home');  // Redirige vers la page d'accueil
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Une erreur est survenue lors de la suppression de votre compte.');
+            return $this->redirectToRoute('app_profile');
+        }
     }
-
-    // Vérification si l'utilisateur est connecté
-    if (!$user) {
-        $this->addFlash('error', 'Vous devez être connecté pour supprimer votre compte.');
-        return $this->redirectToRoute('app_login');
-    }
-
-    // Vérifier que l'utilisateur connecté est bien celui qui tente de supprimer son propre compte
-    if ($user->getId() !== $id) {
-        $this->addFlash('error', 'Vous ne pouvez pas supprimer le compte d\'un autre utilisateur.');
-        return $this->redirectToRoute('app_profile');
-    }
-
-    // Récupérer l'utilisateur à supprimer depuis la base de données en utilisant l'ID passé dans l'URL
-    $userToDelete = $userRepository->find($id);
-
-    // Vérification si l'utilisateur à supprimer existe
-    if (!$userToDelete) {
-        $this->addFlash('error', 'L\'utilisateur à supprimer n\'existe pas.');
-        return $this->redirectToRoute('app_profile');
-    }
-
-    // Vérification du token CSRF
-    if (!$this->isCsrfTokenValid('delete_account', $request->request->get('_token'))) {
-        $this->addFlash('error', 'Token CSRF invalide.');
-        return $this->redirectToRoute('app_profile');
-    }
-
-    // Tentative de suppression
-    try {
-        $entityManager->remove($userToDelete);
-        $entityManager->flush();
-
-        // Déconnexion
-        $tokenStorage->setToken(null); // Supprimer le token d'authentification
-        $session->invalidate(); // Invalide la session actuelle
-
-        $this->addFlash('success', 'Votre compte a été supprimé avec succès.');
-
-        return $this->redirectToRoute('app_home');
-    } catch (\Exception $e) {
-        $this->addFlash('error', 'Une erreur est survenue lors de la suppression de votre compte.');
-        return $this->redirectToRoute('app_profile');
-    }
-}
-
-
-
-
-
-    
-    
 }

@@ -5,41 +5,33 @@ XV---MLD
 XVV---Diagramme de cas d'utilisation
 Planning
 Maquette
-_________________
+___________________
+DT: un résumer du projet en anglais
+______________
 
-VVVX Les cookies
+--Test le site 
 
-a quoi sert ses route ? set et get
-et pourquoi le popup n'apparrait pas à nouveau si je refuse les cookies ? 
-Est ce RGPD de faire apparaite le constement de cookies jusqu'a qu'il accepte mais il peut refuser à chaque fois ?
 
-___________________________
+--avant de faire un github (commentaire)
+
+_____________
+
+--Test unitaire
+________________________
+
+Hébergement
 
 Nosql
 
 rendre mon partage de co en ip fixe
-______________
 
-Mettre tous les message d'erreur sur 
+mettre l'ip du VPS
+_
 
-Problème page de connexion toujour une redirection sur page d'erreur de symfony
-______________
+Cette erreur disparait en prod si tu t'appent les bonne commande
 
 en prod j'ai pas le css de taildwind ?
 
 https://symfony.com/bundles/TailwindBundle/current/index.html
 
 nmp run prod ?
-___________________
-
-
-Commenter le code
-Optimiser le code (facultatif)
-Test unitaire
-W3C (outil de Miguel)
-DT: un résumer du projet en anglais
-______________________
-
-facultatif:
-css ajuste
-captcha

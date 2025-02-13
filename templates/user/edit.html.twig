@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier l'utilisateur{% endblock %}
+{% block title %}Modifier l'utilisateur{% endblock %} 
 
 {% block body %}
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Modifier l'utilisateur</h1>
 
     <div class="bg-white p-8 rounded-lg shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
-        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-        
-        <!-- Affichage des autres champs -->
-        {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-        {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-        {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
-        {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}  {# Début du formulaire avec une classe CSS pour gérer l'espacement entre les champs #}
+
+        <!-- Affichage des champs pour le prénom et le nom de famille -->
+        {{ form_row(form.firstName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}  {# Affichage du champ 'firstName' (prénom) avec des classes CSS pour le style #}
+        {{ form_row(form.lastName, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}  {# Affichage du champ 'lastName' (nom de famille) avec les mêmes styles #}
+
+        {# {{ form_row(form.email, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }} #}
+        {# {{ form_row(form.password, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }} #}
 
         <!-- Affichage du champ 'roles' à la fin -->
-        {{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}
+        {{ form_row(form.roles, {'attr': {'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw'}}) }}  {# Affichage du champ 'roles' avec des options de styles pour ce champ #}
 
         <!-- Conteneur centré pour les boutons -->
         <div class="mt-6 text-center space-x-4">

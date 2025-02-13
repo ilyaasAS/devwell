@@ -4,35 +4,35 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity] // Définition de l'entité OrderItem (élément d'une commande)
 class OrderItem
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Id] // Définition de l'ID comme clé primaire
+    #[ORM\GeneratedValue] // L'ID est généré automatiquement
+    #[ORM\Column(type: 'integer')] // La colonne pour l'ID est de type entier
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: Product::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Product::class)] // Relation ManyToOne avec l'entité Product (chaque article de commande fait référence à un produit)
+    #[ORM\JoinColumn(nullable: false)] // La colonne 'product' ne peut pas être nulle
     private $product;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer')] // Définition d'une colonne pour la quantité du produit dans la commande
     private $quantity;
 
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(type: 'float')] // Définition d'une colonne pour le prix de l'article
     private $price;
 
-    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderItems')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderItems')] // Relation ManyToOne avec l'entité Order (chaque article appartient à une commande)
+    #[ORM\JoinColumn(nullable: false)] // La colonne 'order' ne peut pas être nulle
     private $order;
 
-    // Getter and Setter for $id
+    // Getter et Setter pour l'ID de l'article de commande
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    // Getter and Setter for $product
+    // Getter et Setter pour le produit de l'article de commande
     public function getProduct(): ?Product
     {
         return $this->product;
@@ -45,7 +45,7 @@ class OrderItem
         return $this;
     }
 
-    // Getter and Setter for $quantity
+    // Getter et Setter pour la quantité de produit dans l'article de commande
     public function getQuantity(): ?int
     {
         return $this->quantity;
@@ -58,7 +58,7 @@ class OrderItem
         return $this;
     }
 
-    // Getter and Setter for $price
+    // Getter et Setter pour le prix de l'article de commande
     public function getPrice(): ?float
     {
         return $this->price;
@@ -71,7 +71,7 @@ class OrderItem
         return $this;
     }
 
-    // Getter and Setter for $order
+    // Getter et Setter pour la commande associée à l'article de commande
     public function getOrder(): ?Order
     {
         return $this->order;

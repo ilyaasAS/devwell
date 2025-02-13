@@ -3,37 +3,58 @@
 {% block title %}Dashboard Admin{% endblock %}
 
 {% block body %}
-<div class="container mx-auto p-8">
 
-    
+<div class="container mx-auto p-8">
+    {# Ce conteneur est centré avec 'mx-auto' pour être aligné au centre. Il a un padding de 8 pour créer de l'espace autour du contenu. #}
+
     <h1 class="text-4xl font-bold text-gray-800 text-center mb-8">Bienvenue sur le Dashboard Administrateur</h1>
+    {# Titre principal de la page. Il a une taille de texte de 4xl, une police en gras (font-bold), un texte de couleur gris foncé (text-gray-800) et est centré. Un margin bottom de 8 est appliqué pour espacer du contenu suivant. #}
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {# Ce conteneur utilise le système de grille de Tailwind. À petite échelle (1 colonne), il passe à 2 colonnes pour les écrans moyens et à 3 colonnes pour les grands écrans. Un espace de 6 (gap-6) est défini entre les cartes. #}
+
+        <!-- Carte de gestion des utilisateurs -->
         <div class="card">
             <a href="/admin/user" class="block p-6 bg-blue-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-blue-700">
                 👤 Gestion des utilisateurs
             </a>
         </div>
+        {# Carte pour la gestion des utilisateurs, stylisée avec une couleur de fond bleue (bg-blue-500), du texte blanc (text-white) et une taille de texte de 1,1rem (text-lg). Elle possède un ombrage (shadow-lg) et un effet de survol pour un agrandissement et un changement de couleur (hover:bg-blue-700). #}
+
+        <!-- Carte de gestion des produits -->
         <div class="card">
             <a href="/admin/product" class="block p-6 bg-green-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-green-700">
                 📦 Gestion des produits
             </a>
         </div>
+        {# Carte pour la gestion des produits, avec une couleur de fond verte (bg-green-500) et un effet de survol similaire à celui de la carte précédente (hover:bg-green-700). #}
+
+        <!-- Carte de gestion des catégories -->
         <div class="card">
             <a href="/admin/categories" class="block p-6 bg-yellow-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-yellow-600">
                 🏷️ Gestion des Catégories
             </a>
         </div>
+        {# Carte pour la gestion des catégories, avec un fond jaune (bg-yellow-500) et une légère variation au survol (hover:bg-yellow-600). #}
+
+        <!-- Carte de gestion des commandes -->
         <div class="card">
             <a href="/admin/orders" class="block p-6 bg-red-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-red-700">
                 📜 Gestion des commandes
             </a>
         </div>
+        {# Carte pour la gestion des commandes, stylisée avec un fond rouge (bg-red-500), un texte blanc et un effet de survol où la couleur devient plus foncée (hover:bg-red-700). #}
+
+        <!-- Carte de gestion des messages -->
         <div class="card">
             <a href="/admin/messages" class="block p-6 bg-white-500 text-black text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-white-700">
                 ✉️ Gestion des messages
             </a>
         </div>
+        {# Carte pour la gestion des messages, avec un fond blanc (bg-white-500) et du texte noir (text-black). Un léger changement de couleur est appliqué au survol (hover:bg-white-700). #}
+
     </div>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body'. Ce code est placé à l'intérieur de la structure de base pour afficher le contenu du dashboard. #}

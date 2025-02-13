@@ -3,48 +3,65 @@
 {% block title %}Réinitialiser votre mot de passe{% endblock %}
 
 {% block body %}
+
 <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    {# Ce conteneur utilise Flexbox pour centrer son contenu horizontalement et verticalement. Il prend toute la hauteur de l'écran et ajoute du padding. Le fond est gris clair (bg-gray-50). #}
+
     <div class="max-w-md w-full space-y-8 bg-white p-8 shadow-lg rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-        
+        {# Ce conteneur définit la forme du formulaire. Il a une largeur maximale de "md", un fond blanc, un padding interne de 8 et une ombre légère. Il inclut aussi des effets de transition et de survol pour améliorer l'interaction visuelle. #}
+
         <h1 class="text-center text-2xl font-bold text-primary_dw">Réinitialiser votre mot de passe</h1>
+        {# Titre principal centré avec une taille de texte de 2xl et un poids de police "bold". Il utilise une couleur personnalisée pour le texte (text-primary_dw). #}
 
         {{ form_start(resetForm, {'attr': {'class': 'space-y-6'}}) }}
-            
-            <!-- Champ Nouveau mot de passe -->
-            <div>
-                <label for="{{ resetForm.plainPassword.first.vars.id }}" class="block text-sm font-medium text-gray-700">Nouveau mot de passe</label>
-                {{ form_widget(resetForm.plainPassword.first, {
-                    'attr': {
-                        'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary_dw focus:border-primary_dw sm:text-sm transition duration-300 hover:scale-105'
-                    }
-                }) }}
-            </div>
+        {# Le formulaire commence ici. Il est associé à l'objet 'resetForm' et il reçoit une classe 'space-y-6' qui crée de l'espace vertical entre chaque champ du formulaire. #}
 
-            <!-- Champ Répéter le mot de passe -->
-            <div>
-                <label for="{{ resetForm.plainPassword.second.vars.id }}" class="block text-sm font-medium text-gray-700">Répéter le mot de passe</label>
-                {{ form_widget(resetForm.plainPassword.second, {
-                    'attr': {
-                        'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary_dw focus:border-primary_dw sm:text-sm transition duration-300 hover:scale-105'
-                    }
-                }) }}
-            </div>
+        <!-- Champ Nouveau mot de passe -->
+        <div>
+            <label for="{{ resetForm.plainPassword.first.vars.id }}" class="block text-sm font-medium text-gray-700">Nouveau mot de passe</label>
+            {# Le label du champ 'plainPassword.first' qui indique à l'utilisateur de saisir un nouveau mot de passe. Le texte du label est stylisé pour être de petite taille (text-sm) et avec un texte gris moyen (text-gray-700). #}
 
-            <!-- Message d'erreur -->
-            {% if resetForm.plainPassword.vars.errors|length > 0 %}
-                <div class="text-red-500 text-sm">
-                    {{ form_errors(resetForm.plainPassword) }}
-                </div>
-            {% endif %}
+            {{ form_widget(resetForm.plainPassword.first, {
+                'attr': {
+                    'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary_dw focus:border-primary_dw sm:text-sm transition duration-300 hover:scale-105'
+                }
+            }) }}
+            {# Affiche le champ pour le nouveau mot de passe (plainPassword.first). La classe personnalisée applique des marges, de la largeur, des bordures arrondies, un ombrage léger et des effets de survol. Les classes de transition et de focus sont aussi définies pour améliorer l'interface. #}
+        </div>
 
-            <!-- Bouton de soumission -->
-            <div>
-                <button type="submit" class="w-full bg-primary_dw text-white px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw transition duration-300 transform hover:scale-105">
-                    Réinitialiser votre mot de passe
-                </button>
-            </div>
+        <!-- Champ Répéter le mot de passe -->
+        <div>
+            <label for="{{ resetForm.plainPassword.second.vars.id }}" class="block text-sm font-medium text-gray-700">Répéter le mot de passe</label>
+            {# Le label du champ 'plainPassword.second', permettant à l'utilisateur de confirmer le nouveau mot de passe. #}
+
+            {{ form_widget(resetForm.plainPassword.second, {
+                'attr': {
+                    'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary_dw focus:border-primary_dw sm:text-sm transition duration-300 hover:scale-105'
+                }
+            }) }}
+            {# Affiche le champ pour répéter le mot de passe (plainPassword.second) avec les mêmes attributs de style que le champ pour le nouveau mot de passe. #}
+        </div>
+
+        <!-- Message d'erreur -->
+        {% if resetForm.plainPassword.vars.errors|length > 0 %}
+        <div class="text-red-500 text-sm">
+            {{ form_errors(resetForm.plainPassword) }}
+        </div>
+        {% endif %}
+        {# Si des erreurs existent pour le champ 'plainPassword', elles seront affichées ici dans un texte rouge et de taille petite (text-sm). Ces erreurs sont automatiquement gérées par Symfony et affichées à l'aide de 'form_errors'. #}
+
+        <!-- Bouton de soumission -->
+        <div>
+            <button type="submit" class="w-full bg-primary_dw text-white px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw transition duration-300 transform hover:scale-105">
+                Réinitialiser votre mot de passe
+            </button>
+            {# Bouton de soumission pour envoyer le formulaire. Il est stylisé avec une couleur de fond primaire (bg-primary_dw), du texte blanc, une largeur de 100% (w-full) et des effets de survol. #}
+        </div>
 
         {{ form_end(resetForm) }}
+        {# Fin du formulaire, cette fonction génère la fermeture des balises nécessaires et ajoute des éléments comme les champs cachés CSRF pour la sécurité. #}
     </div>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body', où l'ensemble du contenu du formulaire est placé. #}

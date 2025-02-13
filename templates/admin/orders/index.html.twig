@@ -3,13 +3,20 @@
 {% block title %}Gestion des commandes{% endblock %}
 
 {% block body %}
+
 <div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
+    {# Le conteneur avec une largeur maximale de 4xl (max-w-4xl), centré horizontalement (mx-auto), avec du padding vertical (py-20) et horizontal (px-6). Une marge verticale de 12 (my-12) est ajoutée pour espacer la section. #}
+
     <!-- Page Title -->
     <h1 class="text-3xl font-bold mb-8 text-center text-primary_dw">Gestion des commandes</h1>
+    {# Le titre principal de la page, centré, avec une taille de texte 3xl et un poids de police en gras (font-bold). Une marge inférieure (mb-8) est ajoutée pour espacer du contenu suivant. Le texte utilise la couleur primaire personnalisée (text-primary_dw). #}
 
     <!-- Orders Table -->
     <table class="table-auto w-full border-collapse border border-gray-300 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+        {# Une table est utilisée pour afficher les commandes. Les classes sont appliquées pour contrôler la largeur de la table (w-full), la gestion des bordures (border-collapse, border-gray-300) et l'ajout d'ombres et d'effets au survol (shadow-product, hover:shadow-hover, hover:scale-105). #}
+
         <thead class="bg-gray-100">
+            {# L'en-tête de la table a un fond gris clair (bg-gray-100). #}
             <tr>
                 <th class="border border-gray-300 px-4 py-2">ID</th>
                 <th class="border border-gray-300 px-4 py-2">Statut</th>
@@ -17,34 +24,56 @@
                 <th class="border border-gray-300 px-4 py-2">Actions</th>
             </tr>
         </thead>
+
         <tbody>
+        {# Le corps de la table contient une boucle qui affiche chaque commande. #}
         {% for order in orders %}
+            {# Pour chaque commande, une nouvelle ligne de table est créée avec des classes pour alterner les couleurs de fond (odd:bg-white, even:bg-gray-50). #}
+
             <tr class="odd:bg-white even:bg-gray-50 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
                 <td class="border border-gray-300 px-4 py-2 text-center">{{ order.id }}</td>
+                {# Affiche l'ID de la commande dans une cellule, centrée horizontalement (text-center). #}
+                
                 <td class="border border-gray-300 px-4 py-2 text-center">{{ order.status }}</td>
+                {# Affiche le statut de la commande dans une cellule centrée. #}
+                
                 <td class="border border-gray-300 px-4 py-2 text-center">{{ order.createdAt|date('d-m-Y H:i') }}</td>
+                {# Affiche la date de création de la commande dans une cellule centrée, formatée avec le filtre date ('d-m-Y H:i') pour afficher jour-mois-année heure:minute. #}
+
                 <td class="border border-gray-300 px-4 py-2 text-center">
+                    {# Colonne pour les actions (Voir, Modifier, Supprimer). #}
+
                     <!-- Show Link -->
                     <a href="{{ path('admin_orders_show', {'id': order.id}) }}" 
                        class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
                         Voir
                     </a>
+                    {# Lien vers la page de détail de la commande, avec un style de texte bleu. Le lien change de couleur au survol et est souligné. #}
+
                     <!-- Edit Link -->
                     <a href="{{ path('admin_orders_edit', {'id': order.id}) }}" 
                        class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
                         Modifier
                     </a>
+                    {# Lien vers la page d'édition de la commande, avec un texte jaune. Comme pour "Voir", le lien est stylisé avec des effets au survol. #}
+
                     <!-- Delete Form -->
                     <form method="post" action="{{ path('admin_orders_delete', {'id': order.id}) }}" 
-                          onsubmit="return confirm('Are you sure you want to delete this order?');" class="inline mx-2">
+                          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');" class="inline mx-2">
+                        {# Formulaire pour la suppression de la commande. Un token CSRF est inclus pour la sécurité. #}
+                        
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ order.id) }}">
+                        {# Le token CSRF permet de vérifier que la requête vient d'une source légitime. #}
+                        
                         <button type="submit" class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
                             Supprimer
                         </button>
+                        {# Bouton de soumission pour supprimer la commande, avec un texte rouge. Comme les autres liens, il change de couleur et est souligné au survol. #}
                     </form>
                 </td>
             </tr>
         {% else %}
+            {# Si aucune commande n'est présente, une ligne est affichée avec un message indiquant qu'aucune commande n'a été trouvée. #}
             <tr>
                 <td colspan="4" class="border border-gray-300 px-4 py-2 text-center">Aucune commande trouvée</td>
             </tr>
@@ -52,4 +81,6 @@
         </tbody>
     </table>
 </div>
+
 {% endblock %}
+{# Fin du bloc 'body' qui contient tout le contenu principal de la page. #}
