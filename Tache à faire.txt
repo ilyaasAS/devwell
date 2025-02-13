@@ -8,19 +8,15 @@ XVV---Diagramme de cas d'utilisation
 Planning
 Maquette
 ___________________
-DT: un résumer du projet en anglais
+DT: un résumer du projet en anglais 50 pages
+DP: Faire les capture d'écrans
 _____________
 
 --Test Fonctionnel ?
 
-indenté le code
 Test le site avant le github
 
-Vérifier les fonction mailer
-
 _____
-
-Montre à Miguel la liste des commande
 regarde le canal héberger son site/
 
 -htacces
@@ -29,7 +25,6 @@ ________________________
 
 Hébergement
 
-Pointer son VPS sur le nom de domaine 
 
 installer les bundle taildwind pour la production 
 
