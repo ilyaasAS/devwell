@@ -11,20 +11,17 @@ ___________________
 DT: un résumer du projet en anglais 50 pages
 DP: Faire les capture d'écrans
 _____________
-Test
-
-Meuille page profile plus moderne
-______________
 
 --Test Fonctionnel ?
 
 Test le site prod avant le github
 
+Commenter les test et les nv modif
+
 _____
 regarde le canal héberger son site/
 
 -htacces
-install mysql et mongodb atlas sur mon VPS
 ________________________
 
 Hébergement
