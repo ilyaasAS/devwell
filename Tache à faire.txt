@@ -11,13 +11,12 @@ ___________________
 DT: un résumer du projet en anglais 50 pages
 DP: Faire les capture d'écrans
 _____________
+Test
 
-https://127.0.0.1:8000/login
+rgb(51 51 51/var(--tw-text-opacity,1)) =  hex 333333
 
-Identifiants ou mot de passe incorrect.
-
-Email , password mettre en français
-
+Meilleur page pannier plus moderne
+Meuille page profile plus moderne
 
 ______________
 
