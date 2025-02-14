@@ -12,21 +12,27 @@ DT: un résumer du projet en anglais 50 pages
 DP: Faire les capture d'écrans
 _____________
 
+https://127.0.0.1:8000/login
+
+Identifiants ou mot de passe incorrect.
+
+Email , password mettre en français
+
+
+______________
+
 --Test Fonctionnel ?
 
-Test le site avant le github
+Test le site prod avant le github
 
 _____
 regarde le canal héberger son site/
 
 -htacces
--taildwind prod
+install mysql et mongodb atlas sur mon VPS
 ________________________
 
 Hébergement
-
-
-installer les bundle taildwind pour la production 
 
 vidéo de Ouwardia
 
