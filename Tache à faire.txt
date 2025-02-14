@@ -13,11 +13,7 @@ DP: Faire les capture d'écrans
 _____________
 Test
 
-rgb(51 51 51/var(--tw-text-opacity,1)) =  hex 333333
-
-Meilleur page pannier plus moderne
 Meuille page profile plus moderne
-
 ______________
 
 --Test Fonctionnel ?
