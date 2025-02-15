@@ -33,6 +33,7 @@ class OrderItemType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => OrderItem::class, // Associe ce formulaire à l'entité OrderItem.
+            'csrf_protection' => true, // Activer la protection CSRF
         ]);
     }
 }

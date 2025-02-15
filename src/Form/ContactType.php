@@ -53,6 +53,7 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Contact::class, // Associe ce formulaire à l'entité 'Contact'.
+            'csrf_protection' => true, // Activer la protection CSRF
         ]);
     }
 }

@@ -31,6 +31,7 @@ class ResetPasswordRequestFormType extends AbstractType
     {
         $resolver->setDefaults([
             // Aucune option spécifique n'est définie ici pour le moment
+            'csrf_protection' => true, // Activer la protection CSRF
         ]);
     }
 }

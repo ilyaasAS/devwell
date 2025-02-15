@@ -6,7 +6,7 @@
 {% block body %}
 
 	<div
-		class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+		class="min-h-screen flex items-center justify-center bg-tertiary_dw-50 py-12 px-4 sm:px-6 lg:px-8">
 		{# Ce conteneur utilise Flexbox pour centrer son contenu horizontalement et verticalement. Il prend toute la hauteur de l'écran et ajoute du padding. Le fond est gris clair (bg-gray-50). #}
 
 		<div
@@ -20,7 +20,8 @@
 			{# Le formulaire commence ici. Il est associé à l'objet 'resetForm' et il reçoit une classe 'space-y-6' qui crée de l'espace vertical entre chaque champ du formulaire. #}
 
 			<!-- Champ Nouveau mot de passe -->
-				<div><label for="{{ resetForm.plainPassword.first.vars.id }}" class="block text-sm font-medium text-gray-700"> Nouveau mot de passe</label>
+				<div>
+					<label for="{{ resetForm.plainPassword.first.vars.id }}" class="block text-sm font-medium text-gray-700"> Nouveau mot de passe</label>
 				{# Le label du champ 'plainPassword.first' qui indique à l'utilisateur de saisir un nouveau mot de passe. Le texte du label est stylisé pour être de petite taille (text-sm) et avec un texte gris moyen (text-gray-700). #}
 
 				{{ form_widget(resetForm.plainPassword.first, {
@@ -66,4 +67,3 @@
 	</div>
 
 {% endblock %}
-{# Fin du bloc 'body', où l'ensemble du contenu du formulaire est placé. #}

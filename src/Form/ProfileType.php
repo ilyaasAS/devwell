@@ -49,6 +49,7 @@ class ProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class, // L'entité associée au formulaire est l'entité User
+            'csrf_protection' => true, // Activer la protection CSRF
         ]);
     }
 }

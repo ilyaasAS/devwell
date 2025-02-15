@@ -45,6 +45,8 @@ class CommandType extends AbstractType
     // Configure les options du formulaire, ici il n'y a pas de paramètres supplémentaires définis.
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'csrf_protection' => true, // Activer la protection CSRF
+        ]);
     }
 }

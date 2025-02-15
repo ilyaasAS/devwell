@@ -73,6 +73,7 @@ class User1Type extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,  // L'entité liée à ce formulaire
             'is_admin_edit' => false,  // Par défaut, on suppose que l'utilisateur ne modifie pas les infos en tant qu'admin
+            'csrf_protection' => true, // Activer la protection CSRF
         ]);
     }
 }

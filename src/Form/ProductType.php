@@ -67,7 +67,8 @@ class ProductType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Product::class,  // L'entité associée au formulaire est Product
-            'categories' => []  // Les catégories disponibles sont passées depuis le contrôleur
+            'categories' => [],  // Les catégories disponibles sont passées depuis le contrôleur
+            'csrf_protection' => true, // Activer la protection CSRF
         ]);
     }
 }

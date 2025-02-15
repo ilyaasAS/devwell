@@ -58,6 +58,8 @@ class ChangePasswordFormType extends AbstractType
     // Configure les options du formulaire, mais ici aucune option par défaut n'est définie.
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'csrf_protection' => true, // Activer la protection CSRF
+        ]);
     }
 }

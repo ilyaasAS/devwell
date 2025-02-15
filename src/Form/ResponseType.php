@@ -36,6 +36,7 @@ class ResponseType extends AbstractType
         // Définit la classe de données à laquelle ce formulaire est lié, ici l'entité Contact
         $resolver->setDefaults([
             'data_class' => Contact::class, // Le formulaire est lié à l'entité Contact
+            'csrf_protection' => true, // Activer la protection CSRF
         ]);
     }
 }

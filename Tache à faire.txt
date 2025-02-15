@@ -1,8 +1,12 @@
-Faire une savegarde sur github avant:
-crsf token sur tous mes from comme jonathan
-crsf sur mes from twig
+
 
 fAIRE UNE SAV
+
+________
+
+XSS
+____
+
 ____________
 indenter le code
 et commenter

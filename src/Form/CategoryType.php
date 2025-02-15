@@ -29,6 +29,7 @@ class CategoryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Category::class, // Définit la classe de données associée au formulaire.
+            'csrf_protection' => true, // Activer la protection CSRF
         ]);
     }
 }

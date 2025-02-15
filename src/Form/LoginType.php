@@ -49,6 +49,8 @@ class LoginType extends AbstractType
     // Méthode pour configurer les options du formulaire.
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]); // Pas d'options supplémentaires dans ce cas.
+        $resolver->setDefaults([
+            'csrf_protection' => true // Activer la protection CSRF
+        ]);
     }
 }
