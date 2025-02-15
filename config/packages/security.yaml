@@ -24,6 +24,7 @@ security:
         username_parameter: email # Paramètre pour l'email dans le formulaire de connexion
         password_parameter: password # Paramètre pour le mot de passe
         default_target_path: app_home # Redirige l'utilisateur après une connexion réussie
+        max_login_attempts: 3 # Limite les tentatives de connexion à 3
 
       logout: # Paramètres pour gérer la déconnexion
         path: /logout

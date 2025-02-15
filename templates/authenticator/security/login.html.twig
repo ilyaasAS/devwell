@@ -13,7 +13,8 @@
 			{# Si une erreur existe (par exemple, un mot de passe incorrect), le message d'erreur est affiché ici avec des classes Tailwind pour un fond rouge et du texte rouge. #}
 			{% if error %}
 				<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto text-center w-1/2">
-					<p>Identifiants ou mot de passe incorrect.</p>
+					<p>{{ error }}</p>
+					<!-- Échapper le message d'erreur -->
 				</div>
 			{% endif %}
 

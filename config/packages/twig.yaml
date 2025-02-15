@@ -1,5 +1,6 @@
 twig:
     file_name_pattern: '*.twig'
+    autoescape: html  # ✅ Active l’échappement automatique (normalement par défaut)
 
 when@test:
     twig:

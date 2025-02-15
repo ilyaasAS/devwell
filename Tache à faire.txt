@@ -1,8 +1,3 @@
-fAIRE UNE SAV
-
-XSS
-____________
-
 fAIRE UNE SAVE
 
 SEO
@@ -17,16 +12,15 @@ Cette erreur disparait en prod si tu t'appent les bonne commande
 https://symfony.com/bundles/TailwindBundle/current/index.html
 
 fAIRE UNE SAVE
-_____________________
-regarde le canal héberger son site/
-
--htacces
 ________________________
 
 indenter le code
 et commenter
+_____________________
+regarde le canal héberger son site/
 
-_______________________
+-htacces
+______________________________
 
 Hébergement
 
