@@ -12,11 +12,14 @@ DT: un résumer du projet en anglais 50 pages
 DP: Faire les capture d'écrans
 _____________
 
---Test Fonctionnel ?
-
 Test le site prod avant le github
 
 Commenter les test et les nv modif
+
+crsf token sur tous mes from comme jonathan
+
+OrdreTest ne marche pas
+Avis client
 
 _____
 regarde le canal héberger son site/
