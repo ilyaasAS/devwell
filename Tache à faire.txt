@@ -1,10 +1,5 @@
 fAIRE UNE SAVE
 
-SEO
-
-Et pour le SEO ?
-______
-
 W3C
 
 Cette erreur disparait en prod si tu t'appent les bonne commande
@@ -16,10 +11,18 @@ ________________________
 
 indenter le code
 et commenter
+
+fAIRE UNE SAVE
 _____________________
 regarde le canal héberger son site/
 
 -htacces
+
+fAIRE UNE SAVE
+
+sitemap.xml
+favicone
+robots.txt
 ______________________________
 
 Hébergement

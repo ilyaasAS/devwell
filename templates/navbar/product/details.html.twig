@@ -5,6 +5,13 @@
 	- Détails
 {% endblock %}
 
+{% block head %}
+    <meta name="description" content="{{ product.name }} - {{ product.description|slice(0, 160) }}">
+    <meta name="keywords" content="{{ product.name }}, {{ product.category.name }}, boutique en ligne, produit, e-commerce">
+    <meta property="og:title" content="{{ product.name }}">
+    <meta property="og:description" content="{{ product.description }}">
+{% endblock %}
+
 {% block body %}
 	<div
 		class="container mx-auto py-12 px-6 max-w-4xl">

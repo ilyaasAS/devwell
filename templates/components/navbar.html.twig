@@ -1,18 +1,18 @@
-<nav class="bg-primary_dw text-white">
+<nav class="bg-primary_dw text-white" aria-label="Liens de navigation de la barre de navigation">
 	<div class="container mx-auto px-4">
 		<div
 			class="flex justify-between items-center py-4">
 
 			<!-- Logo visible en permanence, à gauche -->
-			<a href="/" class="flex items-center">
-				<img src="{{ asset('/images/logo_dw.webp') }}" alt="Logo" class="h-8 w-auto">
+			<a href="/" class="flex items-center" itemprop="url">
+				<img src="{{ asset('/images/logo_dw.webp') }}" alt="Logo de Devwell" class="h-8 w-auto" itemprop="logo" loading="lazy">
 			</a>
 
 			<!-- Menu (desktop) -->
 			<ul class="hidden md:flex w-full justify-between items-center">
 				<li class="flex items-center space-x-6">
 					<a href="/" class="text-lg font-bold hover:text-secondary_dw">Accueil</a>
-					<a href="/products" class="text-lg font-bold hover:text-secondary_dw">Produit</a>
+					<a href="/products" title="Voir tous les produits" class="text-lg font-bold hover:text-secondary_dw">Produit</a>
 					<a href="/categorie" class="text-lg font-bold hover:text-secondary_dw">Catégorie</a>
 					<a href="/profile" class="text-lg font-bold hover:text-secondary_dw">Profile</a>
 					<a href="/avis-client" class="text-lg font-bold hover:text-secondary_dw">Avis clients</a>
@@ -29,7 +29,7 @@
 					<a
 						href="/cart" class="relative flex items-center px-4 py-2 rounded hover:text-secondary_dw">
 						<!-- Icône Panier -->
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6"/>
 						</svg>
 						Panier
@@ -40,10 +40,10 @@
 					</a>
 
 					{% if app.user is null %}
-						<a href="/login" class="bg-secondary_dw text-primary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw-300 hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw-300 transition duration-300 transform hover:scale-105">
+						<a href="/login" rel="nofollow" class="bg-secondary_dw text-primary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw-300 hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-primary_dw-300 transition duration-300 transform hover:scale-105">
 							Connexion
 						</a>
-						<a href="/register" class="bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-300 transform hover:scale-105">
+						<a href="/register" rel="nofollow" class="bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-300 transform hover:scale-105">
 							Inscription
 						</a>
 					{% else %}
