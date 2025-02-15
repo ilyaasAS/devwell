@@ -21,7 +21,7 @@ class CartServiceTest extends TestCase
         // Création des mocks pour le repository et le service de sécurité
         $this->cartRepository = $this->createMock(CartRepository::class);
         $this->security = $this->createMock(Security::class);
-        
+
         // Création de l'objet CartService avec les mocks comme dépendances
         $this->cartService = new CartService($this->cartRepository, $this->security);
     }

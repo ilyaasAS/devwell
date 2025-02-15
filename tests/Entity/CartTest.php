@@ -13,7 +13,7 @@ class CartTest extends TestCase
     {
         // Création d'un utilisateur mocké
         $user = $this->createMock(User::class);
-        
+
         // Création d'un produit mocké
         $product = $this->createMock(Product::class);
 

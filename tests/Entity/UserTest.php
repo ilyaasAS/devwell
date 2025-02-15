@@ -27,7 +27,7 @@ class UserTest extends TestCase
 
         // Test des rôles
         $user->setRoles(['ROLE_ADMIN']);
-        
+
         // Vérifier que le rôle ROLE_USER est aussi présent par défaut
         $this->assertContains('ROLE_USER', $user->getRoles()); // Ajout du test pour ROLE_USER par défaut
         $this->assertSame(['ROLE_ADMIN', 'ROLE_USER'], $user->getRoles());
