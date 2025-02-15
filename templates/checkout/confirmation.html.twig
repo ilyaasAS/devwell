@@ -27,34 +27,29 @@
 			<p class="text-lg font-medium">
 				<strong>Commande :</strong>
 				{{ order.id }}</p>
-			<!-- ID unique de la commande -->
 			<p class="text-lg font-medium">
 				<strong>Status :</strong>
 				{{ order.status }}</p>
-			<!-- Statut actuel de la commande -->
 			<p class="text-lg font-medium">
 				<strong>Date :</strong>
 				{{ order.createdAt|date('Y-m-d H:i') }}</p>
-			<!-- Date de création de la commande -->
 			<p class="text-lg font-medium">
 				<strong>Utilisateur :</strong>
 				{{ order.user.email }}</p>
-			<!-- Email de l'utilisateur ayant passé la commande -->
 		</div>
 
 		<!-- Section des articles de la commande -->
 		<h3 class="text-2xl font-semibold mb-4">Articles de la commande :</h3>
-		<ul class="space-y-4">
+		<ul
+			class="space-y-4 mb-12">
+			<!-- Ajout d'un margin-bottom pour ajouter de l'espace -->
 			{% for item in order.orderItems %}
-				<li
-					class="bg-gray-100 p-4 rounded-lg shadow-md">
-					<!-- Affichage des détails de chaque produit de la commande -->
+				<li class="bg-gray-100 p-4 rounded-lg shadow-md">
 					<strong>{{ item.product.name }}</strong>
 					-
 					{{ item.quantity }}
 					x
 					{{ item.price }}€
-					<!-- Nom, quantité et prix du produit -->
 				</li>
 			{% endfor %}
 		</ul>

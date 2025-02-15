@@ -8,10 +8,12 @@
 	<div class="container mx-auto py-20 px-6 my-12 max-w-4xl">
 		{# Le conteneur avec une largeur maximale de 4xl (max-w-4xl), centré horizontalement (mx-auto), avec du padding vertical (py-20) et horizontal (px-6). Une marge verticale de 12 (my-12) est ajoutée pour espacer la section. #}
 
-		<!-- Page Title --><h1 class="text-3xl font-bold mb-8 text-center text-primary_dw"> Gestion des commandes</h1>
+		<!-- Page Title -->
+			<h1 class="text-3xl font-bold mb-8 text-center text-primary_dw"> Gestion des commandes</h1>
 		{# Le titre principal de la page, centré, avec une taille de texte 3xl et un poids de police en gras (font-bold). Une marge inférieure (mb-8) est ajoutée pour espacer du contenu suivant. Le texte utilise la couleur primaire personnalisée (text-primary_dw). #}
 
 		<!-- Orders Table -->
+		<div class="overflow-x-auto">
 		<table
 			class="table-auto w-full border-collapse border border-gray-300 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
 			{# Une table est utilisée pour afficher les commandes. Les classes sont appliquées pour contrôler la largeur de la table (w-full), la gestion des bordures (border-collapse, border-gray-300) et l'ajout d'ombres et d'effets au survol (shadow-product, hover:shadow-hover, hover:scale-105). #}
@@ -80,7 +82,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		<div>
 	</div>
 
 {% endblock %}
-{# Fin du bloc 'body' qui contient tout le contenu principal de la page. #}

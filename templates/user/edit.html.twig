@@ -23,17 +23,18 @@
 			) }}{# Affichage du champ 'roles' avec des options de styles pour ce champ #}
 
 			<!-- Conteneur centré pour les boutons -->
-				<div
-				class="mt-6 text-center space-x-4"> <!-- Bouton Retour -->
-				<a href="{{ path('app_user_index') }}" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-					Retour
-				</a>
+<div class="mt-6 text-center space-y-4"> <!-- Utilisation de space-y-4 pour l'espacement vertical -->
+    <!-- Bouton Mettre à jour -->
+    <button type="submit" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+        Mettre à jour
+    </button>
 
-				<!-- Bouton Mettre à jour -->
-				<button type="submit" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
-					Mettre à jour
-				</button>
-			</div>
+    <!-- Bouton Retour -->
+    <a href="{{ path('app_user_index') }}" class="inline-block w-full max-w-xs bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+        Retour
+    </a>
+</div>
+
 
 			{{ form_end(form) }}
 		</div>

@@ -11,85 +11,73 @@
 		{# Titre de la page stylisé #}
 
 		<!-- Bouton "Créer un utilisateur" aligné à droite -->
-		<div
-			class="flex justify-end mb-6">
+		<div class="flex justify-end mb-6">
 			{# Conteneur flex pour aligner le bouton à droite #}
-			<a href="{{ path('app_user_create') }}" class="inline-block bg-primary_dw text-white py-3 px-6 rounded-lg shadow-md
-					           hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2
-					           focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+			<a href="{{ path('app_user_create') }}" class="inline-block bg-primary_dw text-white py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
 				Créer un utilisateur
 			</a>
 			{# Lien vers la page de création d'un utilisateur avec effets au survol #}
 		</div>
 
-		<!-- Tableau des utilisateurs -->
-		<table class="table-auto w-full border-collapse border border-gray-300 shadow-product
-				                  hover:shadow-hover transition duration-300 transform hover:scale-105">
-			<thead class="bg-gray-100">
-				<tr>
-					<th class="border border-gray-300 px-4 py-2">Id</th>
-					<th class="border border-gray-300 px-4 py-2">Prénom</th>
-					<th class="border border-gray-300 px-4 py-2">Nom de Famille</th>
-					<th class="border border-gray-300 px-4 py-2">Email</th>
-					<th class="border border-gray-300 px-4 py-2">Roles</th>
-					<th class="border border-gray-300 px-4 py-2">Actions</th>
-				</tr>
-				{# Entête du tableau avec les colonnes #}
-			</thead>
-			<tbody>
-				{% for user in users %}
-					{# Boucle pour afficher chaque utilisateur #}
-					<tr class="odd:bg-white even:bg-gray-50 shadow-product hover:shadow-hover
-							                       transition duration-300 transform hover:scale-105">
-						<td class="border border-gray-300 px-4 py-2">{{ user.id }}</td>
-						{# ID de l'utilisateur #}
-						<td class="border border-gray-300 px-4 py-2">{{ user.firstName }}</td>
-						{# Prénom #}
-						<td class="border border-gray-300 px-4 py-2">{{ user.lastName }}</td>
-						{# Nom de famille #}
-						<td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
-						{# Email #}
-						<td class="border border-gray-300 px-4 py-2">{{ user.roles ? user.roles|join(', ') : '' }}</td>
-						{# Rôles de l'utilisateur #}
-						<td
-							class="border border-gray-300 px-4 py-2 text-center">
-							<!-- Lien Voir -->
-							<a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline mx-2
-									                       transition duration-300 transform hover:scale-105">
-								Voir
-							</a>
-							{# Lien pour voir les détails de l'utilisateur #}
-
-							<!-- Lien Modifier -->
-							<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2
-									                       transition duration-300 transform hover:scale-105">
-								Modifier
-							</a>
-							{# Lien pour modifier l'utilisateur #}
-
-							<!-- Formulaire de suppression -->
-							<form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm(''success', 'Profil mis à jour avec succès'.');" class="inline mx-2">
-								<input
-								type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-								{# Token CSRF pour la sécurité #}
-								<button type="submit" class="text-red-500 hover:text-secondary_dw
-										                                hover:underline transition duration-300 transform hover:scale-105">
-									Supprimer
-								</button>
-							</form>
-							{# Formulaire pour supprimer un utilisateur avec une confirmation #}
-						</td>
-					</tr>
-				{% else %}
-					{# Si aucun utilisateur n'est trouvé #}
+		<!-- Ajout du défilement horizontal pour le tableau sur mobile -->
+		<div class="overflow-x-auto">  <!-- Conteneur avec défilement horizontal -->
+			<!-- Tableau des utilisateurs -->
+			<table class="table-auto w-full border-collapse border border-gray-300 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+				<thead class="bg-gray-100">
 					<tr>
-						<td colspan="6" class="border border-gray-300 px-4 py-2 text-center">
-							Aucun enregistrement n'a été trouvé
-						</td>
+						<th class="border border-gray-300 px-4 py-2">Id</th>
+						<th class="border border-gray-300 px-4 py-2">Prénom</th>
+						<th class="border border-gray-300 px-4 py-2">Nom de Famille</th>
+						<th class="border border-gray-300 px-4 py-2">Email</th>
+						<th class="border border-gray-300 px-4 py-2">Roles</th>
+						<th class="border border-gray-300 px-4 py-2">Actions</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+					{# Entête du tableau avec les colonnes #}
+				</thead>
+				<tbody>
+					{% for user in users %}
+						{# Boucle pour afficher chaque utilisateur #}
+						<tr class="odd:bg-white even:bg-gray-50 shadow-product hover:shadow-hover transition duration-300 transform hover:scale-105">
+							<td class="border border-gray-300 px-4 py-2">{{ user.id }}</td>
+							{# ID de l'utilisateur #}
+							<td class="border border-gray-300 px-4 py-2">{{ user.firstName }}</td>
+							{# Prénom #}
+							<td class="border border-gray-300 px-4 py-2">{{ user.lastName }}</td>
+							{# Nom de famille #}
+							<td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
+							{# Email #}
+							<td class="border border-gray-300 px-4 py-2">{{ user.roles ? user.roles|join(', ') : '' }}</td>
+							{# Rôles de l'utilisateur #}
+							<td class="border border-gray-300 px-4 py-2 text-center">
+								<a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
+									Voir
+								</a>
+								{# Lien pour voir les détails de l'utilisateur #}
+
+								<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
+									Modifier
+								</a>
+								{# Lien pour modifier l'utilisateur #}
+
+								<form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" class="inline mx-2">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+									{# Token CSRF pour la sécurité #}
+									<button type="submit" class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
+										Supprimer
+									</button>
+								</form>
+								{# Formulaire pour supprimer un utilisateur avec une confirmation #}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6" class="border border-gray-300 px-4 py-2 text-center">
+								Aucun enregistrement n'a été trouvé
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 	</div>
 {% endblock %}
-{# Fin du bloc body #}

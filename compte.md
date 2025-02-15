@@ -5,6 +5,10 @@ ilyaas@gmail.com
 
 mdp: Ilyaas@15122003
 
+
+admin@gmail.com
+MDP: admin2003
+
 _____________________________
 
 user@gmail.com

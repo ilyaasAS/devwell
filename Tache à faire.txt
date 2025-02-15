@@ -1,27 +1,26 @@
-checker:
+Test le site prod avant le github:
 
-XV---MCD (voir le chat avec db.sql + lui donner à la fin la table noqsl)
-XV---MLD
-_____
+supprimer les erreur dans ma DB: ilyaas15@gmail.com	
 
-XVV---Diagramme de cas d'utilisation
-Planning
-Maquette
-___________________
-DT: un résumer du projet en anglais 50 pages
-DP: Faire les capture d'écrans
-_____________
+____________
 
-Test le site prod avant le github
-
-Commenter les test et les nv modif
-
+Faire une savegarde sur github avant:
 crsf token sur tous mes from comme jonathan
+crsf sur mes from twig
 
-OrdreTest ne marche pas
-Avis client
-
+____________
+indenter le code
+et commenter
 _____
+Optimiser mes images
+____
+
+W3C
+
+Cette erreur disparait en prod si tu t'appent les bonne commande
+
+https://symfony.com/bundles/TailwindBundle/current/index.html
+_____________________
 regarde le canal héberger son site/
 
 -htacces
@@ -38,12 +37,21 @@ rendre mon partage de co en ip fixe
 mettre l'ip du VPS
 ________
 
-W3C
+checker:
 
-Cette erreur disparait en prod si tu t'appent les bonne commande
+XV---MCD (voir le chat avec db.sql + lui donner à la fin la table noqsl)
+XV---MLD
+_____
 
-en prod j'ai pas le css de taildwind ?
+XVV---Diagramme de cas d'utilisation
+Planning
+Maquette
+___________________
+DT: un résumer du projet en anglais 50 pages
+DP: Faire les capture d'écrans
+_____________
 
-https://symfony.com/bundles/TailwindBundle/current/index.html
-
-nmp run prod ?
+Test fonctionnel
+Avis client
+OrdreTest ne marche pas
+MailService
