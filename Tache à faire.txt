@@ -1,16 +1,13 @@
-Test le site prod avant le github:
-
-supprimer les erreur dans ma DB: ilyaas15@gmail.com	
-
-____________
-
 Faire une savegarde sur github avant:
 crsf token sur tous mes from comme jonathan
 crsf sur mes from twig
 
+fAIRE UNE SAV
 ____________
 indenter le code
 et commenter
+
+fAIRE UNE SAVE
 _____
 Optimiser mes images
 ____
