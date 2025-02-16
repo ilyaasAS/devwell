@@ -47,7 +47,7 @@ class ProductType extends AbstractType
                 'choice_label' => function ($category) {  // Définit l'affichage des choix
                     return $category->getName();  // Affiche le nom de la catégorie
                 },
-                'required' => false,  // Le champ catégorie est optionnel
+                'required' => true,  // Le champ catégorie est obligatoire
             ]);
     }
 
