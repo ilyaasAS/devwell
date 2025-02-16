@@ -4,11 +4,6 @@
 	Nos Produits
 {% endblock %}
 
-{% block head %}
-	<meta name="description" content="Découvrez notre large gamme de produits avec des descriptions détaillées et des prix compétitifs.">
-	<meta name="keywords" content="produits, acheter, vente, boutique, e-commerce, produits en ligne">
-{% endblock %}
-
 {% block body %}
 	<div
 		class="container mx-auto py-10">
@@ -49,7 +44,7 @@
 
 						<!-- Image du produit -->
 						<div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
-							<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain loading=" lazy"">
+							<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
 						</div>
 
 						<!-- Description courte du produit -->

@@ -1,11 +1,6 @@
-fAIRE UNE SAVE
-
+UX
 W3C
-
-Cette erreur disparait en prod si tu t'appent les bonne commande
-
-https://symfony.com/bundles/TailwindBundle/current/index.html
-
+fAIRE UNE SAVE
 fAIRE UNE SAVE
 ________________________
 

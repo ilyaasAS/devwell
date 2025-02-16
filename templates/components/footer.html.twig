@@ -1,4 +1,4 @@
-<footer style="background-color: #1a2a40;" class="text-white py-6" itemscope itemtype="https://schema.org/WPFooter">
+<footer style="background-color: #1a2a40;" class="text-white py-6">
 
 	<div
 		class="container mx-auto px-4">
@@ -6,9 +6,9 @@
 
 		<div class="flex flex-col sm:flex-row justify-between items-center">
 			<!-- Utilisation de Flexbox pour gérer la disposition : 
-									                 - Sur mobile (par défaut), les éléments sont en colonne (flex-col)
-									                 - Sur les écrans plus grands (sm et au-dessus), les éléments sont disposés en ligne (flex-row)
-									                 - 'justify-between' assure l'espace entre les éléments, 'items-center' les aligne verticalement au centre -->
+			                 - Sur mobile (par défaut), les éléments sont en colonne (flex-col)
+			                 - Sur les écrans plus grands (sm et au-dessus), les éléments sont disposés en ligne (flex-row)
+			                 - 'justify-between' assure l'espace entre les éléments, 'items-center' les aligne verticalement au centre -->
 
 			<!-- Liens du footer -->
 				<nav
@@ -16,46 +16,44 @@
 
 				<ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
 					<!-- Liste des liens dans le footer. Sur mobile, les éléments sont en colonne (space-y-2), 
-															                         sur les écrans plus larges, ils sont en ligne avec un espacement horizontal (sm:space-x-6) -->
+					                         sur les écrans plus larges, ils sont en ligne avec un espacement horizontal (sm:space-x-6) -->
 
 					<!-- Chaque lien représente une page différente (CGV, CGU, Mentions Légales, etc.) -->
 						<li>
-							<a href="{{ path('app_cgv') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300" title="Consulter les Conditions Générales de Vente" aria-label="Conditions Générales de Vente">CGV</a>
+							<a href="{{ path('app_cgv') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300"> CGV
+						</a>
 					</li>
-			</li>
-			<li>
-				<a href="{{ path('app_cgu') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300" title="Consulter les Conditions Générales d'Utilisation" aria-label="Conditions Générales d'Utilisation">
-					CGU
-				</a>
+					<li>
+						<a href="{{ path('app_cgu') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300">
+							CGU
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('app_mentions_legales') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300">
+							Mentions Légales
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('app_contact') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300">
+							Contact
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('politique_cookies') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300">
+							Politique des Cookies
+						</a>
+					</li>
+				</ul>
+			</nav>
 
-			</li>
-			<li>
-				<a href="{{ path('app_mentions_legales') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300" title="Consulter les Mentions Légales" aria-label="Mentions Légales">
-					Mentions Légales
-				</a>
-
-			</li>
-			<li>
-				<a href="{{ path('app_contact') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300" title="Page de contact" aria-label="Page de Contact">
-					Contact
-				</a>
-
-			</li>
-			<li>
-				<a href="{{ path('politique_cookies') }}" class="hover:text-secondary_dw hover:underline cursor-pointer transition duration-300" title="Consulter la Politique des Cookies" aria-label="Politique des Cookies">
-					Politique des Cookies
-				</a>
-
-			</li>
-		</ul>
-	</nav>
-
-	<!-- Copyright -->
-	<div
-		class="text-sm text-gray-400" itemprop="copyrightHolder">
-		<!-- Affichage du texte des droits d'auteur avec la date actuelle -->
-		&copy;
-		{{ "now"|date("Y") }}
-		Devwell. Tous droits réservés.
+			<!-- Copyright -->
+			<div
+				class="text-sm text-gray-400">
+				<!-- Affichage du texte des droits d'auteur avec la date actuelle -->
+				&copy;
+				{{ "now"|date("Y") }}
+				Devwell. Tous droits réservés.
+			</div>
+		</div>
 	</div>
-</div></div></footer>
+</footer>

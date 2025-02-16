@@ -28,11 +28,10 @@
 
 				{# Pour le champ 'createdAt', un format de date spécifique est appliqué (date('Y-m-d H:i')), et la valeur par défaut est définie sur l'heure de création de la commande (order.createdAt). #}
 			{{ form_row(form.createdAt, {
-                    'attr': {
-                        'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw',
-                        'value': order.createdAt|date('Y-m-d H:i') 
-                    }
-                }) }}
+    'attr': {
+        'class': 'w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-primary_dw focus:border-primary_dw', 
+    }
+}) }}
 			</div>
 
 				<div
