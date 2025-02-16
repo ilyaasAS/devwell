@@ -1,0 +1,11 @@
+# Autoriser tous les robots à explorer tout le site
+User-agent: *
+Disallow:
+
+# Empêcher les robots d'explorer certaines pages ou répertoires
+Disallow: /admin/
+Disallow: /login/
+Disallow: /panier/
+
+# Spécifier l'emplacement du fichier sitemap
+Sitemap: https://www.ilyaas-abdoulazis.fr/sitemap.xml

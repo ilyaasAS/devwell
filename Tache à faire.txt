@@ -4,11 +4,10 @@ regarde le canal héberger son site/
 
 fAIRE UNE SAVE
 
-sitemap.xml
 favicone
 robots.txt
 ______________________________
-
+sitemap.xml
 Hébergement
 
 vidéo de Ouwardia
