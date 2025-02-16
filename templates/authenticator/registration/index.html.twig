@@ -10,7 +10,7 @@
 
 		<div
 			class="max-w-md w-full bg-white p-8 shadow-secondary rounded-md
-				                transform transition-transform duration-300 hover:scale-105 hover:shadow-hover">
+								                transform transition-transform duration-300 hover:scale-105 hover:shadow-hover">
 			{# Conteneur du formulaire avec effet de survol (agrandissement et ombre) pour un effet interactif #}
 
 			<h1 class="text-2xl font-bold text-center mb-8 text-primary_dw">Inscrivez-vous</h1>
@@ -25,14 +25,14 @@
 
 				<div class="space-y-4"> {# Conteneur des champs du formulaire avec un espacement entre eux #}
 
-				<!-- Champ Prénom -->
-					<div>{{ form_label(form.firstName, 'Prénom', {'label_attr': {'class': 'block text-sm font-medium text-text_dw'}}
-					) }}
-					{# Étiquette du champ avec un style défini #}{{ form_widget(form.firstName, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
+				<!-- Champ Prénom --><div>
+					{{ form_label(form.firstName, 'Prénom', {'label_attr': {'class': 'block text-sm font-medium text-text_dw'}}) }}
+					{# Étiquette du champ avec un style défini #}
+					{{ form_widget(form.firstName, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
                                                                    focus:outline-none focus:ring-secondary_dw focus:border-secondary_dw 
-                                                                   transition-all duration-300 hover:scale-105'}}
-					) }}
-					{# Champ de saisie avec styles et effet de survol #}{{ form_errors(form.firstName, {'attr': {'class': 'text-red-500 text-sm'}}
+                                                                   transition-all duration-300 hover:scale-105'}}) }}
+					{# Champ de saisie avec styles et effet de survol #}
+					{{ form_errors(form.firstName, {'attr': {'class': 'text-red-500 text-sm'}}
 				) }}
 					{# Affichage des erreurs de validation en rouge si nécessaire #}
 				</div>
@@ -68,9 +68,9 @@
 			<!-- Bouton S'inscrire -->
 			<div class="mt-6">
 				<button type="submit" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md
-						                           hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw
-						                           focus:text-primary_dw transition duration-300 transform hover:scale-105
-						                           w-full text-center mb-4">
+												                           hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw
+												                           focus:text-primary_dw transition duration-300 transform hover:scale-105
+												                           w-full text-center mb-4">
 					S'inscrire
 				</button>
 				{# Bouton de soumission stylisé avec des effets interactifs au survol et focus #}

@@ -91,11 +91,11 @@
 						{% endfor %}
 					</tbody>
 				</table>
-		</div>
-				{% else %}
-					<p class="text-center text-gray-500 mt-6">Aucune catégorie n'a été trouvée.</p>
-				{# Si aucune catégorie n'est présente dans la base de données, un message informant l'utilisateur qu'aucune catégorie n'a été trouvée est affiché. #}
-			{% endif %}
-		</div>
+			</div>
+		{% else %}
+			<p class="text-center text-gray-500 mt-6">Aucune catégorie n'a été trouvée.</p>
+			{# Si aucune catégorie n'est présente dans la base de données, un message informant l'utilisateur qu'aucune catégorie n'a été trouvée est affiché. #}
+		{% endif %}
+	</div>
 
-	{% endblock %}
+{% endblock %}

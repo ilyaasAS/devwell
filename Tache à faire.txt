@@ -1,14 +1,10 @@
-UX
-W3C
-fAIRE UNE SAVE
-fAIRE UNE SAVE
-________________________
+Mettre un message d'erreur pour dire séléctionne une catégorie pour evite qu'il me dirige vers la page d'erreur
 
-indenter le code
-et commenter
+https://127.0.0.1:8000/admin/product/new
+https://127.0.0.1:8000/admin/product/1/edit
 
-fAIRE UNE SAVE
-_____________________
+Faire une sAV
+______________________
 regarde le canal héberger son site/
 
 -htacces
