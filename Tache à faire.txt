@@ -1,10 +1,3 @@
-Mettre un message d'erreur pour dire séléctionne une catégorie pour evite qu'il me dirige vers la page d'erreur
-
-https://127.0.0.1:8000/admin/product/new
-https://127.0.0.1:8000/admin/product/1/edit
-
-Faire une sAV
-______________________
 regarde le canal héberger son site/
 
 -htacces
