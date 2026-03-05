@@ -61,33 +61,34 @@ class CheckoutController extends AbstractController
                 $em->persist($orderItem);
             }
 
-            // Gestion du paiement via Stripe
+            // Persister la commande et flusher pour obtenir l'ID (nécessaire pour metadata + webhook)
+            $em->persist($order);
+            $em->flush();
+
+            // Gestion du paiement via Stripe (émission asynchrone : le webhook mettra à jour le statut)
             $stripeToken = $request->request->get('stripeToken');
 
             if ($stripeToken) {
-                // Initialisation de Stripe
                 Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
-                // Création d'une charge Stripe
                 try {
                     Charge::create([
-                        'amount' => $this->calculateTotal($cartItems), // Montant en centimes
+                        'amount' => $this->calculateTotal($cartItems),
                         'currency' => 'eur',
                         'description' => 'Commande ' . $order->getId(),
                         'source' => $stripeToken,
+                        'metadata' => [
+                            'order_id' => (string) $order->getId(),
+                        ],
                     ]);
                 } catch (\Exception $e) {
                     $this->addFlash('error', 'Erreur de paiement : ' . $e->getMessage());
                     return $this->redirectToRoute('checkout');
                 }
 
-                // Mettre à jour le statut après paiement réussi
-                $order->setStatus('payée');
+                // Le statut 'payée' est désormais défini par le webhook (StripeWebhookController)
+                // $order->setStatus('payée');
             }
-
-            // Sauvegarder la commande dans la base de données
-            $em->persist($order);
-            $em->flush();
 
             // Suppression des articles du panier après achat
             foreach ($cartItems as $cartItem) {
@@ -99,11 +100,13 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('order_confirmation', ['id' => $order->getId()]);
         }
 
-        // Affichage de la page de paiement
+        // Clé publique Stripe obligatoire : si vide, le champ carte ne s'affichera jamais.
+        // Trim + suppression d'éventuels guillemets/espaces pour éviter 401 ou erreurs JS.
+        $stripePublicKey = trim((string) ($_ENV['STRIPE_PUBLIC_KEY'] ?? ''), " \t\n\r\0\x0B\"'");
         return $this->render('checkout/index.html.twig', [
             'form' => $form->createView(),
             'cartItems' => $cartItems,
-            'stripe_public_key' => $_ENV['STRIPE_PUBLIC_KEY'], // Passer la clé publique à Twig
+            'stripe_public_key' => $stripePublicKey,
         ]);
     }
 

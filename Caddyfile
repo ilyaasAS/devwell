@@ -1,0 +1,22 @@
+# Développement local : Caddy écoute sur localhost en HTTP.
+# Cela évite les collisions avec d'autres vhosts et simule un reverse proxy frontal.
+#
+# Passage en production (Let’s Encrypt) :
+# - Remplacer "localhost" / "mail.localhost" par tes domaines réels, ex. devwell.example.com et mail.devwell.example.com
+# - S'assurer que les ports 80 et 443 du serveur sont accessibles depuis Internet
+# - Configurer un bloc global avec un email ACME, par exemple :
+#     {
+#       email admin@devwell.example.com
+#     }
+#   Caddy gérera alors automatiquement les certificats TLS via Let's Encrypt.
+# - En prod, utiliser un sous-domaine réel pour le mail, par exemple : mail.tonempire.com
+
+# Application Symfony (frontend principal)
+localhost {
+    reverse_proxy app:80
+}
+
+# Interface Mailpit, exposée uniquement via HTTPS/TLS en frontal
+mail.localhost {
+    reverse_proxy mailpit:8025
+}

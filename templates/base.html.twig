@@ -98,13 +98,15 @@ document.querySelectorAll('.alert').forEach(el => el.remove());
 }, 3000);
 			</script>
 
-			<!-- Mobile Menu Toggle -->
+			<!-- Mobile Menu Toggle (gardes pour éviter addEventListener on null) -->
 			<script>
 				const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-menuToggle.addEventListener('click', () => {
-mobileMenu.classList.toggle('hidden');
-});
+				const mobileMenu = document.getElementById('mobile-menu');
+				if (menuToggle && mobileMenu) {
+					menuToggle.addEventListener('click', () => {
+						mobileMenu.classList.toggle('hidden');
+					});
+				}
 			</script>
 
 			<!-- Cookie Consent Script -->

@@ -14,6 +14,12 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
+    # Webhook Stripe : pas d'auth, pas de session ; accepte les requêtes POST de l'extérieur (stripe-cli, Stripe)
+    webhook:
+      pattern: ^/webhook
+      security: false
+      stateless: true
+
     main:
       lazy: true
       provider: users_database # Utilisation du fournisseur d'utilisateurs basé sur la base de données

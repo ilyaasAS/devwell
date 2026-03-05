@@ -36,10 +36,8 @@
 			</div>
 		</div>
 
-		<!-- Stripe Section -->
-		<div
-			class="mt-6">
-			<!-- L'attribut 'for' est retiré car 'card-element' n'est pas un champ form standard -->
+		<!-- Stripe Section (doit rester à l'intérieur de #payment-form, ID exact requis par Stripe) -->
+		<div class="mt-6">
 			<label class="block text-lg font-medium text-gray-700">Informations de paiement</label>
 			<div id="card-element" class="mt-2 p-4 border rounded-md shadow-sm bg-gray-50"></div>
 			<p id="card-errors" class="text-sm text-red-600 mt-2" role="alert"></p>
@@ -54,55 +52,45 @@
 	<script src="https://js.stripe.com/v3/"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
-var stripe = Stripe("{{ stripe_public_key }}");
-var elements = stripe.elements();
-var card = elements.create('card', {
-style: {
-base: {
-fontSize: '16px',
-color: '#32325d',
-fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-'::placeholder': {
-color: '#a0aec0'
-}
-},
-invalid: {
-color: '#fa755a'
-}
-}
-});
-card.mount('#card-element');
+			var stripePublicKey = "{{ stripe_public_key|e('js') }}";
+			if (!stripePublicKey) {
+				console.error('[Stripe] STRIPE_PUBLIC_KEY manquante — le champ carte ne s\'affichera pas.');
+				return;
+			}
+			var form = document.getElementById('payment-form');
+			var cardErrors = document.getElementById('card-errors');
+			var stripe = Stripe(stripePublicKey);
+			var elements = stripe.elements();
+			var card = elements.create('card', {
+				disableLink: true,
+				style: {
+					base: { fontSize: '16px', color: '#32325d', fontFamily: '"Helvetica Neue", Helvetica, sans-serif', '::placeholder': { color: '#a0aec0' } },
+					invalid: { color: '#fa755a' }
+				}
+			});
+			card.mount('#card-element');
 
-// Gestion des erreurs de carte
-card.addEventListener('change', function (event) {
-var displayError = document.getElementById('card-errors');
-if (event.error) {
-displayError.textContent = event.error.message;
-} else {
-displayError.textContent = '';
-}
-});
+			card.addEventListener('change', function (event) {
+				if (cardErrors) cardErrors.textContent = event.error ? event.error.message : '';
+			});
 
-// Gestion du formulaire
-var form = document.getElementById('payment-form');
-form.addEventListener('submit', function (event) {
-event.preventDefault();
-
-stripe.createToken(card).then(function (result) {
-if (result.error) {
-var errorElement = document.getElementById('card-errors');
-errorElement.textContent = result.error.message;
-} else {
-var hiddenInput = document.createElement('input');
-hiddenInput.setAttribute('type', 'hidden');
-hiddenInput.setAttribute('name', 'stripeToken');
-hiddenInput.setAttribute('value', result.token.id);
-form.appendChild(hiddenInput);
-
-form.submit();
-}
-});
-});
-});
+			if (form) {
+				form.addEventListener('submit', function (event) {
+					event.preventDefault();
+					stripe.createToken(card).then(function (result) {
+						if (result.error) {
+							if (cardErrors) cardErrors.textContent = result.error.message;
+						} else {
+							var hiddenInput = document.createElement('input');
+							hiddenInput.setAttribute('type', 'hidden');
+							hiddenInput.setAttribute('name', 'stripeToken');
+							hiddenInput.setAttribute('value', result.token.id);
+							form.appendChild(hiddenInput);
+							form.submit();
+						}
+					});
+				});
+			}
+		});
 	</script>
 {% endblock %}
