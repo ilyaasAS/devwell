@@ -33,8 +33,8 @@ class CommandType extends AbstractType
                     'rows' => 4, // Le champ de texte aura 4 lignes visibles.
                 ],
             ])
-            // Champ 'submit' pour le bouton de soumission du formulaire, de type 'SubmitType'.
-            ->add('submit', SubmitType::class, [
+            // Champ 'valider' pour le bouton de soumission (évite le conflit avec form.submit() en JS).
+            ->add('valider', SubmitType::class, [
                 'label' => 'Passer commande', // Texte du bouton de soumission.
                 'attr' => [
                     'class' => 'w-full bg-primary_dw text-tertiary_dw py-3 rounded-lg text-lg font-semibold shadow hover:bg-primary_hover transition', // Classe CSS pour la mise en forme du bouton.

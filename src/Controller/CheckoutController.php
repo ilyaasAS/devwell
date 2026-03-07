@@ -49,9 +49,14 @@ class CheckoutController extends AbstractController
 
         // Vérification si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+            // 1. Token Stripe obligatoire : sans lui, on ne crée aucune commande et on ne touche pas au panier
+            $stripeToken = $request->request->get('stripeToken');
+            if (!$stripeToken) {
+                $this->addFlash('error', 'Veuillez renseigner vos informations de paiement (carte bancaire).');
+                return $this->redirectToRoute('checkout');
+            }
 
-            // Ajouter les articles du panier à la commande
+            // 2. Créer la commande et les lignes, persister pour obtenir l'ID (metadata + webhook)
             foreach ($cartItems as $cartItem) {
                 $orderItem = new OrderItem();
                 $orderItem->setOrder($order);
@@ -60,37 +65,29 @@ class CheckoutController extends AbstractController
                 $orderItem->setPrice($cartItem->getProduct()->getPrice());
                 $em->persist($orderItem);
             }
-
-            // Persister la commande et flusher pour obtenir l'ID (nécessaire pour metadata + webhook)
             $em->persist($order);
             $em->flush();
 
-            // Gestion du paiement via Stripe (émission asynchrone : le webhook mettra à jour le statut)
-            $stripeToken = $request->request->get('stripeToken');
-
-            if ($stripeToken) {
+            // 3. Tenter le paiement Stripe ; en cas d'échec, annuler la commande et garder le panier
+            try {
                 Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
-
-                try {
-                    Charge::create([
-                        'amount' => $this->calculateTotal($cartItems),
-                        'currency' => 'eur',
-                        'description' => 'Commande ' . $order->getId(),
-                        'source' => $stripeToken,
-                        'metadata' => [
-                            'order_id' => (string) $order->getId(),
-                        ],
-                    ]);
-                } catch (\Exception $e) {
-                    $this->addFlash('error', 'Erreur de paiement : ' . $e->getMessage());
-                    return $this->redirectToRoute('checkout');
-                }
-
-                // Le statut 'payée' est désormais défini par le webhook (StripeWebhookController)
-                // $order->setStatus('payée');
+                Charge::create([
+                    'amount' => $this->calculateTotal($cartItems),
+                    'currency' => 'eur',
+                    'description' => 'Commande ' . $order->getId(),
+                    'source' => $stripeToken,
+                    'metadata' => [
+                        'order_id' => (string) $order->getId(),
+                    ],
+                ]);
+            } catch (\Exception $e) {
+                $em->remove($order); // cascade supprime les OrderItem
+                $em->flush();
+                $this->addFlash('error', 'Erreur de paiement : ' . $e->getMessage());
+                return $this->redirectToRoute('checkout');
             }
 
-            // Suppression des articles du panier après achat
+            // 4. Paiement réussi : vider le panier et rediriger vers la confirmation
             foreach ($cartItems as $cartItem) {
                 $em->remove($cartItem);
             }
