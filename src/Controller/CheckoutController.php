@@ -87,6 +87,9 @@ class CheckoutController extends AbstractController
                 return $this->redirectToRoute('checkout');
             }
 
+            $order->setStatus('payée');
+            $em->persist($order);
+
             // 4. Paiement réussi : vider le panier et rediriger vers la confirmation
             foreach ($cartItems as $cartItem) {
                 $em->remove($cartItem);
