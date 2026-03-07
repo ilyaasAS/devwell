@@ -89,20 +89,6 @@ services:
     networks:
       - devwell_net
 
-  stripe-cli:
-    image: stripe/stripe-cli:latest
-    container_name: devwell_stripe_cli
-    env_file:
-      - .env
-      - .env.local
-    # Clé secrète pour écouter les vrais événements ; forward HTTP vers l'app (Docker = HTTP simple)
-    command: listen --api-key $$STRIPE_SECRET_KEY --forward-to http://app/webhook/stripe --skip-verify
-    depends_on:
-      - app
-    restart: unless-stopped
-    networks:
-      - devwell_net
-
 volumes:
   mariadb_data:
   mongodb_data:
