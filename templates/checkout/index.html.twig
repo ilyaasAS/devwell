@@ -58,17 +58,12 @@
 
 	<script src="https://js.stripe.com/v3/"></script>
 	<script>
-		console.log('[Checkout] Script Stripe chargé.');
-
 		document.addEventListener('DOMContentLoaded', function () {
-			console.log('[Checkout] DOMContentLoaded — initialisation Stripe.');
-
 			var form = document.getElementById('payment-form');
 			if (!form) {
 				console.error('[Checkout] CRITIQUE: Élément #payment-form introuvable. Le formulaire ne peut pas être intercepté.');
 				return;
 			}
-			console.log('[Checkout] Formulaire #payment-form trouvé.', form);
 
 			var stripePublicKey = "{{ stripe_public_key|e('js') }}";
 			if (!stripePublicKey) {
@@ -87,7 +82,6 @@
 				}
 			});
 			card.mount('#card-element');
-			console.log('[Checkout] Stripe Elements (carte) monté.');
 
 			card.addEventListener('change', function (event) {
 				if (cardErrors) cardErrors.textContent = event.error ? event.error.message : '';
@@ -95,14 +89,11 @@
 
 			form.addEventListener('submit', function (event) {
 				event.preventDefault();
-				console.log('[Checkout] Submit intercepté ! Envoi bloqué tant que le token Stripe n\'est pas créé.');
 
 				stripe.createToken(card).then(function (result) {
 					if (result.error) {
-						console.warn('[Checkout] Erreur Stripe createToken:', result.error.message);
 						if (cardErrors) cardErrors.textContent = result.error.message;
 					} else {
-						console.log('[Checkout] Token Stripe créé, envoi du formulaire.');
 						var hiddenInput = document.createElement('input');
 						hiddenInput.setAttribute('type', 'hidden');
 						hiddenInput.setAttribute('name', 'stripeToken');
@@ -112,8 +103,6 @@
 					}
 				});
 			});
-
-			console.log('[Checkout] Écouteur submit attaché au formulaire.');
 		});
 	</script>
 {% endblock %}
