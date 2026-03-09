@@ -21,7 +21,7 @@
 
 			<!-- Image produit -->
 			<div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
-				<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+				<img src="{{ product.image starts with 'http' ? product.image : asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
 			</div>
 			{# Une image du produit est affichée dans un conteneur avec une hauteur de 96, une largeur pleine, des coins arrondis et un ombrage. L'image s'adapte à l'intérieur du conteneur grâce à l'utilisation de 'object-contain'. #}
 

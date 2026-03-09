@@ -60,7 +60,7 @@
 				<div class="mb-6">
 					<p class="text-sm text-gray-600 text-center">Image actuelle :</p>
 					<img
-					src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-contain rounded-lg mb-4">
+					src="{{ product.image starts with 'http' ? product.image : asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-contain rounded-lg mb-4">
 				{# L'image actuelle est affichée avec une largeur complète, une hauteur de 64 (h-64), et un effet 'object-contain' pour que l'image soit contenue dans la boîte sans être déformée. #}
 				</div>
 			{% endif %}

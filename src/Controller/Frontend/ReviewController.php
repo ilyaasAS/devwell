@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use App\Document\AvisClient; // Importation du document AvisClient, qui représente l'avis d'un client dans la base de données.
 use Doctrine\ODM\MongoDB\DocumentManager; // Importation du DocumentManager, utilisé pour gérer les documents MongoDB dans Doctrine ODM.
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request; // Importation de la classe Reques
 use Symfony\Component\HttpFoundation\Response; // Importation de la classe Response qui gère la réponse HTTP.
 use Symfony\Component\Routing\Annotation\Route; // Importation de l'annotation Route pour définir les routes dans Symfony.
 
-class AvisClientController extends AbstractController
+class ReviewController extends AbstractController
 {
     // Définition de la route pour accéder à la page des avis clients. La route accepte les méthodes GET et POST.
     #[Route('/avis-client', name: 'avis_client', methods: ['GET', 'POST'])]

@@ -60,22 +60,22 @@ class AppFixtures extends Fixture
 
         $productsByCategory = [
             'Santé' => [
-                ['name' => 'Compléments vitamines D3', 'price' => 14.90, 'description' => 'Complément alimentaire pour renforcer les défenses immunitaires.'],
-                ['name' => 'Huile essentielle lavande', 'price' => 9.50, 'description' => 'Huile essentielle 10 ml pour apaisement et sommeil.'],
-                ['name' => 'Tensiomètre brassard digital', 'price' => 34.99, 'description' => 'Tensiomètre électronique avec écran LCD et mémoire.'],
-                ['name' => 'Coussin cervical mémoire', 'price' => 42.00, 'description' => 'Coussin ergonomique pour un bon maintien cervical.'],
+                ['name' => 'Compléments vitamines D3', 'price' => 14.90, 'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&q=80', 'description' => 'Renforce les défenses immunitaires.'],
+                ['name' => 'Huile essentielle lavande', 'price' => 9.50, 'image' => 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500&q=80', 'description' => 'Apaisement et sommeil.'],
+                ['name' => 'Tensiomètre brassard digital', 'price' => 34.99, 'image' => 'https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=500&q=80', 'description' => 'Électronique avec écran LCD.'],
+                ['name' => 'Coussin cervical mémoire', 'price' => 42.00, 'image' => 'https://images.unsplash.com/photo-1632927265433-09b709c92861?w=500&q=80', 'description' => 'Maintien ergonomique.'],
             ],
             'High-Tech' => [
-                ['name' => 'Montre connectée santé', 'price' => 89.90, 'description' => 'Suivi fréquence cardiaque, sommeil et activité.'],
-                ['name' => 'Tensiomètre connecté Bluetooth', 'price' => 59.99, 'description' => 'Envoi des mesures vers smartphone.'],
-                ['name' => 'Purificateur d\'air HEPA', 'price' => 129.00, 'description' => 'Filtration des particules et allergènes.'],
-                ['name' => 'Lampe luminothérapie 10000 lux', 'price' => 49.90, 'description' => 'Simulation lumière du jour contre la dépression saisonnière.'],
+                ['name' => 'Montre connectée santé', 'price' => 89.90, 'image' => 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80', 'description' => 'Suivi cardiaque et sommeil.'],
+                ['name' => 'Tensiomètre connecté Bluetooth', 'price' => 59.99, 'image' => 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?w=500&q=80', 'description' => 'Envoi des mesures sur smartphone.'],
+                ['name' => 'Purificateur d\'air HEPA', 'price' => 129.00, 'image' => 'https://images.unsplash.com/photo-1612362921342-02d7037f0253?w=500&q=80', 'description' => 'Filtration des allergènes.'],
+                ['name' => 'Lampe luminothérapie', 'price' => 49.90, 'image' => 'https://plus.unsplash.com/premium_photo-1664303840471-46b00307806c?w=500&q=80', 'description' => 'Lumière du jour contre la fatigue.'],
             ],
             'Bien-être' => [
-                ['name' => 'Tapis d\'acupression', 'price' => 29.90, 'description' => 'Détente musculaire et circulation.'],
-                ['name' => 'Diffuseur huiles essentielles', 'price' => 24.99, 'description' => 'Nébulisation à froid, lumière douce.'],
-                ['name' => 'Couverture lestée 6 kg', 'price' => 79.00, 'description' => 'Apaisement et meilleur sommeil.'],
-                ['name' => 'Roller de massage musculaire', 'price' => 19.90, 'description' => 'Auto-massage des jambes et du dos.'],
+                ['name' => 'Tapis de yoga / acupression', 'price' => 29.90, 'image' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&q=80', 'description' => 'Détente musculaire.'],
+                ['name' => 'Diffuseur huiles essentielles', 'price' => 24.99, 'image' => 'https://images.unsplash.com/photo-1602928321679-560bb453f190?w=500&q=80', 'description' => 'Nébulisation à froid.'],
+                ['name' => 'Couverture lestée 6kg', 'price' => 79.00, 'image' => 'https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=500&q=80', 'description' => 'Apaisement et sommeil profond.'],
+                ['name' => 'Roller de massage', 'price' => 19.90, 'image' => 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=500&q=80', 'description' => 'Auto-massage musculaire.'],
             ],
         ];
 
@@ -89,7 +89,7 @@ class AppFixtures extends Fixture
                 $product->setName($data['name']);
                 $product->setPrice($data['price']);
                 $product->setStock(100);
-                $product->setImage('placeholder.jpg');
+                $product->setImage($data['image']);
                 $product->setDescription($data['description']);
                 $product->setCategory($category);
                 $manager->persist($product);

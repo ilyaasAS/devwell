@@ -1,7 +1,7 @@
 <?php
 
 // src/Controller/CookieController.php
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;

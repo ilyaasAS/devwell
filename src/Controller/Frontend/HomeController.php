@@ -1,7 +1,7 @@
 <?php
 
 // src/Controller/HomeController.php
-namespace App\Controller\Navbar;
+namespace App\Controller\Frontend;
 
 use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

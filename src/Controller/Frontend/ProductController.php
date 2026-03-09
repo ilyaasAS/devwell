@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Navbar;
+namespace App\Controller\Frontend;
 
 use App\Entity\Category;
 use App\Entity\Product;

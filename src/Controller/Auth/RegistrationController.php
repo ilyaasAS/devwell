@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Authenticator;
+namespace App\Controller\Auth;
 
 use App\Entity\User; // Importation de l'entité User pour interagir avec les utilisateurs dans la base de données.
 use App\Form\UserType; // Importation du formulaire de type User, qui est utilisé pour l'inscription.

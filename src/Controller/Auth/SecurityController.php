@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Authenticator;
+namespace App\Controller\Auth;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Importation de la classe de base pour les contrôleurs dans Symfony.
 use Symfony\Component\HttpFoundation\Request; // Importation de la classe Request pour récupérer les données de la requête HTTP.

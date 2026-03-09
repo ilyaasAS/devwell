@@ -44,7 +44,7 @@
 
 						<!-- Image du produit -->
 						<div class="w-full h-96 mb-8 overflow-hidden rounded-lg shadow-md">
-							<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+							<img src="{{ product.image starts with 'http' ? product.image : asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
 						</div>
 
 						<!-- Description courte du produit -->

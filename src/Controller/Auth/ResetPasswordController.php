@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Authenticator;
+namespace App\Controller\Auth;
 
 use App\Entity\User; // Importation de l'entité User, utilisée pour récupérer les utilisateurs dans la base de données.
 use App\Form\ChangePasswordFormType; // Importation du formulaire pour changer le mot de passe.
