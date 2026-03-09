@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;  // Ajouter cette importation pour la réponse JSON
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request; // Importation nécessaire pour récupérer les données du formulaire
 
 class CartController extends AbstractController
@@ -99,7 +99,7 @@ class CartController extends AbstractController
         }
 
         // Afficher la vue du panier avec les éléments et totaux calculés
-        return $this->render('navbar/cart/index.html.twig', [
+        return $this->render('frontend/cart.html.twig', [
             'cartItems' => $cartItems,
             'totalItems' => $totalItems, // Passer le nombre d'articles au template
             'totalPrice' => $totalPrice, // Passer le prix total au template
@@ -160,7 +160,7 @@ class CartController extends AbstractController
         }
 
         // Retourner la page du panier avec les informations mises à jour
-        return $this->render('navbar/cart/index.html.twig', [
+        return $this->render('frontend/cart.html.twig', [
             'cartItems' => $cartItems,
             'totalItems' => $totalItems,
             'totalPrice' => number_format($totalPrice, 2, ',', ' '),  // Formater le prix total

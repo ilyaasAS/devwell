@@ -7,7 +7,7 @@ use Doctrine\ODM\MongoDB\DocumentManager; // Importation du DocumentManager, uti
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Importation de la classe de base pour les contrôleurs dans Symfony.
 use Symfony\Component\HttpFoundation\Request; // Importation de la classe Request qui gère les requêtes HTTP entrantes.
 use Symfony\Component\HttpFoundation\Response; // Importation de la classe Response qui gère la réponse HTTP.
-use Symfony\Component\Routing\Annotation\Route; // Importation de l'annotation Route pour définir les routes dans Symfony.
+use Symfony\Component\Routing\Attribute\Route; // Importation de l'annotation Route pour définir les routes dans Symfony.
 
 class ReviewController extends AbstractController
 {
@@ -51,7 +51,7 @@ class ReviewController extends AbstractController
         $avisClients = $dm->getRepository(AvisClient::class)->findAll();
 
         // On rend la vue de la page avec la liste des avis clients.
-        return $this->render('pages/avis_client.html.twig', [
+        return $this->render('frontend/avis_client.html.twig', [
             'avisClients' => $avisClients, // On passe la liste des avis à la vue Twig.
         ]);
     }

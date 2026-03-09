@@ -53,7 +53,7 @@ class ResetPasswordController extends AbstractController
         }
 
         // Rendu de la vue avec le formulaire de demande de réinitialisation.
-        return $this->render('authenticator/reset_password/request.html.twig', [
+        return $this->render('auth/reset_password/request.html.twig', [
             'requestForm' => $form, // On passe le formulaire à la vue.
         ]);
     }
@@ -70,7 +70,7 @@ class ResetPasswordController extends AbstractController
         }
 
         // Rendu de la vue de confirmation avec le token.
-        return $this->render('authenticator/reset_password/check_email.html.twig', [
+        return $this->render('auth/reset_password/check_email.html.twig', [
             'resetToken' => $resetToken, // On passe le token à la vue.
         ]);
     }
@@ -136,7 +136,7 @@ class ResetPasswordController extends AbstractController
         }
 
         // Rendu de la vue avec le formulaire pour changer le mot de passe.
-        return $this->render('authenticator/reset_password/reset.html.twig', [
+        return $this->render('auth/reset_password/reset.html.twig', [
             'resetForm' => $form, // On passe le formulaire à la vue.
         ]);
     }
@@ -170,7 +170,7 @@ class ResetPasswordController extends AbstractController
             ->from(new Address('noreply@exemple.com', 'Support DevWell'))
             ->to((string) $user->getEmail())
             ->subject('Your password reset request')
-            ->htmlTemplate('authenticator/reset_password/email.html.twig')
+            ->htmlTemplate('auth/reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken, // Le token est passé à la vue pour être utilisé dans l'email.
             ]);

@@ -6,14 +6,14 @@ namespace App\Controller\Frontend;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CookieController extends AbstractController
 {
     // Route pour supprimer un cookie spécifique
     #[Route('/delete-cookie', name: 'delete_cookie', methods: ['GET'])]
-    public function deleteCookie()
+    public function deleteCookie(): Response
     {
         // Création d'un cookie avec une valeur vide et une date d'expiration passée pour le supprimer
         $cookie = Cookie::create(
@@ -31,17 +31,17 @@ class CookieController extends AbstractController
 
     // Route pour afficher la page dédiée à la suppression des cookies
     #[Route('/delete-my-cookies', name: 'delete_my_cookies', methods: ['GET'])]
-    public function deleteMyCookiesPage()
+    public function deleteMyCookiesPage(): Response
     {
         // Affiche une page expliquant la gestion et suppression des cookies
-        return $this->render('cookie/delete_cookies.html.twig');
+        return $this->render('privacy/delete_cookies.html.twig');
     }
 
     // Route pour afficher la politique de gestion des cookies
     #[Route('/politique-cookies', name: 'politique_cookies', methods: ['GET'])]
-    public function politiqueCookies()
+    public function politiqueCookies(): Response
     {
         // Affiche une page détaillant la politique des cookies du site
-        return $this->render('cookie/politique_cookies.html.twig');
+        return $this->render('privacy/politique_cookies.html.twig');
     }
 }

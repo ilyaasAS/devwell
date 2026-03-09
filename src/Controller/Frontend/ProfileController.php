@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Order;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -67,7 +67,7 @@ class ProfileController extends AbstractController
         }
 
         // Afficher la vue avec le formulaire et les commandes de l'utilisateur
-        return $this->render('navbar/profile/edit.html.twig', [
+        return $this->render('frontend/profile.html.twig', [
             'form' => $form->createView(),
             'orders' => $orders, // Passer les commandes à la vue Twig
         ]);

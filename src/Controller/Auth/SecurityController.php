@@ -5,7 +5,7 @@ namespace App\Controller\Auth;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Importation de la classe de base pour les contrôleurs dans Symfony.
 use Symfony\Component\HttpFoundation\Request; // Importation de la classe Request pour récupérer les données de la requête HTTP.
 use Symfony\Component\HttpFoundation\Response; // Importation de la classe Response pour renvoyer une réponse HTTP.
-use Symfony\Component\Routing\Annotation\Route; // Importation de l'annotation Route pour définir les routes dans Symfony.
+use Symfony\Component\Routing\Attribute\Route; // Importation de l'annotation Route pour définir les routes dans Symfony.
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils; // Importation de la classe AuthenticationUtils pour gérer les erreurs d'authentification et récupérer l'email utilisé lors de la connexion.
 
 class SecurityController extends AbstractController
@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
         }
 
         // Rendu de la vue de la page de connexion avec les variables last_username et error.
-        return $this->render('authenticator/security/login.html.twig', [
+        return $this->render('auth/login.html.twig', [
             'last_username' => $lastUsername, // Affiche l'email utilisé lors de la dernière tentative de connexion.
             'error' => $error, // Affiche l'erreur d'authentification, si présente.
         ]);

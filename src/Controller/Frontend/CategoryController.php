@@ -6,7 +6,7 @@ use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class CategoryController extends AbstractController
 {
@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
         $categories = $entityManager->getRepository(Category::class)->findAll();
 
         // Renvoyer la vue 'user_index.html.twig' avec les catégories récupérées
-        return $this->render('navbar/category/user_index.html.twig', [
+        return $this->render('frontend/category/index.html.twig', [
             'categories' => $categories, // Passer les catégories à la vue
         ]);
     }
@@ -36,7 +36,7 @@ class CategoryController extends AbstractController
         }
 
         // Renvoyer la vue 'user_show.html.twig' avec les détails de la catégorie
-        return $this->render('navbar/category/user_show.html.twig', [
+        return $this->render('frontend/category/show.html.twig', [
             'category' => $category, // Passer la catégorie à la vue pour afficher ses détails
         ]);
     }

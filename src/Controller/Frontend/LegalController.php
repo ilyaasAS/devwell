@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class LegalController extends AbstractController
 {
@@ -18,14 +18,14 @@ class LegalController extends AbstractController
     #[Route('/cgu', name: 'app_cgu')]
     public function cgu(): Response
     {
-        return $this->render('footer/cgu.html.twig');
+        return $this->render('legal/cgu.html.twig');
     }
 
     // Route pour les Conditions Générales de Vente (CGV)
     #[Route('/cgv', name: 'app_cgv')]
     public function cgv(): Response
     {
-        return $this->render('footer/cgv.html.twig');
+        return $this->render('legal/cgv.html.twig');
     }
 
     // Route pour la page de contact et gestion du formulaire
@@ -65,7 +65,7 @@ class LegalController extends AbstractController
         }
 
         // Affichage du formulaire dans la vue contact
-        return $this->render('footer/contact.html.twig', [
+        return $this->render('legal/contact.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -74,6 +74,6 @@ class LegalController extends AbstractController
     #[Route('/mentions-legales', name: 'app_mentions_legales')]
     public function mentionsLegales(): Response
     {
-        return $this->render('footer/mention_legale.html.twig');
+        return $this->render('legal/mention_legale.html.twig');
     }
 }

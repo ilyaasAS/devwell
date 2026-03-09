@@ -7,7 +7,7 @@ use App\Form\UserType; // Importation du formulaire de type User, qui est utilis
 use Doctrine\ORM\EntityManagerInterface; // Interface pour manipuler les entités en base de données via Doctrine.
 use Symfony\Component\HttpFoundation\Request; // Importation de la classe Request pour gérer les requêtes HTTP.
 use Symfony\Component\HttpFoundation\Response; // Importation de la classe Response pour générer des réponses HTTP.
-use Symfony\Component\Routing\Annotation\Route; // Annotation pour définir les routes.
+use Symfony\Component\Routing\Attribute\Route; // Annotation pour définir les routes.
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Classe de base pour les contrôleurs dans Symfony.
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface; // Interface pour hacher les mots de passe.
 use Symfony\Component\Mailer\MailerInterface; // Interface pour envoyer des emails via Symfony Mailer.
@@ -72,7 +72,7 @@ class RegistrationController extends AbstractController
         }
 
         // 9. Affichage du formulaire d'inscription si il n'est pas soumis ou si des erreurs se produisent
-        return $this->render('authenticator/registration/index.html.twig', [
+        return $this->render('auth/registration.html.twig', [
             'form' => $form->createView(), // Passer le formulaire à la vue pour affichage
         ]);
     }

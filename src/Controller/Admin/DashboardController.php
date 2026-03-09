@@ -5,14 +5,14 @@
 namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DashboardController extends AbstractController
 {
     // Route pour accéder au dashboard de l'administration
     #[Route('/admin/dashboard', name: 'admin_dashboard')]
-    public function index()
+    public function index(): \Symfony\Component\HttpFoundation\Response
     {
         // Vérifier si l'utilisateur a le rôle 'ROLE_ADMIN'
         if (!$this->isGranted('ROLE_ADMIN')) {

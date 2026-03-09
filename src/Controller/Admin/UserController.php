@@ -53,7 +53,7 @@ final class UserController extends AbstractController
         }
 
         // Affiche le formulaire pour la création d'un utilisateur
-        return $this->render('user/create.html.twig', [
+        return $this->render('admin/user/create.html.twig', [
             'form' => $form->createView(),  // Passe le formulaire à la vue
         ]);
     }
@@ -62,7 +62,7 @@ final class UserController extends AbstractController
     #[Route(name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('user/index.html.twig', [
+        return $this->render('admin/user/index.html.twig', [
             'users' => $userRepository->findAll(), // Récupère tous les utilisateurs de la base de données
         ]);
     }
@@ -71,7 +71,7 @@ final class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', [
+        return $this->render('admin/user/show.html.twig', [
             'user' => $user,  // Passe l'utilisateur à la vue
         ]);
     }
@@ -107,7 +107,7 @@ final class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index'); // Redirige vers la liste des utilisateurs
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('admin/user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),  // Passe le formulaire à la vue
         ]);

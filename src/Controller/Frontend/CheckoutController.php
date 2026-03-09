@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Stripe\Stripe;
 use Stripe\Charge;
 
@@ -103,7 +103,7 @@ class CheckoutController extends AbstractController
         // Clé publique Stripe obligatoire : si vide, le champ carte ne s'affichera jamais.
         // Trim + suppression d'éventuels guillemets/espaces pour éviter 401 ou erreurs JS.
         $stripePublicKey = trim((string) ($_ENV['STRIPE_PUBLIC_KEY'] ?? ''), " \t\n\r\0\x0B\"'");
-        return $this->render('checkout/index.html.twig', [
+        return $this->render('frontend/checkout/index.html.twig', [
             'form' => $form->createView(),
             'cartItems' => $cartItems,
             'stripe_public_key' => $stripePublicKey,
@@ -114,7 +114,7 @@ class CheckoutController extends AbstractController
     #[Route('/order/confirmation/{id}', name: 'order_confirmation')]
     public function confirmOrder(Order $order): Response
     {
-        return $this->render('checkout/confirmation.html.twig', [
+        return $this->render('frontend/checkout/confirmation.html.twig', [
             'order' => $order,
         ]);
     }

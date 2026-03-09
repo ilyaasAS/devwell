@@ -6,11 +6,11 @@ namespace App\Controller\Frontend;
 use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    private $cartService; // Déclaration de la variable pour stocker le service CartService
+    private CartService $cartService; // Déclaration de la variable pour stocker le service CartService
 
     // Injecter le service CartService via le constructeur
     public function __construct(CartService $cartService)
@@ -27,7 +27,7 @@ class HomeController extends AbstractController
         $totalItems = $this->cartService->getTotalItems();
 
         // Retourner la vue d'accueil avec le nombre total d'articles dans le panier
-        return $this->render('navbar/home.html.twig', [
+        return $this->render('frontend/home.html.twig', [
             'totalItems' => $totalItems,  // Passer la variable totalItems à la vue
         ]);
     }
