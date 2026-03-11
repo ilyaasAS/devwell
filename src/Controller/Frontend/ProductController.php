@@ -50,7 +50,7 @@ class ProductController extends AbstractController
             ->getSingleScalarResult(); // Récupérer un seul résultat (le nombre total)
 
         // Rendu de la vue avec les résultats, la recherche et la pagination
-        return $this->render('frontend/product/index.html.twig', [
+        return $this->render('frontend/products/index.html.twig', [
             'products' => $products, // Passer les produits à la vue
             'search' => $search, // Passer le terme de recherche à la vue
             'currentPage' => $page, // Passer la page actuelle à la vue
@@ -63,7 +63,7 @@ class ProductController extends AbstractController
     public function productDetails(Product $product): Response
     {
         // Afficher les détails d'un produit spécifique
-        return $this->render('frontend/product/details.html.twig', [
+        return $this->render('frontend/products/details.html.twig', [
             'product' => $product, // Passer l'objet produit à la vue
         ]);
     }

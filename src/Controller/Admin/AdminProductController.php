@@ -22,13 +22,13 @@ class AdminProductController extends AbstractController
         $products = $entityManager->getRepository(Product::class)->findAll();
 
         // Rendu de la vue avec la liste des produits
-        return $this->render('admin/product/index.html.twig', [
+        return $this->render('admin/products/index.html.twig', [
             'products' => $products,
         ]);
     }
 
     // Créer un nouveau produit
-    #[Route('/admin/product/new', name: 'app_admin_product_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/products/new', name: 'app_admin_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $product = new Product();  // Créer un objet de type Product
@@ -70,23 +70,23 @@ class AdminProductController extends AbstractController
         }
 
         // Rendu du formulaire
-        return $this->render('admin/product/new.html.twig', [
+        return $this->render('admin/products/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     // Voir un produit spécifique (affichage pour l'admin)
-    #[Route('/admin/product/{id}', name: 'app_admin_product_show', methods: ['GET'])]
+    #[Route('/admin/products/{id}', name: 'app_admin_product_show', methods: ['GET'])]
     public function productShow(Product $product): Response
     {
         // Rendu de la vue pour afficher un produit spécifique
-        return $this->render('admin/product/show.html.twig', [
+        return $this->render('admin/products/show.html.twig', [
             'product' => $product,
         ]);
     }
 
     // Modifier un produit existant
-    #[Route('/admin/product/{id}/edit', name: 'app_admin_product_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/products/{id}/edit', name: 'app_admin_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         // Récupérer toutes les catégories pour le formulaire
@@ -127,14 +127,14 @@ class AdminProductController extends AbstractController
         }
 
         // Rendu de la vue pour modifier un produit
-        return $this->render('admin/product/edit.html.twig', [
+        return $this->render('admin/products/edit.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
     }
 
     // Supprimer un produit
-    #[Route('/admin/product/{id}/delete', name: 'app_admin_product_delete', methods: ['POST'])]
+    #[Route('/admin/products/{id}/delete', name: 'app_admin_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         // Vérifier le token CSRF pour la suppression

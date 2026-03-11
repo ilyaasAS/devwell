@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire; // Importation d'A
 use Symfony\Component\ErrorHandler\Exception\FlattenException; // Importation de FlattenException, utilisé pour aplatir des exceptions afin de les sérialiser.
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface; // Importation de l'interface NormalizerInterface, nécessaire pour implémenter un normaliseur personnalisé.
 
-class CustomeErrorNormalizer implements NormalizerInterface // Déclaration de la classe CustomeErrorNormalizer qui implémente NormalizerInterface.
+class CustomErrorNormalizer implements NormalizerInterface // Déclaration de la classe CustomErrorNormalizer qui implémente NormalizerInterface.
 {
 
     // La méthode normalize transforme l'objet d'exception en un tableau de données qui sera sérialisé en réponse.

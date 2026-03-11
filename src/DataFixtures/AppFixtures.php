@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Document\AvisClient;
+use App\Document\Review;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\User;
@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
-        $this->loadAvisClients();
+        $this->loadReviews();
         $this->documentManager->flush();
     }
 
@@ -124,22 +124,22 @@ class AppFixtures extends Fixture
         }
     }
 
-    private function loadAvisClients(): void
+    private function loadReviews(): void
     {
-        $avis = [
-            ['nom' => 'Sophie L.', 'email' => 'sophie.leclerc@email.com', 'note' => 5, 'commentaire' => 'Service impeccable et produits de qualité. Je recommande vivement !'],
-            ['nom' => 'Thomas B.', 'email' => 'thomas.bernard@email.com', 'note' => 5, 'commentaire' => 'Livraison rapide, site clair. Mon tensiomètre connecté est parfait.'],
-            ['nom' => 'Claire M.', 'email' => 'claire.martin@email.com', 'note' => 4, 'commentaire' => 'Très satisfaite de ma lampe luminothérapie. Un peu chère mais efficace.'],
-            ['nom' => 'Marc D.', 'email' => 'marc.dubois@email.com', 'note' => 5, 'commentaire' => 'Meilleure expérience d\'achat bien-être en ligne. À refaire.'],
-            ['nom' => 'Julie R.', 'email' => 'julie.rousseau@email.com', 'note' => 4, 'commentaire' => 'Bons conseils et suivi client au top. Produits conformes.'],
+        $reviews = [
+            ['name' => 'Sophie L.', 'email' => 'sophie.leclerc@email.com', 'note' => 5, 'comment' => 'Service impeccable et produits de qualité. Je recommande vivement !'],
+            ['name' => 'Thomas B.', 'email' => 'thomas.bernard@email.com', 'note' => 5, 'comment' => 'Livraison rapide, site clair. Mon tensiomètre connecté est parfait.'],
+            ['name' => 'Claire M.', 'email' => 'claire.martin@email.com', 'note' => 4, 'comment' => 'Très satisfaite de ma lampe luminothérapie. Un peu chère mais efficace.'],
+            ['name' => 'Marc D.', 'email' => 'marc.dubois@email.com', 'note' => 5, 'comment' => 'Meilleure expérience d\'achat bien-être en ligne. À refaire.'],
+            ['name' => 'Julie R.', 'email' => 'julie.rousseau@email.com', 'note' => 4, 'comment' => 'Bons conseils et suivi client au top. Produits conformes.'],
         ];
 
-        foreach ($avis as $data) {
-            $doc = new AvisClient();
-            $doc->setNom($data['nom']);
+        foreach ($reviews as $data) {
+            $doc = new Review();
+            $doc->setName($data['name']);
             $doc->setEmail($data['email']);
             $doc->setNote($data['note']);
-            $doc->setCommentaire($data['commentaire']);
+            $doc->setComment($data['comment']);
             $this->documentManager->persist($doc);
         }
     }

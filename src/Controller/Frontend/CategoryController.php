@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
         $categories = $entityManager->getRepository(Category::class)->findAll();
 
         // Renvoyer la vue 'user_index.html.twig' avec les catégories récupérées
-        return $this->render('frontend/category/index.html.twig', [
+        return $this->render('frontend/categories/index.html.twig', [
             'categories' => $categories, // Passer les catégories à la vue
         ]);
     }
@@ -36,7 +36,7 @@ class CategoryController extends AbstractController
         }
 
         // Renvoyer la vue 'user_show.html.twig' avec les détails de la catégorie
-        return $this->render('frontend/category/show.html.twig', [
+        return $this->render('frontend/categories/show.html.twig', [
             'category' => $category, // Passer la catégorie à la vue pour afficher ses détails
         ]);
     }

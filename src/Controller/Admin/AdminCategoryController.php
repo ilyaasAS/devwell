@@ -20,7 +20,7 @@ class AdminCategoryController extends AbstractController
         $categories = $entityManager->getRepository(Category::class)->findAll();
 
         // Rendre la vue avec la liste des catégories
-        return $this->render('admin/category/index.html.twig', [
+        return $this->render('admin/categories/index.html.twig', [
             'categories' => $categories, // Passer les catégories à la vue
         ]);
     }
@@ -52,7 +52,7 @@ class AdminCategoryController extends AbstractController
         }
 
         // Rendre la vue avec le formulaire de création
-        return $this->render('admin/category/new.html.twig', [
+        return $this->render('admin/categories/new.html.twig', [
             'form' => $form->createView(), // Passer le formulaire à la vue
         ]);
     }
@@ -67,7 +67,7 @@ class AdminCategoryController extends AbstractController
         }
 
         // Rendre la vue avec les détails de la catégorie
-        return $this->render('admin/category/show.html.twig', [
+        return $this->render('admin/categories/show.html.twig', [
             'category' => $category, // Passer les informations de la catégorie à la vue
         ]);
     }
@@ -95,7 +95,7 @@ class AdminCategoryController extends AbstractController
         }
 
         // Rendre la vue avec le formulaire de modification
-        return $this->render('admin/category/edit.html.twig', [
+        return $this->render('admin/categories/edit.html.twig', [
             'form' => $form->createView(), // Passer le formulaire à la vue
             'category' => $category, // Passer la catégorie existante à la vue
         ]);

@@ -16,14 +16,14 @@ class LegalController extends AbstractController
 {
     // Route pour les Conditions Générales d'Utilisation (CGU)
     #[Route('/terms-of-use', name: 'app_cgu')]
-    public function cgu(): Response
+    public function termsOfUse(): Response
     {
         return $this->render('legal/terms_of_use.html.twig');
     }
 
     // Route pour les Conditions Générales de Vente (CGV)
     #[Route('/terms-of-sale', name: 'app_cgv')]
-    public function cgv(): Response
+    public function termsOfSale(): Response
     {
         return $this->render('legal/terms_of_sale.html.twig');
     }

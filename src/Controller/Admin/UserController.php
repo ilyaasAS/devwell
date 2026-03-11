@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Form\User1Type;
+use App\Form\AdminUserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +32,7 @@ final class UserController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User(); // Crée un nouvel objet utilisateur
-        $form = $this->createForm(User1Type::class, $user); // Crée un formulaire basé sur User1Type
+        $form = $this->createForm(AdminUserType::class, $user); // Crée un formulaire basé sur AdminUserType
         $form->handleRequest($request); // Gère la soumission du formulaire
 
         // Vérifie si le formulaire est soumis et valide
@@ -53,7 +53,7 @@ final class UserController extends AbstractController
         }
 
         // Affiche le formulaire pour la création d'un utilisateur
-        return $this->render('admin/user/create.html.twig', [
+        return $this->render('admin/users/create.html.twig', [
             'form' => $form->createView(),  // Passe le formulaire à la vue
         ]);
     }
@@ -62,7 +62,7 @@ final class UserController extends AbstractController
     #[Route(name: 'app_admin_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('admin/user/index.html.twig', [
+        return $this->render('admin/users/index.html.twig', [
             'users' => $userRepository->findAll(), // Récupère tous les utilisateurs de la base de données
         ]);
     }
@@ -71,7 +71,7 @@ final class UserController extends AbstractController
     #[Route('/{id}', name: 'app_admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('admin/user/show.html.twig', [
+        return $this->render('admin/users/show.html.twig', [
             'user' => $user,  // Passe l'utilisateur à la vue
         ]);
     }
@@ -84,7 +84,7 @@ final class UserController extends AbstractController
         $isAdminEdit = $this->isGranted('ROLE_ADMIN');
 
         // Crée un formulaire pour éditer l'utilisateur en passant l'option 'is_admin_edit'
-        $form = $this->createForm(User1Type::class, $user, [
+        $form = $this->createForm(AdminUserType::class, $user, [
             'is_admin_edit' => $isAdminEdit,
         ]);
 
@@ -107,7 +107,7 @@ final class UserController extends AbstractController
             return $this->redirectToRoute('app_admin_user_index'); // Redirige vers la liste des utilisateurs
         }
 
-        return $this->render('admin/user/edit.html.twig', [
+        return $this->render('admin/users/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),  // Passe le formulaire à la vue
         ]);

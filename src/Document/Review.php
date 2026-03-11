@@ -4,19 +4,18 @@ namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM; // Importation des annotations Doctrine ODM
 
-// Déclaration de la classe AvisClient en tant que document MongoDB
+// Déclaration de la classe Review en tant que document MongoDB
 
-// #[ODM\Document (collection: "avis")] 
-#[ODM\Document]
-class AvisClient
+#[ODM\Document(collection: "avis_client")]
+class Review
 {
-    // Déclaration de l'ID unique du document AvisClient
+    // Déclaration de l'ID unique du document Review
     #[ODM\Id]
     private $id;
 
-    // Déclaration du champ 'nom' qui sera stocké dans MongoDB sous forme de chaîne de caractères
+    // Déclaration du champ 'name' qui sera stocké dans MongoDB sous forme de chaîne de caractères
     #[ODM\Field(type: "string")]
-    private string $nom;
+    private string $name;
 
     // Déclaration du champ 'email' pour l'email du client
     #[ODM\Field(type: "string")]
@@ -26,9 +25,9 @@ class AvisClient
     #[ODM\Field(type: "int")]
     private int $note; // Note entre 1 et 5
 
-    // Déclaration du champ 'commentaire' qui contient le texte du commentaire du client
+    // Déclaration du champ 'comment' qui contient le texte du commentaire du client
     #[ODM\Field(type: "string")]
-    private string $commentaire;
+    private string $comment;
 
     // Déclaration du champ 'createdAt' pour enregistrer la date de création de l'avis
     #[ODM\Field(type: "date")]
@@ -49,15 +48,15 @@ class AvisClient
     }
 
     // Récupérer le nom du client
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
     // Définir le nom du client
-    public function setNom(string $nom): self
+    public function setName(string $name): self
     {
-        $this->nom = $nom;
+        $this->name = $name;
         return $this; // Permet un chaînage des méthodes (fluent interface)
     }
 
@@ -88,15 +87,15 @@ class AvisClient
     }
 
     // Récupérer le commentaire du client
-    public function getCommentaire(): ?string
+    public function getComment(): ?string
     {
-        return $this->commentaire;
+        return $this->comment;
     }
 
     // Définir le commentaire du client
-    public function setCommentaire(string $commentaire): self
+    public function setComment(string $comment): self
     {
-        $this->commentaire = $commentaire;
+        $this->comment = $comment;
         return $this; // Chaînage des méthodes
     }
 

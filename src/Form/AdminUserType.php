@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType; // Ajouté pour les champs de texte
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class User1Type extends AbstractType
+class AdminUserType extends AbstractType
 {
     // Méthode pour construire le formulaire
     public function buildForm(FormBuilderInterface $builder, array $options): void
