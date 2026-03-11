@@ -48,19 +48,19 @@
 								{# Colonne pour les actions (Voir, Modifier, Supprimer). #}
 
 								<!-- Show Link -->
-									<a href="{{ path('admin_orders_show', {'id': order.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105"> Voir
+									<a href="{{ path('app_admin_order_show', {'id': order.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105"> Voir
 								</a>
 								{# Lien vers la page de détail de la commande, avec un style de texte bleu. Le lien change de couleur au survol et est souligné. #}
 
 								<!-- Edit Link -->
-								<a href="{{ path('admin_orders_edit', {'id': order.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
+								<a href="{{ path('app_admin_order_edit', {'id': order.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
 									Modifier
 								</a>
 								{# Lien vers la page d'édition de la commande, avec un texte jaune. Comme pour "Voir", le lien est stylisé avec des effets au survol. #}
 
 								<!-- Delete Form -->
 								<form
-									method="post" action="{{ path('admin_orders_delete', {'id': order.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');" class="inline mx-2">
+									method="post" action="{{ path('app_admin_order_delete', {'id': order.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');" class="inline mx-2">
 									{# Formulaire pour la suppression de la commande. Un token CSRF est inclus pour la sécurité. #}
 
 									<input

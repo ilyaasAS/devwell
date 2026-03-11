@@ -1,6 +1,6 @@
 <!-- Formulaire de suppression d'utilisateur -->
 <form
-	method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" class="inline">
+	method="post" action="{{ path('app_admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" class="inline">
 
 	<!-- Champ caché contenant le token CSRF pour sécuriser la requête -->
 	<input

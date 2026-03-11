@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class DashboardController extends AbstractController
 {
     // Route pour accéder au dashboard de l'administration
-    #[Route('/admin/dashboard', name: 'admin_dashboard')]
+    #[Route('/admin/dashboard', name: 'app_admin_dashboard_index')]
     public function index(): \Symfony\Component\HttpFoundation\Response
     {
         // Vérifier si l'utilisateur a le rôle 'ROLE_ADMIN'

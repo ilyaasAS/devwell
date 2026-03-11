@@ -85,19 +85,19 @@
 			{# Une zone avec des boutons d'action, centrée et avec un espacement entre les boutons (gap-6). #}
 
 			<!-- Retour Button -->
-				<a href="{{ path('admin_orders_index') }}" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105"> Retour
+				<a href="{{ path('app_admin_order_index') }}" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105"> Retour
 			</a>
 			{# Un bouton pour revenir à la liste des commandes, avec un style de fond bleu et un texte tertiaire. Le bouton change de couleur et s'agrandit au survol. #}
 
 			<!-- Modifier Button -->
-			<a href="{{ path('admin_orders_edit', {'id': order.id}) }}" class="inline-block bg-yellow-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 hover:text-primary_dw focus:bg-yellow-400 focus:text-primary_dw transition duration-300 transform hover:scale-105">
+			<a href="{{ path('app_admin_order_edit', {'id': order.id}) }}" class="inline-block bg-yellow-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 hover:text-primary_dw focus:bg-yellow-400 focus:text-primary_dw transition duration-300 transform hover:scale-105">
 				Modifier
 			</a>
 			{# Un bouton pour éditer la commande, avec un fond jaune et du texte blanc. Le fond change au survol. #}
 
 			<!-- Supprimer Button -->
 			<form
-				method="post" action="{{ path('admin_orders_delete', {'id': order.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');" class="inline">
+				method="post" action="{{ path('app_admin_order_delete', {'id': order.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');" class="inline">
 				{# Un formulaire pour supprimer la commande. Un message de confirmation est demandé avant la suppression. #}
 
 				<input

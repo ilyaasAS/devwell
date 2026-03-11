@@ -17,7 +17,7 @@
 			class="flex justify-end mb-6">
 			{# Un conteneur flexible (flex) pour placer le bouton "Ajouter un nouveau produit" aligné à droite (justify-end), avec une marge inférieure (mb-6). #}
 
-			<a href="{{ path('app_product_new') }}" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
+			<a href="{{ path('app_admin_product_new') }}" class="inline-block bg-primary_dw text-tertiary_dw px-6 py-3 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:bg-secondary_dw focus:text-primary_dw transition duration-300 transform hover:scale-105">
 				Ajouter un nouveau produit
 			</a>
 			{# Le bouton est stylisé pour avoir un fond de couleur principale ('bg-primary_dw'), un texte secondaire ('text-tertiary_dw'), et des effets d'animation au survol et au focus. Il a une forme arrondie et une ombre. #}
@@ -61,19 +61,19 @@
 									{# Colonne des actions centrée (text-center). Contient les liens pour afficher, modifier ou supprimer un produit. #}
 
 									<!-- Show Link -->
-										<a href="{{ path('app_product_show', {id: product.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105"> Voir
+										<a href="{{ path('app_admin_product_show', {id: product.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105"> Voir
 									</a>
 									{# Lien pour afficher les détails du produit. Il est stylisé pour être bleu avec un effet au survol. #}
 
 									<!-- Edit Link -->
-									<a href="{{ path('app_product_edit', {id: product.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline ml-2 transition duration-300 transform hover:scale-105">
+									<a href="{{ path('app_admin_product_edit', {id: product.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline ml-2 transition duration-300 transform hover:scale-105">
 										Modifier
 									</a>
 									{# Lien pour modifier le produit. Il est stylisé en jaune, avec un effet au survol. 'ml-2' ajoute une marge gauche pour espacer le lien. #}
 
 									<!-- Delete Button -->
 									<form
-										method="post" action="{{ path('app_product_delete', {id: product.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" class="inline ml-2">
+										method="post" action="{{ path('app_admin_product_delete', {id: product.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" class="inline ml-2">
 										{# Formulaire pour supprimer un produit. La méthode est 'post' et la confirmation de suppression est demandée avant la soumission. Le formulaire est en ligne avec une marge à gauche. #}
 
 										<input

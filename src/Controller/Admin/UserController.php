@@ -28,7 +28,7 @@ final class UserController extends AbstractController
     }
 
     // Route pour la création d'un utilisateur
-    #[Route('/create', name: 'app_user_create', methods: ['GET', 'POST'])]
+    #[Route('/create', name: 'app_admin_user_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User(); // Crée un nouvel objet utilisateur
@@ -49,7 +49,7 @@ final class UserController extends AbstractController
             $this->addFlash('success', 'Utilisateur créé avec succès !');
 
             // Redirige vers la liste des utilisateurs
-            return $this->redirectToRoute('app_user_index');
+            return $this->redirectToRoute('app_admin_user_index');
         }
 
         // Affiche le formulaire pour la création d'un utilisateur
@@ -59,7 +59,7 @@ final class UserController extends AbstractController
     }
 
     // Route pour afficher la liste des utilisateurs
-    #[Route(name: 'app_user_index', methods: ['GET'])]
+    #[Route(name: 'app_admin_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('admin/user/index.html.twig', [
@@ -68,7 +68,7 @@ final class UserController extends AbstractController
     }
 
     // Route pour afficher les détails d'un utilisateur
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('admin/user/show.html.twig', [
@@ -77,7 +77,7 @@ final class UserController extends AbstractController
     }
 
     // Route pour éditer un utilisateur
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_admin_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         // Vérifie si l'utilisateur connecté est un administrateur
@@ -104,7 +104,7 @@ final class UserController extends AbstractController
             // Affiche un message flash de succès
             $this->addFlash('success', 'Utilisateur modifié avec succès !');
 
-            return $this->redirectToRoute('app_user_index'); // Redirige vers la liste des utilisateurs
+            return $this->redirectToRoute('app_admin_user_index'); // Redirige vers la liste des utilisateurs
         }
 
         return $this->render('admin/user/edit.html.twig', [
@@ -114,7 +114,7 @@ final class UserController extends AbstractController
     }
 
     // Route pour supprimer un utilisateur
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_admin_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         // Vérifie si le token CSRF est valide
@@ -129,11 +129,11 @@ final class UserController extends AbstractController
             $this->addFlash('error', 'Échec de la suppression de l\'utilisateur.');
         }
 
-        return $this->redirectToRoute('app_user_index'); // Redirige vers la liste des utilisateurs
+        return $this->redirectToRoute('app_admin_user_index'); // Redirige vers la liste des utilisateurs
     }
 
     // Route pour supprimer le compte d'un utilisateur
-    #[Route('/delete-account/{id}', name: 'app_delete_account', methods: ['POST'])]
+    #[Route('/delete-account/{id}', name: 'app_admin_user_delete_account', methods: ['POST'])]
     public function deleteAccount(
         EntityManagerInterface $entityManager,
         Request $request,

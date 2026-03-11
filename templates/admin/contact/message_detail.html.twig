@@ -82,7 +82,7 @@
 						{# Conteneur pour les boutons d'action, disposés avec un espacement horizontal. #}
 
 						<!-- Retour à la liste -->
-							<a href="{{ path('admin_messages') }}" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 transform hover:scale-105"> Retour à la liste
+							<a href="{{ path('app_admin_contact_index') }}" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 transform hover:scale-105"> Retour à la liste
 						</a>
 						{# Lien pour retourner à la liste des messages, avec un style de fond gris et un effet de survol. #}
 
@@ -97,7 +97,7 @@
 			{% else %}
 				{# Si l'utilisateur n'est pas un administrateur, il voit seulement un bouton pour retourner à la liste des messages. #}
 				<div class="mt-6 text-center">
-					<a href="{{ path('admin_messages') }}" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 transform hover:scale-105">
+					<a href="{{ path('app_admin_contact_index') }}" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 transform hover:scale-105">
 						Retour à la liste
 					</a>
 				</div>

@@ -15,7 +15,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class AdminProductController extends AbstractController
 {
     // Liste des produits pour l'administration
-    #[Route('/admin/product', name: 'app_product_index', methods: ['GET'])]
+    #[Route('/admin/product', name: 'app_admin_product_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         // Récupérer tous les produits de la base de données
@@ -28,7 +28,7 @@ class AdminProductController extends AbstractController
     }
 
     // Créer un nouveau produit
-    #[Route('/admin/product/new', name: 'app_product_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/product/new', name: 'app_admin_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $product = new Product();  // Créer un objet de type Product
@@ -66,7 +66,7 @@ class AdminProductController extends AbstractController
             $this->addFlash('success', 'Le produit a été créé avec succès.');
 
             // Rediriger vers la liste des produits après la création
-            return $this->redirectToRoute('app_product_index');
+            return $this->redirectToRoute('app_admin_product_index');
         }
 
         // Rendu du formulaire
@@ -76,7 +76,7 @@ class AdminProductController extends AbstractController
     }
 
     // Voir un produit spécifique (affichage pour l'admin)
-    #[Route('/admin/product/{id}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/admin/product/{id}', name: 'app_admin_product_show', methods: ['GET'])]
     public function productShow(Product $product): Response
     {
         // Rendu de la vue pour afficher un produit spécifique
@@ -86,7 +86,7 @@ class AdminProductController extends AbstractController
     }
 
     // Modifier un produit existant
-    #[Route('/admin/product/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/product/{id}/edit', name: 'app_admin_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         // Récupérer toutes les catégories pour le formulaire
@@ -123,7 +123,7 @@ class AdminProductController extends AbstractController
             $this->addFlash('success', 'Le produit a été modifié avec succès.');
 
             // Rediriger vers la liste des produits
-            return $this->redirectToRoute('app_product_index');
+            return $this->redirectToRoute('app_admin_product_index');
         }
 
         // Rendu de la vue pour modifier un produit
@@ -134,7 +134,7 @@ class AdminProductController extends AbstractController
     }
 
     // Supprimer un produit
-    #[Route('/admin/product/{id}/delete', name: 'app_product_delete', methods: ['POST'])]
+    #[Route('/admin/product/{id}/delete', name: 'app_admin_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         // Vérifier le token CSRF pour la suppression
@@ -148,6 +148,6 @@ class AdminProductController extends AbstractController
         }
 
         // Rediriger vers la liste des produits
-        return $this->redirectToRoute('app_product_index');
+        return $this->redirectToRoute('app_admin_product_index');
     }
 }

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class AdminOrderController extends AbstractController
 {
     // Affichage de toutes les commandes
-    #[Route('/admin/orders', name: 'admin_orders_index', methods: ['GET'])]
+    #[Route('/admin/orders', name: 'app_admin_order_index', methods: ['GET'])]
     public function index(OrderRepository $orderRepository): Response
     {
         // Récupérer toutes les commandes de la base de données
@@ -25,7 +25,7 @@ class AdminOrderController extends AbstractController
     }
 
     // Affichage des détails d'une commande
-    #[Route('/admin/orders/{id}', name: 'admin_orders_show', methods: ['GET'])]
+    #[Route('/admin/orders/{id}', name: 'app_admin_order_show', methods: ['GET'])]
     public function show(Order $order): Response
     {
         // Rendu de la vue pour afficher les détails d'une commande spécifique
@@ -36,7 +36,7 @@ class AdminOrderController extends AbstractController
     }
 
     // Édition d'une commande existante
-    #[Route('/admin/orders/{id}/edit', name: 'admin_orders_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/orders/{id}/edit', name: 'app_admin_order_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Order $order, EntityManagerInterface $entityManager): Response
     {
         // Créer et afficher le formulaire de modification de la commande
@@ -52,7 +52,7 @@ class AdminOrderController extends AbstractController
             $this->addFlash('success', 'La commande a été mise à jour avec succès.');
 
             // Rediriger vers la liste des commandes
-            return $this->redirectToRoute('admin_orders_index');
+            return $this->redirectToRoute('app_admin_order_index');
         }
 
         // Afficher la vue d'édition avec le formulaire de modification
@@ -64,7 +64,7 @@ class AdminOrderController extends AbstractController
     }
 
     // Suppression d'une commande
-    #[Route('/admin/orders/{id}', name: 'admin_orders_delete', methods: ['POST'])]
+    #[Route('/admin/orders/{id}', name: 'app_admin_order_delete', methods: ['POST'])]
     public function delete(Request $request, Order $order, EntityManagerInterface $entityManager): Response
     {
         // Vérification de la validité du token CSRF pour sécuriser la suppression
@@ -81,6 +81,6 @@ class AdminOrderController extends AbstractController
         }
 
         // Rediriger vers la liste des commandes
-        return $this->redirectToRoute('admin_orders_index');
+        return $this->redirectToRoute('app_admin_order_index');
     }
 }

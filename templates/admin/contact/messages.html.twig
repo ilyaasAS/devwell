@@ -63,12 +63,12 @@
 							{# Conteneur pour les actions liées au message, avec un margin-top de 4 et un espacement horizontal (space-x-4) entre les éléments. #}
 
 							<!-- Lien Voir -->
-								<a href="{{ path('admin_message_view', { id: message.id }) }}" class="text-blue-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105"> Voir
+								<a href="{{ path('app_admin_contact_show', { id: message.id }) }}" class="text-blue-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105"> Voir
 							</a>
 							{# Lien pour voir les détails du message. Le texte est bleu (text-blue-500) et l'effet de survol le change en couleur secondaire et le souligne. #}
 
 							<!-- Lien Supprimer -->
-							<a href="{{ path('admin_message_delete', { id: message.id }) }}" class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
+							<a href="{{ path('app_admin_contact_delete', { id: message.id }) }}" class="text-red-500 hover:text-secondary_dw hover:underline transition duration-300 transform hover:scale-105">
 								Supprimer
 							</a>
 							{# Lien pour supprimer le message. Le texte est rouge (text-red-500) et l'effet de survol le change en couleur secondaire et le souligne. #}

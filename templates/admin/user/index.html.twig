@@ -15,7 +15,7 @@
 		<div
 			class="flex justify-end mb-6">
 			{# Conteneur flex pour aligner le bouton à droite #}
-			<a href="{{ path('app_user_create') }}" class="inline-block bg-primary_dw text-white py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+			<a href="{{ path('app_admin_user_create') }}" class="inline-block bg-primary_dw text-white py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
 				Créer un utilisateur
 			</a>
 			{# Lien vers la page de création d'un utilisateur avec effets au survol #}
@@ -51,17 +51,17 @@
 							<td class="border border-gray-300 px-4 py-2">{{ user.roles ? user.roles|join(', ') : '' }}</td>
 							{# Rôles de l'utilisateur #}
 							<td class="border border-gray-300 px-4 py-2 text-center">
-								<a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
+								<a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="text-blue-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
 									Voir
 								</a>
 								{# Lien pour voir les détails de l'utilisateur #}
 
-								<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
+								<a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="text-yellow-500 hover:text-secondary_dw hover:underline mx-2 transition duration-300 transform hover:scale-105">
 									Modifier
 								</a>
 								{# Lien pour modifier l'utilisateur #}
 
-								<form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" class="inline mx-2">
+								<form method="post" action="{{ path('app_admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" class="inline mx-2">
 									<input
 									type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
 									{# Token CSRF pour la sécurité #}

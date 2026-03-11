@@ -18,7 +18,7 @@ use Symfony\Component\Mime\Email;
 class AdminContactController extends AbstractController
 {
     // Affichage de tous les messages de contact
-    #[Route('/admin/messages', name: 'admin_messages')]
+    #[Route('/admin/messages', name: 'app_admin_contact_index')]
     public function adminMessages(EntityManagerInterface $em): Response
     {
         // Récupérer tous les messages de contact de la base de données, triés par date de création
@@ -31,7 +31,7 @@ class AdminContactController extends AbstractController
     }
 
     // Suppression d'un message de contact
-    #[Route('/admin/messages/delete/{id}', name: 'admin_message_delete')]
+    #[Route('/admin/messages/delete/{id}', name: 'app_admin_contact_delete')]
     public function deleteMessage(int $id, EntityManagerInterface $em): Response
     {
         // Récupérer le message à supprimer via l'ID
@@ -50,11 +50,11 @@ class AdminContactController extends AbstractController
         }
 
         // Rediriger vers la liste des messages après suppression
-        return $this->redirectToRoute('admin_messages');
+        return $this->redirectToRoute('app_admin_contact_index');
     }
 
     // Affichage des détails d'un message et possibilité de répondre
-    #[Route('/admin/messages/view/{id}', name: 'admin_message_view')]
+    #[Route('/admin/messages/view/{id}', name: 'app_admin_contact_show')]
     public function viewMessage(int $id, Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         // Récupérer le message spécifique par son ID
@@ -63,7 +63,7 @@ class AdminContactController extends AbstractController
         if (!$message) {
             // Si le message n'existe pas, afficher une erreur et rediriger
             $this->addFlash('error', 'Le message n\'existe pas.');
-            return $this->redirectToRoute('admin_messages');
+            return $this->redirectToRoute('app_admin_contact_index');
         }
 
         // Créer un formulaire pour que l'administrateur réponde au message
@@ -99,7 +99,7 @@ class AdminContactController extends AbstractController
             $this->addFlash('success', 'Votre réponse a été envoyée par email.');
 
             // Rediriger vers la page de détails du message après la réponse
-            return $this->redirectToRoute('admin_message_view', ['id' => $id]);
+            return $this->redirectToRoute('app_admin_contact_show', ['id' => $id]);
         }
 
         // Rendre la vue avec le message et le formulaire de réponse

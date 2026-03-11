@@ -16,7 +16,7 @@
 			{# Ce conteneur utilise le système de grille de Tailwind. À petite échelle (1 colonne), il passe à 2 colonnes pour les écrans moyens et à 3 colonnes pour les grands écrans. Un espace de 6 (gap-6) est défini entre les cartes. #}
 
 			<!-- Carte de gestion des utilisateurs -->
-				<div class="card"> <a href="/admin/user" class="block p-6 bg-blue-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-blue-700">
+			<div class="card"> <a href="{{ path('app_admin_user_index') }}" class="block p-6 bg-blue-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-blue-700">
 					👤 Gestion des utilisateurs
 				</a>
 			</div>
@@ -24,7 +24,7 @@
 
 			<!-- Carte de gestion des produits -->
 			<div class="card">
-				<a href="/admin/product" class="block p-6 bg-green-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-green-700">
+				<a href="{{ path('app_admin_product_index') }}" class="block p-6 bg-green-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-green-700">
 					📦 Gestion des produits
 				</a>
 			</div>
@@ -40,7 +40,7 @@
 
 			<!-- Carte de gestion des commandes -->
 			<div class="card">
-				<a href="/admin/orders" class="block p-6 bg-red-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-red-700">
+				<a href="{{ path('app_admin_order_index') }}" class="block p-6 bg-red-500 text-white text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-red-700">
 					📜 Gestion des commandes
 				</a>
 			</div>
@@ -48,7 +48,7 @@
 
 			<!-- Carte de gestion des messages -->
 			<div class="card">
-				<a href="/admin/messages" class="block p-6 bg-white-500 text-black text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-white-700">
+				<a href="{{ path('app_admin_contact_index') }}" class="block p-6 bg-white-500 text-black text-lg font-semibold rounded-xl shadow-lg transition transform hover:scale-105 hover:bg-white-700">
 					✉️ Gestion des messages
 				</a>
 			</div>
