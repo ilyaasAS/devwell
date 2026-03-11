@@ -11,8 +11,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class CategoryController extends AbstractController
 {
     // Afficher toutes les catégories pour l'utilisateur sans pagination
-    #[Route('/categorie', name: 'app_category_user_index', methods: ['GET'])]
-    public function indexu(EntityManagerInterface $entityManager): Response
+    #[Route('/categories', name: 'app_category_index', methods: ['GET'])]
+    public function index(EntityManagerInterface $entityManager): Response
     {
         // Récupérer toutes les catégories sans pagination
         // L'utilisation de findAll() récupère toutes les entrées de la table Category
@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
     }
 
     // Afficher les détails d'une catégorie (produits associés)
-    #[Route('/categorie/{id}', name: 'app_category_user_show', methods: ['GET'])]
+    #[Route('/categories/{id}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
         // Vérification si la catégorie existe, cette vérification est déjà gérée par Symfony

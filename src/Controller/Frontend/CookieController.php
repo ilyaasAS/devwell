@@ -38,10 +38,10 @@ class CookieController extends AbstractController
     }
 
     // Route pour afficher la politique de gestion des cookies
-    #[Route('/politique-cookies', name: 'politique_cookies', methods: ['GET'])]
-    public function politiqueCookies(): Response
+    #[Route('/cookie-policy', name: 'app_cookie_policy', methods: ['GET'])]
+    public function cookiePolicy(): Response
     {
         // Affiche une page détaillant la politique des cookies du site
-        return $this->render('privacy/politique_cookies.html.twig');
+        return $this->render('privacy/cookie_policy.html.twig');
     }
 }

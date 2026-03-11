@@ -55,12 +55,12 @@
 				class="mt-8 text-center">
 				{# Une section en bas du formulaire avec des liens de retour et de modification. Un espacement supérieur de 8 (mt-8) et un centrage du texte. #}
 
-				<a href="{{ path('app_category_index') }}" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
+				<a href="{{ path('app_admin_category_index') }}" class="inline-block bg-primary_dw text-tertiary_dw py-3 px-6 rounded-lg shadow-md hover:bg-secondary_dw hover:text-primary_dw focus:outline-none focus:ring-2 focus:ring-secondary_dw transition duration-300 transform hover:scale-105">
 					Retour à la liste
 				</a>
 				{# Un bouton "Retour à la liste" avec un style de fond primaire (bg-primary_dw), un texte secondaire (text-tertiary_dw) et des effets de transition au survol/focus. #}
 
-				<a href="{{ path('app_category_edit', {id: category.id}) }}" class="inline-block bg-yellow-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-yellow-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-300 transition duration-300 transform hover:scale-105">
+				<a href="{{ path('app_admin_category_edit', {id: category.id}) }}" class="inline-block bg-yellow-500 text-black py-3 px-6 rounded-lg shadow-md hover:bg-yellow-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-300 transition duration-300 transform hover:scale-105">
 					Modifier la catégorie
 				</a>
 				{# Un bouton "Modifier la catégorie" qui redirige vers la page de modification de la catégorie. Il utilise une couleur de fond jaune (bg-yellow-500) et des transitions pour agrandir au survol. #}

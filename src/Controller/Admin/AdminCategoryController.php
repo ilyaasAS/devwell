@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class AdminCategoryController extends AbstractController
 {
     // Affichage de la liste des catégories
-    #[Route('/admin/categories', name: 'app_category_index', methods: ['GET'])]
+    #[Route('/admin/categories', name: 'app_admin_category_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         // Récupérer toutes les catégories de la base de données
@@ -26,7 +26,7 @@ class AdminCategoryController extends AbstractController
     }
 
     // Ajouter une nouvelle catégorie
-    #[Route('/admin/categories/new', name: 'app_category_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/categories/new', name: 'app_admin_category_new', methods: ['GET', 'POST'])]
     public function test(Request $request, EntityManagerInterface $entityManager): Response
     {
         // Créer une nouvelle instance de la catégorie
@@ -48,7 +48,7 @@ class AdminCategoryController extends AbstractController
             $this->addFlash('success', 'Catégorie créée avec succès !');
 
             // Rediriger vers la page des catégories
-            return $this->redirectToRoute('app_category_index');
+            return $this->redirectToRoute('app_admin_category_index');
         }
 
         // Rendre la vue avec le formulaire de création
@@ -58,7 +58,7 @@ class AdminCategoryController extends AbstractController
     }
 
     // Afficher les détails d'une catégorie
-    #[Route('/admin/categories/{id}', name: 'app_category_show', methods: ['GET'])]
+    #[Route('/admin/categories/{id}', name: 'app_admin_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
         // Vérification pour s'assurer que la catégorie existe
@@ -73,7 +73,7 @@ class AdminCategoryController extends AbstractController
     }
 
     // Modifier une catégorie existante
-    #[Route('/admin/categories/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/categories/{id}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         // Créer le formulaire de modification de catégorie
@@ -91,7 +91,7 @@ class AdminCategoryController extends AbstractController
             $this->addFlash('success', 'Mise à jour réussie de la catégorie !');
 
             // Rediriger vers la page des catégories
-            return $this->redirectToRoute('app_category_index');
+            return $this->redirectToRoute('app_admin_category_index');
         }
 
         // Rendre la vue avec le formulaire de modification
@@ -102,7 +102,7 @@ class AdminCategoryController extends AbstractController
     }
 
     // Supprimer une catégorie
-    #[Route('/admin/categories/{id}/delete', name: 'app_category_delete', methods: ['POST'])]
+    #[Route('/admin/categories/{id}/delete', name: 'app_admin_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         // Vérification du token CSRF pour sécuriser la suppression
@@ -116,6 +116,6 @@ class AdminCategoryController extends AbstractController
         }
 
         // Rediriger vers la page des catégories
-        return $this->redirectToRoute('app_category_index');
+        return $this->redirectToRoute('app_admin_category_index');
     }
 }

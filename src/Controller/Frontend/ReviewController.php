@@ -12,8 +12,8 @@ use Symfony\Component\Routing\Attribute\Route; // Importation de l'annotation Ro
 class ReviewController extends AbstractController
 {
     // Définition de la route pour accéder à la page des avis clients. La route accepte les méthodes GET et POST.
-    #[Route('/avis-client', name: 'avis_client', methods: ['GET', 'POST'])]
-    public function avisClient(Request $request, DocumentManager $dm): Response
+    #[Route('/reviews', name: 'app_reviews_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, DocumentManager $dm): Response
     {
         // Vérifie si la requête est de type POST (soumission du formulaire d'avis)
         if ($request->isMethod('POST')) {
@@ -43,7 +43,7 @@ class ReviewController extends AbstractController
                 // On affiche un message de succès après l'enregistrement de l'avis.
                 $this->addFlash('success', 'Votre avis a été enregistré avec succès.');
                 // On redirige l'utilisateur vers la même page pour afficher les avis mis à jour.
-                return $this->redirectToRoute('avis_client');
+                return $this->redirectToRoute('app_reviews_index');
             }
         }
 
@@ -51,7 +51,7 @@ class ReviewController extends AbstractController
         $avisClients = $dm->getRepository(AvisClient::class)->findAll();
 
         // On rend la vue de la page avec la liste des avis clients.
-        return $this->render('frontend/avis_client.html.twig', [
+        return $this->render('frontend/reviews.html.twig', [
             'avisClients' => $avisClients, // On passe la liste des avis à la vue Twig.
         ]);
     }

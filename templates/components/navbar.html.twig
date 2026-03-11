@@ -13,9 +13,9 @@
 				<li class="flex items-center space-x-6">
 					<a href="/" class="text-lg font-bold hover:text-secondary_dw">Accueil</a>
 					<a href="/products" class="text-lg font-bold hover:text-secondary_dw">Produit</a>
-					<a href="/categorie" class="text-lg font-bold hover:text-secondary_dw">Catégorie</a>
+					<a href="/categories" class="text-lg font-bold hover:text-secondary_dw">Catégorie</a>
 					<a href="/profile" class="text-lg font-bold hover:text-secondary_dw">Profile</a>
-					<a href="/avis-client" class="text-lg font-bold hover:text-secondary_dw">Avis clients</a>
+					<a href="/reviews" class="text-lg font-bold hover:text-secondary_dw">Avis clients</a>
 
 					<!-- Afficher Dashboard seulement si l'utilisateur a le rôle 'ROLE_ADMIN' -->
 					{% if is_granted('ROLE_ADMIN') %}
@@ -89,13 +89,13 @@
 				<a href="/products" class="block py-2 hover:text-secondary_dw">Produit</a>
 			</li>
 			<li>
-				<a href="/categorie" class="block py-2 hover:text-secondary_dw">Catégorie</a>
+				<a href="/categories" class="block py-2 hover:text-secondary_dw">Catégorie</a>
 			</li>
 			<li>
 				<a href="/profile" class="block py-2 hover:text-secondary_dw">Profile</a>
 			</li>
 			<li>
-				<a href="/avis-client" class="block py-2 hover:text-secondary_dw">Avis clients</a>
+				<a href="/reviews" class="block py-2 hover:text-secondary_dw">Avis clients</a>
 			</li>
 
 			{% if is_granted('ROLE_ADMIN') %}
