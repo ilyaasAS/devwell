@@ -97,7 +97,7 @@ class CheckoutController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Commande passée avec succès.');
-            return $this->redirectToRoute('order_confirmation', ['id' => $order->getId()]);
+            return $this->redirectToRoute('app_orders_confirmation', ['id' => $order->getId()]);
         }
 
         // Clé publique Stripe obligatoire : si vide, le champ carte ne s'affichera jamais.
@@ -111,7 +111,7 @@ class CheckoutController extends AbstractController
     }
 
     // Route pour confirmer la commande après paiement
-    #[Route('/order/confirmation/{id}', name: 'order_confirmation')]
+    #[Route('/orders/confirmation/{id}', name: 'app_orders_confirmation')]
     public function confirmOrder(Order $order): Response
     {
         return $this->render('frontend/checkout/confirmation.html.twig', [
