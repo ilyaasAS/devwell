@@ -120,7 +120,7 @@ class CheckoutController extends AbstractController
     }
 
     // Fonction pour calculer le total de la commande en centimes
-    private function calculateTotal($cartItems): int
+    private function calculateTotal(iterable $cartItems): int
     {
         $total = 0;
         foreach ($cartItems as $cartItem) {

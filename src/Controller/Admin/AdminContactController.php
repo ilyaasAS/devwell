@@ -19,7 +19,7 @@ class AdminContactController extends AbstractController
 {
     // Affichage de tous les messages de contact
     #[Route('/admin/messages', name: 'app_admin_contact_index')]
-    public function adminMessages(EntityManagerInterface $em): Response
+    public function index(EntityManagerInterface $em): Response
     {
         // Récupérer tous les messages de contact de la base de données, triés par date de création
         $messages = $em->getRepository(Contact::class)->findBy([], ['createdAt' => 'DESC']);
@@ -32,7 +32,7 @@ class AdminContactController extends AbstractController
 
     // Suppression d'un message de contact
     #[Route('/admin/messages/delete/{id}', name: 'app_admin_contact_delete')]
-    public function deleteMessage(int $id, EntityManagerInterface $em): Response
+    public function delete(int $id, EntityManagerInterface $em): Response
     {
         // Récupérer le message à supprimer via l'ID
         $message = $em->getRepository(Contact::class)->find($id);
@@ -55,7 +55,7 @@ class AdminContactController extends AbstractController
 
     // Affichage des détails d'un message et possibilité de répondre
     #[Route('/admin/messages/view/{id}', name: 'app_admin_contact_show')]
-    public function viewMessage(int $id, Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
+    public function show(int $id, Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         // Récupérer le message spécifique par son ID
         $message = $em->getRepository(Contact::class)->find($id);

@@ -77,7 +77,7 @@ class AdminProductController extends AbstractController
 
     // Voir un produit spécifique (affichage pour l'admin)
     #[Route('/admin/products/{id}', name: 'app_admin_product_show', methods: ['GET'])]
-    public function productShow(Product $product): Response
+    public function show(Product $product): Response
     {
         // Rendu de la vue pour afficher un produit spécifique
         return $this->render('admin/products/show.html.twig', [

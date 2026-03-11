@@ -29,7 +29,7 @@ final class UserController extends AbstractController
 
     // Route pour la création d'un utilisateur
     #[Route('/create', name: 'app_admin_user_create', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User(); // Crée un nouvel objet utilisateur
         $form = $this->createForm(AdminUserType::class, $user); // Crée un formulaire basé sur AdminUserType
