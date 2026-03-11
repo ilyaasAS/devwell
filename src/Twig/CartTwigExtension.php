@@ -9,7 +9,7 @@ use App\Service\CartService; // Importation de la classe CartService pour obteni
 
 class CartTwigExtension extends AbstractExtension implements GlobalsInterface
 {
-    private $cartService; // Déclare la propriété cartService qui sera utilisée pour accéder aux informations du panier.
+    private CartService $cartService; // Déclare la propriété cartService qui sera utilisée pour accéder aux informations du panier.
 
     // Le constructeur de la classe CartTwigExtension. Il reçoit une instance de CartService pour l'injection de dépendance.
     public function __construct(CartService $cartService)

@@ -9,8 +9,8 @@ use Symfony\Component\Security\Core\Security; // Importation de la classe Securi
 
 class CartService
 {
-    private $cartRepository; // Déclare la propriété cartRepository pour accéder au repository du panier.
-    private $security; // Déclare la propriété security pour gérer l'utilisateur connecté.
+    private CartRepository $cartRepository; // Déclare la propriété cartRepository pour accéder au repository du panier.
+    private SecurityBundleSecurity $security; // Déclare la propriété security pour gérer l'utilisateur connecté.
 
     // Injection des dépendances dans le constructeur : CartRepository pour interagir avec les paniers et Security pour accéder à l'utilisateur.
     public function __construct(CartRepository $cartRepository, SecurityBundleSecurity $security)

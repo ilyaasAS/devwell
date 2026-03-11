@@ -15,14 +15,14 @@ use Symfony\Component\Routing\Attribute\Route;
 class LegalController extends AbstractController
 {
     // Route pour les Conditions Générales d'Utilisation (CGU)
-    #[Route('/terms-of-use', name: 'app_cgu')]
+    #[Route('/terms-of-use', name: 'app_terms_of_use')]
     public function termsOfUse(): Response
     {
         return $this->render('legal/terms_of_use.html.twig');
     }
 
     // Route pour les Conditions Générales de Vente (CGV)
-    #[Route('/terms-of-sale', name: 'app_cgv')]
+    #[Route('/terms-of-sale', name: 'app_terms_of_sale')]
     public function termsOfSale(): Response
     {
         return $this->render('legal/terms_of_sale.html.twig');
@@ -71,8 +71,8 @@ class LegalController extends AbstractController
     }
 
     // Route pour la page des mentions légales
-    #[Route('/legal-notice', name: 'app_mentions_legales')]
-    public function mentionsLegales(): Response
+    #[Route('/legal-notice', name: 'app_legal_notice')]
+    public function legalNotice(): Response
     {
         return $this->render('legal/legal_notice.html.twig');
     }

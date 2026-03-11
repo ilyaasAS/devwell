@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver; // Utilisé pour configur
 class ResponseType extends AbstractType
 {
     // Méthode pour construire le formulaire de réponse
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             // Champ de texte pour la réponse
@@ -31,7 +31,7 @@ class ResponseType extends AbstractType
     }
 
     // Méthode pour configurer les options du formulaire
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         // Définit la classe de données à laquelle ce formulaire est lié, ici l'entité Contact
         $resolver->setDefaults([

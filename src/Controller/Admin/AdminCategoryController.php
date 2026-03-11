@@ -27,7 +27,7 @@ class AdminCategoryController extends AbstractController
 
     // Ajouter une nouvelle catégorie
     #[Route('/admin/categories/new', name: 'app_admin_category_new', methods: ['GET', 'POST'])]
-    public function test(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         // Créer une nouvelle instance de la catégorie
         $category = new Category();

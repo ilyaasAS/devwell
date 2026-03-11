@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver; // Utilisé pour définir
 class ContactType extends AbstractType
 {
     // Cette méthode définit la structure du formulaire de contact.
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             // Champ 'name' pour le nom, de type 'TextType' pour un champ de texte.
@@ -49,7 +49,7 @@ class ContactType extends AbstractType
     }
 
     // Configure les options du formulaire, ici l'entité 'Contact' est définie comme le type de données.
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Contact::class, // Associe ce formulaire à l'entité 'Contact'.
