@@ -25,7 +25,7 @@ class AdminContactController extends AbstractController
         $messages = $em->getRepository(Contact::class)->findBy([], ['createdAt' => 'DESC']);
 
         // Affichage de la liste des messages avec la vue correspondante
-        return $this->render('admin/contact/messages.html.twig', [
+        return $this->render('admin/contacts/messages.html.twig', [
             'messages' => $messages, // Passer les messages récupérés à la vue
         ]);
     }
@@ -103,7 +103,7 @@ class AdminContactController extends AbstractController
         }
 
         // Rendre la vue avec le message et le formulaire de réponse
-        return $this->render('admin/contact/message_detail.html.twig', [
+        return $this->render('admin/contacts/message_detail.html.twig', [
             'message' => $message, // Passer le message à la vue
             'form' => $responseForm->createView(), // Passer le formulaire à la vue
         ]);

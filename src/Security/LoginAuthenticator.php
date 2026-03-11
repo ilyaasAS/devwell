@@ -26,9 +26,9 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator  // Déclaration
 
     public const LOGIN_ROUTE = 'app_login';  // Définition de la route pour accéder au formulaire de login.
 
-    private $urlGenerator;  // Déclaration d'une propriété pour générer des URLs.
-    private $entityManager;  // Déclaration d'une propriété pour interagir avec la base de données (via Doctrine).
-    private $passwordHasher;  // Déclaration d'une propriété pour vérifier et hasher les mots de passe.
+    private UrlGeneratorInterface $urlGenerator;  // Déclaration d'une propriété pour générer des URLs.
+    private EntityManagerInterface $entityManager;  // Déclaration d'une propriété pour interagir avec la base de données (via Doctrine).
+    private UserPasswordHasherInterface $passwordHasher;  // Déclaration d'une propriété pour vérifier et hasher les mots de passe.
 
     // Constructeur de la classe, il initialise les services nécessaires à l'authentification.
     public function __construct(UrlGeneratorInterface $urlGenerator, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)

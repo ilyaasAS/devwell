@@ -11,7 +11,7 @@ class Review
 {
     // Déclaration de l'ID unique du document Review
     #[ODM\Id]
-    private $id;
+    private ?string $id = null;
 
     // Déclaration du champ 'name' qui sera stocké dans MongoDB sous forme de chaîne de caractères
     #[ODM\Field(type: "string")]

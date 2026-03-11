@@ -52,7 +52,7 @@ class ProductType extends AbstractType
     }
 
     // Méthode pour récupérer les choix de catégories
-    private function getCategoryChoices($categories)
+    private function getCategoryChoices(array $categories): array
     {
         $choices = [];
         // Pour chaque catégorie passée, ajouter son nom comme clé et l'objet catégorie comme valeur

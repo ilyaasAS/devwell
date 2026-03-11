@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
 // Définition de la route principale pour ce contrôleur d'administration
-#[Route('/admin/user')]
+#[Route('/admin/users')]
 final class UserController extends AbstractController
 {
     private HasherUserPasswordHasherInterface $passwordHasher;  // Service pour le hachage des mots de passe

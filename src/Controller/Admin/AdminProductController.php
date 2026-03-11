@@ -15,7 +15,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class AdminProductController extends AbstractController
 {
     // Liste des produits pour l'administration
-    #[Route('/admin/product', name: 'app_admin_product_index', methods: ['GET'])]
+    #[Route('/admin/products', name: 'app_admin_product_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         // Récupérer tous les produits de la base de données

@@ -13,21 +13,21 @@ class Order
     #[ORM\Id] // Définition de l'ID comme clé primaire
     #[ORM\GeneratedValue] // La valeur de l'ID est générée automatiquement
     #[ORM\Column(type: 'integer')] // Définition de la colonne pour l'ID (type entier)
-    private $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)] // Définition d'une colonne pour le statut de la commande, longueur maximale de 255 caractères
     #[Assert\NotBlank] // Validation pour s'assurer que le champ 'status' ne soit pas vide
-    private $status;
+    private string $status;
 
     #[ORM\Column(type: 'datetime')] // Définition d'une colonne pour la date de création de la commande
-    private $createdAt;
+    private \DateTimeInterface $createdAt;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'orders')] // Relation ManyToOne avec l'entité User (chaque commande appartient à un utilisateur)
     #[ORM\JoinColumn(nullable: false)] // La colonne 'user' ne peut pas être nulle
-    private $user;
+    private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'order', targetEntity: OrderItem::class, cascade: ['persist', 'remove'])] // Relation OneToMany avec l'entité OrderItem (chaque commande peut avoir plusieurs articles)
-    private $orderItems;
+    private \Doctrine\Common\Collections\Collection $orderItems;
 
     // Getter and Setter pour l'ID de la commande
     public function getId(): ?int

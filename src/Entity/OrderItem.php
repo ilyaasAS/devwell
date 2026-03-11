@@ -10,21 +10,21 @@ class OrderItem
     #[ORM\Id] // Définition de l'ID comme clé primaire
     #[ORM\GeneratedValue] // L'ID est généré automatiquement
     #[ORM\Column(type: 'integer')] // La colonne pour l'ID est de type entier
-    private $id;
+    private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Product::class)] // Relation ManyToOne avec l'entité Product (chaque article de commande fait référence à un produit)
     #[ORM\JoinColumn(nullable: false)] // La colonne 'product' ne peut pas être nulle
-    private $product;
+    private ?Product $product = null;
 
     #[ORM\Column(type: 'integer')] // Définition d'une colonne pour la quantité du produit dans la commande
-    private $quantity;
+    private int $quantity;
 
     #[ORM\Column(type: 'float')] // Définition d'une colonne pour le prix de l'article
-    private $price;
+    private float $price;
 
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderItems')] // Relation ManyToOne avec l'entité Order (chaque article appartient à une commande)
     #[ORM\JoinColumn(nullable: false)] // La colonne 'order' ne peut pas être nulle
-    private $order;
+    private ?Order $order = null;
 
     // Getter et Setter pour l'ID de l'article de commande
     public function getId(): ?int
