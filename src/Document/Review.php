@@ -2,11 +2,12 @@
 
 namespace App\Document;
 
+use App\Repository\ReviewRepository;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM; // Importation des annotations Doctrine ODM
 
 // Déclaration de la classe Review en tant que document MongoDB
 
-#[ODM\Document(collection: "avis_client")]
+#[ODM\Document(collection: "avis_client", repositoryClass: ReviewRepository::class)]
 class Review
 {
     // Déclaration de l'ID unique du document Review

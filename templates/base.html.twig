@@ -111,5 +111,122 @@ document.querySelectorAll('.alert').forEach(el => el.remove());
 
 			<!-- Cookie Consent Script -->
 			<script src="{{ asset('js/cookie-consent.js') }}" async></script>
+
+			<!-- Chat widget -->
+			<div id="chat-widget" class="fixed bottom-4 right-4 z-50 flex flex-col items-end space-y-2">
+				<button
+					id="chat-toggle"
+					class="bg-secondary_dw text-primary_dw rounded-full shadow-secondary w-14 h-14 flex items-center justify-center hover:shadow-hover transition-shadow">
+					<span class="text-2xl">💬</span>
+				</button>
+
+				<div
+					id="chat-window"
+					class="hidden w-80 max-h-[70vh] bg-tertiary_dw shadow-hover rounded-xl flex flex-col overflow-hidden">
+					<div class="px-4 py-3 bg-primary_dw text-tertiary_dw font-semibold">
+						Assistant Client
+					</div>
+					<div
+						id="chat-messages"
+						class="flex-1 p-3 space-y-2 overflow-y-auto text-sm bg-white">
+						<div class="bg-secondary_dw/40 text-primary_dw rounded-lg px-3 py-2 max-w-[85%]">
+							Bonjour, je suis votre assistant client. Comment puis-je vous aider ?
+						</div>
+					</div>
+					<div class="border-t border-gray-200 p-2 bg-tertiary_dw">
+						<div id="chat-typing" class="hidden text-xs text-gray-500 mb-1">En train de répondre...</div>
+						<form id="chat-form" class="flex items-center space-x-2">
+							<input
+								id="chat-input"
+								type="text"
+								class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-secondary_dw"
+								placeholder="Posez votre question..."
+								autocomplete="off"
+							/>
+							<button
+								type="submit"
+								class="bg-primary_dw text-tertiary_dw text-sm px-3 py-2 rounded-lg hover:bg-primary_dw/90 focus:outline-none">
+								Envoyer
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<script>
+				(function () {
+					const chatToggle = document.getElementById('chat-toggle');
+					const chatWindow = document.getElementById('chat-window');
+					const chatForm = document.getElementById('chat-form');
+					const chatInput = document.getElementById('chat-input');
+					const chatMessages = document.getElementById('chat-messages');
+					const chatTyping = document.getElementById('chat-typing');
+
+					if (!chatToggle || !chatWindow || !chatForm || !chatInput || !chatMessages || !chatTyping) {
+						return;
+					}
+
+					chatToggle.addEventListener('click', function () {
+						chatWindow.classList.toggle('hidden');
+						if (!chatWindow.classList.contains('hidden')) {
+							chatInput.focus();
+						}
+					});
+
+					chatForm.addEventListener('submit', function (event) {
+						event.preventDefault();
+
+						const message = chatInput.value.trim();
+						if (!message) {
+							return;
+						}
+
+						appendMessage(message, 'user');
+						chatInput.value = '';
+
+						chatTyping.classList.remove('hidden');
+
+						fetch('{{ path('api_chat') }}', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({ message }),
+						})
+							.then(function (response) {
+								return response.json();
+							})
+							.then(function (data) {
+								chatTyping.classList.add('hidden');
+								if (data.response) {
+									appendMessage(data.response, 'assistant');
+								} else if (data.error) {
+									appendMessage('Une erreur est survenue. Veuillez réessayer plus tard.', 'assistant');
+								}
+							})
+							.catch(function () {
+								chatTyping.classList.add('hidden');
+								appendMessage('Une erreur réseau est survenue. Veuillez réessayer plus tard.', 'assistant');
+							});
+					});
+
+					function appendMessage(text, sender) {
+						const wrapper = document.createElement('div');
+						wrapper.className = 'w-full flex ' + (sender === 'user' ? 'justify-end' : 'justify-start');
+
+						const bubble = document.createElement('div');
+						bubble.className = 'rounded-lg px-3 py-2 max-w-[85%] break-words ' +
+							(sender === 'user'
+								? 'bg-primary_dw text-tertiary_dw'
+								: 'bg-secondary_dw/60 text-primary_dw');
+						bubble.textContent = text;
+
+						wrapper.appendChild(bubble);
+						chatMessages.appendChild(wrapper);
+						chatMessages.scrollTop = chatMessages.scrollHeight;
+					}
+				})();
+			</script>
+
 		</body>
 	</html>

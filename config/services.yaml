@@ -13,6 +13,8 @@ services:
   _defaults:
     autowire: true # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    bind:
+      $geminiApiKey: '%env(GOOGLE_GEMINI_API_KEY)%'
 
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
@@ -26,6 +28,19 @@ services:
   # Ajout des services manquants
   Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface: '@security.token_storage'
   Symfony\Component\HttpFoundation\Session\SessionInterface: '@session'
+
+  App\Service\AiServiceInterface: '@App\Service\GeminiService'
+
+  App\Service\GeminiService:
+    arguments:
+      $geminiApiKey: '%env(GOOGLE_GEMINI_API_KEY)%'
+      $productRepository: '@App\Repository\ProductRepository'
+      $reviewRepository: '@App\Repository\ReviewRepository'
+
+  App\Repository\ReviewRepository:
+    factory: ['@doctrine_mongodb.odm.default_document_manager', getRepository]
+    arguments:
+      - 'App\Document\Review'
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
