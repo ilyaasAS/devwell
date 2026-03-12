@@ -48,10 +48,13 @@ class GeminiService implements AiServiceInterface
 
         $fullPrompt = trim($systemInstruction . "\n\nContexte:\n" . $ragContext . "\n\nQuestion utilisateur:\n" . $prompt);
 
-        $url = sprintf(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=%s',
-            $this->geminiApiKey
-        );
+        // Utilisation du modèle 'lite' qui a survécu aux tests de quota
+    $url = sprintf(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=%s',
+        $this->geminiApiKey
+    );
+
+        
 
         $payload = [
             'contents' => [
@@ -72,12 +75,8 @@ class GeminiService implements AiServiceInterface
         $rawContent = $response->getContent(false);
 
         if ($statusCode !== 200) {
-            $this->logger->error('Gemini API error', [
-                'status_code' => $statusCode,
-                'response' => $rawContent,
-            ]);
-
-            return 'ERREUR GOOGLE (' . $statusCode . ') : ' . $rawContent;
+            $this->logger->error('Gemini API error', ['status' => $statusCode, 'response' => $rawContent]);
+            return "Je suis un peu trop sollicité en ce moment. Laissez-moi respirer quelques secondes et reposez-moi votre question !";
         }
 
         $data = json_decode($rawContent, true);
