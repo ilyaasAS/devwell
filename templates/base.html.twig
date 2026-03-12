@@ -88,6 +88,8 @@
 		<main class="flex-grow"> {% block body %}{% endblock %}
 			</main>
 
+			
+
 			<!-- Footer -->
 			{% include 'components/footer.html.twig' %}
 
@@ -113,10 +115,10 @@ document.querySelectorAll('.alert').forEach(el => el.remove());
 			<script src="{{ asset('js/cookie-consent.js') }}" async></script>
 
 			<!-- Chat widget -->
-			<div id="chat-widget" class="fixed bottom-4 right-4 z-50 flex flex-col items-end space-y-2">
+			<div id="chat-widget" class="fixed bottom-12 right-12 z-[9999] flex flex-col items-end">
 				<button
 					id="chat-toggle"
-					class="bg-secondary_dw text-primary_dw rounded-full shadow-secondary w-14 h-14 flex items-center justify-center hover:shadow-hover transition-shadow">
+					class="bg-secondary_dw text-primary_dw rounded-full border-2 border-primary_dw shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-14 h-14 flex items-center justify-center hover:scale-110 transition-transform">
 					<span class="text-2xl">💬</span>
 				</button>
 

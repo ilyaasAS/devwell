@@ -36,6 +36,12 @@ class GeminiService implements AiServiceInterface
 
     public function generateResponse(string $prompt, ?User $user = null): string
     {
+        if ($this->geminiApiKey === '') {
+            $this->logger->error('Gemini API key is missing from environment.');
+
+            return 'Erreur API Gemini (voir logs)';
+        }
+
         $systemInstruction = 'Tu es l\'assistant de vente officiel de ce site e-commerce. Ton rôle est d\'aider les clients à trouver des produits, de répondre aux questions techniques et de faciliter leurs achats. Ton ton est professionnel, accueillant et efficace. Si on te pose une question hors sujet (politique, personnel), redirige poliment la conversation vers le catalogue produit.';
 
         $ragContext = $this->buildRagContext($user);
@@ -71,7 +77,7 @@ class GeminiService implements AiServiceInterface
                 'response' => $rawContent,
             ]);
 
-            return 'Erreur API Gemini (voir logs)';
+            return 'ERREUR GOOGLE (' . $statusCode . ') : ' . $rawContent;
         }
 
         $data = json_decode($rawContent, true);
@@ -93,20 +99,27 @@ class GeminiService implements AiServiceInterface
 
         $products = $this->productRepository->findBy([], ['id' => 'DESC'], 10);
         foreach ($products as $product) {
+            $name = (string) ($product->getName() ?? '');
+            $price = (float) ($product->getPrice() ?? 0.0);
+            $description = (string) ($product->getDescription() ?? '');
+
             $lines[] = sprintf(
                 'Product: %s - Price: %0.2f€ - Description: %s',
-                $product->getName() ?? '',
-                $product->getPrice() ?? 0.0,
-                $product->getDescription() ?? ''
+                $name,
+                $price,
+                $description
             );
         }
 
         $reviews = $this->reviewRepository->findBy([], ['createdAt' => 'DESC'], 10);
         foreach ($reviews as $review) {
+            $note = (int) ($review->getNote() ?? 0);
+            $comment = (string) ($review->getComment() ?? '');
+
             $lines[] = sprintf(
                 'Customer Review: %d/5 - %s',
-                $review->getNote() ?? 0,
-                $review->getComment() ?? ''
+                $note,
+                $comment
             );
         }
 
