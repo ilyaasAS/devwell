@@ -34,8 +34,12 @@ install: ## Installation complète Devwell (env, Docker, assets, fixtures)
 	@sleep 30
 	@echo ">> Démarrage de la stack Docker (build inclus)..."
 	@$(COMPOSE) up -d --build
+	@echo ">> Installation des dépendances PHP (Composer)..."
+	@$(COMPOSE) exec $(APP_SERVICE) composer install --no-interaction --optimize-autoloader
 	@echo ">> Build des assets Tailwind..."
 	@$(COMPOSE) exec $(APP_SERVICE) php bin/console tailwind:build
+	@echo ">> Vérification et création des tables (Migrations)..."
+	@$(MAKE) migrate
 	@echo ">> Chargement des fixtures (protégé contre APP_ENV=prod)..."
 	@$(MAKE) fixtures
 

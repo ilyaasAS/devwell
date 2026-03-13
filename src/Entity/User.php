@@ -39,10 +39,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Cart::class, mappedBy: 'user', orphanRemoval: true)] // Relation avec Cart, un utilisateur a plusieurs paniers
     private Collection $carts;
 
-    // Constructeur pour initialiser la collection de paniers
+    /**
+     * @var Collection<int, Order> // Relation OneToMany avec l'entité Order, chaque utilisateur peut avoir plusieurs commandes
+     */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)] // Relation avec Order, un utilisateur a plusieurs commandes
+    private Collection $orders;
+
+    // Constructeur pour initialiser les collections
     public function __construct()
     {
         $this->carts = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     // Getter pour l'ID de l'utilisateur
@@ -139,7 +146,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Getter pour obtenir les paniers associés à l'utilisateur
-     * @return Collection<int, Cart> 
+     * @return Collection<int, Cart>
      */
     public function getCarts(): Collection
     {
@@ -164,6 +171,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // Définir l'utilisateur du panier à null (sauf si déjà modifié)
             if ($cart->getUser() === $this) {
                 $cart->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Getter pour obtenir les commandes associées à l'utilisateur
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    // Ajouter une commande à l'utilisateur
+    public function addOrder(Order $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setUser($this); // Associer la commande à l'utilisateur
+        }
+
+        return $this;
+    }
+
+    // Retirer une commande de l'utilisateur
+    public function removeOrder(Order $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            // Définir l'utilisateur de la commande à null (sauf si déjà modifié)
+            if ($order->getUser() === $this) {
+                $order->setUser(null);
             }
         }
 
