@@ -62,18 +62,54 @@ L'intégration de l'IA est encapsulée dans `App\Service\GeminiService` :
 
 ## ▸ 4. Installation et Démarrage (Protocole Dev)
 
-### 4.1 Configuration de l'environnement
-```bash
+### ⚠️ Prérequis Système
+Avant de commencer, assurez-vous que la machine cible dispose de :
+* **Git** : Pour cloner l'empire.
+* **Docker Desktop** : Le moteur de l'infrastructure.
+* **Make** : Pour piloter le projet (natif sur macOS).
+
+### 4.1 Lancement de la Stack (Méthode Automatisée - Makefile)
+
+Sur macOS, le Makefile est le cerveau de l'installation. Il gère tout, de la création des fichiers de configuration au peuplement de la base de données.
+
+### 1. Récupération du projet
+git clone https://github.com/ilyaasAS/devwell.git
+cd devwell
+
+### 2. Installation souveraine
+make install
+
+Le comportement intelligent du Makefile :
+
+Initialisation : Il détecte l'absence de .env.local et le crée automatiquement pour toi (cp .env .env.local).
+
+Sécurité : Il s'arrête et t'invite à remplir tes clés (Stripe, Gemini) avant de continuer.
+
+Automatisation : Une fois les clés saisies, relancer make install déclenche l'ouverture de Docker, l'attente de 30s, le build, la compilation Tailwind et l'injection des fixtures.
+
+
+### 4.2 Décomposition Manuelle (Flux de secours)
+
+Si tu décides de ne pas utiliser l'automate, voici la séquence exacte à reproduire manuellement :
+
+### 1. Configuration manuelle
 cp .env .env.local
-# Éditer .env.local pour configurer les clés API (Gemini, Stripe) et le HEALTH_CHECK_TOKEN.
+# -> Remplir Stripe, Gemini et API ici.
 
+### 2. Réveil du moteur Docker et construction
+open -a Docker && sleep 30 && docker compose up -d --build
 
-### 4.2 Lancement de la Stack
+### 3. Construction de la façade visuelle (Assets)
+docker compose exec app php bin/console tailwind:build
 
-docker compose up -d --build
+### 4. Peuplement du royaume (Données de test)
+docker compose exec app php bin/console doctrine:fixtures:load --no-interaction
 
-# Initialisation des bases de données
-docker compose exec app php bin/console doctrine:migrations:migrate --no-interaction
+### 4.3 Ressources de Test et Accès (Dossier `/docs`)
+Une fois l'installation terminée (`make install`), le projet est prêt à l'emploi. Pour faciliter vos tests, des ressources sont disponibles à la racine dans le dossier `docs/` :
+
+* **Identifiants Utilisateurs (`docs/compte_test`)** : Contient les emails et mots de passe des comptes créés par les fixtures (Profils Admin et Clients).
+* **Paiements de Test (`docs/Carte_test_stripe`)** : Contient les numéros de cartes bancaires fournis par Stripe pour simuler des transactions réussies ou échouées en mode développement.
 
 ---
 
@@ -104,7 +140,11 @@ Flux optimisé : Mise à jour Git → Reconstruction images → Recréation cont
 
 ## ▸ 7. Référence Rapide API
 
-EndpointMéthodeDescriptionSécurité/GETPage d'accueilSession / Public/api/chatPOSTAssistant de vente IAJSON Body/api/healthGETCheck de santé infraHeader X-HEALTH-TOKEN
+| Endpoint | Méthode | Description | Sécurité |
+| :--- | :--- | :--- | :--- |
+| `/` | GET | Page d'accueil | Session / Public |
+| `/api/chat` | POST | Assistant de vente IA | JSON Body |
+| `/api/health` | GET | Check de santé infra | Header X-HEALTH-TOKEN |
 
 ---
 
