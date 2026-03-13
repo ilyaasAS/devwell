@@ -1,16 +1,22 @@
 FROM php:8.2-apache
 
-# Dépendances système pour les extensions PHP et pour Stripe (curl, openssl)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libzip-dev \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libicu-dev \
-    git \
-    unzip \
+# Dépendances système pour les extensions PHP, Stripe et les outils de base de données
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        wget \
+        libzip-dev \
+        libpng-dev \
+        libonig-dev \
+        libxml2-dev \
+        libcurl4-openssl-dev \
+        libssl-dev \
+        libicu-dev \
+        default-mysql-client \
+        git \
+        unzip \
+    && wget -q https://fastdl.mongodb.org/tools/db/mongodb-database-tools-debian12-x86_64-100.9.4.deb \
+    && dpkg -i mongodb-database-tools-debian12-x86_64-100.9.4.deb || apt-get install -f -y \
+    && rm mongodb-database-tools-debian12-x86_64-100.9.4.deb \
     && rm -rf /var/lib/apt/lists/*
 
 # Extensions PHP : PDO MySQL, MongoDB (PECL), intl, zip, xml

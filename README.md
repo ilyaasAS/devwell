@@ -1,0 +1,113 @@
+# 🏰 Devwell – Plateforme E-Commerce Souveraine (README Golden Master)
+
+Devwell est une plateforme e-commerce souveraine de classe industrielle, bâtie sur **Symfony 7** et **PHP 8.2+**. Elle est conçue pour une résilience maximale, une indépendance totale vis-à-vis des tiers et une élégance opérationnelle absolue. 
+
+La plateforme est entièrement conteneurisée avec **Docker + Docker Compose**, protégée en production par **Caddy** pour la gestion HTTP/HTTPS, et pensée pour être portable, auditable et sécurisée dès sa conception.
+
+> **Philosophie directrice : L'Ingénierie Souveraine**
+> Aucune dépendance SaaS cachée, propriété totale des données, infrastructure déterministe et contrôles de sécurité proactifs. Devwell peut être cloné, initialisé, exploité, sauvegardé et redéployé sur n'importe quel hôte Linux compatible (ou VM cloud) disposant de Docker.
+
+---
+
+## ▸ 1. Vision Souveraine et Vue d'Ensemble
+
+### 1.1 L'Ingénierie Souveraine
+L'Ingénierie Souveraine dans Devwell signifie :
+* **Indépendance totale vis-à-vis des fournisseurs** : Tous les composants critiques (application web, MariaDB, MongoDB, capture de mail, reverse proxy) fonctionnent comme des services Docker. Aucune dépendance SaaS payante ou PaaS opaque n'est intégrée au chemin critique.
+* **Portabilité absolue via Docker** : Un seul `docker-compose.yml` pour le développement local et un `docker-compose.prod.yml` durci pour la production. Le même Dockerfile construit l'image de l'application pour tous les environnements.
+* **Architecture axée sur la sécurité** : Exposition directe nulle des bases de données internes en production (réseau bridge privé). Points de terminaison (endpoints) de santé protégés par des en-têtes secrets partagés. Intégration de l'IA (Gemini) encapsulée dans un service dédié.
+
+### 1.2 Aperçu Fonctionnel de Haut Niveau
+* **Fonctionnalités E-commerce** : Catalogue (produits, catégories, avis, prix), flux de panier et de paiement, gestion des utilisateurs, back-office administrateur, gestion des webhooks Stripe.
+* **Assistant de vente augmenté par l'IA** : Endpoint `/api/chat` fournissant une assistance via **Gemini 2.5 Flash Lite**. Contexte RAG basé sur les derniers produits et avis.
+* **Plan Opérationnel** : Endpoint de santé `/api/health`. Scripts de sauvegarde complets pour MariaDB et MongoDB. Script de déploiement sans interruption de service (Zero-downtime).
+
+---
+
+## ▸ 2. Analyse Approfondie du Projet (Le Cœur)
+
+### 2.1 Séparation de l'Architecture – Moteur UX vs APIs Stateless
+L'application Symfony est structurée autour d'une séparation claire des responsabilités :
+* **Frontend (Moteur UX)** – `App\Controller\Frontend\*` : Gère toutes les pages orientées utilisateur. Optimisé pour une UX basée sur les sessions, des vues rendues côté serveur et des routes respectueuses du SEO. Design implémenté avec **Tailwind CSS**.
+* **Couche API (Services Stateless)** – `App\Controller\Api\*` : Expose des points de terminaison sans état consommables par des machines (ChatApiController, HealthCheckController).
+
+### 2.2 Stratégie de Données – Hybride MariaDB + MongoDB
+* **MariaDB (Cœur Relationnel / Transactionnel)** : Utilisé pour les entités critiques du commerce (utilisateurs, produits, commandes, paiements).
+* **MongoDB (Document / Log / Contexte RAG)** : Utilisé pour les documents contextuels et les connaissances non relationnelles destinées à l'assistant IA.
+
+### 2.3 Intelligence Artificielle – Intégration Gemini 2.5 Flash Lite
+L'intégration de l'IA est encapsulée dans `App\Service\GeminiService` :
+* **Construction du contexte RAG** : Compose le contexte à partir des 10 derniers produits et des 10 derniers avis (tronqués à 100 caractères pour la confidentialité).
+* **Minimisation des données personnelles (PII)** : Un prompt système strict interdit à l'assistant de divulguer des informations personnelles ou financières internes.
+* **Contrôles Anti-DoS** : Rejet des messages de plus de 1500 caractères.
+
+---
+
+## ▸ 3. Stack Technique et Standards d'Ingénierie
+
+### 3.1 Stack Principale
+
+| Couche | Technologie | Rôle |
+| :--- | :--- | :--- |
+| **Langage** | PHP 8.2+ | Runtime backend principal |
+| **Framework** | Symfony 7 | Framework HTTP, DI, routage, sécurité |
+| **Design Frontend** | Tailwind CSS | CSS utilitaire pour une UI rapide |
+| **Serveur HTTP** | Apache | php:8.2-apache pour Symfony |
+| **Reverse Proxy** | Caddy | Terminaison TLS, automatisation HTTPS |
+| **BDD Relationnelle** | MariaDB 10.11 | Transactions, modèle de domaine |
+| **BDD Document** | MongoDB | Contexte, logs, documents flexibles |
+| **Conteneurisation** | Docker | Paquetage et isolation |
+
+---
+
+## ▸ 4. Installation et Démarrage (Protocole Dev)
+
+### 4.1 Configuration de l'environnement
+```bash
+cp .env .env.local
+# Éditer .env.local pour configurer les clés API (Gemini, Stripe) et le HEALTH_CHECK_TOKEN.
+
+
+### 4.2 Lancement de la Stack
+
+docker compose up -d --build
+
+# Initialisation des bases de données
+docker compose exec app php bin/console doctrine:migrations:migrate --no-interaction
+
+---
+
+##  ▸ 5. Sécurité et Infrastructure
+
+Isolation "Zero-Trust" : En production, les bases de données sont invisibles de l'extérieur. Seul le conteneur app communique avec database:3306 et mongodb:27017 via le réseau privé.
+
+Surveillance /api/health : Endpoint protégé par l'en-tête X-HEALTH-TOKEN. Effectue des tests de connexion réels sur les deux bases de données avant de répondre.
+
+---
+
+## ▸ 6. Opérations Souveraines (Résilience)
+
+### 6.1 Protocole de Sauvegarde – .docker/backup.sh
+
+Sauvegardes adaptées aux tâches Cron :
+
+MariaDB : Dump SQL via mysqldump --skip-ssl sans allocation de TTY.
+
+MongoDB : Archive binaire via mongodump --archive.
+
+Sorties streamées vers le dossier backups/ de l'hôte.
+
+### 6.2 Déploiement sans interruption – .docker/deploy.sh
+Flux optimisé : Mise à jour Git → Reconstruction images → Recréation conteneurs (detatched) → Nettoyage cache prod.
+
+---
+
+## ▸ 7. Référence Rapide API
+
+EndpointMéthodeDescriptionSécurité/GETPage d'accueilSession / Public/api/chatPOSTAssistant de vente IAJSON Body/api/healthGETCheck de santé infraHeader X-HEALTH-TOKEN
+
+---
+
+## ▸ 8. Conclusion
+
+L'approche d'Ingénierie Souveraine de Devwell produit une plateforme e-commerce résiliente, sécurisée par conception et augmentée par l'IA tout en respectant la confidentialité des données.

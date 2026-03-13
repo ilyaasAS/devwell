@@ -2,14 +2,13 @@ services:
   app:
     build: .
     container_name: devwell_app
-    # Plus d'exposition directe : l'app n'est accessible que via le proxy Caddy.
     expose:
       - "80"
     env_file:
       - .env
-      - .env.local  # <--- Ajoute cette ligne manuellement
     environment:
-      APP_ENV: ${APP_ENV:-dev}
+      APP_ENV: ${APP_ENV:-prod}
+      APP_DEBUG: ${APP_DEBUG:-0}
       DATABASE_URL: "mysql://${DB_USER:-app}:${DB_PASSWORD:-!ChangeMe!}@database:3306/${DB_NAME:-devwell}?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
       MAILER_DSN: "smtp://mailpit:1025"
       MONGODB_URL: ${MONGODB_URL}
@@ -18,8 +17,6 @@ services:
         condition: service_healthy
       mongodb:
         condition: service_started
-    volumes:
-      - .:/var/www/html
     restart: unless-stopped
     networks:
       - devwell_net
@@ -34,13 +31,6 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD:-!ChangeMe!}
     volumes:
       - mariadb_data:/var/lib/mysql
-    # NOTE SÉCURITÉ PROD :
-    # - En production, il est fortement recommandé de supprimer l'exposition du port 3306
-    #   pour empêcher tout accès direct à MariaDB depuis l'extérieur.
-    # - L'application doit accéder à la base uniquement via le réseau interne Docker.
-    # Pour la dev locale, tu peux laisser ce port exposé si tu as besoin d'un client SQL.
-    # ports:
-    #  - "3306:3306"
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 5s
@@ -63,8 +53,6 @@ services:
   mailpit:
     image: axllent/mailpit:latest
     container_name: devwell_mailpit
-    ports:
-      - "1025:1025"
     environment:
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
@@ -75,13 +63,11 @@ services:
   caddy:
     image: caddy:latest
     container_name: devwell_caddy
-    # Point d'entrée unique HTTP/HTTPS. En prod, pointer un vrai domaine vers cette machine.
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      # Volumes persistants pour conserver certificats et configuration ACME
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
@@ -93,10 +79,10 @@ services:
 volumes:
   mariadb_data:
   mongodb_data:
-  # Volumes pour la persistance des certificats Caddy (TLS / ACME)
   caddy_data:
   caddy_config:
 
 networks:
   devwell_net:
     driver: bridge
+
