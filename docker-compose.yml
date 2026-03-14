@@ -9,7 +9,6 @@ services:
       - .env
       - .env.local  # <--- Ajoute cette ligne manuellement
     environment:
-      APP_ENV: ${APP_ENV:-dev}
       DATABASE_URL: "mysql://${DB_USER:-app}:${DB_PASSWORD:-!ChangeMe!}@database:3306/${DB_NAME:-devwell}?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
       MAILER_DSN: "smtp://mailpit:1025"
       MONGODB_URL: ${MONGODB_URL}

@@ -1,15 +1,39 @@
 SHELL := /bin/bash
 
-COMPOSE ?= docker compose
+# --- 1. DÉTECTION CENTRALE DE L'ENVIRONNEMENT ---
+# On tente de lire .env.local, sinon .env, sinon 'dev' par défaut.
+# Le 'tr -d' nettoie les retours à la ligne Windows invisibles.
+APP_ENV := $(shell grep -E '^APP_ENV=' .env.local 2>/dev/null | cut -d'=' -f2 | tr -d '\r')
+ifeq ($(APP_ENV),)
+	APP_ENV := $(shell grep -E '^APP_ENV=' .env 2>/dev/null | cut -d'=' -f2 | tr -d '\r')
+endif
+ifeq ($(APP_ENV),)
+	APP_ENV := dev
+endif
+
+# --- 2. SÉLECTION DE L'ARMURE (COMPOSE) ---
+ifeq ($(APP_ENV),prod)
+	COMPOSE_FILE := docker-compose.prod.yml
+	UI_STATUS := 🚀 MODE PRODUCTION ACTIVÉ (Image scellée)
+else
+	COMPOSE_FILE := docker-compose.yml
+	UI_STATUS := 🛠️ MODE DÉVELOPPEMENT ACTIVÉ (Volumes actifs)
+endif
+
+# --- 3. DÉFINITION DE LA TÉLÉCOMMANDE ---
+COMPOSE := docker compose -f $(COMPOSE_FILE)
 APP_SERVICE ?= app
 
-.DEFAULT_GOAL := help
+# ------------------------------------------------------------------
 
+.DEFAULT_GOAL := help
 .PHONY: help install migrate up stop restart logs fixtures fix-mapping backup
 
-help: ## Affiche cette aide
+help: ## Affiche cette aide et le statut actuel
 	@echo ""
-	@echo "===== Devwell – Commandes Make ====="
+	@echo "===== 🏰 Devwell – Console de Commande ====="
+	@echo "Statut actuel : $(UI_STATUS)"
+	@echo "Fichier utilisé : $(COMPOSE_FILE)"
 	@echo ""
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@echo ""
@@ -47,6 +71,10 @@ install: ## Installation complète Devwell (env, Docker, assets, fixtures)
 	else \
 		echo ">> Mode DEV détecté : Build Tailwind classique..."; \
 		$(COMPOSE) exec $(APP_SERVICE) php bin/console tailwind:build; \
+	fi
+	@if [ "$(APP_ENV)" = "prod" ]; then \
+		echo ">> Ajustement des permissions (var/ et public/) pour www-data..."; \
+		$(COMPOSE) exec -u root $(APP_SERVICE) chown -R www-data:www-data /var/www/html/var /var/www/html/public; \
 	fi
 	@echo ">> Vérification et création des tables (Migrations)..."
 	@$(MAKE) migrate

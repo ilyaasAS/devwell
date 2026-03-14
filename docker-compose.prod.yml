@@ -8,8 +8,6 @@ services:
       - .env
       - .env.local  # <--- On ajoute cette ligne pour que la Prod lise tes secrets locaux
     environment:
-      APP_ENV: ${APP_ENV:-prod}
-      APP_DEBUG: ${APP_DEBUG:-0}
       DATABASE_URL: "mysql://${DB_USER:-app}:${DB_PASSWORD:-!ChangeMe!}@database:3306/${DB_NAME:-devwell}?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
       MAILER_DSN: "smtp://mailpit:1025"
       MONGODB_URL: ${MONGODB_URL}
@@ -18,6 +16,7 @@ services:
         condition: service_healthy
       mongodb:
         condition: service_started
+    volumes: []
     restart: unless-stopped
     networks:
       - devwell_net

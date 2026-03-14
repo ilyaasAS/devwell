@@ -44,13 +44,23 @@ RUN composer install --no-scripts --no-autoloader --prefer-dist
 
 # Code applicatif
 COPY . .
+RUN rm -rf /var/www/html/var
+
+# Création des dossiers runtime et permissions (mode prod / VPS)
+RUN mkdir -p /var/www/html/var/cache /var/www/html/var/log \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod 775 /var/www/html/var
 
 RUN composer dump-autoload --optimize
 
-# Droits var/ pour cache et logs
-RUN chown -R www-data:www-data /var/www/html/var 2>/dev/null || true \
-    && mkdir -p /var/www/html/var/cache /var/www/html/var/log \
-    && chown -R www-data:www-data /var/www/html/var
+RUN php bin/console tailwind:build
+
+RUN php bin/console asset-map:compile
+
+# Préchauffage du cache Symfony en prod (build-time)
+RUN APP_ENV=prod php bin/console cache:clear --env=prod
+
+RUN chown -R www-data:www-data /var/www/html/var
 
 # Logs vers stderr (Cloud-Ready) — ne pas mettre APACHE_LOG_DIR=/dev/stdout (Apache tente mkdir)
 RUN ln -sf /dev/stderr /var/log/apache2/error.log 2>/dev/null || true

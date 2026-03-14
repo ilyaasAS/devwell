@@ -24,5 +24,8 @@ done
 echo "[entrypoint] Base de données prête. Lancement des migrations..."
 php bin/console doctrine:migrations:migrate --no-interaction
 
+echo "[entrypoint] Ajustement des permissions (var/ et public/) pour www-data..."
+chown -R www-data:www-data /var/www/html/var /var/www/html/public 2>/dev/null || true
+
 echo "[entrypoint] Démarrage d'Apache."
 exec apache2-foreground
