@@ -113,7 +113,69 @@ Une fois l'installation terminée (`make install`), le projet est prêt à l'emp
 
 ---
 
-##  ▸ 5. Sécurité et Infrastructure
+▸ 5. Déploiement Souverain en Production (Oracle Cloud)
+Le passage en production obéit à la règle stricte du "Zéro Secret en Ligne". Le fichier .env public ne contient aucune donnée sensible. Le pouvoir réside dans le .env.local du serveur de production.
+
+5.1 Préparation de l'Infrastructure Matérielle
+Instance : Créer un VPS (ex: Ampere A1 sur Oracle Cloud) sous Ubuntu.
+
+Réseau : Ouvrir les ports 80 (HTTP) et 443 (HTTPS) dans les règles de sécurité du pare-feu Cloud.
+
+Moteur : Se connecter via SSH et installer les dépendances :
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install docker.io docker-compose-v2 git -y
+sudo usermod -aG docker $USER
+
+5.2 Le Coffre-Fort (Configuration Isolée)
+Cloner le projet sur le serveur, puis créer manuellement le fichier .env.local :
+
+git clone https://github.com/ilyaasAS/devwell.git
+cd devwell
+nano .env.local
+
+Insérer impérativement APP_ENV=prod, APP_DEBUG=0, et les clés d'API (Stripe Live, Gemini, etc.). Sauvegarder et quitter.
+
+5.3 La Compilation de Guerre (Automatisée ou Manuelle)
+Option A : L'Automate Stratégique (Recommandé)
+Exécuter la commande d'architecture centrale :
+
+make install
+
+En détectant APP_ENV=prod, le Makefile va automatiquement minifier extrêmement Tailwind CSS (--minify), figer les assets statiques (asset-map:compile) et bloquer l'injection des Fixtures.
+
+Option B : Décomposition Manuelle (Contrôle Absolu)
+Si l'automate n'est pas utilisé, voici la séquence stricte à exécuter pour forger l'environnement de production étape par étape :
+
+# 1. Démarrage des moteurs et construction des images
+docker compose up -d --build
+
+# 2. Installation des dépendances PHP (Optimisées)
+docker compose exec app composer install --no-interaction --optimize-autoloader
+
+# 3. Minification extrême du design pour la vélocité maximale
+docker compose exec app php bin/console tailwind:build --minify
+
+# 4. Figeage des assets statiques (AssetMapper)
+docker compose exec app php bin/console asset-map:compile
+
+# 5. Création de la structure de la base de données (Tables vides)
+docker compose exec app php bin/console doctrine:migrations:migrate --no-interaction
+
+(Aucune commande de fixtures n'est exécutée ici pour préserver la base).
+
+5.4 Le Sacre (Élévation des Privilèges)
+La base de données étant vierge, la création du compte Administrateur se fait par injection SQL après une inscription légitime :
+
+S'inscrire sur le site web public avec l'email du dirigeant.
+
+Élever les privilèges via le terminal du serveur (SSH) :
+
+docker exec -it devwell_app php bin/console dbal:run-sql "UPDATE user SET roles = '[\"ROLE_ADMIN\"]' WHERE email = 'ton-vrai-email@devwell.com';"
+
+---
+
+##  ▸ 6. Sécurité et Infrastructure
 
 Isolation "Zero-Trust" : En production, les bases de données sont invisibles de l'extérieur. Seul le conteneur app communique avec database:3306 et mongodb:27017 via le réseau privé.
 
@@ -121,9 +183,9 @@ Surveillance /api/health : Endpoint protégé par l'en-tête X-HEALTH-TOKEN. Eff
 
 ---
 
-## ▸ 6. Opérations Souveraines (Résilience)
+## ▸ 7. Opérations Souveraines (Résilience)
 
-### 6.1 Protocole de Sauvegarde – .docker/backup.sh
+### 7.1 Protocole de Sauvegarde – .docker/backup.sh
 
 Sauvegardes adaptées aux tâches Cron :
 
@@ -133,12 +195,12 @@ MongoDB : Archive binaire via mongodump --archive.
 
 Sorties streamées vers le dossier backups/ de l'hôte.
 
-### 6.2 Déploiement sans interruption – .docker/deploy.sh
+### 7.2 Déploiement sans interruption – .docker/deploy.sh
 Flux optimisé : Mise à jour Git → Reconstruction images → Recréation conteneurs (detatched) → Nettoyage cache prod.
 
 ---
 
-## ▸ 7. Référence Rapide API
+## ▸ 8. Référence Rapide API
 
 | Endpoint | Méthode | Description | Sécurité |
 | :--- | :--- | :--- | :--- |
@@ -148,6 +210,6 @@ Flux optimisé : Mise à jour Git → Reconstruction images → Recréation cont
 
 ---
 
-## ▸ 8. Conclusion
+## ▸ 9. Conclusion
 
 L'approche d'Ingénierie Souveraine de Devwell produit une plateforme e-commerce résiliente, sécurisée par conception et augmentée par l'IA tout en respectant la confidentialité des données.

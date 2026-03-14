@@ -36,8 +36,18 @@ install: ## Installation complète Devwell (env, Docker, assets, fixtures)
 	@$(COMPOSE) up -d --build
 	@echo ">> Installation des dépendances PHP (Composer)..."
 	@$(COMPOSE) exec $(APP_SERVICE) composer install --no-interaction --optimize-autoloader
-	@echo ">> Build des assets Tailwind..."
-	@$(COMPOSE) exec $(APP_SERVICE) php bin/console tailwind:build
+	@echo ">> Lecture de l'environnement (Priorité au .env.local)..."
+	@APP_ENV=$$(grep -E '^APP_ENV=' .env.local 2>/dev/null | cut -d'=' -f2 | tr -d '\r'); \
+	if [ -z "$$APP_ENV" ]; then APP_ENV=$$(grep -E '^APP_ENV=' .env 2>/dev/null | cut -d'=' -f2 | tr -d '\r'); fi; \
+	if [ -z "$$APP_ENV" ]; then APP_ENV=dev; fi; \
+	if [ "$$APP_ENV" = "prod" ]; then \
+		echo ">> Mode PROD détecté : Minification et figeage des assets..."; \
+		$(COMPOSE) exec $(APP_SERVICE) php bin/console tailwind:build --minify; \
+		$(COMPOSE) exec $(APP_SERVICE) php bin/console asset-map:compile; \
+	else \
+		echo ">> Mode DEV détecté : Build Tailwind classique..."; \
+		$(COMPOSE) exec $(APP_SERVICE) php bin/console tailwind:build; \
+	fi
 	@echo ">> Vérification et création des tables (Migrations)..."
 	@$(MAKE) migrate
 	@echo ">> Chargement des fixtures (protégé contre APP_ENV=prod)..."

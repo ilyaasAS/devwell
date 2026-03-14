@@ -6,6 +6,7 @@ services:
       - "80"
     env_file:
       - .env
+      - .env.local  # <--- On ajoute cette ligne pour que la Prod lise tes secrets locaux
     environment:
       APP_ENV: ${APP_ENV:-prod}
       APP_DEBUG: ${APP_DEBUG:-0}
