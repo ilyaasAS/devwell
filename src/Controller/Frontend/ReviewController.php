@@ -18,10 +18,10 @@ class ReviewController extends AbstractController
         // Vérifie si la requête est de type POST (soumission du formulaire d'avis)
         if ($request->isMethod('POST')) {
             // Récupération des données envoyées dans le formulaire (nom, email, note, commentaire)
-            $name = $request->request->get('nom');
+            $name = $request->request->get('name');
             $email = $request->request->get('email');
             $rating = (int)$request->request->get('note'); // Conversion de la note en entier.
-            $comment = $request->request->get('commentaire');
+            $comment = $request->request->get('comment');
 
             // Validation des champs : on vérifie si les champs obligatoires sont remplis et si la note est dans une plage valide (1 à 5).
             if (empty($name) || empty($email) || empty($comment) || $rating < 1 || $rating > 5) {
