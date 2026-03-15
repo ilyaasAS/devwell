@@ -80,7 +80,7 @@
 	<!-- Pagination -->
 	{% if totalPages > 1 %}
 		<div
-			class="mt-6 flex justify-center space-x-2">
+			class="mt-6 mb-1 flex justify-center space-x-2">
 			<!-- Lien vers la page précédente -->
 			{% if currentPage > 1 %}
 				<a href="{{ path('app_products', { page: currentPage - 1, search: search }) }}" class="px-4 py-2 border bg-gray-100 text-gray-600 rounded-md hover:bg-secondary_dw hover:text-primary_dw transition">
