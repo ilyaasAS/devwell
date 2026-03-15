@@ -34,13 +34,13 @@ class CartController extends AbstractController
         if ($quantity < 1) {
             // Si la quantité est inférieure à 1, afficher un message d'erreur
             $this->addFlash('error', 'La quantité doit être d\'au moins 1.');
-            return $this->redirectToRoute('product_details', ['id' => $product->getId()]);
+            return $this->redirectToRoute('app_product_details', ['id' => $product->getId()]);
         }
 
         if ($quantity > $product->getStock()) {
             // Si la quantité dépasse le stock disponible, afficher un message d'erreur
             $this->addFlash('error', 'La quantité demandée dépasse le stock disponible.');
-            return $this->redirectToRoute('product_details', ['id' => $product->getId()]);
+            return $this->redirectToRoute('app_product_details', ['id' => $product->getId()]);
         }
 
         // Recherche s'il existe déjà un produit dans le panier de l'utilisateur
